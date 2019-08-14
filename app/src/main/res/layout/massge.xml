@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cardview_dark_background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="متن پیام"
+        android:id="@+id/massge_text"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+        android:password="false"
+        android:phoneNumber="false"
+        android:textColor="#ffffff"
+        android:textSize="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="خب"
+            android:id="@+id/massge_btn"
+            android:padding="5dp"
+            android:textColor="#ffee04"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textView19"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

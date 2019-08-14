@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="right"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+
+        <Object.MyTextView
+            android:id="@+id/list_student_titr"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:text="لیست دانشجویان کلاس"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold"></Object.MyTextView>
+
+        <ImageView
+            android:id="@+id/old_classsss_time"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="15dp"
+            android:src="@drawable/back"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout3"
+        android:layoutDirection="rtl">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_student_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+</RelativeLayout>

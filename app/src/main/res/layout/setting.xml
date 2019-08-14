@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayout6">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:gravity="right"
+            android:layoutDirection="rtl"
+            android:layout_above="@+id/linearLayout6"
+            android:layout_alignParentTop="true">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layoutDirection="rtl">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView3"
+                    android:background="@color/colorPrimary"
+                    android:text="تنظیمات"
+                    android:gravity="center_vertical"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:paddingRight="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layoutDirection="rtl"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="تنظیمات پسورد"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/textView7" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/textView2"
+                    android:layout_weight="1"
+                    android:layoutDirection="rtl"
+                    android:background="#4db2ff" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="لغو پسورد"
+                android:id="@+id/setting_check"
+                android:scrollIndicators="right"
+                android:layoutDirection="rtl"
+                android:button="@drawable/checkbox_selector"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="right"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="رمز قدیم:"
+                    android:id="@+id/setting_text_old_password"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingRight="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/setting_password_old"
+                    android:inputType="phone"
+                    android:background="@drawable/bacgrond_edittext"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="right"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="رمز جدید:"
+                    android:id="@+id/setting_text_new_password1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingRight="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:ems="10"
+                    android:id="@+id/setting_password1_new"
+                    android:background="@drawable/bacgrond_edittext"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="right"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="تکرار رمز جدید:"
+                    android:id="@+id/setting_text_new_password2"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingRight="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number|phone"
+                    android:ems="10"
+                    android:id="@+id/setting_password2_new"
+                    android:background="@drawable/bacgrond_edittext"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="تنظیم فونت"
+                    android:id="@+id/textView8" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Small Text"
+                    android:id="@+id/textView9"
+                    android:layout_weight="1"
+                    android:background="#4db2ff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="right"
+                android:layout_marginTop="5dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="فونت1"
+                    android:scrollIndicators="right"
+                    android:layoutDirection="rtl"
+                    android:button="@drawable/checkbox_selector"
+                    android:id="@+id/setting_font1"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="فونت2"
+                    android:scrollIndicators="right"
+                    android:layoutDirection="rtl"
+                    android:button="@drawable/checkbox_selector"
+                    android:id="@+id/setting_font2"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="فونت3"
+                    android:scrollIndicators="right"
+                    android:layoutDirection="rtl"
+                    android:button="@drawable/checkbox_selector"
+                    android:id="@+id/setting_font3"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/setting_text_test"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="تنظیمات برنامه ای"
+                    android:id="@+id/textView11" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/textView10"
+                    android:layout_weight="1"
+                    android:background="#4db2ff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginTop="5dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="نمرات عددی"
+                    android:scrollIndicators="right"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/setting_numberon"
+                    android:button="@drawable/checkbox_selector"
+                    android:textColor="#000000"
+                    android:paddingRight="3dp"
+                    android:checked="true"
+                    android:layout_marginRight="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layoutDirection="rtl"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="تنظیمات ایمیل"
+                    android:layoutDirection="rtl"
+                    android:id="@+id/textView7" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/textView2"
+                    android:layout_weight="1"
+                    android:layoutDirection="rtl"
+                    android:background="#4db2ff" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textviweset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="اگر برای نرم افزار رمز قرار می دهید ایمیل خودتان را ثبت کنید که در صورت فراموشی رمز ، نرم افزار رمز را برای ایمیل ثبت شده ارسال کند."
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <EditText
+                    android:id="@+id/setting_Email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="ایمیل خود را وارد کنید"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" />
+
+                <Button
+                    android:id="@+id/setting_bmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_style_save"
+                    android:padding="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:text="ثبت" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:id="@+id/linearLayout6"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:text="ذخیره"
+            android:id="@+id/setting_save"
+            android:background="@drawable/button_style_save"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:text="بازگشت"
+            android:background="@drawable/button_style_cancel"
+            android:id="@+id/setting_cancel"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp" />
+    </LinearLayout>
+</RelativeLayout>

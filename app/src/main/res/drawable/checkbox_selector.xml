@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"
+        android:drawable="@drawable/cbchk_blue"
+        android:state_focused="false">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#ffffff" />
+            <gradient  android:endColor="#ffffff" android:startColor="#000000" android:type="sweep"  />
+            <size android:height="30dp" android:width="30dp" />
+        </shape>
+    </item>
+    <item android:state_checked="true"
+        android:drawable="@drawable/cbchk_blue"
+        android:state_focused="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#ffffff" />
+            <gradient  android:endColor="#ffffff" android:startColor="#000000" android:type="sweep"  />
+            <size android:height="30dp" android:width="30dp" />
+        </shape>
+    </item>
+    <item android:state_checked="false"
+        android:drawable="@drawable/cbunchk_blue"
+        android:state_focused="false">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#000000" />
+            <size android:height="30dp" android:width="30dp" />
+        </shape>
+    </item>
+    <item android:state_checked="false"
+        android:drawable="@drawable/cbunchk_blue"
+        android:state_focused="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="#ffffff" />
+            <size android:height="30dp" android:width="30dp" />
+        </shape>
+    </item>
+    </selector>

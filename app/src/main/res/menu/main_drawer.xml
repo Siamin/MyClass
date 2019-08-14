@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_add_class"
+        android:icon="@drawable/bookopenpagevariant"
+        android:title="اضافه کردن کلاس جدید" />
+
+
+    <item
+        android:id="@+id/nav_backup"
+        android:icon="@drawable/cloudupload"
+        android:title="پشتیبان گیری از نرم افزار" />
+
+    <item
+        android:id="@+id/nav_upload"
+        android:icon="@drawable/clouddownload"
+        android:title="بارگیری فایل پشتیبانی" />
+
+    <item
+        android:id="@+id/nav_amozesh"
+        android:icon="@drawable/play"
+        android:title="آموزش اضافه کردن گروهی دانشجویان به کلاس" />
+
+    <item
+        android:id="@+id/nav_ClearDataBase"
+        android:icon="@drawable/clear_database"
+        android:title="پاک کردن حافظه نرم افزار" />
+
+    <item
+        android:id="@+id/nav_abute"
+        android:icon="@drawable/abute"
+        android:title="درباره ما" />
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/settings"
+        android:title="تنظیمات" />
+    <item
+        android:id="@+id/nav_coment"
+        android:icon="@drawable/ic_menu_send"
+        android:title="انتقادات و پیشنهادات" />
+    <item
+        android:id="@+id/buyapp"
+        android:icon="@drawable/pay"
+        android:title="خرید کامل برنامه" />
+
+    <item
+        android:id="@+id/nav_exit"
+        android:icon="@drawable/logout"
+        android:title="خروج" />
+
+</menu>
