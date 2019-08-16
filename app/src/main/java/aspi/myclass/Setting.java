@@ -22,7 +22,6 @@ import java.util.TimerTask;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import java.util.Calendar;
-import java.util.Timer;
 
 public class Setting extends Activity {
 
@@ -39,7 +38,7 @@ public class Setting extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.setting);
+        setContentView(R.layout.activity_setting);
         config();
 
         font_1 = Typeface.createFromAsset(getAssets(), "Font/font1.ttf");
@@ -355,7 +354,7 @@ public class Setting extends Activity {
             sp = getApplicationContext().getSharedPreferences("myclass", 0);
             final String Code_save = sp.getString("EC_Email", "null");
             final Dialog kelas = new Dialog(Setting.this, R.style.MyAlertDialogStyle);
-            kelas.setContentView(R.layout.setcodeemail);
+            kelas.setContentView(R.layout.dialog_verifycode);
             kelas.setCancelable(true);
             kelas.setCanceledOnTouchOutside(true);
             kelas.show();

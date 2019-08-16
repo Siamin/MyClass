@@ -31,7 +31,7 @@ public class Add_class extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.add_class);
+        setContentView(R.layout.activity_addclass);
         data=new dbstudy(this);
         config();
         //******************************************************************************************
@@ -168,7 +168,7 @@ public class Add_class extends Activity {
     }
     void Mesage(String text){
         final Dialog massege = new Dialog(Add_class.this,R.style.MyAlertDialogStyle);
-        massege.setContentView(R.layout.massge);
+        massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();

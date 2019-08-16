@@ -41,7 +41,7 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
 
     @Override
     public cvh onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_lists_old_class, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_listcreatclass, parent, false);
         return new cvh(view);
     }
 
@@ -210,7 +210,7 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     void Edit_Data(String[] Datas, final String jalase){
         final Dialog edit = new Dialog(contexts);
-        edit.setContentView(R.layout.edit_data);
+        edit.setContentView(R.layout.dialog_editdatecreatclass);
         edit.setCancelable(true);
         edit.setTitle("ویرایش تاریخ");
         edit.setCanceledOnTouchOutside(true);

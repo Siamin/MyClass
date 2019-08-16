@@ -15,7 +15,7 @@ public class ListStudent extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_student);
+        setContentView(R.layout.activity_liststudentclass);
         config();
     }
 

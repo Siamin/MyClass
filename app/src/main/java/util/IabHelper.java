@@ -250,7 +250,7 @@ public class IabHelper {
                 catch (RemoteException e) {
                     if (listener != null) {
                         listener.onIabSetupFinished(new IabResult(IABHELPER_REMOTE_EXCEPTION,
-                                                    "RemoteException while setting up in-app billing."));
+                                                    "RemoteException while activity_setting up in-app billing."));
                     }
                     e.printStackTrace();
                     return;

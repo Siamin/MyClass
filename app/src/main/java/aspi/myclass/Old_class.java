@@ -3,18 +3,14 @@ package aspi.myclass;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +29,7 @@ public class Old_class extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.new_class);
+        setContentView(R.layout.activity_newclass);
         data=new dbstudy(this);
         config();
         //************************************************
@@ -150,7 +146,7 @@ public class Old_class extends Activity {
     }
     void Mesage(String text){
         final Dialog massege = new Dialog(Old_class.this,R.style.MyAlertDialogStyle);
-        massege.setContentView(R.layout.massge);
+        massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();

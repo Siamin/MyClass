@@ -10,18 +10,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.graphics.drawable.ColorDrawable;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.race604.drawable.wave.WaveDrawable;
@@ -40,7 +34,7 @@ public class Flash extends Activity implements ActivityCompat.OnRequestPermissio
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.flash);
+        setContentView(R.layout.activity_spalshscrean);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 

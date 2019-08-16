@@ -28,7 +28,7 @@ public class Recyclerview_content_show_student extends RecyclerView.Adapter<Recy
 
     @Override
     public cvh onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_student, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_statistics, parent, false);
         return new cvh(view);
     }
 

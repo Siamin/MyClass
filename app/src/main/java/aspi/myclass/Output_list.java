@@ -5,11 +5,9 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -22,7 +20,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.poi.hssf.record.formula.functions.Na;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -36,7 +33,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.*;
 
 public class Output_list extends Activity {
 
@@ -55,7 +51,7 @@ public class Output_list extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.output_list);
+        setContentView(R.layout.activity_outputdataclass);
         data = new dbstudy(this);
         config();
         //******************************************************************************************
@@ -423,7 +419,7 @@ public class Output_list extends Activity {
 
     void Mesage(String text) {
         final Dialog massege = new Dialog(Output_list.this, R.style.MyAlertDialogStyle);
-        massege.setContentView(R.layout.massge);
+        massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();

@@ -43,7 +43,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
 
     @Override
     public cvh onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_class_in_main, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_classview, parent, false);
         return new cvh(view);
     }
 
@@ -149,7 +149,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
 
     void Mesage(String text) {
         final Dialog massege = new Dialog(contexts, R.style.MyAlertDialogStyle);
-        massege.setContentView(R.layout.massge);
+        massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();
@@ -172,7 +172,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
         final float amozesh = sp.getFloat("Amozesh", 0);
         final Dialog kelas = new Dialog(contexts, R.style.MyAlertDialogStyle);
         kelas.setTitle("درس " + Class);
-        kelas.setContentView(R.layout.list_class_chang);
+        kelas.setContentView(R.layout.dialog_optionclass);
         kelas.setCancelable(true);
         kelas.setCanceledOnTouchOutside(true);
         kelas.show();
@@ -344,7 +344,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
     void Set_Of_Week(final String Class, final String location, final String Characteristic, final String did,final String TXT) {
         final Dialog Week = new Dialog(contexts);
         Week.setTitle("اضافه کردن به ایام هفته");
-        Week.setContentView(R.layout.class_of_week);
+        Week.setContentView(R.layout.dialog_editclass);
         Week.setCancelable(false);
         Week.setCanceledOnTouchOutside(false);
         Week.show();
@@ -426,7 +426,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
         final float amozesh = sp.getFloat("Amozesh", 0);
         final Dialog statistics_ = new Dialog(contexts, R.style.MyAlertDialogStyle);
         statistics_.setTitle("درس " + Class);
-        statistics_.setContentView(R.layout.list_statistics_class);
+        statistics_.setContentView(R.layout.dialog_optionoutputclass);
         statistics_.setCancelable(true);
         statistics_.setCanceledOnTouchOutside(true);
         statistics_.show();

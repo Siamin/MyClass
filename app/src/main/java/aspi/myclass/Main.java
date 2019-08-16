@@ -629,7 +629,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     void Mesage(String text) {
         final Dialog massege = new Dialog(Main.this, R.style.MyAlertDialogStyle);
-        massege.setContentView(R.layout.massge);
+        massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();

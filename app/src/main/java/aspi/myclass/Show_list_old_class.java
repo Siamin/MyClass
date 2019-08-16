@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +33,7 @@ public class Show_list_old_class extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_list_old_class);
+        setContentView(R.layout.activity_oldclasslist);
         data = new dbstudy(this);
         config();
         //************************************************
@@ -184,7 +183,7 @@ public class Show_list_old_class extends Activity {
 
     void Mesage(String text) {
         final Dialog massege = new Dialog(Show_list_old_class.this, R.style.MyAlertDialogStyle);
-        massege.setContentView(R.layout.massge);
+        massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();

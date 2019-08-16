@@ -28,7 +28,7 @@ public class Edit_class extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.add_class);
+        setContentView(R.layout.activity_addclass);
         data=new dbstudy(this);
         config();
         //******************************************************************************************

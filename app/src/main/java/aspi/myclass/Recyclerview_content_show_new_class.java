@@ -32,7 +32,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
     }
     @Override
     public cvh onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_show_student, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_studentview, parent, false);
         return new cvh(view);
     }
     @Override
@@ -361,7 +361,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
     }
     void Mesage(String text){
         final Dialog massege = new Dialog(contexts,R.style.MyAlertDialogStyle);
-        massege.setContentView(R.layout.massge);
+        massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();

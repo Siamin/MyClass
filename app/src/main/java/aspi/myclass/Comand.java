@@ -1,7 +1,6 @@
 package aspi.myclass;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,7 +20,7 @@ public class Comand extends Activity {
     String model="";
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.coment);
+        setContentView(R.layout.activity_comment);
         //******************************************************************************************
         config();
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
