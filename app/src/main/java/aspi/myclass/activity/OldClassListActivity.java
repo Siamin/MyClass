@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -187,7 +188,8 @@ public class OldClassListActivity extends Activity {
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(OldClassListActivity.this, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(OldClassListActivity.this, R.style.NewDialog);
+        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);

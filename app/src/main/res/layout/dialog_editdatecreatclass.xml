@@ -1,112 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:layout_marginTop="5dp">
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="8dp"
+        android:foregroundGravity="center_vertical|center_horizontal"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="روز"
-            android:id="@+id/textView28"
-            android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="ماه"
-            android:id="@+id/textView29"
-            android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="سال"
-            android:id="@+id/textView30"
-            android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="روز"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="ماه"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/edit_data_d"
-            android:background="@drawable/bacgrond_spinner"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginRight="5dp" />
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="سال"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/edit_data_m"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:background="@drawable/bacgrond_spinner"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/edit_data_y"
-            android:background="@drawable/bacgrond_spinner"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp" />
-    </LinearLayout>
+                <Spinner
+                    android:id="@+id/edit_data_d"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bacgrond_spinner"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layoutDirection="rtl"
-        android:layout_marginBottom="20dp">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ذخیره"
-            android:id="@+id/edit_data_save"
-            android:layout_weight="1"
-            android:background="@drawable/button_style_save"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp" />
+                <Spinner
+                    android:id="@+id/edit_data_m"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bacgrond_spinner"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="بازگشت"
-            android:id="@+id/edit_data_cancel"
-            android:layout_weight="1"
-            android:background="@drawable/button_style_cancel"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" />
+                <Spinner
+                    android:id="@+id/edit_data_y"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bacgrond_spinner"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/edit_data_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style_save"
+                    android:text="ذخیره" />
+
+                <Button
+                    android:id="@+id/edit_data_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style_cancel"
+                    android:text="بازگشت" />
 
 
-    </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
+    </android.support.v7.widget.CardView>
 </LinearLayout>

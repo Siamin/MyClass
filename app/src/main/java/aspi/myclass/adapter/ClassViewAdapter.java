@@ -13,6 +13,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -159,7 +160,8 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(contexts, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(contexts, R.style.NewDialog);
+        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -181,7 +183,8 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
     void items(final String Class, final String id, final String location, final String starttime, final String endtime, final String Characteristic, final String did,final String TXT) {
         SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
         final float amozesh = sp.getFloat("LerningActivity", 0);
-        final Dialog kelas = new Dialog(contexts, R.style.MyAlertDialogStyle);
+        final Dialog kelas = new Dialog(contexts, R.style.NewDialog);
+        kelas.requestWindowFeature(Window.FEATURE_NO_TITLE);
         kelas.setTitle("درس " + Class);
         kelas.setContentView(R.layout.dialog_optionclass);
         kelas.setCancelable(true);
@@ -353,7 +356,8 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
     }
 
     void Set_Of_Week(final String Class, final String location, final String Characteristic, final String did,final String TXT) {
-        final Dialog Week = new Dialog(contexts);
+        final Dialog Week = new Dialog(contexts, R.style.NewDialog);
+        Week.requestWindowFeature(Window.FEATURE_NO_TITLE);
         Week.setTitle("اضافه کردن به ایام هفته");
         Week.setContentView(R.layout.dialog_editclass);
         Week.setCancelable(false);
@@ -435,7 +439,8 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
     void statistics(final String Class, final String id, final String location, final String starttime, final String endtime, final String Characteristic, final String did) {
         final SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
         final float amozesh = sp.getFloat("LerningActivity", 0);
-        final Dialog statistics_ = new Dialog(contexts, R.style.MyAlertDialogStyle);
+        final Dialog statistics_ = new Dialog(contexts, R.style.NewDialog);
+        statistics_.requestWindowFeature(Window.FEATURE_NO_TITLE);
         statistics_.setTitle("درس " + Class);
         statistics_.setContentView(R.layout.dialog_optionoutputclass);
         statistics_.setCancelable(true);

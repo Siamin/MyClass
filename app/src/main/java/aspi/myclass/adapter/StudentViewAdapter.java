@@ -11,6 +11,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -366,7 +367,8 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         edit.commit();
     }
     void Mesage(String text){
-        final Dialog massege = new Dialog(contexts,R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(contexts, R.style.NewDialog);
+        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);

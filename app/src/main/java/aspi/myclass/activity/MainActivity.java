@@ -26,6 +26,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -252,7 +253,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void Clear_databaese() {
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this, R.style.NewDialog);
+        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         progressDialog.setProgress(0);
         progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -634,7 +636,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(MainActivity.this, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(MainActivity.this, R.style.NewDialog);
+        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);

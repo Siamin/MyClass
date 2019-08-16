@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -170,7 +171,8 @@ public class AddClassActivity extends Activity {
         }
     }
     void Mesage(String text){
-        final Dialog massege = new Dialog(AddClassActivity.this,R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(AddClassActivity.this, R.style.NewDialog);
+        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);

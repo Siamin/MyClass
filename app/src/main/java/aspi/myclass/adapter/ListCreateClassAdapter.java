@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -157,7 +158,8 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
     void Delete_rollcall(final String id_jalase) {
         try {
-            final ProgressDialog progressDialog = new ProgressDialog(contexts);
+            final ProgressDialog progressDialog = new ProgressDialog(contexts, R.style.NewDialog);
+            progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             progressDialog.setProgress(0);
             progressDialog.setProgressDrawable(contexts.getResources().getDrawable(R.drawable.dialog));
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -215,7 +217,8 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     void Edit_Data(String[] Datas, final String jalase){
-        final Dialog edit = new Dialog(contexts);
+        final Dialog edit = new Dialog(contexts, R.style.NewDialog);
+        edit.requestWindowFeature(Window.FEATURE_NO_TITLE);
         edit.setContentView(R.layout.dialog_editdatecreatclass);
         edit.setCancelable(true);
         edit.setTitle("ویرایش تاریخ");
