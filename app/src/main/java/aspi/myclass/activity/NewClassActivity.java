@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -24,8 +24,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.content.AbsentPersentContent;
+import aspi.myclass.R;
+import aspi.myclass.adapter.StudentViewAdapter;
+import aspi.myclass.class_.dbstudy;
 
-public class New_class extends Activity {
+
+public class NewClassActivity extends Activity {
 
     private TextView name_class, DATA;
     public static String Name_class, did;
@@ -33,7 +38,7 @@ public class New_class extends Activity {
     private dbstudy data;
     private RecyclerView recyclerView1;
     private LinearLayoutManager linearLayoutManager;
-    public static List<Content_new_class> List = new ArrayList<>();
+    public static List<AbsentPersentContent> List = new ArrayList<>();
     private int MINUTE, HOUR;
     private String[] DATA_IRAN, data_;
     public Timer time;
@@ -107,7 +112,7 @@ public class New_class extends Activity {
                     jalase = Integer.parseInt(data.Display("rollcall", (cunt_roll - 1), 8)) + 1;
                 }
                 for (int i = 0; i < cunt1; i++) {
-                    Content_new_class content = new Content_new_class();
+                    AbsentPersentContent content = new AbsentPersentContent();
                     content.name = Name[i];
                     content.family = Family[i];
                     content.sno = Sno[i];
@@ -201,7 +206,7 @@ public class New_class extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -217,7 +222,7 @@ public class New_class extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            progressDialog = new ProgressDialog(New_class.this);
+                            progressDialog = new ProgressDialog(NewClassActivity.this);
                             //progressDialog.setProgress(0);
                             //progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
                             //progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -235,10 +240,10 @@ public class New_class extends Activity {
                         if (view) {
                             view = false;
                             recyclerView1 = (RecyclerView) findViewById(R.id.recyclerview_new_classsss);
-                            linearLayoutManager = new LinearLayoutManager(New_class.this);
+                            linearLayoutManager = new LinearLayoutManager(NewClassActivity.this);
                             recyclerView1.setLayoutManager(linearLayoutManager);
                             recyclerView1.setHasFixedSize(true);
-                            recyclerView1.setAdapter(new Recyclerview_content_show_new_class(List, FONT, New_class.this));
+                            recyclerView1.setAdapter(new StudentViewAdapter(List, FONT, NewClassActivity.this));
                             progressDialog.cancel();
                             time.cancel();
                         }
@@ -250,13 +255,13 @@ public class New_class extends Activity {
 
     void Amozesh(final boolean chek) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("Amozesh", 0);
+        float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 9)
             Mesage("شما می توانید در این صفحه حضور،غیاب و نمرات دانشجویان را وارد کنید.وهمچنین می توانید با انتخاب تیک که روبه روی اسم دانشجو قرار دارد برای دانشجو غیبت وارد لیست نمایید.");
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(New_class.this, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(NewClassActivity.this, R.style.MyAlertDialogStyle);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -351,7 +356,7 @@ public class New_class extends Activity {
 
                 //cunt_roll=Integer.parseInt(data.Display("rollcall", cunt_roll-1, 0))+1;
                 for (int i = 0; i < c; i++) {
-                    Content_new_class content = new Content_new_class();
+                    AbsentPersentContent content = new AbsentPersentContent();
                     content.name = Name[i];
                     content.family = Family[i];
                     content.sno = Sno[i];
@@ -394,14 +399,14 @@ public class New_class extends Activity {
     void SetCode(float code) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(New_class.this, R.style.MyAlertDialogStyle);
-            final TextView input = new TextView(New_class.this);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(NewClassActivity.this, R.style.MyAlertDialogStyle);
+            final TextView input = new TextView(NewClassActivity.this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             input.setLayoutParams(lp);
             input.setText("تمام اطلاعات ذخیره شده است با زدن دکمه بازگشت اطلاعات حذف نمی گردد و در زمان ورود مجدد تغییرات حضور و غیاب جدید اعمال می گردد.");

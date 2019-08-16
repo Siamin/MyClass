@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.adapter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -23,16 +23,22 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.List;
 
+import aspi.myclass.content.OldClassContent;
+import aspi.myclass.R;
+import aspi.myclass.activity.MainActivity;
+import aspi.myclass.activity.OldClassActivity;
+import aspi.myclass.activity.OldClassListActivity;
+import aspi.myclass.class_.dbstudy;
 
 
-public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Recyclerview_content_show_list_old.cvh> {
+public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClassAdapter.cvh> {
 
-    private List<Content_show_list_old_class> Content_list_old;
+    private List<OldClassContent> Content_list_old;
     private Context contexts;
     private dbstudy data;
     Activity activity;
 
-    public Recyclerview_content_show_list_old(List<Content_show_list_old_class> contents, Context context, Activity Act) {
+    public ListCreateClassAdapter(List<OldClassContent> contents, Context context, Activity Act) {
         this.Content_list_old = contents;
         this.contexts = context;
         data = new dbstudy(context);
@@ -47,17 +53,17 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
 
     @Override
     public void onBindViewHolder(final cvh holder, final int position) {
-        final Content_show_list_old_class content = Content_list_old.get(position);
+        final OldClassContent content = Content_list_old.get(position);
         //*************************************************************************
         holder.row.setText("" + (position + 1));
         holder.Data.setText("" + content.DATA);
         holder.time.setText("" + content.Hour);
         //*************************************************************************
-        holder.row.setTypeface(Main.FONTS);
-        holder.Data.setTypeface(Main.FONTS);
-        holder.loggin.setTypeface(Main.FONTS);
-        holder.delete.setTypeface(Main.FONTS);
-        holder.time.setTypeface(Main.FONTS);
+        holder.row.setTypeface(MainActivity.FONTS);
+        holder.Data.setTypeface(MainActivity.FONTS);
+        holder.loggin.setTypeface(MainActivity.FONTS);
+        holder.delete.setTypeface(MainActivity.FONTS);
+        holder.time.setTypeface(MainActivity.FONTS);
         //*************************************************************************
         holder.time.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -74,18 +80,18 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
         //*************************************************************************
         holder.loggin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (Main.BUYAPP.equals("Buy_App") || position<3) {
+                if (MainActivity.BUYAPP.equals("Buy_App") || position<3) {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    float amozesh = sp.getFloat("Amozesh", 0);
+                    float amozesh = sp.getFloat("LerningActivity", 0);
                     if (amozesh == 17)SetCode(18);
 
-                    Old_class.did_class=Show_list_old_class.id_class;
-                    Old_class.Name_class=Show_list_old_class.Name_class;
-                    //Old_class.Row=Integer.parseInt(content.Row_rollcall);
-                    Old_class.Data_class=content.DATA;
-                    Old_class.Jalase=content.jalase;
-                    Old_class.HOUR=content.Hour;
-                    Intent old_class=new Intent(contexts,Old_class.class);
+                    OldClassActivity.did_class= OldClassListActivity.id_class;
+                    OldClassActivity.Name_class= OldClassListActivity.Name_class;
+                    //OldClassActivity.Row=Integer.parseInt(content.Row_rollcall);
+                    OldClassActivity.Data_class=content.DATA;
+                    OldClassActivity.Jalase=content.jalase;
+                    OldClassActivity.HOUR=content.Hour;
+                    Intent old_class=new Intent(contexts, OldClassActivity.class);
                     contexts.startActivity(old_class);
                 }else{
                     TOAST("برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
@@ -95,13 +101,13 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
         //*************************************************************************
         holder.delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (Main.BUYAPP.equals("Buy_App") || position<3) {
+                if (MainActivity.BUYAPP.equals("Buy_App") || position<3) {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
                     final TextView input = new TextView(contexts);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                     input.setLayoutParams(lp);
                     input.setText("آیا میخواهید جلسه"+content.DATA+" در ساعت "+content.Hour+" را حذف کنید؟");
-                    input.setTypeface(Main.FONTS);
+                    input.setTypeface(MainActivity.FONTS);
                     input.setTextSize(15);
                     input.setPadding(10,10,5,0);
                     input.setTextColor(contexts.getResources().getColor(R.color.toast));
@@ -142,7 +148,7 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Content_show_list_old_class conlist = Content_list_old.get(getPosition());
+                    OldClassContent conlist = Content_list_old.get(getPosition());
                 }
             });
         }
@@ -169,7 +175,7 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
                         activity.runOnUiThread(new Runnable() {
                             public void run() {
                                 TOAST("جلسه با موفقیت حذف شد..!");
-                                Show_list_old_class.refresh = "1";
+                                OldClassListActivity.refresh = "1";
                             }
                         });
                     } catch (Exception e) {
@@ -192,7 +198,7 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
         Toast toast = Toast.makeText(contexts, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(contexts.getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -203,7 +209,7 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
     void SetCode(float code) {
         SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 
@@ -267,7 +273,7 @@ public class Recyclerview_content_show_list_old extends RecyclerView.Adapter<Rec
             data.close();
             TOAST("ویرایش انجام شد.");
             edit.dismiss();
-            Show_list_old_class.refresh = "1";
+            OldClassListActivity.refresh = "1";
         }catch (Exception e){
            // TOAST(e.toString());
         }

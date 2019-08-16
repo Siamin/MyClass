@@ -3,7 +3,7 @@ package Object;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import aspi.myclass.OtherMetod;
+import aspi.myclass.class_.OtherMetod;
 
 public class MyTextView extends android.support.v7.widget.AppCompatTextView {
 

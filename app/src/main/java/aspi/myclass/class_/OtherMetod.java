@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.class_;
 
 
 
@@ -18,10 +18,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-
 import java.util.Calendar;
 import java.util.Random;
+
+import aspi.myclass.R;
+import aspi.myclass.activity.MainActivity;
 
 public class OtherMetod {
 
@@ -264,7 +265,7 @@ public class OtherMetod {
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setPadding(5,3,5,3);
         textView.setTextColor(context.getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -293,7 +294,7 @@ public class OtherMetod {
         }
     }
 
-    void Abute(final Context context) {
+    public void Abute(final Context context) {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo("aspi.myclass", 0);
             String version = pInfo.versionName;
@@ -329,7 +330,7 @@ public class OtherMetod {
 
     }
 
-    void Qusins(final Context context){
+    public void Qusins(final Context context){
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
             builder.setIcon(R.drawable.abute);

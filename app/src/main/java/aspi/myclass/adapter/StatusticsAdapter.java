@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,15 +12,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 
+import aspi.myclass.content.StatisticsContent;
+import aspi.myclass.R;
+import aspi.myclass.activity.MainActivity;
+import aspi.myclass.class_.dbstudy;
 
-public class Recyclerview_content_show_student extends RecyclerView.Adapter<Recyclerview_content_show_student.cvh> {
 
-    private List<Content_show_student> Content_student;
+public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cvh> {
+
+    private List<StatisticsContent> Content_student;
     private Context contexts;
     private dbstudy data;
     Activity activity;
 
-    public Recyclerview_content_show_student(List<Content_show_student> contents, Context context) {
+    public StatusticsAdapter(List<StatisticsContent> contents, Context context) {
         this.Content_student = contents;
         this.contexts = context;
         data = new dbstudy(context);
@@ -34,7 +39,7 @@ public class Recyclerview_content_show_student extends RecyclerView.Adapter<Recy
 
     @Override
     public void onBindViewHolder(final cvh holder, int position) {
-        final Content_show_student content = Content_student.get(position);
+        final StatisticsContent content = Content_student.get(position);
         //*************************************************************************
         if (position<9)holder.row.setText("  " + (position + 1)+" ");
         if (position>9)holder.row.setText(" " + (position + 1)+" ");
@@ -47,13 +52,13 @@ public class Recyclerview_content_show_student extends RecyclerView.Adapter<Recy
         float status_=((float)content.set/content.max)*100;
         holder.status.setText("%"+String.valueOf((int)status_));
         //*************************************************************************
-        holder.row.setTypeface(Main.FONTS);
-        holder.name.setTypeface(Main.FONTS);
-        holder.family.setTypeface(Main.FONTS);
-        holder.status.setTypeface(Main.FONTS);
-        holder.all.setTypeface(Main.FONTS);
-        holder.abs.setTypeface(Main.FONTS);
-        holder.per.setTypeface(Main.FONTS);
+        holder.row.setTypeface(MainActivity.FONTS);
+        holder.name.setTypeface(MainActivity.FONTS);
+        holder.family.setTypeface(MainActivity.FONTS);
+        holder.status.setTypeface(MainActivity.FONTS);
+        holder.all.setTypeface(MainActivity.FONTS);
+        holder.abs.setTypeface(MainActivity.FONTS);
+        holder.per.setTypeface(MainActivity.FONTS);
         holder.progressDialog.setProgress(content.set);
         holder.progressDialog.setMax(content.max);
         //*************************************************************************
@@ -83,7 +88,7 @@ public class Recyclerview_content_show_student extends RecyclerView.Adapter<Recy
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Content_show_student content = Content_student.get(getPosition());
+                    StatisticsContent content = Content_student.get(getPosition());
                 }
             });
         }
@@ -94,7 +99,7 @@ public class Recyclerview_content_show_student extends RecyclerView.Adapter<Recy
         Toast toast = Toast.makeText(contexts, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(contexts.getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         textView.setGravity(Gravity.CENTER);

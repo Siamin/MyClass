@@ -1,12 +1,9 @@
 package Object;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
-import aspi.myclass.OtherMetod;
+import aspi.myclass.class_.OtherMetod;
 
 /**
  * Created by AmIn on 12/21/2018.

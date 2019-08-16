@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
-public class Password extends AppCompatActivity {
+import aspi.myclass.R;
+
+public class LoginActivity extends AppCompatActivity {
 
     private Button zero, one, tow, three, four, five, six, seven, eight, nine, claer, login;
     private String get_password = "", set_password = "";
@@ -34,13 +36,13 @@ public class Password extends AppCompatActivity {
                     sp = getApplicationContext().getSharedPreferences("myclass", 0);
                     if (!sp.getString("Email", "").equals(""))
                     {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Password.this, R.style.MyAlertDialogStyle);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyAlertDialogStyle);
                         builder.setTitle("ارسال رمز عبور").setMessage("آیا دستگاه شما به اینترنت متصل است؟");
                         builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 sp = getApplicationContext().getSharedPreferences("myclass", 0);
                                 String password_chek = sp.getString("Password_App", "null");
-                                BackgroundMail.newBuilder(Password.this)
+                                BackgroundMail.newBuilder(LoginActivity.this)
                                         .withUsername("amin.syahi.1369@gmail.com")
                                         .withPassword("919121318")
                                         .withMailto(sp.getString("Email", ""))
@@ -50,10 +52,10 @@ public class Password extends AppCompatActivity {
                                         .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                                             @Override
                                             public void onSuccess() {
-                                                Toast toast = Toast.makeText(Password.this, "ایمیل ارسال شد...!", Toast.LENGTH_LONG);
+                                                Toast toast = Toast.makeText(LoginActivity.this, "ایمیل ارسال شد...!", Toast.LENGTH_LONG);
                                                 TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
                                                 textView.setTextColor(getResources().getColor(R.color.toast));
-                                                textView.setTypeface(Main.FONTS);
+                                                textView.setTypeface(MainActivity.FONTS);
                                                 textView.setTextSize(18);
                                                 textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
                                                 View view = toast.getView();
@@ -64,10 +66,10 @@ public class Password extends AppCompatActivity {
                                         .withOnFailCallback(new BackgroundMail.OnFailCallback() {
                                             @Override
                                             public void onFail() {
-                                                Toast toast = Toast.makeText(Password.this, "خطا در ارسال ایمیل...!", Toast.LENGTH_LONG);
+                                                Toast toast = Toast.makeText(LoginActivity.this, "خطا در ارسال ایمیل...!", Toast.LENGTH_LONG);
                                                 TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
                                                 textView.setTextColor(getResources().getColor(R.color.toast));
-                                                textView.setTypeface(Main.FONTS);
+                                                textView.setTypeface(MainActivity.FONTS);
                                                 textView.setTextSize(18);
                                                 textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
                                                 View view = toast.getView();
@@ -188,7 +190,7 @@ public class Password extends AppCompatActivity {
     }
 
     private void Go_to_main() {
-        Intent Main = new Intent(Password.this, Main.class);
+        Intent Main = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(Main);
         finish();
     }
@@ -240,7 +242,7 @@ public class Password extends AppCompatActivity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();

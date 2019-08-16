@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 
 import android.app.Activity;
@@ -16,7 +16,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Old_class extends Activity {
+import aspi.myclass.content.AbsentPersentContent;
+import aspi.myclass.R;
+import aspi.myclass.adapter.StudentViewAdapter;
+import aspi.myclass.class_.dbstudy;
+
+public class OldClassActivity extends Activity {
 
     private TextView name_class, DATA,Time,Titel;
     public static String Name_class, did_class,Data_class,Jalase,HOUR;
@@ -24,7 +29,7 @@ public class Old_class extends Activity {
     private dbstudy data;
     private RecyclerView recyclerView_Old;
     private LinearLayoutManager linearLayoutManagers;
-    public static java.util.List<Content_new_class> List = new ArrayList<>();
+    public static java.util.List<AbsentPersentContent> List = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +46,9 @@ public class Old_class extends Activity {
         Time= (TextView) findViewById(R.id.old_classsss_time);
         Titel= (TextView) findViewById(R.id.New_class_titel);
         //*************************************************************
-        name_class.setTypeface(Main.FONTS);
-        DATA.setTypeface(Main.FONTS);
-        Time.setTypeface(Main.FONTS);
+        name_class.setTypeface(MainActivity.FONTS);
+        DATA.setTypeface(MainActivity.FONTS);
+        Time.setTypeface(MainActivity.FONTS);
         //*************************************************************
         Titel.setText("لیست گذشته کلاس");
         Time.setText("ساعت: "+HOUR);
@@ -57,7 +62,7 @@ public class Old_class extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -113,7 +118,7 @@ public class Old_class extends Activity {
 //**************************************************************************************************
             List.clear();
             for (int i = 0; i < Cunter; i++) {
-                Content_new_class content = new Content_new_class();
+                AbsentPersentContent content = new AbsentPersentContent();
                 content.id_rull=id_rull[i];
                 content.id=id_student[i];
                 content.family=family[i];
@@ -128,8 +133,8 @@ public class Old_class extends Activity {
             linearLayoutManagers = new LinearLayoutManager(this);
             recyclerView_Old.setLayoutManager(linearLayoutManagers);
             recyclerView_Old.setHasFixedSize(true);
-            recyclerView_Old.setAdapter(new Recyclerview_content_show_new_class(List, Main.FONTS, Old_class.this));
-            Amozesh(false);
+            recyclerView_Old.setAdapter(new StudentViewAdapter(List, MainActivity.FONTS, OldClassActivity.this));
+            LerningActivity(false);
 //**************************************************************************************************
         }catch (Exception e){
             TOAST(e.toString());
@@ -138,14 +143,14 @@ public class Old_class extends Activity {
     }
     void Amozesh(final boolean chek){
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("Amozesh",0);
+        float amozesh = sp.getFloat("LerningActivity",0);
         if (amozesh==18){
             Mesage("شما در این صفحه اطلاعات مربوط به جلسه ی برگزار شده تاریخ مورد نظرتان را مشاهده می کنین و می توانید تغییرات خود را اعمال کنید.پس از ثبت تغییرات خود به صفحه ی اصلی برنامه برگردید.");
             SetCode(19);
         }
     }
     void Mesage(String text){
-        final Dialog massege = new Dialog(Old_class.this,R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(OldClassActivity.this,R.style.MyAlertDialogStyle);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -166,7 +171,7 @@ public class Old_class extends Activity {
     void SetCode( float code) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -236,7 +241,7 @@ public class Old_class extends Activity {
             name=Name.split("~");
             text=Text.split("~");
             for (int i = 0; i < Cunter; i++) {
-                Content_new_class content = new Content_new_class();
+                AbsentPersentContent content = new AbsentPersentContent();
                 content.id_rull=id_rull[i];
                 content.id=id_student[i];
                 content.family=family[i];
@@ -251,7 +256,7 @@ public class Old_class extends Activity {
             linearLayoutManagers = new LinearLayoutManager(this);
             recyclerView_Old.setLayoutManager(linearLayoutManagers);
             recyclerView_Old.setHasFixedSize(true);
-            recyclerView_Old.setAdapter(new Recyclerview_content_show_new_class(List, Main.FONTS, Old_class.this));
+            recyclerView_Old.setAdapter(new StudentViewAdapter(List, MainActivity.FONTS, OldClassActivity.this));
             Amozesh(false);
 
 //**************************************************************************************************

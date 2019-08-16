@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.adapter;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -24,19 +24,30 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import aspi.myclass.content.ClassContent;
+import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.R;
+import aspi.myclass.activity.AddStudentActivity;
+import aspi.myclass.activity.EditClassActivity;
+import aspi.myclass.activity.MainActivity;
+import aspi.myclass.activity.NewClassActivity;
+import aspi.myclass.activity.OutputDataClassActivity;
+import aspi.myclass.activity.OldClassListActivity;
+import aspi.myclass.activity.StatisticsActivity;
+import aspi.myclass.class_.dbstudy;
 
-public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<recyclerview_Content_class_main_show.cvh> {
 
-    private List<Content_class_main_show> content_class_main_shows;
+public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh> {
+
+    private List<ClassContent> content_class_main_shows;
     private Context contexts;
     private dbstudy data;
     Activity activity;
     OtherMetod om = new OtherMetod();
 
-    public recyclerview_Content_class_main_show(List<Content_class_main_show> contents, Context context, Activity activitys) {
-        this.content_class_main_shows = contents;
-
-        this.contexts = context;
+    public ClassViewAdapter(List<ClassContent> contents, Context context, Activity activitys) {
+        content_class_main_shows = contents;
+        contexts = context;
         data = new dbstudy(context);
         activity = activitys;
     }
@@ -49,7 +60,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
 
     @Override
     public void onBindViewHolder(cvh holder, int position) {
-        final Content_class_main_show content = content_class_main_shows.get(position);
+        final ClassContent content = content_class_main_shows.get(position);
 
         if (!content.name_class.equals("")) {
             holder.row.setText("" + (position + 1) + "");
@@ -92,9 +103,9 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Content_class_main_show conlist = content_class_main_shows.get(getPosition());
+                    ClassContent conlist = content_class_main_shows.get(getPosition());
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    float amozesh = sp.getFloat("Amozesh", 0);
+                    float amozesh = sp.getFloat("LerningActivity", 0);
                     if (conlist.APP) {
                         items(conlist.name_class, conlist.id, conlist.location, conlist.time_start, conlist.time_end, conlist.characteristic, conlist.id_class,conlist.text_class);
                     }
@@ -143,7 +154,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
     void SetCode(float code) {
         SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 
@@ -169,7 +180,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
 
     void items(final String Class, final String id, final String location, final String starttime, final String endtime, final String Characteristic, final String did,final String TXT) {
         SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-        final float amozesh = sp.getFloat("Amozesh", 0);
+        final float amozesh = sp.getFloat("LerningActivity", 0);
         final Dialog kelas = new Dialog(contexts, R.style.MyAlertDialogStyle);
         kelas.setTitle("درس " + Class);
         kelas.setContentView(R.layout.dialog_optionclass);
@@ -205,9 +216,9 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
             public void onClick(View v) {
                 if (amozesh == 8) SetCode(9);
                 kelas.cancel();
-                New_class.Name_class = Class;
-                New_class.did = did;
-                Intent New_class = new Intent(contexts, New_class.class);
+                NewClassActivity.Name_class = Class;
+                NewClassActivity.did = did;
+                Intent New_class = new Intent(contexts, NewClassActivity.class);
                 contexts.startActivity(New_class);
             }
         });
@@ -216,11 +227,11 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
             public void onClick(View v) {
                 if (amozesh == 4) SetCode(5);
                 kelas.cancel();
-                Add_student.id_class = did;
-                Add_student.Name_class = Class;
-                Add_student.location = location;
-                Add_student.Start_time = starttime;
-                Intent student = new Intent(contexts, Add_student.class);
+                AddStudentActivity.id_class = did;
+                AddStudentActivity.Name_class = Class;
+                AddStudentActivity.location = location;
+                AddStudentActivity.Start_time = starttime;
+                Intent student = new Intent(contexts, AddStudentActivity.class);
                 contexts.startActivity(student);
             }
         });
@@ -228,9 +239,9 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
         old_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (amozesh == 16) SetCode(17);
-                Show_list_old_class.id_class = did;
-                Show_list_old_class.Name_class = Class;
-                Intent Show_list_old_class = new Intent(contexts, Show_list_old_class.class);
+                OldClassListActivity.id_class = did;
+                OldClassListActivity.Name_class = Class;
+                Intent Show_list_old_class = new Intent(contexts, OldClassListActivity.class);
                 contexts.startActivity(Show_list_old_class);
                 kelas.cancel();
             }
@@ -240,12 +251,12 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
             public void onClick(View v) {
                 kelas.dismiss();
                 if (amozesh == 22) SetCode(23);
-                Edit_class.ID_Class = id;
-                Edit_class.Name_Class = Class;
-                Edit_class.Location_Class = location;
-                Edit_class.Start_Class = starttime;
-                Edit_class.End_Class = endtime;
-                Intent edit_class = new Intent(contexts, Edit_class.class);
+                EditClassActivity.ID_Class = id;
+                EditClassActivity.Name_Class = Class;
+                EditClassActivity.Location_Class = location;
+                EditClassActivity.Start_Class = starttime;
+                EditClassActivity.End_Class = endtime;
+                Intent edit_class = new Intent(contexts, EditClassActivity.class);
                 contexts.startActivity(edit_class);
             }
         });
@@ -263,7 +274,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
                             data.open();
                             data.delete("dars", Integer.parseInt(id));
                             data.close();
-                            Main.refresh = 1;
+                            MainActivity.refresh = 1;
                             TOAST("کلاس حذف شد...!");
                         } catch (Exception e) {
                         }
@@ -271,7 +282,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
                 });
                 builder.setNegativeButton("انصراف", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        if (amozesh == 27) Main.refresh = 1;
+                        if (amozesh == 27) MainActivity.refresh = 1;
                     }
                 });
                 AlertDialog aler = builder.create();
@@ -320,7 +331,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
                                     data.update_one1("dars", "txt", input.getText().toString(), "did="+did);
                                     data.close();
                                     TOAST("ذخیره شد...!");
-                                    if (amozesh != 20) Main.refresh = 1;
+                                    if (amozesh != 20) MainActivity.refresh = 1;
                                 }
                             } catch (Exception e) {
                             }
@@ -394,7 +405,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
                     data.insert_class(Class, String.valueOf(day_of), String.valueOf(HS) + ":" + String.valueOf(MS), location, String.valueOf(HE) + ":" + String.valueOf(ME), Characteristic, room.getText().toString(), did);
                     data.update_one1("dars", "txt", TXT, "did="+did);
                     data.close();
-                    Main.refresh = 1;
+                    MainActivity.refresh = 1;
                     Week.cancel();
                 } catch (Exception e) {
                 }
@@ -413,7 +424,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
         Toast toast = Toast.makeText(contexts, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(contexts.getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -423,7 +434,7 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
 
     void statistics(final String Class, final String id, final String location, final String starttime, final String endtime, final String Characteristic, final String did) {
         final SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-        final float amozesh = sp.getFloat("Amozesh", 0);
+        final float amozesh = sp.getFloat("LerningActivity", 0);
         final Dialog statistics_ = new Dialog(contexts, R.style.MyAlertDialogStyle);
         statistics_.setTitle("درس " + Class);
         statistics_.setContentView(R.layout.dialog_optionoutputclass);
@@ -441,10 +452,10 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
                 if (om.get_Data("‌Buy_App","NO",contexts).equals("Buy_App")) {
                     if (amozesh ==28 || amozesh ==29) SetCode(30);
                     statistics_.cancel();
-                    Show_student.Name_class = Class;
-                    Show_student.Id_class = id;
-                    Show_student.Did_class = did;
-                    contexts.startActivity(new Intent(contexts, Show_student.class));
+                    StatisticsActivity.Name_class = Class;
+                    StatisticsActivity.Id_class = id;
+                    StatisticsActivity.Did_class = did;
+                    contexts.startActivity(new Intent(contexts, StatisticsActivity.class));
                 } else {
                     TOAST("برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
@@ -457,11 +468,11 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
                 if (om.get_Data("‌Buy_App","NO",contexts).equals("Buy_App")) {
                     if (amozesh ==30) SetCode(31);
                     statistics_.cancel();
-                    Output_list.Name_class = Class;
-                    Output_list.Id_class = id;
-                    Output_list.Did_class = did;
-                    Output_list.STATUS = true;
-                    contexts.startActivity(new Intent(contexts, Output_list.class));
+                    OutputDataClassActivity.Name_class = Class;
+                    OutputDataClassActivity.Id_class = id;
+                    OutputDataClassActivity.Did_class = did;
+                    OutputDataClassActivity.STATUS = true;
+                    contexts.startActivity(new Intent(contexts, OutputDataClassActivity.class));
                 } else {
                     TOAST("برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
@@ -474,11 +485,11 @@ public class recyclerview_Content_class_main_show extends RecyclerView.Adapter<r
                 if (om.get_Data("‌Buy_App","NO",contexts).equals("Buy_App")) {
                     if (amozesh ==32) SetCode(33);
                     statistics_.cancel();
-                    Output_list.Name_class = Class;
-                    Output_list.Id_class = id;
-                    Output_list.Did_class = did;
-                    Output_list.STATUS = false;
-                    contexts.startActivity(new Intent(contexts, Output_list.class));
+                    OutputDataClassActivity.Name_class = Class;
+                    OutputDataClassActivity.Id_class = id;
+                    OutputDataClassActivity.Did_class = did;
+                    OutputDataClassActivity.STATUS = false;
+                    contexts.startActivity(new Intent(contexts, OutputDataClassActivity.class));
                 } else {
                     TOAST("برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }

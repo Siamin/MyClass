@@ -20,9 +20,11 @@ import android.widget.ImageView;
 
 import com.race604.drawable.wave.WaveDrawable;
 
+import aspi.myclass.activity.LoginActivity;
+import aspi.myclass.class_.OtherMetod;
 import tyrantgit.explosionfield.ExplosionField;
 
-public class Flash extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback, PermissionResultCallback {
+public class SplashScreanActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback, PermissionResultCallback {
 
     int time = 0;
     ImageView mImageView;
@@ -34,12 +36,12 @@ public class Flash extends Activity implements ActivityCompat.OnRequestPermissio
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spalshscrean);
+        setContentView(R.layout.activity_splashscrean);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
         //*********************************************************** PermissionUtils
-        permissionUtils = new PermissionUtils(Flash.this);
+        permissionUtils = new PermissionUtils(SplashScreanActivity.this);
         permissions.add(Manifest.permission.INTERNET);
         permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -70,7 +72,7 @@ public class Flash extends Activity implements ActivityCompat.OnRequestPermissio
                         if (time == 5) {
                             mWaveDrawable.setIndeterminate(false);
                             timer.cancel();
-                            startActivity(new Intent(Flash.this, Password.class));
+                            startActivity(new Intent(SplashScreanActivity.this, LoginActivity.class));
                             finish();
                         }
 
@@ -93,7 +95,7 @@ public class Flash extends Activity implements ActivityCompat.OnRequestPermissio
 
             permissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults);
             if (!isGranted) {
-                om.SetCode("permissions", "1", Flash.this);
+                om.SetCode("permissions", "1", SplashScreanActivity.this);
                 Timer();
 
 

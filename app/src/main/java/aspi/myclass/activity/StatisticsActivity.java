@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,8 +13,13 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.content.StatisticsContent;
+import aspi.myclass.R;
+import aspi.myclass.adapter.StatusticsAdapter;
+import aspi.myclass.class_.dbstudy;
 
-public class Show_student extends Activity {
+
+public class StatisticsActivity extends Activity {
 
 
     public static String Name_class, Id_class, Did_class;
@@ -24,7 +29,7 @@ public class Show_student extends Activity {
     private RecyclerView recyclerView_show_student;
     private LinearLayoutManager linearLayoutManager_show_student;
     private boolean view = false;
-    private java.util.List<Content_show_student> List = new ArrayList<>();
+    private java.util.List<StatisticsContent> List = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +44,7 @@ public class Show_student extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -96,7 +101,7 @@ public class Show_student extends Activity {
                 cunter -= 1;
                 if (cunter > 0) {
                     for (int i = 0; i < name.length; i++) {
-                        Content_show_student content = new Content_show_student();
+                        StatisticsContent content = new StatisticsContent();
                         content.name = name[i];
                         content.family = family[i];
                         content.max = cunter;
@@ -137,7 +142,7 @@ public class Show_student extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            progressDialog = new ProgressDialog(Show_student.this);
+                            progressDialog = new ProgressDialog(StatisticsActivity.this);
                            /* progressDialog.setProgress(0);
                             progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
                             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);*/
@@ -154,9 +159,9 @@ public class Show_student extends Activity {
                         }
                         if (view) {
                             recyclerView_show_student = (RecyclerView) findViewById(R.id.show_student_recyclerview);
-                            linearLayoutManager_show_student = new LinearLayoutManager(Show_student.this);
+                            linearLayoutManager_show_student = new LinearLayoutManager(StatisticsActivity.this);
                             recyclerView_show_student.setLayoutManager(linearLayoutManager_show_student);
-                            recyclerView_show_student.setAdapter(new Recyclerview_content_show_student(List, Show_student.this));
+                            recyclerView_show_student.setAdapter(new StatusticsAdapter(List, StatisticsActivity.this));
                             time.cancel();
                             progressDialog.cancel();
                         }
@@ -215,7 +220,7 @@ public class Show_student extends Activity {
                 Abs=abs.split("~");
 
                 for (int i = 0; i < Cunt; i++) {
-                    Content_show_student content = new Content_show_student();
+                    StatisticsContent content = new StatisticsContent();
                     content.name = Name[i];
                     content.family = Family[i];
                     content.max = Integer.parseInt(max);

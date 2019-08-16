@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
-    tools:context="aspi.myclass.Main">
+    tools:context="aspi.myclass.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -34,7 +34,10 @@ import java.io.FileOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Output_list extends Activity {
+import aspi.myclass.R;
+import aspi.myclass.class_.dbstudy;
+
+public class OutputDataClassActivity extends Activity {
 
     private TableRow.LayoutParams llp;
     private LinearLayout cell;
@@ -92,7 +95,7 @@ public class Output_list extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -192,7 +195,7 @@ public class Output_list extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            progressDialog = new ProgressDialog(Output_list.this);
+                            progressDialog = new ProgressDialog(OutputDataClassActivity.this);
                             //progressDialog.setProgress(0);
                             //progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
                             //progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -252,13 +255,13 @@ public class Output_list extends Activity {
                         tv.setText("نام و نام خانوادگی");
                         tv.setPadding(0, 0, 4, 3);
                         tv.setTextSize(15);
-                        tv.setTypeface(Main.FONTS);
+                        tv.setTypeface(MainActivity.FONTS);
                         tv.setLayoutParams(new TableRow.LayoutParams(250, TableRow.LayoutParams.FILL_PARENT));
                     } else if (fild == 0) {
                         tv.setText(name[row - 1] + " " + family[row - 1]);//name & family
                         tv.setPadding(0, 0, 4, 3);
                         tv.setTextSize(15);
-                        tv.setTypeface(Main.FONTS);
+                        tv.setTypeface(MainActivity.FONTS);
                         tv.setLayoutParams(new TableRow.LayoutParams(250, TableRow.LayoutParams.FILL_PARENT));
 
                     } else if (row > 0) {
@@ -281,14 +284,14 @@ public class Output_list extends Activity {
                         }
                         tv.setPadding(0, 0, 4, 3);
                         tv.setTextSize(12);
-                        tv.setTypeface(Main.FONTS);
+                        tv.setTypeface(MainActivity.FONTS);
                         tv.setLayoutParams(new TableRow.LayoutParams(50, TableRow.LayoutParams.FILL_PARENT));
 
                     } else {
                         tv.setText(Data_[fild - 1].replace("/", "\n-\n"));
                         tv.setPadding(0, 0, 4, 3);
                         tv.setTextSize(12);
-                        tv.setTypeface(Main.FONTS);
+                        tv.setTypeface(MainActivity.FONTS);
                         tv.setLayoutParams(new TableRow.LayoutParams(50, TableRow.LayoutParams.FILL_PARENT));
                     }
 
@@ -359,7 +362,7 @@ public class Output_list extends Activity {
                 }
             }
 
-            File file = new java.io.File(Main.Address_file_app, Name_class + " " + titel.getText().toString() + ".xls");
+            File file = new java.io.File(MainActivity.Address_file_app, Name_class + " " + titel.getText().toString() + ".xls");
             FileOutputStream os = null;
 
             os = new FileOutputStream(file);
@@ -378,7 +381,7 @@ public class Output_list extends Activity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         text.setLayoutParams(lp);
         text.setText("آیا می خواهید اطلاعات کلاس " + Name_class + " را در یک فایل اکسل ذخیره کنید؟");
-        text.setTypeface(Main.FONTS);
+        text.setTypeface(MainActivity.FONTS);
         text.setTextColor(getResources().getColor(R.color.toast));
         text.setTextSize(15);
         text.setTextColor(getResources().getColor(R.color.toast));
@@ -388,10 +391,10 @@ public class Output_list extends Activity {
         builder1.setPositiveButton("بله", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 if (Excel((sno.length + 1), (Data_.length + 1))) {
-                    TOAST(Main.Address_file_app + "/" + Name_class + " " + titel.getText().toString() + ".xls");
+                    TOAST(MainActivity.Address_file_app + "/" + Name_class + " " + titel.getText().toString() + ".xls");
                 } else {
-                    if (!Main.Address_file_app.exists()) {
-                        TOAST("مشکل در ایجاد پوشه ی  " + Main.Address_file_app + " در حافظه ی گوشی ");
+                    if (!MainActivity.Address_file_app.exists()) {
+                        TOAST("مشکل در ایجاد پوشه ی  " + MainActivity.Address_file_app + " در حافظه ی گوشی ");
                     } else {
                         TOAST("مشکل در ذخیره فایل در حافظه گوشی");
                     }
@@ -405,7 +408,7 @@ public class Output_list extends Activity {
 
     void Amozesh(final boolean chek) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("Amozesh", 0);
+        float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh > 31) {
             if (amozesh == 33) {
                 Mesage("شما می توانید در این قسمت از برنامه لیست نمرات کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
@@ -418,7 +421,7 @@ public class Output_list extends Activity {
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(Output_list.this, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(OutputDataClassActivity.this, R.style.MyAlertDialogStyle);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -445,7 +448,7 @@ public class Output_list extends Activity {
     void SetCode(float code) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 

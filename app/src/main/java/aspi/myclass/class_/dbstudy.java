@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.class_;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,14 +6,14 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import aspi.myclass.activity.NewClassActivity;
+import aspi.myclass.content.AbsentPersentContent;
 
 public class dbstudy extends SQLiteOpenHelper {
 
@@ -351,7 +351,7 @@ public class dbstudy extends SQLiteOpenHelper {
         }
         if (cursor.moveToFirst()) {
             do {
-                Content_new_class content = new Content_new_class();
+                AbsentPersentContent content = new AbsentPersentContent();
                 content.name = cursor.getString(3);
                 content.family = cursor.getString(2);
                 content.sno = cursor.getString(1);
@@ -363,7 +363,7 @@ public class dbstudy extends SQLiteOpenHelper {
                 insert_Rollcall(cursor.getString(1), true, "", DATA_IRAN[0], DATA_IRAN[1], DATA_IRAN[2], did, String.valueOf(jalase), String.valueOf(HOUR) + ":" + String.valueOf(MINUTE));
                 content.id_rull = Display("rollcall", cunt_roll, 0);
                 cunt_roll += 1;
-                New_class.List.add(content);
+                NewClassActivity.List.add(content);
                 Status = true;
             } while (cursor.moveToNext());
         }

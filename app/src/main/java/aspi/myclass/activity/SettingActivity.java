@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -23,7 +23,9 @@ import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import java.util.Calendar;
 
-public class Setting extends Activity {
+import aspi.myclass.R;
+
+public class SettingActivity extends Activity {
 
     private SharedPreferences sp;
     private Button save, cancel, Bmail;
@@ -126,7 +128,7 @@ public class Setting extends Activity {
             @Override
             public void onClick(View view) {
                 try {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this, R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this, R.style.MyAlertDialogStyle);
                     //builder.setIcon(R.drawable.abute);
                     builder.setTitle("ارسال کد تایید").setMessage("آیا میخواهید کد تایید برای ایمیل شما ارسال شود؟");
                     builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
@@ -139,7 +141,7 @@ public class Setting extends Activity {
                             x /= c.get(Calendar.DAY_OF_MONTH);
                             x += c.get(Calendar.HOUR_OF_DAY);
                             final int codes = x;
-                            BackgroundMail.newBuilder(Setting.this)
+                            BackgroundMail.newBuilder(SettingActivity.this)
                                     .withUsername("amin.syahi.1369@gmail.com")
                                     .withPassword("919121318")
                                     .withMailto(email.getText().toString())
@@ -148,10 +150,10 @@ public class Setting extends Activity {
                                     .withBody(email.getText().toString() + "\n" + model + "\nکد تایید\n" + x + "\n ایمیل شما \n" + email.getText().toString())
                                     .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                                         public void onSuccess() {
-                                            Toast toast = Toast.makeText(Setting.this, "  کد برای ایمیل شما ارسال شد...!  ", Toast.LENGTH_LONG);
+                                            Toast toast = Toast.makeText(SettingActivity.this, "  کد برای ایمیل شما ارسال شد...!  ", Toast.LENGTH_LONG);
                                             TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
                                             textView.setTextColor(getResources().getColor(R.color.toast));
-                                            textView.setTypeface(Main.FONTS);
+                                            textView.setTypeface(MainActivity.FONTS);
                                             textView.setTextSize(18);
                                             textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
                                             View view = toast.getView();
@@ -165,10 +167,10 @@ public class Setting extends Activity {
                                     })
                                     .withOnFailCallback(new BackgroundMail.OnFailCallback() {
                                         public void onFail() {
-                                            Toast toast = Toast.makeText(Setting.this, "  خطا در ارسال ایمیل...!  ", Toast.LENGTH_LONG);
+                                            Toast toast = Toast.makeText(SettingActivity.this, "  خطا در ارسال ایمیل...!  ", Toast.LENGTH_LONG);
                                             TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
                                             textView.setTextColor(getResources().getColor(R.color.toast));
-                                            textView.setTypeface(Main.FONTS);
+                                            textView.setTypeface(MainActivity.FONTS);
                                             textView.setTextSize(18);
                                             textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
                                             View view = toast.getView();
@@ -284,7 +286,7 @@ public class Setting extends Activity {
     }
 
     private void Go_main() {
-        Intent setting = new Intent(this, Main.class);
+        Intent setting = new Intent(this, MainActivity.class);
         startActivity(setting);
         finish();
     }
@@ -325,7 +327,7 @@ public class Setting extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -353,7 +355,7 @@ public class Setting extends Activity {
         try {
             sp = getApplicationContext().getSharedPreferences("myclass", 0);
             final String Code_save = sp.getString("EC_Email", "null");
-            final Dialog kelas = new Dialog(Setting.this, R.style.MyAlertDialogStyle);
+            final Dialog kelas = new Dialog(SettingActivity.this, R.style.MyAlertDialogStyle);
             kelas.setContentView(R.layout.dialog_verifycode);
             kelas.setCancelable(true);
             kelas.setCanceledOnTouchOutside(true);

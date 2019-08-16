@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -29,8 +29,11 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import aspi.myclass.R;
+import aspi.myclass.class_.dbstudy;
 
-public class Add_student extends Activity {
+
+public class AddStudentActivity extends Activity {
 
     private Button save, cancel, download, Reload;
     private TextView nameclass, starttime, locationclass, snostudent, namestudent, familystudent, numbers[];
@@ -56,7 +59,7 @@ public class Add_student extends Activity {
                     }
                     case MotionEvent.ACTION_UP: {
                         download.setBackgroundResource(R.drawable.download1);
-                        if (Main.BUYAPP.equals("Buy_App")) {
+                        if (MainActivity.BUYAPP.equals("Buy_App")) {
                             ReadFileExternal("/App_class/IO.txt");
                             Mesage("برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
                         } else {
@@ -92,7 +95,7 @@ public class Add_student extends Activity {
                 if (!sno_student[0].getText().toString().equals("") && !name_student[0].getText().toString().equals("") && !family_student[0].getText().toString().equals("")) {
                     if (save()) {
                         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                        float amozesh = sp.getFloat("Amozesh", 0);
+                        float amozesh = sp.getFloat("LerningActivity", 0);
                         TOAST("ذخیره شد...!");
                         if (amozesh == 4 || amozesh == 5) {
                             SetCode(6);
@@ -220,7 +223,7 @@ public class Add_student extends Activity {
         family_student[18] = (EditText) findViewById(R.id.add_student_family19);
         family_student[19] = (EditText) findViewById(R.id.add_student_family20);
         //**********************************************************
-        FONT(Main.FONTS);
+        FONT(MainActivity.FONTS);
         //**********************************************************
         nameclass.setText("" + Name_class);
         starttime.setText("" + Start_time);
@@ -291,7 +294,7 @@ public class Add_student extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -304,8 +307,8 @@ public class Add_student extends Activity {
         final TextView input = new TextView(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         input.setLayoutParams(lp);
-        input.setText("آیا میخواهید اسامی دانشجویان را از حافظه ای  " + Main.Address_file_app + "در فایل Text با نام " + "IO.txt" + " و یا در فایل Excel با نام " + "IO.xls" + " دریافت کنید؟ ");
-        input.setTypeface(Main.FONTS);
+        input.setText("آیا میخواهید اسامی دانشجویان را از حافظه ای  " + MainActivity.Address_file_app + "در فایل Text با نام " + "IO.txt" + " و یا در فایل Excel با نام " + "IO.xls" + " دریافت کنید؟ ");
+        input.setTypeface(MainActivity.FONTS);
         input.setTextSize(15);
         input.setPadding(10, 10, 5, 0);
         builder1.setView(input);
@@ -367,7 +370,7 @@ public class Add_student extends Activity {
 
     void Amozesh(final boolean chek) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("Amozesh", 0);
+        float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh > 5) {
             if (amozesh > 6) {
 
@@ -381,7 +384,7 @@ public class Add_student extends Activity {
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(Add_student.this, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(AddStudentActivity.this, R.style.MyAlertDialogStyle);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -408,7 +411,7 @@ public class Add_student extends Activity {
     void SetCode(float code) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 

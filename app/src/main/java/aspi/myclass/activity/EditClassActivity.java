@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -13,8 +13,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import aspi.myclass.R;
+import aspi.myclass.class_.dbstudy;
 
-public class Edit_class extends Activity {
+
+public class EditClassActivity extends Activity {
 
     private Button save,cancel;
     private TextView name_text,code_text,timeS_text,timeE_text,location_text,day_of_week_text,class_text,title;
@@ -73,7 +76,7 @@ public class Edit_class extends Activity {
         title= (TextView) findViewById(R.id.add_class_title);
         ArrayAdapter<String> a=new  ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Day_of_week);
         day_spinner.setAdapter(a);
-        FONT(Main.FONTS);
+        FONT(MainActivity.FONTS);
         time_start.setIs24HourView(true);
         time_end.setIs24HourView(true);
         set_item();
@@ -219,7 +222,7 @@ public class Edit_class extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         textView.setTextSize(18);
         View view = toast.getView();

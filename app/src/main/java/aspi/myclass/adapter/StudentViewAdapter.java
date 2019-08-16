@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -18,13 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 
+import aspi.myclass.content.AbsentPersentContent;
+import aspi.myclass.R;
+import aspi.myclass.activity.MainActivity;
+import aspi.myclass.activity.NewClassActivity;
+import aspi.myclass.class_.dbstudy;
 
-public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Recyclerview_content_show_new_class.cvh> {
-    private List<Content_new_class> Content_new_class;
+
+public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.cvh> {
+    private List<AbsentPersentContent> Content_new_class;
     private Typeface FONT;
     private Context contexts;
     private dbstudy data;
-    public Recyclerview_content_show_new_class(List<Content_new_class> contents, Typeface font, Context context) {
+    public StudentViewAdapter(List<AbsentPersentContent> contents, Typeface font, Context context) {
         this.Content_new_class = contents;
         this.FONT = font;
         this.contexts = context;
@@ -37,7 +43,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
     }
     @Override
     public void onBindViewHolder(final cvh holder, int position) {
-        final Content_new_class content = Content_new_class.get(position);
+        final AbsentPersentContent content = Content_new_class.get(position);
         //*****************************************************************
         holder.row.setText("  " + (position + 1) + " ");
         holder.sno.setText(content.sno);
@@ -71,7 +77,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
         holder.status.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                float amozesh = sp.getFloat("Amozesh",0);
+                float amozesh = sp.getFloat("LerningActivity",0);
 
                 String STATUS = "1";
                 if (holder.status.isChecked()) {
@@ -101,7 +107,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("Amozesh",0);
+                    final float amozesh = sp.getFloat("LerningActivity",0);
 
                     final String sno_old = holder.sno.getText().toString();
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
@@ -119,7 +125,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
                             try {
                                 data.open();
                                 boolean S;
-                                S = data.Update_sno(input.getText().toString(),New_class.did,holder.sno.getText().toString());
+                                S = data.Update_sno(input.getText().toString(), NewClassActivity.did,holder.sno.getText().toString());
                                 data.close();
 
                                 if (S) {
@@ -149,7 +155,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("Amozesh",0);
+                    final float amozesh = sp.getFloat("LerningActivity",0);
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -190,7 +196,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("Amozesh",0);
+                    final float amozesh = sp.getFloat("LerningActivity",0);
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -230,7 +236,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("Amozesh",0);
+                    final float amozesh = sp.getFloat("LerningActivity",0);
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -273,7 +279,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("Amozesh",0);
+                    final float amozesh = sp.getFloat("LerningActivity",0);
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -282,7 +288,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
                     input.setLayoutParams(lp);
                     input.setHint("نمره را وارد کنید");
                     builder1.setView(input);
-                    if(Main.status_number.equals("on")){
+                    if(MainActivity.status_number.equals("on")){
                         input.setInputType(InputType.TYPE_CLASS_NUMBER);
                     }
                     input.setTypeface(FONT);
@@ -336,7 +342,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Content_new_class conlist = Content_new_class.get(getPosition());
+                    AbsentPersentContent conlist = Content_new_class.get(getPosition());
                 }
             });
         }
@@ -346,7 +352,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
         Toast toast = Toast.makeText(contexts, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(contexts.getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -356,7 +362,7 @@ public class Recyclerview_content_show_new_class extends RecyclerView.Adapter<Re
     void SetCode( float code) {
         SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
     void Mesage(String text){

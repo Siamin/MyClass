@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -17,7 +17,9 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Amozesh extends Activity {
+import aspi.myclass.R;
+
+public class LerningActivity extends Activity {
 
     LinearLayout linearLayout;
     int w, h;
@@ -29,7 +31,7 @@ public class Amozesh extends Activity {
         Mode();
     }
     void text(String text, float size,int p) {
-        TextView tv = new TextView(Amozesh.this);
+        TextView tv = new TextView(LerningActivity.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 10, 0, 10);
         tv.setPadding(15, 20, 15, 10);
@@ -42,7 +44,7 @@ public class Amozesh extends Activity {
 
     }
     void line() {
-        TextView tv = new TextView(Amozesh.this);
+        TextView tv = new TextView(LerningActivity.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,2);
         lp.setMargins(0, 0, 0, 0);
         tv.setPadding(5, 0, 5, 0);
@@ -52,7 +54,7 @@ public class Amozesh extends Activity {
 
     }
     void img(String name,int p) {
-        ImageView img = new ImageView(Amozesh.this);
+        ImageView img = new ImageView(LerningActivity.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(p, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER;
         AssetManager am = getAssets();
@@ -84,7 +86,7 @@ public class Amozesh extends Activity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         input.setLayoutParams(lp);
         input.setText("آموزش مورد نظرتان را انتخاب کنید.");
-        input.setTypeface(Main.FONTS);
+        input.setTypeface(MainActivity.FONTS);
         input.setTextSize(15);
         input.setPadding(10, 10, 5, 0);
         builder1.setView(input);

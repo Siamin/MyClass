@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -17,8 +17,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import aspi.myclass.R;
+import aspi.myclass.class_.dbstudy;
 
-public class Add_class extends Activity {
+
+public class AddClassActivity extends Activity {
 
     private Button save,cancel;
     private TextView name_text,code_text,timeS_text,timeE_text,location_text,day_of_week_text,class_text;
@@ -45,9 +48,9 @@ public class Add_class extends Activity {
                             if (!class_edit.getText().toString().equals("")){
                                 if (save()) {
                                     SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                                    float amozesh = sp.getFloat("Amozesh",0);
+                                    float amozesh = sp.getFloat("LerningActivity",0);
                                     if (amozesh==1.0) SetCode(2);
-                                    Main.refresh=1;
+                                    MainActivity.refresh=1;
                                     Go_main();
                                 }
                             }else{
@@ -94,7 +97,7 @@ public class Add_class extends Activity {
         time_end= (TimePicker) findViewById(R.id.add_class_end_time_picker);
         ArrayAdapter<String> a=new  ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Day_of_week);
         day_spinner.setAdapter(a);
-        FONT(Main.FONTS);
+        FONT(MainActivity.FONTS);
         time_start.setIs24HourView(true);
         time_end.setIs24HourView(true);
 
@@ -152,7 +155,7 @@ public class Add_class extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -161,13 +164,13 @@ public class Add_class extends Activity {
     }
     void Amozesh(){
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("Amozesh",0);
+        float amozesh = sp.getFloat("LerningActivity",0);
         if (amozesh==1){
            Mesage("ابتدا اطلاعات درس را وارد کنید سپس با انتخاب گزینه ذخیره اطلاعات مورد نظر را در برنامه ذخیره کنید.");
         }
     }
     void Mesage(String text){
-        final Dialog massege = new Dialog(Add_class.this,R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(AddClassActivity.this,R.style.MyAlertDialogStyle);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -193,7 +196,7 @@ public class Add_class extends Activity {
     void SetCode( float code) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 }

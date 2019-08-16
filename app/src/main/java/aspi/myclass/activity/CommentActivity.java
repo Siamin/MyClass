@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
-public class Comand extends Activity {
+import aspi.myclass.R;
+
+public class CommentActivity extends Activity {
 
     EditText subject,body,name,email;
     Button ok,cancel;
@@ -30,7 +32,7 @@ public class Comand extends Activity {
         ok.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                BackgroundMail.newBuilder(Comand.this)
+                BackgroundMail.newBuilder(CommentActivity.this)
                         .withUsername("amin.syahi.1369@gmail.com")
                         .withPassword("919121318")
                         .withMailto("aspi.program@gmail.com")
@@ -39,10 +41,10 @@ public class Comand extends Activity {
                         .withBody(body.getText().toString()+"\n ارسال شده از  طرف \n"+name.getText().toString()+"\n ایمیل \n"+email.getText().toString()+"\n مدل دستگاه = "+model)
                         .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                             public void onSuccess() {
-                                Toast toast = Toast.makeText(Comand.this, " نظر ارسال شد ", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(CommentActivity.this, " نظر ارسال شد ", Toast.LENGTH_LONG);
                                 TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
                                 textView.setTextColor(getResources().getColor(R.color.toast));
-                                textView.setTypeface(Main.FONTS);
+                                textView.setTypeface(MainActivity.FONTS);
                                 textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
                                 textView.setTextSize(18);
                                 View view = toast.getView();
@@ -53,10 +55,10 @@ public class Comand extends Activity {
                         })
                         .withOnFailCallback(new BackgroundMail.OnFailCallback() {
                             public void onFail() {
-                                Toast toast = Toast.makeText(Comand.this, " خطا در ارسال نظر ", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(CommentActivity.this, " خطا در ارسال نظر ", Toast.LENGTH_LONG);
                                 TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
                                 textView.setTextColor(getResources().getColor(R.color.toast));
-                                textView.setTypeface(Main.FONTS);
+                                textView.setTypeface(MainActivity.FONTS);
                                 textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
                                 textView.setTextSize(18);
                                 View view = toast.getView();
@@ -76,7 +78,7 @@ public class Comand extends Activity {
     }
 
     void Back(){
-        startActivity(new Intent(this, Main.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
     void config(){

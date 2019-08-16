@@ -300,7 +300,7 @@ public class Base64 {
             int maxLineLength) {
         int lenDiv3 = (len + 2) / 3; // ceil(len / 3)
         int len43 = lenDiv3 * 4;
-        byte[] outBuff = new byte[len43 // Main 4:3
+        byte[] outBuff = new byte[len43 // MainActivity 4:3
                                   + (len43 / maxLineLength)]; // New lines
 
         int d = 0;

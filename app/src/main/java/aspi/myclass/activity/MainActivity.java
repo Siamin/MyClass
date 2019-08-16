@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 
 import android.app.Dialog;
@@ -42,7 +42,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import aspi.myclass.content.ClassContent;
+import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.R;
+import aspi.myclass.class_.dbstudy;
+import aspi.myclass.adapter.ClassViewAdapter;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     DrawerLayout drawer;
@@ -57,7 +63,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     TextView text_day_class;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
-    List<Content_class_main_show> List = new ArrayList<>();
+    List<ClassContent> List = new ArrayList<>();
     dbstudy data;
     public static String BUYAPP = "", status_number = "off";
     public static Timer time;
@@ -134,24 +140,24 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        final float amozesh = sp.getFloat("Amozesh", 0);
+        final float amozesh = sp.getFloat("LerningActivity", 0);
         if (id == R.id.nav_add_class) {
             if (amozesh == 0.5) SetCode(1);
-            startActivity(new Intent(this, Add_class.class));
+            startActivity(new Intent(this, AddClassActivity.class));
         } else if (id == R.id.nav_abute) {
-            om.Abute(Main.this);
+            om.Abute(MainActivity.this);
         } else if (id == R.id.nav_coment) {
-            startActivity(new Intent(this, Comand.class));
+            startActivity(new Intent(this, CommentActivity.class));
             finish();
         } else if (id == R.id.nav_setting) {
-            startActivity(new Intent(this, Setting.class));
+            startActivity(new Intent(this, SettingActivity.class));
             finish();
         } else if (id == R.id.nav_exit) {
             finish();
         } else if (id == R.id.nav_ClearDataBase) {
             Clear_DataBaese();
         } else if (id == R.id.nav_backup) {
-            if (om.get_Data("‌Buy_App", "NO", Main.this).equals("Buy_App")) {
+            if (om.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
                 final TextView input = new TextView(this);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -176,11 +182,11 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 AlertDialog aler1 = builder1.create();
                 aler1.show();
             } else {
-                om.Toast(Main.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                om.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
             }
 
         } else if (id == R.id.nav_upload) {
-            if (om.get_Data("‌Buy_App", "NO", Main.this).equals("Buy_App")) {
+            if (om.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
                 final TextView input = new TextView(this);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -205,16 +211,16 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 AlertDialog aler1 = builder1.create();
                 aler1.show();
             } else {
-                om.Toast(Main.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                om.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
             }
         } else if (id == R.id.nav_amozesh) {
-            startActivity(new Intent(this, Amozesh.class));
+            startActivity(new Intent(this, LerningActivity.class));
         } else if (id == R.id.buyapp) {
-            if (om.get_Data("‌Buy_App", "NO", Main.this).equals("NO")) {
-                startActivity(new Intent(this, Buyapp.class));
+            if (om.get_Data("‌Buy_App", "NO", MainActivity.this).equals("NO")) {
+                startActivity(new Intent(this, BuyAppActivity.class));
                 finish();
             } else {
-                om.Toast(Main.this, "شما قبلا برنامه را خریداری کرده اید.");
+                om.Toast(MainActivity.this, "شما قبلا برنامه را خریداری کرده اید.");
             }
         }
 
@@ -246,7 +252,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     void Clear_databaese() {
-        final ProgressDialog progressDialog = new ProgressDialog(Main.this);
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setProgress(0);
         progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -265,7 +271,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            om.Toast(Main.this, "حافظه نرم افزار با موفقیت پاک شد...!");
+                            om.Toast(MainActivity.this, "حافظه نرم افزار با موفقیت پاک شد...!");
                             refresh = 1;
                         }
                     });
@@ -358,7 +364,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
             if (chek) {
                 sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                float amozesh = sp.getFloat("Amozesh", 0);
+                float amozesh = sp.getFloat("LerningActivity", 0);
                 if (amozesh == 2.0) SetCode(3);
                 String[] name, start, end, id, location, class_, id_class, characteristic, Text_class;
                 name = Name.split("~");
@@ -372,7 +378,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 Text_class = txt_class.split("~");
                 List.clear();
                 for (int i = 0; i < name.length; i++) {
-                    Content_class_main_show content = new Content_class_main_show();
+                    ClassContent content = new ClassContent();
                     content.APP = chek;
                     content.name_class = name[i];
                     content.time_start = start[i];
@@ -389,7 +395,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 linearLayoutManager = new LinearLayoutManager(this);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new recyclerview_Content_class_main_show(List, Main.this, Main.this));
+                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this, MainActivity.this));
                 Amozesh(true);
             } else {
                 List.clear();
@@ -397,7 +403,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 linearLayoutManager = new LinearLayoutManager(this);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new recyclerview_Content_class_main_show(List, Main.this, Main.this));
+                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this, MainActivity.this));
             }
             Set_day();
         } catch (Exception e) {
@@ -458,7 +464,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 write("class", BACKUP_class);
                 write("student", BACKUP_student);
                 write("rollcall", BACKUP_roll);
-                om.Toast(Main.this, "فایل پشتیبانی گرفته شد...!");
+                om.Toast(MainActivity.this, "فایل پشتیبانی گرفته شد...!");
             } catch (Exception e) {
                 Log.i(TAG, e.toString());
             }
@@ -492,7 +498,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                         data.insert_Rollcall(item[0], status, item[2], item[3], item[4], item[5], NC + item[6], item[7] + NC, item[8]);
                     }
                     data.close();
-                    om.Toast(Main.this, "بارگزاری انجام شد...!");
+                    om.Toast(MainActivity.this, "بارگزاری انجام شد...!");
                     refresh = 1;
                 } catch (Exception e) {
                 }
@@ -520,7 +526,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
             try {
                 long vCode = service.getVersionCode("aspi.myclass");
                 if (vCode != -1) {
-                    om.Qusins(Main.this);
+                    om.Qusins(MainActivity.this);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -545,7 +551,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     void Amozesh(final boolean chek) {
         sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("Amozesh", 0);
+        float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh > 0) {
             if (amozesh > 0.5) {
                 if (amozesh > 2.0) {
@@ -628,7 +634,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(Main.this, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(MainActivity.this, R.style.MyAlertDialogStyle);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -655,7 +661,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     void SetCode(float code) {
         sp = getApplicationContext().getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 

@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,15 +17,20 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.content.OldClassContent;
+import aspi.myclass.R;
+import aspi.myclass.adapter.ListCreateClassAdapter;
+import aspi.myclass.class_.dbstudy;
 
-public class Show_list_old_class extends Activity {
+
+public class OldClassListActivity extends Activity {
 
     public static String Name_class, id_class, refresh = "";
     private TextView name_class;
     private dbstudy data;
     private RecyclerView recyclerView2;
     private LinearLayoutManager linearLayoutManager;
-    private java.util.List<Content_show_list_old_class> List = new ArrayList<>();
+    private java.util.List<OldClassContent> List = new ArrayList<>();
     public static Timer time;
     private ProgressDialog progressDialog;
     private int cunters = 0;
@@ -42,7 +47,7 @@ public class Show_list_old_class extends Activity {
     void config() {
         name_class = (TextView) findViewById(R.id.show_list_old_class_name_class);
         //***********************************************************************
-        name_class.setTypeface(Main.FONTS);
+        name_class.setTypeface(MainActivity.FONTS);
         //***********************************************************************
         name_class.setText("" + Name_class);
         //***********************************************************************
@@ -80,7 +85,7 @@ public class Show_list_old_class extends Activity {
                 Hour = HOUR.split("~");
                 row = Row.split("~");
                 for (int i = 0; i < cual; i++) {
-                    Content_show_list_old_class content = new Content_show_list_old_class();
+                    OldClassContent content = new OldClassContent();
                     content.DATA = Data[i];
                     content.jalase = Jalase[i];
                     content.Hour = Hour[i];
@@ -127,7 +132,7 @@ public class Show_list_old_class extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
@@ -143,7 +148,7 @@ public class Show_list_old_class extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            progressDialog = new ProgressDialog(Show_list_old_class.this);
+                            progressDialog = new ProgressDialog(OldClassListActivity.this);
                             //progressDialog.setProgress(0);
                             //progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
                             //progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -161,10 +166,10 @@ public class Show_list_old_class extends Activity {
                         if (view) {
                             view = false;
                             recyclerView2 = (RecyclerView) findViewById(R.id.show_list_old_class_recyclerview);
-                            linearLayoutManager = new LinearLayoutManager(Show_list_old_class.this);
+                            linearLayoutManager = new LinearLayoutManager(OldClassListActivity.this);
                             recyclerView2.setLayoutManager(linearLayoutManager);
                             recyclerView2.setHasFixedSize(true);
-                            recyclerView2.setAdapter(new Recyclerview_content_show_list_old(List, Show_list_old_class.this, Show_list_old_class.this));
+                            recyclerView2.setAdapter(new ListCreateClassAdapter(List, OldClassListActivity.this, OldClassListActivity.this));
                             progressDialog.cancel();
                             Amozesh(false);
                         }
@@ -176,13 +181,13 @@ public class Show_list_old_class extends Activity {
 
     void Amozesh(final boolean chek) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("Amozesh", 0);
+        float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 17.0)
             Mesage("شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
     }
 
     void Mesage(String text) {
-        final Dialog massege = new Dialog(Show_list_old_class.this, R.style.MyAlertDialogStyle);
+        final Dialog massege = new Dialog(OldClassListActivity.this, R.style.MyAlertDialogStyle);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
@@ -204,7 +209,7 @@ public class Show_list_old_class extends Activity {
     void SetCode(float code) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("Amozesh", code);
+        edit.putFloat("LerningActivity", code);
         edit.commit();
     }
 
@@ -269,7 +274,7 @@ public class Show_list_old_class extends Activity {
 
                 for (int i = 0; i < cual; i++) {
 
-                    Content_show_list_old_class content = new Content_show_list_old_class();
+                    OldClassContent content = new OldClassContent();
                     content.DATA = Data[i];
                     content.jalase = Jalase[i];
                     content.Hour = Hour[i];

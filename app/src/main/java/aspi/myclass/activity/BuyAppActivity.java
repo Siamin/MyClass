@@ -1,4 +1,4 @@
-package aspi.myclass;
+package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import aspi.myclass.R;
 import util.IabHelper;
 import util.IabResult;
 import util.Inventory;
@@ -20,7 +22,7 @@ import util.Purchase;
 import util.SkuDetails;
 
 
-public class Buyapp extends Activity {
+public class BuyAppActivity extends Activity {
 
     static final String TAG = "amin.syahi.69@chmail.ir";
     static final String SKU_PREMIUM = "buyApp";
@@ -42,7 +44,7 @@ public class Buyapp extends Activity {
         try {
             config();
             buyhelper = new IabHelper(this, AppKey);
-            progressDialog = new ProgressDialog(Buyapp.this);
+            progressDialog = new ProgressDialog(BuyAppActivity.this);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setTitle("در حال دریافت اطلاعات از بازار");
             progressDialog.setCancelable(false);
@@ -80,7 +82,7 @@ public class Buyapp extends Activity {
                             if (result.isSuccess()) {
                                 SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
                                 String model = android.os.Build.MODEL + " " + android.os.Build.BRAND +" (" + android.os.Build.VERSION.RELEASE+")" + " API-" + android.os.Build.VERSION.SDK_INT;
-                                BackgroundMail.newBuilder(Buyapp.this)
+                                BackgroundMail.newBuilder(BuyAppActivity.this)
                                         .withUsername("amin.syahi.1369@gmail.com")
                                         .withPassword("919121318")
                                         .withMailto("aspi.program@gmail.com")
@@ -158,12 +160,12 @@ public class Buyapp extends Activity {
         textView = (TextView) findViewById(R.id.buyapp_text);
         buy = (Button) findViewById(R.id.buyapp_buy);
         cancel = (Button) findViewById(R.id.buyapp_cancel);
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setText("");
     }
 
     void Back() {
-        startActivity(new Intent(this, Main.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 
@@ -171,7 +173,7 @@ public class Buyapp extends Activity {
         Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
         textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(Main.FONTS);
+        textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         View view = toast.getView();
