@@ -5,19 +5,23 @@
     android:gravity="right"
     android:layoutDirection="rtl"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@color/colorPrimary"
         android:gravity="right"
         android:layoutDirection="rtl"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimary">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
             android:paddingRight="10dp"
@@ -25,64 +29,66 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1">
-        </TextView>
+            android:textStyle="bold"></TextView>
 
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <ImageView
             android:id="@+id/add_student_reload"
-            android:background="@drawable/reload1"
-            android:layout_centerVertical="true" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_refresh_black_24dp"
+            android:tint="@color/white"/>
 
-        <Button
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:id="@+id/add_student_download_"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/download1" />
+        <ImageView
+            android:id="@+id/add_student_download_"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_file_download_black_24dp"
+            android:tint="@color/white"/>
+
+        <ImageView
+            android:id="@+id/add_student_save"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_check_black_24dp"
+            android:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/add_student_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:tint="@color/white" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout"
         android:layout_gravity="right"
-        android:gravity="center_vertical|center_horizontal"
         android:layoutDirection="rtl"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="    "
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
+        <Object.MyTextView
             android:id="@+id/add_student_name_class"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_addstudent1"
             android:gravity="center_vertical|center_horizontal"
             android:text="کلاس:"
+            android:textColor="@color/white"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
 
-        <TextView
+        <Object.MyTextView
             android:id="@+id/add_student_start_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -90,94 +96,30 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_addstudent"
+            android:textColor="@color/white"
             android:gravity="center_vertical|center_horizontal"
             android:text="ساعت شروع کلاس"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
 
-        <TextView
+        <Object.MyTextView
             android:id="@+id/add_student_location"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_day"
+            android:textColor="@color/white"
             android:gravity="center_vertical|center_horizontal"
             android:text="مکان برگزاری کلاس"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
 
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_gravity="right"
-        android:gravity="center_vertical|center_horizontal"
-        android:layoutDirection="rtl"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="    "
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/add_student_sno"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_addstudent1"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="شماره دانشجویی"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/add_student_name_student"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_addstudent"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="نام"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/add_student_family_student"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_day"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="نام خانوادگی"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15dp" />
-
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayout2"
-        android:layout_below="@+id/linearLayout3">
+        android:layout_below="@+id/linearLayout4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -188,22 +130,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 1 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number0" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -211,10 +153,10 @@
                     android:layout_weight="1"
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal"
-                    android:inputType="phone"/>
+                    android:inputType="phone" />
 
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -223,7 +165,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -231,8 +173,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bacgrond_edittext"
                     android:ems="10"
-                    android:gravity="center_vertical|center_horizontal"
-                     />
+                    android:gravity="center_vertical|center_horizontal" />
 
             </LinearLayout>
 
@@ -240,22 +181,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 2 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number1" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -266,7 +207,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -275,7 +216,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -290,22 +231,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 3 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number2" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -316,7 +257,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -325,7 +266,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -340,22 +281,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 4 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number3" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -366,7 +307,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -375,7 +316,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -390,22 +331,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 5 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number4" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -416,7 +357,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -425,7 +366,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -440,22 +381,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 6 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number5" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -466,7 +407,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -475,7 +416,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -490,22 +431,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 7 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number6" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -516,7 +457,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -525,7 +466,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -540,22 +481,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 8 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number7" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -566,7 +507,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -575,7 +516,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -590,22 +531,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 9 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number8" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -616,7 +557,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -625,7 +566,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -640,22 +581,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 10 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number9" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -666,7 +607,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -675,7 +616,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -690,22 +631,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 11 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number10" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -716,7 +657,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -725,7 +666,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -740,22 +681,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 12 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number11" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -766,7 +707,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -775,7 +716,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -790,22 +731,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 13 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number12" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno13"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -816,7 +757,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name13"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -825,7 +766,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family13"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -840,22 +781,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 14 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number13" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -866,7 +807,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -875,7 +816,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -890,22 +831,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 15 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number14" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -916,7 +857,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -925,7 +866,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -940,22 +881,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 16 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number15" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -966,7 +907,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -975,7 +916,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -990,22 +931,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 17 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number16" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1016,7 +957,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1025,7 +966,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1040,22 +981,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 18 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number17" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1066,7 +1007,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1075,7 +1016,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1090,22 +1031,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 19 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number18" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1116,7 +1057,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1125,7 +1066,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1140,22 +1081,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_above="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <Object.MyTextView
+                    android:id="@+id/add_student_number19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/backgrond_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
                     android:text=" 20 "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/add_student_number19" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_sno20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1166,7 +1107,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_name20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1175,7 +1116,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <EditText
+                <Object.MyEditText
                     android:id="@+id/add_student_family20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1187,46 +1128,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:layoutDirection="rtl"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/add_student_save"
-            android:layout_width="0dp"
-            android:layout_height="65dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_style_save"
-            android:text="ذخیره"
-            android:textColor="#ffffff"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp" />
-
-        <Button
-            android:id="@+id/add_student_cancel"
-            android:layout_width="0dp"
-            android:layout_height="65dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_style_cancel"
-            android:text="بازگشت"
-            android:textColor="#ffffff"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="5dp" />
-    </LinearLayout>
 
 </RelativeLayout>

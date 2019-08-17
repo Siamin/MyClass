@@ -1,45 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@color/colorPrimary"
         android:gravity="right"
         android:layoutDirection="rtl"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimary">
+        android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/New_class_titel"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:gravity="center_vertical"
-                android:paddingRight="10dp"
-                android:text="لیست حضور و غیاب کلاس"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#ffffff"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1">
-            </TextView>
+        <Object.MyTextView
+            android:id="@+id/New_class_titel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:text="لیست حضور و غیاب کلاس"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold"></Object.MyTextView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/old_classsss_time"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:textColor="#ffffff"
-                android:textSize="15dp"
-                android:gravity="center_vertical|center_horizontal" />
+        <Object.MyTextView
+            android:id="@+id/old_classsss_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/activity_newclass_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:tint="@color/white" />
 
     </LinearLayout>
 
@@ -47,15 +55,16 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_gravity="right"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center_vertical|center_horizontal"
         android:layoutDirection="rtl"
-        android:orientation="horizontal"
-        android:layout_below="@+id/linearLayout">
+        android:orientation="horizontal">
 
-        <TextView
+        <Object.MyTextView
             android:id="@+id/new_class_name_class"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -63,40 +72,40 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_addstudent1"
             android:gravity="center_vertical|center_horizontal"
             android:text="شماره دانشجویی"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
-        <TextView
+        <Object.MyTextView
+            android:id="@+id/new_class_data"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@drawable/bacgrond_text_day"
             android:gravity="center_vertical|center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="تاریخ"
-            android:id="@+id/new_class_data"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout3"
-        android:layoutDirection="rtl">
+        android:layoutDirection="rtl"
+        android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_new_classsss"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/recyclerview_new_classsss">
+            android:layout_weight="1">
 
         </android.support.v7.widget.RecyclerView>
 

@@ -24,21 +24,21 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:gravity="center_vertical|center_horizontal">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layoutDirection="rtl"
                 android:gravity="center_vertical">
 
-                <TextView
+                <Object.MyTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text=" 1 "
+                    android:textColor="@color/white"
                     android:id="@+id/list_show_student_numbers"
                     android:background="@drawable/backgrond_text_day_class"
                     android:paddingRight="2dp" />
@@ -46,13 +46,11 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="شماره دانشجویی"
                     android:id="@+id/list_show_student_sno"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_gravity="right"
                     android:layout_marginRight="2dp"
-                    android:layout_weight="1"
                     android:textSize="15dp" />
 
 
@@ -60,25 +58,23 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="130dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="right"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1">
 
-                    <TextView
+                    <Object.MyTextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="نام"
                         android:id="@+id/list_show_student_name"
                         android:layout_weight="1"
                         android:gravity="center_vertical|center_horizontal"
                         android:textSize="15dp" />
 
-                    <TextView
+                    <Object.MyTextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="نام خانوادگی"
                         android:id="@+id/list_show_student_family"
                         android:layout_weight="1"
@@ -88,7 +84,7 @@
 
 
 
-                <TextView
+                <Object.MyTextView
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -112,10 +108,9 @@
 
             </LinearLayout>
 
-            <TextView
+            <Object.MyTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_height="35dp"
                 android:text="توضیحات دانشجو"
                 android:id="@+id/list_show_student_text"
                 android:gravity="center_vertical|right"

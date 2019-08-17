@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,18 +39,26 @@ public class OldClassListActivity extends Activity {
     private ProgressDialog progressDialog;
     private int cunters = 0;
     private boolean view = false;
-    String TAG="TAG_OldClassListActivity";
+    String TAG = "TAG_OldClassListActivity";
     OtherMetod om = new OtherMetod();
+    ImageView backPage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oldclasslist);
         data = new dbstudy(this);
-        config();
+        initView();
         //************************************************
+        backPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
-    void config() {
+    void initView() {
+        backPage = findViewById(R.id.activity_listoldclass_back);
         name_class = (TextView) findViewById(R.id.show_list_old_class_name_class);
         //***********************************************************************
         name_class.setTypeface(MainActivity.FONTS);
@@ -119,7 +128,7 @@ public class OldClassListActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 17.0)
-            om.Mesage(OldClassListActivity.this,"شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
+            om.Mesage(OldClassListActivity.this, "شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -133,32 +142,32 @@ public class OldClassListActivity extends Activity {
         try {
             List.clear();
             String jalase_old = "0", DATA = "", jalase = "", HOUR = "", Row = "", Res = "";
-            int cual=0;
+            int cual = 0;
             boolean STATUS = false;
             data.open();
             Res = data.Get_old_class(id_class);
             data.close();
-            if(!Res.equals("")){
+            if (!Res.equals("")) {
                 STATUS = true;
 
-                for(int i=0,j=0,start=0;i<Res.length();i++){
+                for (int i = 0, j = 0, start = 0; i < Res.length(); i++) {
 
-                    if(Res.charAt(i)=='|'){
+                    if (Res.charAt(i) == '|') {
 
-                        String TEXT_RES=Res.substring(start,i);
-                        start=i+1;
-                        if(j==0){
-                            DATA=TEXT_RES;
-                            j+=1;
-                        }else if(j==1){
-                            jalase=TEXT_RES;
-                            j+=1;
-                        }else if(j==2){
-                            HOUR=TEXT_RES;
-                            j+=1;
-                        }else if(j==3){
-                            cual=Integer.parseInt(TEXT_RES);
-                            j+=1;
+                        String TEXT_RES = Res.substring(start, i);
+                        start = i + 1;
+                        if (j == 0) {
+                            DATA = TEXT_RES;
+                            j += 1;
+                        } else if (j == 1) {
+                            jalase = TEXT_RES;
+                            j += 1;
+                        } else if (j == 2) {
+                            HOUR = TEXT_RES;
+                            j += 1;
+                        } else if (j == 3) {
+                            cual = Integer.parseInt(TEXT_RES);
+                            j += 1;
                         }
 
                     }
@@ -195,7 +204,7 @@ public class OldClassListActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        om.Toast(OldClassListActivity.this,"هیچ جلسه ای برای کلاس تشکیل نشده...!");
+                        om.Toast(OldClassListActivity.this, "هیچ جلسه ای برای کلاس تشکیل نشده...!");
                         finish();
                     }
                 });
@@ -205,7 +214,7 @@ public class OldClassListActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i(TAG,"Error" + e.toString());
+                    Log.i(TAG, "Error" + e.toString());
                 }
             });
         }

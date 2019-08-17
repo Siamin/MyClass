@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,39 +29,41 @@ public class OldClassActivity extends Activity {
 
     private TextView name_class, DATA, Time, Titel;
     public static String Name_class, did_class, Data_class, Jalase, HOUR;
-    public static int Row;
     private dbstudy data;
     private RecyclerView recyclerView_Old;
     private LinearLayoutManager linearLayoutManagers;
     public static java.util.List<AbsentPersentContent> List = new ArrayList<>();
     String TAG = "TAG_OldClassActivity";
     OtherMetod om = new OtherMetod();
-
+    ImageView backPage;
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_newclass);
         data = new dbstudy(this);
-        config();
+        initView();
         //************************************************
+        backPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
-    void config() {
+    void initView() {
+        backPage = findViewById(R.id.activity_newclass_back);
         name_class = (TextView) findViewById(R.id.new_class_name_class);
         DATA = (TextView) findViewById(R.id.new_class_data);
         Time = (TextView) findViewById(R.id.old_classsss_time);
         Titel = (TextView) findViewById(R.id.New_class_titel);
-        //*************************************************************
-        name_class.setTypeface(MainActivity.FONTS);
-        DATA.setTypeface(MainActivity.FONTS);
-        Time.setTypeface(MainActivity.FONTS);
         //*************************************************************
         Titel.setText("لیست گذشته کلاس");
         Time.setText("ساعت: " + HOUR);
         name_class.setText("کلاس " + Name_class);
         DATA.setText("" + Data_class);
         //*************************************************************
-        //Get_database();
         Get_qury();
     }
 
@@ -68,7 +71,7 @@ public class OldClassActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 18) {
-            om.Mesage(OldClassActivity.this,"شما در این صفحه اطلاعات مربوط به جلسه ی برگزار شده تاریخ مورد نظرتان را مشاهده می کنین و می توانید تغییرات خود را اعمال کنید.پس از ثبت تغییرات خود به صفحه ی اصلی برنامه برگردید.");
+            om.Mesage(OldClassActivity.this, "شما در این صفحه اطلاعات مربوط به جلسه ی برگزار شده تاریخ مورد نظرتان را مشاهده می کنین و می توانید تغییرات خود را اعمال کنید.پس از ثبت تغییرات خود به صفحه ی اصلی برنامه برگردید.");
             SetCode(19);
         }
     }
@@ -162,7 +165,7 @@ public class OldClassActivity extends Activity {
             linearLayoutManagers = new LinearLayoutManager(this);
             recyclerView_Old.setLayoutManager(linearLayoutManagers);
             recyclerView_Old.setHasFixedSize(true);
-            recyclerView_Old.setAdapter(new StudentViewAdapter(List, MainActivity.FONTS, OldClassActivity.this));
+            recyclerView_Old.setAdapter(new StudentViewAdapter(List, OldClassActivity.this));
             Amozesh(false);
 
 //**************************************************************************************************

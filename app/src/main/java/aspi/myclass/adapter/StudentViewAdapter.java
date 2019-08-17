@@ -31,15 +31,13 @@ import aspi.myclass.class_.dbstudy;
 
 public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.cvh> {
     private List<AbsentPersentContent> Content_new_class;
-    private Typeface FONT;
     private Context contexts;
     private dbstudy data;
     OtherMetod om = new OtherMetod();
     String TAG = "TAG_StudentViewAdapter";
 
-    public StudentViewAdapter(List<AbsentPersentContent> contents, Typeface font, Context context) {
+    public StudentViewAdapter(List<AbsentPersentContent> contents, Context context) {
         this.Content_new_class = contents;
-        this.FONT = font;
         this.contexts = context;
         data = new dbstudy(context);
     }
@@ -76,13 +74,6 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             }
         }
         //*****************************************************************
-        holder.row.setTypeface(FONT);
-        holder.sno.setTypeface(FONT);
-        holder.name.setTypeface(FONT);
-        holder.family.setTypeface(FONT);
-        holder.nomreh.setTypeface(FONT);
-        holder.text.setTypeface(FONT);
-        //*****************************************************************
         holder.status.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
@@ -107,7 +98,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                 }
                 if (amozesh == 9) {
                     SetCode(10);
-                    om.Mesage(contexts,"و همچنین شما می توانید با انتخاب کادر سبز رنگی که روبه روی نام دانشجو قرار دارد برای دانشجو نمره کلاسی یا میان ترم وارد کنید.");
+                    om.Mesage(contexts, "و همچنین شما می توانید با انتخاب کادر سبز رنگی که روبه روی نام دانشجو قرار دارد برای دانشجو نمره کلاسی یا میان ترم وارد کنید.");
                 }
             }
         });
@@ -124,7 +115,6 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                     lp.setMargins(10, 10, 5, 0);
                     input.setLayoutParams(lp);
-                    input.setTypeface(FONT);
                     input.setHint("" + sno_old);
                     input.setInputType(InputType.TYPE_CLASS_NUMBER);
                     builder1.setView(input);
@@ -138,17 +128,17 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
 
                                 if (S) {
-                                    om.Toast(contexts,"این شماره دانشجویی در کلاس وجود دارد.");
+                                    om.Toast(contexts, "این شماره دانشجویی در کلاس وجود دارد.");
                                 } else {
                                     holder.sno.setText(input.getText().toString());
                                 }
 
                                 if (amozesh == 11) {
                                     SetCode(12);
-                                    om.Mesage(contexts,"همچنین می توانید با انتخاب نام دانشجو را ویرایش کنید.");
+                                    om.Mesage(contexts, "همچنین می توانید با انتخاب نام دانشجو را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
-                                Log.i(TAG,"Error"+e.toString());
+                                Log.i(TAG, "Error" + e.toString());
                             }
                         }
                     });
@@ -173,7 +163,6 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                     input.setLayoutParams(lp);
                     input.setText("" + holder.family.getText().toString());
                     builder1.setView(input);
-                    input.setTypeface(FONT);
                     builder1.setTitle("ویرایش نام خانوادگی " + content.family + " را انجام دهید." + "\n\n");
                     builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -185,7 +174,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 content.family = input.getText().toString();
                                 if (amozesh == 13) {
                                     SetCode(14);
-                                    om.Mesage(contexts,"شما هم می توانید با انتخاب توضیحات دانشجو برای دانشجویی انتخاب شده توضیحات لازم را به برنامه اضافه کنید.");
+                                    om.Mesage(contexts, "شما هم می توانید با انتخاب توضیحات دانشجو برای دانشجویی انتخاب شده توضیحات لازم را به برنامه اضافه کنید.");
                                 }
                             } catch (Exception e) {
                             }
@@ -214,7 +203,6 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                     input.setLayoutParams(lp);
                     input.setText("" + holder.name.getText().toString());
                     builder1.setView(input);
-                    input.setTypeface(FONT);
                     builder1.setTitle("ویرایش نام  " + content.name + " را انجام دهید." + "\n\n");
                     builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -226,7 +214,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 content.name = input.getText().toString();
                                 if (amozesh == 12) {
                                     SetCode(13);
-                                    om.Mesage(contexts,"همچنین می توانید با انتخاب نام خانوادگی  دانشجو را ویرایش کنید.");
+                                    om.Mesage(contexts, "همچنین می توانید با انتخاب نام خانوادگی  دانشجو را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
                             }
@@ -254,7 +242,6 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                     input.setLayoutParams(lp);
                     input.setText("" + content.text);
                     builder1.setView(input);
-                    input.setTypeface(FONT);
                     builder1.setTitle("توضیحات " + content.name + " " + content.family + " را وارد کنید." + "\n\n");
                     builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -300,7 +287,6 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                     if (MainActivity.status_number.equals("on")) {
                         input.setInputType(InputType.TYPE_CLASS_NUMBER);
                     }
-                    input.setTypeface(FONT);
                     builder1.setTitle("نمره دانشجو " + content.name + " " + content.family + " را وارد کنید." + "\n\n");
                     builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -312,7 +298,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 content.nomreh = input.getText().toString();
                                 if (amozesh == 10) {
                                     SetCode(11);
-                                    om.Mesage(contexts,"همچنین می توانید با انتخاب شماره ی دانشجویی را ویرایش کنید.");
+                                    om.Mesage(contexts, "همچنین می توانید با انتخاب شماره ی دانشجویی را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
                             }

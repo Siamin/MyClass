@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -42,17 +43,17 @@ import aspi.myclass.class_.dbstudy;
 
 public class OutputDataClassActivity extends Activity {
 
-    private TableRow.LayoutParams llp;
-    private LinearLayout cell;
-    private TableLayout table;
-    private dbstudy data;
+    TableRow.LayoutParams llp;
+    LinearLayout cell;
+    TableLayout table;
+    dbstudy data;
     public static boolean STATUS;
-    private Button save;
-    private TextView titel;
-    private ProgressDialog progressDialog;
+    ImageView save;
+    TextView titel;
+    ProgressDialog progressDialog;
     public static String Name_class, Id_class, Did_class, Resualt;
-    private boolean view = false;
-    private int cunters = 0;
+    boolean view = false;
+    int cunters = 0;
     String[] name, family, sno, status_, nomreh_, Data_;
     OtherMetod om = new OtherMetod();
     String TAG = "TAG_OutputDataClassActivity";
@@ -63,27 +64,17 @@ public class OutputDataClassActivity extends Activity {
         data = new dbstudy(this);
         config();
         //******************************************************************************************
-        save.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        save.setBackgroundResource(R.drawable.save_y);
-                        Question();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        save.setBackgroundResource(R.drawable.save_g);
-                        break;
-                    }
-                }
-                return false;
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Question();
             }
         });
         //******************************************************************************************
     }
 
     private void config() {
-        save = (Button) findViewById(R.id.output_list_save);
+        save = (ImageView) findViewById(R.id.output_list_save);
         titel = (TextView) findViewById(R.id.output_list_titel);
         table = (TableLayout) findViewById(R.id.output_list_table);
         //*****************************************************

@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,6 @@ public class NewClassActivity extends Activity {
 
     private TextView name_class, DATA;
     public static String Name_class, did;
-    public static Typeface FONT;
     private dbstudy data;
     private RecyclerView recyclerView1;
     private LinearLayoutManager linearLayoutManager;
@@ -49,6 +49,7 @@ public class NewClassActivity extends Activity {
     private boolean view = false;
     private Cursor cursor;
     OtherMetod om = new OtherMetod();
+    ImageView backPage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,80 +57,31 @@ public class NewClassActivity extends Activity {
         setContentView(R.layout.activity_newclass);
         //******************************************************************************************
         data = new dbstudy(this);
-        config();
+        initView();
         //******************************************************************************************
+        backPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogBack();
+            }
+        });
     }
 
-    void config() {
+    void initView() {
+        backPage = findViewById(R.id.activity_newclass_back);
         name_class = (TextView) findViewById(R.id.new_class_name_class);
         DATA = (TextView) findViewById(R.id.new_class_data);
         //*************************************************************
-        name_class.setTypeface(FONT);
-        DATA.setTypeface(FONT);
-        //*************************************************************
         name_class.setText("کلاس " + Name_class);
-        DATA.setText("" + date_iran());
+        DATA.setText("" + om.date_iran());
+        HOUR = Integer.parseInt(om.Get_Time().split(":")[0]);
+        MINUTE = Integer.parseInt(om.Get_Time().split(":")[1]);
         //*************************************************************
         Start();
     }
 
     void go_main() {
         finish();
-    }
-
-    String date_iran() {
-        Calendar c = Calendar.getInstance();
-        int year = 0, month = 0, day = 0;
-        int y = c.get(Calendar.YEAR);
-        int x = c.get(Calendar.DAY_OF_YEAR);
-        MINUTE = c.get(Calendar.MINUTE);
-        HOUR = c.get(Calendar.HOUR_OF_DAY);
-        //*******************************
-        if (x >= 0 && x <= 20) {
-            year = y - 622;
-        } else if (x >= 21 && x <= 50) {
-            year = y - 622;
-        } else if (x >= 51 && x <= 79) {
-            year = y - 622;
-        } else if (x >= 80 && x <= 266) {
-            year = y - 621;
-        } else if (x >= 267 && x <= 365) {
-            year = y - 621;
-        }
-        int mod = year % 33, kabise = 0;
-        if (mod == 1 || mod == 5 || mod == 9 || mod == 13 || mod == 17 || mod == 22 || mod == 26 || mod == 30) {
-            kabise = 1;
-        } else {
-            kabise = 0;
-        }
-        //*******************************
-        if (x >= 0 && x <= 20) {
-            month = 10;
-            day = x + 10;
-        } else if (x >= 21 && x <= 50) {
-            month = 11;
-            day = x - 20;
-        } else if (x >= 51 && x <= 79 && kabise == 0) {
-            month = 12;
-            day = x - 40;
-        } else if (x >= 51 && x <= 80 && kabise == 1) {
-            month = 12;
-            day = x - 49;
-        } else if (x >= 80 && x <= 266 && kabise == 0) {
-            x = x - 80;
-            month = (x / 31) + 1;
-            day = (x % 31) + 1;
-        } else if (x >= 81 && x <= 266 && kabise == 1) {
-            x = x - 79;
-            month = (x / 31) + 1;
-            day = (x % 31);
-        } else if (x >= 267 && x <= 365) {
-            x = x - 266;
-            month = (x / 30) + 7;
-            day = (x % 30) + 1;
-        }
-        String data = String.valueOf(year) + "/" + String.valueOf(month) + "/" + String.valueOf(day);
-        return data;
     }
 
     void Start() {
@@ -141,9 +93,6 @@ public class NewClassActivity extends Activity {
                         cunters += 1;
                         if (cunters == 1) {
                             progressDialog = new ProgressDialog(NewClassActivity.this);
-                            //progressDialog.setProgress(0);
-                            //progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
-                            //progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                             progressDialog.setTitle("درحال دریافت اطلاعات");
                             progressDialog.setCancelable(false);
                             progressDialog.setMessage("لطفا صبر کنید ...!");
@@ -161,7 +110,7 @@ public class NewClassActivity extends Activity {
                             linearLayoutManager = new LinearLayoutManager(NewClassActivity.this);
                             recyclerView1.setLayoutManager(linearLayoutManager);
                             recyclerView1.setHasFixedSize(true);
-                            recyclerView1.setAdapter(new StudentViewAdapter(List, FONT, NewClassActivity.this));
+                            recyclerView1.setAdapter(new StudentViewAdapter(List, NewClassActivity.this));
                             progressDialog.cancel();
                             time.cancel();
                         }
@@ -243,7 +192,7 @@ public class NewClassActivity extends Activity {
                 Abs = abs.split("~");
                 Per = per.split("~");
 
-                DATA_IRAN = date_iran().split("/");
+                DATA_IRAN = om.date_iran().split("/");
 
                 data.open();
                 int cunt_roll = data.count("rollcall");
@@ -294,37 +243,32 @@ public class NewClassActivity extends Activity {
         Amozesh(false);
     }
 
-    void SetCode(float code) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("LerningActivity", code);
-        edit.commit();
-    }
-
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(NewClassActivity.this, R.style.MyAlertDialogStyle);
-            final TextView input = new TextView(NewClassActivity.this);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-            input.setLayoutParams(lp);
-            input.setText("تمام اطلاعات ذخیره شده است با زدن دکمه بازگشت اطلاعات حذف نمی گردد و در زمان ورود مجدد تغییرات حضور و غیاب جدید اعمال می گردد.");
-            input.setTypeface(FONT);
-            input.setTextSize(15);
-            input.setTextColor(getResources().getColor(R.color.toast));
-            input.setPadding(10, 10, 5, 0);
-            builder1.setView(input);
-            builder1.setTitle("بازگشت");
-            builder1.setPositiveButton("بازگشت", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    go_main();
-                }
-            });
-            builder1.setNegativeButton("ماندن در این صفحه", null);
-            AlertDialog aler1 = builder1.create();
-            aler1.show();
+            dialogBack();
         }
         return super.onKeyDown(keyCode, event);
     }
 
+    void dialogBack(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(NewClassActivity.this, R.style.MyAlertDialogStyle);
+        final TextView input = new TextView(NewClassActivity.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        input.setText("تمام اطلاعات ذخیره شده است با زدن دکمه بازگشت اطلاعات حذف نمی گردد و در زمان ورود مجدد تغییرات حضور و غیاب جدید اعمال می گردد.");
+        input.setTextSize(15);
+        input.setTextColor(getResources().getColor(R.color.toast));
+        input.setPadding(10, 10, 5, 0);
+        builder1.setView(input);
+        builder1.setTitle("بازگشت");
+        builder1.setPositiveButton("بازگشت", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                go_main();
+            }
+        });
+        builder1.setNegativeButton("ماندن در این صفحه", null);
+        AlertDialog aler1 = builder1.create();
+        aler1.show();
+    }
 
 }

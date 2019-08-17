@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +39,8 @@ import aspi.myclass.class_.dbstudy;
 
 public class AddStudentActivity extends Activity {
 
-    private Button save, cancel, download, Reload;
-    private TextView nameclass, starttime, locationclass, snostudent, namestudent, familystudent, numbers[];
+    ImageView save, cancel, download, Reload;
+    private TextView nameclass, starttime, locationclass, numbers[];
     private EditText sno_student[], name_student[], family_student[];
     private dbstudy data;
     public static String id_class, Name_class, Start_time, location;
@@ -52,45 +53,25 @@ public class AddStudentActivity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_addstudent);
         data = new dbstudy(this);
-        config();
+        initView();
         //***********************************************
-        download.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        download.setBackgroundResource(R.drawable.download2);
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        download.setBackgroundResource(R.drawable.download1);
-                        if (MainActivity.BUYAPP.equals("Buy_App")) {
-                            ReadFileExternal("/App_class/IO.txt");
-                            om.Mesage(AddStudentActivity.this,"برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
-                        } else {
-                            om.Toast(AddStudentActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
-                        }
-                        break;
-                    }
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.BUYAPP.equals("Buy_App")) {
+                    ReadFileExternal("/App_class/IO.txt");
+                    om.Mesage(AddStudentActivity.this, "برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
+                } else {
+                    om.Toast(AddStudentActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
-                return false;
             }
         });
         //***********************************************
-        Reload.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        Reload.setBackgroundResource(R.drawable.reload2);
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        Reload.setBackgroundResource(R.drawable.reload1);
-                        if (!Upload.equals(""))
-                            get_upload(Upload);
-                        break;
-                    }
-                }
-                return false;
+        Reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!Upload.equals(""))
+                    get_upload(Upload);
             }
         });
         //***********************************************
@@ -125,24 +106,21 @@ public class AddStudentActivity extends Activity {
         //***********************************************
     }
 
-    void config() {
+    void initView(){
         numbers = new TextView[20];
         sno_student = new EditText[20];
         name_student = new EditText[20];
         family_student = new EditText[20];
         //**********************************************************
-        save = (Button) findViewById(R.id.add_student_save);
-        cancel = (Button) findViewById(R.id.add_student_cancel);
-        download = (Button) findViewById(R.id.add_student_download_);
-        Reload = (Button) findViewById(R.id.add_student_reload);
+        save = (ImageView) findViewById(R.id.add_student_save);
+        cancel = (ImageView) findViewById(R.id.add_student_cancel);
+        download = (ImageView) findViewById(R.id.add_student_download_);
+        Reload = (ImageView) findViewById(R.id.add_student_reload);
         Reload.setVisibility(View.INVISIBLE);
         //**********************************************************
         nameclass = (TextView) findViewById(R.id.add_student_name_class);
         starttime = (TextView) findViewById(R.id.add_student_start_time);
         locationclass = (TextView) findViewById(R.id.add_student_location);
-        snostudent = (TextView) findViewById(R.id.add_student_sno);
-        namestudent = (TextView) findViewById(R.id.add_student_name_student);
-        familystudent = (TextView) findViewById(R.id.add_student_family_student);
         numbers[0] = (TextView) findViewById(R.id.add_student_number0);
         numbers[1] = (TextView) findViewById(R.id.add_student_number1);
         numbers[2] = (TextView) findViewById(R.id.add_student_number2);
@@ -227,30 +205,15 @@ public class AddStudentActivity extends Activity {
         family_student[18] = (EditText) findViewById(R.id.add_student_family19);
         family_student[19] = (EditText) findViewById(R.id.add_student_family20);
         //**********************************************************
-        FONT(MainActivity.FONTS);
-        //**********************************************************
         nameclass.setText("" + Name_class);
         starttime.setText("" + Start_time);
         locationclass.setText("" + location);
-    }
 
-    void FONT(Typeface font_text) {
-        nameclass.setTypeface(font_text);
-        starttime.setTypeface(font_text);
-        locationclass.setTypeface(font_text);
-        snostudent.setTypeface(font_text);
-        namestudent.setTypeface(font_text);
-        familystudent.setTypeface(font_text);
-        save.setTypeface(font_text);
-        cancel.setTypeface(font_text);
-        download.setTypeface(font_text);
-        for (int i = 0; i < 20; i++) {
-            numbers[i].setTypeface(font_text);
-            sno_student[i].setTypeface(font_text);
-            name_student[i].setTypeface(font_text);
-            family_student[i].setTypeface(font_text);
+        for (int i=0;i<20;i++){
+            sno_student[i].setHint("شماره "+(i+1));
+            name_student[i].setHint("نام "+(i+1));
+            family_student[i].setHint("نام خانوادگی "+(i+1));
         }
-
     }
 
     void Go_main() {
