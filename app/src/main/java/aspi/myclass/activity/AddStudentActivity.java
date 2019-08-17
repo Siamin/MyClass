@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -31,6 +32,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import aspi.myclass.R;
+import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.class_.dbstudy;
 
 
@@ -42,7 +44,8 @@ public class AddStudentActivity extends Activity {
     private dbstudy data;
     public static String id_class, Name_class, Start_time, location;
     private int not_save = 0;
-    private String Upload = "";
+    private String Upload = "", TAG = "TAG_AddStudentActivity";
+    OtherMetod om = new OtherMetod();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +65,9 @@ public class AddStudentActivity extends Activity {
                         download.setBackgroundResource(R.drawable.download1);
                         if (MainActivity.BUYAPP.equals("Buy_App")) {
                             ReadFileExternal("/App_class/IO.txt");
-                            Mesage("برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
+                            om.Mesage(AddStudentActivity.this,"برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
                         } else {
-                            TOAST("برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                            om.Toast(AddStudentActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                         }
                         break;
                     }
@@ -97,7 +100,7 @@ public class AddStudentActivity extends Activity {
                     if (save()) {
                         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
                         float amozesh = sp.getFloat("LerningActivity", 0);
-                        TOAST("ذخیره شد...!");
+                        om.Toast(AddStudentActivity.this, "ذخیره شد...!");
                         if (amozesh == 4 || amozesh == 5) {
                             SetCode(6);
                             Amozesh(false);
@@ -105,10 +108,10 @@ public class AddStudentActivity extends Activity {
 
                     }
                     if (not_save > 0) {
-                        TOAST("اطلاعاتی که بعد از ذخیره پاک نشده اند قبلا شماره آنها وارد شده است...!");
+                        om.Toast(AddStudentActivity.this, "اطلاعاتی که بعد از ذخیره پاک نشده اند قبلا شماره آنها وارد شده است...!");
                     }
                 } else {
-                    TOAST("لطفا تمامی مشخصات را به ترتیب وارد نمایید...!");
+                    om.Toast(AddStudentActivity.this, "لطفا تمامی مشخصات را به ترتیب وارد نمایید...!");
                 }
             }
         });
@@ -255,19 +258,19 @@ public class AddStudentActivity extends Activity {
     }
 
     boolean save() {
-        boolean resualt, check=false;
+        boolean resualt, check = false;
         int res = 0;
         not_save = 0;
         try {
             data.open();
             for (int i = 0; i < 20; i++) {
-                check=false;
+                check = false;
                 if (!sno_student[i].getText().toString().equals("") && !name_student[i].getText().toString().equals("") && !family_student[i].getText().toString().equals("")) {
 
-                    try{
+                    try {
                         check = data.insert_student(sno_student[i].getText().toString(), family_student[i].getText().toString(), name_student[i].getText().toString(), id_class);
-                    }catch (Exception e){
-                        TOAST(e.toString());
+                    } catch (Exception e) {
+                        Log.i(TAG, "Error" + e.toString());
                     }
 
                     if (check) {
@@ -289,18 +292,6 @@ public class AddStudentActivity extends Activity {
             resualt = false;
         }
         return resualt;
-    }
-
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
     }
 
     void ReadFileExternal(final String path) {
@@ -376,33 +367,12 @@ public class AddStudentActivity extends Activity {
             if (amozesh > 6) {
 
             } else {
-                Mesage("همچنین شما می توانید با انتخاب ایکون سبز رنگ بالای صفحه،اطلاعات دانشجویان را بصورت لیست وارد برنامه کنید");
+                om.Mesage(AddStudentActivity.this, "همچنین شما می توانید با انتخاب ایکون سبز رنگ بالای صفحه،اطلاعات دانشجویان را بصورت لیست وارد برنامه کنید");
                 SetCode(7);
             }
         } else {
-            Mesage("در این قسمت شما می توانید اطلاعات دانشجویان را بصورت دستی وارد کنید.اطلاعات چند دانشجو را وارد کرده و گزینه ی ذخیره را انتخاب کنید.");
+            om.Mesage(AddStudentActivity.this, "در این قسمت شما می توانید اطلاعات دانشجویان را بصورت دستی وارد کنید.اطلاعات چند دانشجو را وارد کرده و گزینه ی ذخیره را انتخاب کنید.");
         }
-    }
-
-    void Mesage(String text) {
-        final Dialog massege = new Dialog(AddStudentActivity.this, R.style.NewDialog);
-        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        massege.setContentView(R.layout.dialog_message);
-        massege.setCancelable(false);
-        massege.setCanceledOnTouchOutside(false);
-        massege.show();
-        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
-        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
-        //**********************************************************************
-        txt.setText("" + text);
-        txt.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        ok.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        //**********************************************************************
-        ok.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                massege.dismiss();
-            }
-        });
     }
 
     protected void onResume() {
@@ -465,7 +435,7 @@ public class AddStudentActivity extends Activity {
             }
             get_upload(Uploads);
         } catch (Exception e) {
-            TOAST("لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");
+            om.Toast(AddStudentActivity.this, "لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");
         }
 
     }

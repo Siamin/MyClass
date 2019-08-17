@@ -24,6 +24,7 @@ import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import java.util.Calendar;
 
 import aspi.myclass.R;
+import aspi.myclass.class_.OtherMetod;
 
 public class SettingActivity extends Activity {
 
@@ -36,6 +37,8 @@ public class SettingActivity extends Activity {
     private int Size_Text, refresh = 0;
     private Typeface font_1, font_2, font_3;
     static Timer time;
+    OtherMetod om = new OtherMetod();
+    String TAG= "TAG_SettingActivity";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +73,7 @@ public class SettingActivity extends Activity {
                     if (!sp.getString("EC_Email", "null").equals("null") && sp.getString("save_Email", "0").equals("1") && !sp.getString("Email", "").equals("")) {
                         setEnabled(true);
                     } else {
-                        TOAST("  برای استفاده از این قسمت باید ایمیل خود را در سیستم ثبت کنید. ");
+                        om.Toast(SettingActivity.this,"  برای استفاده از این قسمت باید ایمیل خود را در سیستم ثبت کنید. ");
                         setEnabled(false);
                         checkBox_password.setChecked(true);
                     }
@@ -113,7 +116,7 @@ public class SettingActivity extends Activity {
             public void onClick(View v) {
                 if (save()) {
                     Go_main();
-                    TOAST("ذخیره شد...!");
+                    om.Toast(SettingActivity.this,"ذخیره شد...!");
                 }
 
             }
@@ -300,13 +303,13 @@ public class SettingActivity extends Activity {
                 } else if (!new_password1.getText().toString().equals("") && !new_password2.getText().toString().equals("")) {
                     new_password1.setText("");
                     new_password2.setText("");
-                    TOAST("رمز جدید را مجددا وارد کنید...!");
+                   om.Toast(SettingActivity.this,"رمز جدید را مجددا وارد کنید...!");
                     res = false;
                 }
             } else if (!old_password.getText().toString().equals("")) {
                 res = false;
                 old_password.setText("");
-                TOAST("رمز قدیمی را مجددا وارد کنید...!");
+                om.Toast(SettingActivity.this,"رمز قدیمی را مجددا وارد کنید...!");
             }
         } else {
             SetCode("myclass", "Password_App", "null");
@@ -321,18 +324,6 @@ public class SettingActivity extends Activity {
         SetCode("myclass", "Font_App", font_set);
         SetCode("myclass", "status_number", Number);
         return res;
-    }
-
-    private void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
     }
 
     void refresh() {
@@ -370,10 +361,10 @@ public class SettingActivity extends Activity {
                         SetCode("myclass", "EC_Email", "null");
                         SetCode("myclass", "save_Email", "1");
                         email.setText(sp.getString("Email", ""));
-                        TOAST("ایمیل شما ثبت شد...!");
+                        om.Toast(SettingActivity.this,"ایمیل شما ثبت شد...!");
                         kelas.dismiss();
                     } else {
-                        TOAST("کد وارد شده اشتباه است...!");
+                        om.Toast(SettingActivity.this,"کد وارد شده اشتباه است...!");
                     }
                 }
             });

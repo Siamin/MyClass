@@ -95,16 +95,5 @@ public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cv
 
     }
 
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(contexts, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(contexts.getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        textView.setGravity(Gravity.CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
-    }
+
 }

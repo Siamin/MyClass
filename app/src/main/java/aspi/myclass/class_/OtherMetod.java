@@ -1,7 +1,7 @@
 package aspi.myclass.class_;
 
 
-
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import aspi.myclass.activity.MainActivity;
 
 public class OtherMetod {
 
-    public String Maile = "amin.syahi.1369@gmail.com" , Pass = "942134025";
+    public String Maile = "amin.syahi.1369@gmail.com", Pass = "942134025";
     SharedPreferences sp;
     String packages = "myclass";
     Context C;
@@ -263,8 +264,8 @@ public class OtherMetod {
     public void Toast(Context context, String Text) {
         Toast toast = Toast.makeText(context, "" + Text, Toast.LENGTH_LONG);
         TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setPadding(5,3,5,3);
-        textView.setTextColor(context.getResources().getColor(R.color.toast));
+        textView.setPadding(5, 3, 5, 3);
+        textView.setTextColor(context.getResources().getColor(R.color.yellow));
         textView.setTypeface(MainActivity.FONTS);
         textView.setTextSize(18);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
@@ -290,7 +291,7 @@ public class OtherMetod {
             intent.setPackage("com.farsitel.bazaar");
             context.startActivity(intent);
         } catch (Exception e) {
-            Toast(context,"لطفا برنامه بازار را نصب کنید...!");
+            Toast(context, "لطفا برنامه بازار را نصب کنید...!");
         }
     }
 
@@ -325,12 +326,12 @@ public class OtherMetod {
             intent.setPackage("com.farsitel.bazaar");
             context.startActivity(intent);
         } catch (Exception e) {
-            Toast(context,"لطفا برنامه بازار را نصب کنید...!");
+            Toast(context, "لطفا برنامه بازار را نصب کنید...!");
         }
 
     }
 
-    public void Qusins(final Context context){
+    public void Qusins(final Context context) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
             builder.setIcon(R.drawable.abute);
@@ -347,9 +348,30 @@ public class OtherMetod {
             });
             AlertDialog aler = builder.create();
             aler.show();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
+    }
+
+    public void Mesage(Context context, String text) {
+        final Dialog massege = new Dialog(context, R.style.NewDialog);
+        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        massege.setContentView(R.layout.dialog_message);
+        massege.setCancelable(false);
+        massege.setCanceledOnTouchOutside(false);
+        massege.show();
+        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
+        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
+        //**********************************************************************
+        txt.setText("" + text);
+        txt.setTypeface(Typeface.createFromAsset(context.getAssets(), "Font/font2.ttf"));
+        ok.setTypeface(Typeface.createFromAsset(context.getAssets(), "Font/font2.ttf"));
+        //**********************************************************************
+        ok.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                massege.dismiss();
+            }
+        });
     }
 
 }

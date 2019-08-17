@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.content.OldClassContent;
 import aspi.myclass.R;
 import aspi.myclass.adapter.ListCreateClassAdapter;
@@ -36,6 +38,8 @@ public class OldClassListActivity extends Activity {
     private ProgressDialog progressDialog;
     private int cunters = 0;
     private boolean view = false;
+    String TAG="TAG_OldClassListActivity";
+    OtherMetod om = new OtherMetod();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,63 +60,6 @@ public class OldClassListActivity extends Activity {
         refresh();
     }
 
-    void get_database() {
-        try {
-            List.clear();
-            String jalase_old = "0", DATA = "", jalase = "", HOUR = "", Row = "";
-            boolean STATUS = false;
-            data.open();
-            int cunt_rll = data.count("rollcall"), cual = 0;
-            progressDialog.setMax(cunt_rll);
-            for (int i = 0; i < cunt_rll; i++) {
-                String GET[] = data.Display_Rullcall("rollcall", i).split("~");
-                if (!jalase_old.equals(GET[0]) && id_class.equals(GET[1])) {
-                    jalase_old = GET[0];
-                    DATA += GET[2] + "/" + GET[3] + "/" + GET[4] + "~";
-                    jalase += GET[0] + "~";
-                    HOUR += GET[5] + "~";
-                    Row += String.valueOf(i) + "~";
-                    STATUS = true;
-                    cual += 1;
-                    progressDialog.setMax(cunt_rll + cual);
-                }
-                progressDialog.setProgress(i);
-            }
-            data.close();
-            if (STATUS) {
-                String[] Data, Jalase, Hour, row;
-                Data = DATA.split("~");
-                Jalase = jalase.split("~");
-                Hour = HOUR.split("~");
-                row = Row.split("~");
-                for (int i = 0; i < cual; i++) {
-                    OldClassContent content = new OldClassContent();
-                    content.DATA = Data[i];
-                    content.jalase = Jalase[i];
-                    content.Hour = Hour[i];
-                    content.Row_rollcall = row[i];
-                    List.add(content);
-                    progressDialog.setProgress(cunt_rll + i);
-                }
-                view = true;
-            } else {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        TOAST("هیچ جلسه ای برای کلاس تشکیل نشده...!");
-                        finish();
-                    }
-                });
-            }
-        } catch (final Exception e) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    //    TOAST("" + e.toString());
-                }
-            });
-        }
-    }
-
     public void refresh() {
         time = new Timer();
         time.schedule(new TimerTask() {
@@ -127,18 +74,6 @@ public class OldClassListActivity extends Activity {
                 });
             }
         }, 1, 50);
-    }
-
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
     }
 
     void Start() {
@@ -184,35 +119,7 @@ public class OldClassListActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 17.0)
-            Mesage("شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
-    }
-
-    void Mesage(String text) {
-        final Dialog massege = new Dialog(OldClassListActivity.this, R.style.NewDialog);
-        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        massege.setContentView(R.layout.dialog_message);
-        massege.setCancelable(false);
-        massege.setCanceledOnTouchOutside(false);
-        massege.show();
-        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
-        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
-        //**********************************************************************
-        txt.setText("" + text);
-        txt.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        ok.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        //**********************************************************************
-        ok.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                massege.dismiss();
-            }
-        });
-    }
-
-    void SetCode(float code) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("LerningActivity", code);
-        edit.commit();
+            om.Mesage(OldClassListActivity.this,"شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -288,7 +195,7 @@ public class OldClassListActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        TOAST("هیچ جلسه ای برای کلاس تشکیل نشده...!");
+                        om.Toast(OldClassListActivity.this,"هیچ جلسه ای برای کلاس تشکیل نشده...!");
                         finish();
                     }
                 });
@@ -298,7 +205,7 @@ public class OldClassListActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    TOAST("" + e.toString());
+                    Log.i(TAG,"Error" + e.toString());
                 }
             });
         }

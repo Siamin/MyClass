@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.List;
 
+import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.content.AbsentPersentContent;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
@@ -31,17 +34,22 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
     private Typeface FONT;
     private Context contexts;
     private dbstudy data;
+    OtherMetod om = new OtherMetod();
+    String TAG = "TAG_StudentViewAdapter";
+
     public StudentViewAdapter(List<AbsentPersentContent> contents, Typeface font, Context context) {
         this.Content_new_class = contents;
         this.FONT = font;
         this.contexts = context;
         data = new dbstudy(context);
     }
+
     @Override
     public cvh onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_studentview, parent, false);
         return new cvh(view);
     }
+
     @Override
     public void onBindViewHolder(final cvh holder, int position) {
         final AbsentPersentContent content = Content_new_class.get(position);
@@ -57,12 +65,12 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             holder.status.setChecked(false);
         }
         if (!content.text.equals(" ")) {
-            if (content.text.replace("\n","  ").length()>50){
-                holder.text.setText(content.text.replace("\n","  ").substring(0,50)+"  توضایحات ادامه دارد...");
-            }else{
-                if (content.text.length()>2) {
+            if (content.text.replace("\n", "  ").length() > 50) {
+                holder.text.setText(content.text.replace("\n", "  ").substring(0, 50) + "  توضایحات ادامه دارد...");
+            } else {
+                if (content.text.length() > 2) {
                     holder.text.setText(content.text);
-                }else{
+                } else {
                     holder.text.setText("توضیحات...");
                 }
             }
@@ -78,7 +86,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         holder.status.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                float amozesh = sp.getFloat("LerningActivity",0);
+                float amozesh = sp.getFloat("LerningActivity", 0);
 
                 String STATUS = "1";
                 if (holder.status.isChecked()) {
@@ -97,9 +105,9 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                     }
                 } catch (Exception e) {
                 }
-                if (amozesh==9) {
+                if (amozesh == 9) {
                     SetCode(10);
-                    Mesage("و همچنین شما می توانید با انتخاب کادر سبز رنگی که روبه روی نام دانشجو قرار دارد برای دانشجو نمره کلاسی یا میان ترم وارد کنید.");
+                    om.Mesage(contexts,"و همچنین شما می توانید با انتخاب کادر سبز رنگی که روبه روی نام دانشجو قرار دارد برای دانشجو نمره کلاسی یا میان ترم وارد کنید.");
                 }
             }
         });
@@ -108,13 +116,13 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity",0);
+                    final float amozesh = sp.getFloat("LerningActivity", 0);
 
                     final String sno_old = holder.sno.getText().toString();
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10,10,5,0);
+                    lp.setMargins(10, 10, 5, 0);
                     input.setLayoutParams(lp);
                     input.setTypeface(FONT);
                     input.setHint("" + sno_old);
@@ -126,21 +134,21 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                             try {
                                 data.open();
                                 boolean S;
-                                S = data.Update_sno(input.getText().toString(), NewClassActivity.did,holder.sno.getText().toString());
+                                S = data.Update_sno(input.getText().toString(), NewClassActivity.did, holder.sno.getText().toString());
                                 data.close();
 
                                 if (S) {
-                                    TOAST("این شماره دانشجویی در کلاس وجود دارد.");
-                                }else{
+                                    om.Toast(contexts,"این شماره دانشجویی در کلاس وجود دارد.");
+                                } else {
                                     holder.sno.setText(input.getText().toString());
                                 }
 
-                                if (amozesh==11) {
+                                if (amozesh == 11) {
                                     SetCode(12);
-                                    Mesage("همچنین می توانید با انتخاب نام دانشجو را ویرایش کنید.");
+                                    om.Mesage(contexts,"همچنین می توانید با انتخاب نام دانشجو را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
-                                TOAST(e.toString());
+                                Log.i(TAG,"Error"+e.toString());
                             }
                         }
                     });
@@ -156,12 +164,12 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity",0);
+                    final float amozesh = sp.getFloat("LerningActivity", 0);
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10,10,5,0);
+                    lp.setMargins(10, 10, 5, 0);
                     input.setLayoutParams(lp);
                     input.setText("" + holder.family.getText().toString());
                     builder1.setView(input);
@@ -175,9 +183,9 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
                                 holder.family.setText("" + input.getText().toString());
                                 content.family = input.getText().toString();
-                                if (amozesh==13) {
+                                if (amozesh == 13) {
                                     SetCode(14);
-                                    Mesage("شما هم می توانید با انتخاب توضیحات دانشجو برای دانشجویی انتخاب شده توضیحات لازم را به برنامه اضافه کنید.");
+                                    om.Mesage(contexts,"شما هم می توانید با انتخاب توضیحات دانشجو برای دانشجویی انتخاب شده توضیحات لازم را به برنامه اضافه کنید.");
                                 }
                             } catch (Exception e) {
                             }
@@ -197,12 +205,12 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity",0);
+                    final float amozesh = sp.getFloat("LerningActivity", 0);
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10,10,5,0);
+                    lp.setMargins(10, 10, 5, 0);
                     input.setLayoutParams(lp);
                     input.setText("" + holder.name.getText().toString());
                     builder1.setView(input);
@@ -216,9 +224,9 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
                                 holder.name.setText("" + input.getText().toString());
                                 content.name = input.getText().toString();
-                                if (amozesh==12) {
+                                if (amozesh == 12) {
                                     SetCode(13);
-                                    Mesage("همچنین می توانید با انتخاب نام خانوادگی  دانشجو را ویرایش کنید.");
+                                    om.Mesage(contexts,"همچنین می توانید با انتخاب نام خانوادگی  دانشجو را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
                             }
@@ -237,14 +245,14 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity",0);
+                    final float amozesh = sp.getFloat("LerningActivity", 0);
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10,10,5,0);
+                    lp.setMargins(10, 10, 5, 0);
                     input.setLayoutParams(lp);
-                    input.setText("" +content.text);
+                    input.setText("" + content.text);
                     builder1.setView(input);
                     input.setTypeface(FONT);
                     builder1.setTitle("توضیحات " + content.name + " " + content.family + " را وارد کنید." + "\n\n");
@@ -254,13 +262,13 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.open();
                                 data.update_one("klas", "tx", input.getText().toString(), Integer.parseInt(content.id));
                                 data.close();
-                                if (input.getText().toString().replace("\n","  ").length()>50){
-                                    holder.text.setText(input.getText().toString().replace("\n","  ").substring(0,50)+"  توضایحات ادامه دارد...");
-                                }else{
-                                    holder.text.setText(input.getText().toString().replace("\n","  "));
+                                if (input.getText().toString().replace("\n", "  ").length() > 50) {
+                                    holder.text.setText(input.getText().toString().replace("\n", "  ").substring(0, 50) + "  توضایحات ادامه دارد...");
+                                } else {
+                                    holder.text.setText(input.getText().toString().replace("\n", "  "));
                                 }
                                 content.text = input.getText().toString();
-                                if (amozesh==14){
+                                if (amozesh == 14) {
                                     SetCode(15);
                                 }
 
@@ -280,16 +288,16 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             public void onClick(View v) {
                 try {
                     SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity",0);
+                    final float amozesh = sp.getFloat("LerningActivity", 0);
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts,R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10,10,5,0);
+                    lp.setMargins(10, 10, 5, 0);
                     input.setLayoutParams(lp);
                     input.setHint("نمره را وارد کنید");
                     builder1.setView(input);
-                    if(MainActivity.status_number.equals("on")){
+                    if (MainActivity.status_number.equals("on")) {
                         input.setInputType(InputType.TYPE_CLASS_NUMBER);
                     }
                     input.setTypeface(FONT);
@@ -302,9 +310,9 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
                                 holder.nomreh.setText("" + input.getText().toString());
                                 content.nomreh = input.getText().toString();
-                                if (amozesh==10) {
+                                if (amozesh == 10) {
                                     SetCode(11);
-                                    Mesage("همچنین می توانید با انتخاب شماره ی دانشجویی را ویرایش کنید.");
+                                    om.Mesage(contexts,"همچنین می توانید با انتخاب شماره ی دانشجویی را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
                             }
@@ -320,10 +328,12 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         });
         //******************************************************************************************end onBindViewHolder
     }
+
     @Override
     public int getItemCount() {
         return Content_new_class.size();
     }
+
     public class cvh extends RecyclerView.ViewHolder {
 
         private TextView row, sno, name, family, nomreh, text;
@@ -349,41 +359,11 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         }
 
     }
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(contexts, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(contexts.getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
-    }
-    void SetCode( float code) {
+
+    void SetCode(float code) {
         SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
         SharedPreferences.Editor edit = sp.edit();
         edit.putFloat("LerningActivity", code);
         edit.commit();
-    }
-    void Mesage(String text){
-        final Dialog massege = new Dialog(contexts, R.style.NewDialog);
-        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        massege.setContentView(R.layout.dialog_message);
-        massege.setCancelable(false);
-        massege.setCanceledOnTouchOutside(false);
-        massege.show();
-        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
-        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
-        //**********************************************************************
-        txt.setText(""+text);
-        txt.setTypeface(Typeface.createFromAsset(contexts.getAssets(), "Font/font2.ttf"));
-        ok.setTypeface(Typeface.createFromAsset(contexts.getAssets(), "Font/font2.ttf"));
-        //**********************************************************************
-        ok.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                massege.dismiss();
-            }
-        });
     }
 }

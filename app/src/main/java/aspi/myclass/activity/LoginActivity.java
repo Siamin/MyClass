@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import aspi.myclass.R;
+import aspi.myclass.class_.OtherMetod;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private String get_password = "", set_password = "";
     private TextView show,forget;
     private SharedPreferences sp;
+    OtherMetod om = new OtherMetod();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (get_password.equals(set_password)) {
                     Go_to_main();
                 } else {
-                    TOAST("رمزاشتباه است");
+                    om.Toast(LoginActivity.this,"رمزاشتباه است");
                 }
             }
         });
@@ -236,18 +238,6 @@ public class LoginActivity extends AppCompatActivity {
         claer = (Button) findViewById(R.id.key_c);
         login = (Button) findViewById(R.id.key_enter);
         //******************************************
-    }
-
-    private void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
     }
 
 }

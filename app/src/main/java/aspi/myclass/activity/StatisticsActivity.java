@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.content.StatisticsContent;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StatusticsAdapter;
@@ -30,6 +31,7 @@ public class StatisticsActivity extends Activity {
     private LinearLayoutManager linearLayoutManager_show_student;
     private boolean view = false;
     private java.util.List<StatisticsContent> List = new ArrayList<>();
+    OtherMetod om = new OtherMetod();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,100 +40,6 @@ public class StatisticsActivity extends Activity {
         Start();
 
 
-    }
-
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
-    }
-
-    void Get_Data_Base() {
-        /*try {
-            data.open();
-            String name_ = "", family_ = "", old_j = "";
-            int cunter = 0, cunt_student = data.count("klas"), cunt_rollcal = data.count("rollcall");
-            progressDialog.setMax(cunt_student + cunt_rollcal);
-            for (int i = 0; i < cunt_student; i++) {
-                String Class[] = data.Display_Class("klas", i).split("~");
-                if (Did_class.equals(Class[5])) {
-                    family_ += Class[2] + "~";
-                    name_ += Class[3] + "~";
-                    cunter += 1;
-                }
-                progressDialog.setProgress(i);
-            }
-            if (cunter > 0) {
-                String[] name, family;
-                int[] abs, per;
-                family = family_.split("~");
-                name = name_.split("~");
-                per = new int[name.length];
-                abs = new int[name.length];
-                cunter = 1;
-                for (int i = 0, j = 0; i < cunt_rollcal; i++) {
-                    String Class[] = data.Display_all("rollcall", i, 0, 9).split("~");
-                    if (i == 0) old_j = Class[8];
-                    if (Did_class.equals(Class[7])) {
-                        if (!old_j.equals(Class[8]) && j != 0) {
-                            j = 0;
-                            cunter += 1;
-                        }
-                        if (Integer.parseInt(Class[2]) == 1) {
-                            abs[j] += 1;
-                        } else if (Integer.parseInt(Class[2]) == 0) {
-                            per[j] += 1;
-                        }
-                        j++;
-                        if (j == name.length) {
-                            j = 0;
-                            cunter += 1;
-                        }
-                        old_j = Class[8];
-                    }
-                    progressDialog.setProgress(cunt_student + i);
-                }
-                data.close();
-                cunter -= 1;
-                if (cunter > 0) {
-                    for (int i = 0; i < name.length; i++) {
-                        StatisticsContent content = new StatisticsContent();
-                        content.name = name[i];
-                        content.family = family[i];
-                        content.max = cunter;
-                        content.set = abs[i];
-                        content.per = per[i];
-                        List.add(content);
-                    }
-                    view = true;
-                } else {
-                    view = false;
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            TOAST("هیچ جلسه ای برای این کلاس ثبت نشده...!");
-                        }
-                    });
-                    finish();
-                }
-
-            } else {
-                view = false;
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        TOAST("هیچ دانشجویی در این کلاس ثبت نشده است...!");
-                    }
-                });
-                finish();
-            }
-        } catch (final Exception e) {
-        }
-*/
     }
 
     void Start() {
@@ -235,7 +143,7 @@ public class StatisticsActivity extends Activity {
 
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        TOAST(" برای آمار حضور و غیاب شما باید جلسه برای کلاس خود تشکیل دهید...! ");
+                        om.Toast(StatisticsActivity.this," برای آمار حضور و غیاب شما باید جلسه برای کلاس خود تشکیل دهید...! ");
                     }
                 });
             }

@@ -17,9 +17,10 @@ import aspi.myclass.R;
 
 public class CommentActivity extends Activity {
 
-    EditText subject,body,name,email;
-    Button ok,cancel;
-    String model="";
+    EditText subject, body, name, email;
+    Button ok, cancel;
+    String model = "";
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
@@ -27,7 +28,7 @@ public class CommentActivity extends Activity {
         config();
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         email.setText(sp.getString("Email", ""));
-        model = android.os.Build.MODEL + " " + android.os.Build.BRAND +" (" + android.os.Build.VERSION.RELEASE+")" + " API-" + android.os.Build.VERSION.SDK_INT;
+        model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
         //******************************************************************************************
         ok.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -38,7 +39,7 @@ public class CommentActivity extends Activity {
                         .withMailto("aspi.program@gmail.com")
                         .withType(BackgroundMail.TYPE_PLAIN)
                         .withSubject(subject.getText().toString())
-                        .withBody(body.getText().toString()+"\n ارسال شده از  طرف \n"+name.getText().toString()+"\n ایمیل \n"+email.getText().toString()+"\n مدل دستگاه = "+model)
+                        .withBody(body.getText().toString() + "\n ارسال شده از  طرف \n" + name.getText().toString() + "\n ایمیل \n" + email.getText().toString() + "\n مدل دستگاه = " + model)
                         .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                             public void onSuccess() {
                                 Toast toast = Toast.makeText(CommentActivity.this, " نظر ارسال شد ", Toast.LENGTH_LONG);
@@ -77,11 +78,12 @@ public class CommentActivity extends Activity {
         });
     }
 
-    void Back(){
+    void Back() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
-    void config(){
+
+    void config() {
         subject = (EditText) findViewById(R.id.coment_subject);
         name = (EditText) findViewById(R.id.coment_name);
         email = (EditText) findViewById(R.id.coment_email);

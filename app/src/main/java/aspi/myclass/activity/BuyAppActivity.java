@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import aspi.myclass.R;
+import aspi.myclass.class_.OtherMetod;
 import util.IabHelper;
 import util.IabResult;
 import util.Inventory;
@@ -36,6 +37,7 @@ public class BuyAppActivity extends Activity {
     private Button buy, cancel;
     private SharedPreferences sp;
     private ProgressDialog progressDialog;
+    OtherMetod om = new OtherMetod();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,27 +94,27 @@ public class BuyAppActivity extends Activity {
                                         .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                                             public void onSuccess() {
                                                 SetCode("myclass", "‌Buy_App", "Buy_App");
-                                                TOAST("با تشکر از خرید شما...!");
+                                                om.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
                                                 Back();
                                             }
                                         })
                                         .withOnFailCallback(new BackgroundMail.OnFailCallback() {
                                             public void onFail() {
                                                 SetCode("myclass", "‌Buy_App", "Buy_App");
-                                                TOAST("با تشکر از خرید شما...!");
+                                                om.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
                                                 Back();
                                             }
                                         })
                                         .send();
                             } else {
-                                TOAST("عملیات خرید ناموفق ...!");
+                                om.Toast(BuyAppActivity.this,"عملیات خرید ناموفق ...!");
                                 Back();
                             }
 
                         }
                     });
         } catch (Exception e) {
-            TOAST("لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            om.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
         }
     }
 
@@ -133,7 +135,7 @@ public class BuyAppActivity extends Activity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            TOAST("مشکل ارتباط با کافه بازار...!");
+                                            om.Toast(BuyAppActivity.this,"مشکل ارتباط با کافه بازار...!");
                                         }
                                     });
                                     progressDialog.cancel();
@@ -144,7 +146,7 @@ public class BuyAppActivity extends Activity {
                 }
             });
         } catch (Exception e) {
-            TOAST("لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            om.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
         }
 
     }
@@ -167,18 +169,6 @@ public class BuyAppActivity extends Activity {
     void Back() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
-    }
-
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
     }
 
     String date_iran() {

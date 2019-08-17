@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.List;
 
+import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.content.OldClassContent;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
@@ -38,6 +40,8 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
     private Context contexts;
     private dbstudy data;
     Activity activity;
+    OtherMetod om = new OtherMetod();
+    String TAG = "TAG_ListCreateClassAdapter";
 
     public ListCreateClassAdapter(List<OldClassContent> contents, Context context, Activity Act) {
         this.Content_list_old = contents;
@@ -95,7 +99,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                     Intent old_class=new Intent(contexts, OldClassActivity.class);
                     contexts.startActivity(old_class);
                 }else{
-                    TOAST("برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    om.Toast(contexts,"برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
             }
         });
@@ -123,7 +127,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                     AlertDialog aler1 = builder1.create();
                     aler1.show();
                 }else{
-                    TOAST("برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    om.Toast(contexts,"برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
             }
         });
@@ -176,12 +180,12 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                         data.close();
                         activity.runOnUiThread(new Runnable() {
                             public void run() {
-                                TOAST("جلسه با موفقیت حذف شد..!");
+                                om.Toast(contexts,"جلسه با موفقیت حذف شد..!");
                                 OldClassListActivity.refresh = "1";
                             }
                         });
                     } catch (Exception e) {
-                        TOAST(e.toString());
+                        Log.i(TAG,"Error"+e.toString());
                     }
                     activity.runOnUiThread(new Runnable() {
                         public void run() {
@@ -194,18 +198,6 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
         } catch (Exception e) {
            // TOAST("THREAD \n" + e.toString());
         }
-    }
-
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(contexts, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(contexts.getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
     }
 
     void SetCode(float code) {
@@ -274,11 +266,11 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
             data.open();
             data.update("day",Yaer[yaer.getSelectedItemPosition()],"month",Month[month.getSelectedItemPosition()],"year",Day[day.getSelectedItemPosition()],"jalase="+jalase);
             data.close();
-            TOAST("ویرایش انجام شد.");
+            om.Toast(contexts,"ویرایش انجام شد.");
             edit.dismiss();
             OldClassListActivity.refresh = "1";
         }catch (Exception e){
-           // TOAST(e.toString());
+           Log.i(TAG,"Error"+e.toString());
         }
 
             }

@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.content.AbsentPersentContent;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StudentViewAdapter;
@@ -47,6 +48,7 @@ public class NewClassActivity extends Activity {
     private int cunters = 0;
     private boolean view = false;
     private Cursor cursor;
+    OtherMetod om = new OtherMetod();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,79 +71,6 @@ public class NewClassActivity extends Activity {
         DATA.setText("" + date_iran());
         //*************************************************************
         Start();
-    }
-
-
-    void get_data_for_database() {
-       /* try {
-            List.clear();
-            String name_ = "", family_ = "", sno_ = "", text_ = "", id_ = "", abs = "", per = "";
-            data.open();
-            int cunt1 = 0, cunt = data.count("klas");
-            progressDialog.setMax(cunt);
-            for (int i = 0; i < cunt; i++) {
-                String Class[] = data.Display_Class("klas", i).split("~");
-                if (did.equals(Class[5])) {
-                    id_ += Class[0] + "~";
-                    sno_ += Class[1] + "~";
-                    family_ += Class[2] + "~";
-                    name_ += Class[3] + "~";
-                    text_ += Class[4] + " ~";
-                    abs += Class[7] + " ~";
-                    per += Class[8] + " ~";
-                    cunt1 += 1;
-                    progressDialog.setMax(cunt + cunt1);
-                }
-                progressDialog.setProgress(i);
-            }
-            data.close();
-            if (cunt1 > 0) {
-                //**********************************************************************************
-                String[] Name, Family, Sno, Text, Id, Abs, Per;
-                Name = name_.split("~");
-                Family = family_.split("~");
-                Sno = sno_.split("~");
-                Text = text_.split("~");
-                Id = id_.split("~");
-                Abs = abs.split("~");
-                Per = per.split("~");
-                DATA_IRAN = date_iran().split("/");
-                data.open();
-                int cunt_roll = data.count("rollcall");
-                int jalase = 1;
-                if (cunt_roll > 0) {
-                    jalase = Integer.parseInt(data.Display("rollcall", (cunt_roll - 1), 8)) + 1;
-                }
-                for (int i = 0; i < cunt1; i++) {
-                    AbsentPersentContent content = new AbsentPersentContent();
-                    content.name = Name[i];
-                    content.family = Family[i];
-                    content.sno = Sno[i];
-                    content.id = Id[i];
-                    content.text = Text[i];
-                    content.status = "1";
-                    content.absent = Abs[i];
-                    content.prezent = Per[i];
-                    data.insert_Rollcall(Sno[i], true, "", DATA_IRAN[0], DATA_IRAN[1], DATA_IRAN[2], did, String.valueOf(jalase), String.valueOf(HOUR) + ":" + String.valueOf(MINUTE));
-                    content.id_rull = data.Display("rollcall", cunt_roll, 0);
-                    cunt_roll += 1;
-                    List.add(content);
-                    progressDialog.setProgress(cunt + i);
-                }
-                data.close();
-                view = true;
-                //**********************************************************************************
-            } else {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        TOAST("هیچ دانشجویی برای این کلاس ثبت نشده...!");
-                        go_main();
-                    }
-                });
-            }
-        } catch (Exception e) {
-        }
-*/
     }
 
     void go_main() {
@@ -203,18 +132,6 @@ public class NewClassActivity extends Activity {
         return data;
     }
 
-    void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
-    }
-
     void Start() {
         final Timer time = new Timer();
         time.schedule(new TimerTask() {
@@ -258,28 +175,7 @@ public class NewClassActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 9)
-            Mesage("شما می توانید در این صفحه حضور،غیاب و نمرات دانشجویان را وارد کنید.وهمچنین می توانید با انتخاب تیک که روبه روی اسم دانشجو قرار دارد برای دانشجو غیبت وارد لیست نمایید.");
-    }
-
-    void Mesage(String text) {
-        final Dialog massege = new Dialog(NewClassActivity.this, R.style.NewDialog);
-        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        massege.setContentView(R.layout.dialog_message);
-        massege.setCancelable(false);
-        massege.setCanceledOnTouchOutside(false);
-        massege.show();
-        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
-        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
-        //**********************************************************************
-        txt.setText("" + text);
-        txt.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        ok.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        //**********************************************************************
-        ok.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                massege.dismiss();
-            }
-        });
+            om.Mesage(NewClassActivity.this,"شما می توانید در این صفحه حضور،غیاب و نمرات دانشجویان را وارد کنید.وهمچنین می توانید با انتخاب تیک که روبه روی اسم دانشجو قرار دارد برای دانشجو غیبت وارد لیست نمایید.");
     }
 
     void GET_QURY() {
@@ -378,7 +274,7 @@ public class NewClassActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        TOAST("هیچ دانشجویی برای این کلاس ثبت نشده...!");
+                        om.Toast(NewClassActivity.this, "هیچ دانشجویی برای این کلاس ثبت نشده...!");
                         go_main();
                     }
                 });

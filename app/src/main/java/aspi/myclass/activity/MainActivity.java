@@ -567,52 +567,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 if (amozesh > 27.0) {
                                                     if (amozesh > 34.0) {
                                                         if (amozesh == 36.0) {
-                                                            Mesage("موفق و پیروز باشید!");
+                                                            om.Mesage(MainActivity.this, "موفق و پیروز باشید!");
                                                             SetCode(37);
                                                         } else if (amozesh == 35.0) {
                                                             drawer.openDrawer(GravityCompat.START);
-                                                            Mesage("شما همچنین می توانید فایل پشتیبانی هر ترم را در داخل پوشه ی BackupClass قرار دهد و با انتخاب گزینه ی بارگیری فایل پشتیبانی اطلاعات ترم مورد نظرتان را به برنامه اضافه کنید.گزینه ی بارگیری فایل پشتیبانی را انتخاب کنید.");
+                                                            om.Mesage(MainActivity.this, "شما همچنین می توانید فایل پشتیبانی هر ترم را در داخل پوشه ی BackupClass قرار دهد و با انتخاب گزینه ی بارگیری فایل پشتیبانی اطلاعات ترم مورد نظرتان را به برنامه اضافه کنید.گزینه ی بارگیری فایل پشتیبانی را انتخاب کنید.");
                                                         }
                                                     } else if (amozesh == 34.0) {
                                                         drawer.openDrawer(GravityCompat.START);
-                                                        Mesage("شما می توانید زمانی پایان ترم از اطلاعات تمامی کلاس های تشکیل شده در برنامه فایل پشتیبانی تهیه کنید .از منو کشویی برنامه گزینه ی پشتیبان گیری از نرم افزار را انتخاب کنید ،با انتخاب این گزینه برای شما سه فایل پشتیبان گیری از اطلاعات کلاس های شما گرفته می شود و در حافظه ی اصلی گوشی در پوشه ی  BackupClass ذخیره می شود.");
+                                                        om.Mesage(MainActivity.this, "شما می توانید زمانی پایان ترم از اطلاعات تمامی کلاس های تشکیل شده در برنامه فایل پشتیبانی تهیه کنید .از منو کشویی برنامه گزینه ی پشتیبان گیری از نرم افزار را انتخاب کنید ،با انتخاب این گزینه برای شما سه فایل پشتیبان گیری از اطلاعات کلاس های شما گرفته می شود و در حافظه ی اصلی گوشی در پوشه ی  BackupClass ذخیره می شود.");
                                                     }
                                                 } else if (amozesh == 27.0) {
-                                                    Mesage("درس را انتخاب کنید.");
+                                                    om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                                     SetCode(28);
                                                 }
                                             } else if (amozesh == 25.0) {
-                                                Mesage("پس از ثبت کلاس در دیگر ایام هفته تمام اطلاعات کلاس از جمله اطلاعات دانشجویان و جلسات برگزار شده انتقال می یابد." + "\n درس را انتخاب کنید.");
+                                                om.Mesage(MainActivity.this, "پس از ثبت کلاس در دیگر ایام هفته تمام اطلاعات کلاس از جمله اطلاعات دانشجویان و جلسات برگزار شده انتقال می یابد." + "\n درس را انتخاب کنید.");
                                                 SetCode(26);
                                             }
                                         } else if (amozesh == 23.0) {
-                                            Mesage("درس را انتخاب کنید.");
+                                            om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                             SetCode(24);
                                         }
                                     } else if (amozesh == 21.0) {
-                                        Mesage("درس را انتخاب کنید.");
+                                        om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                         SetCode(22);
                                     }
                                 } else if (amozesh == 19.0) {
-                                    Mesage("درس را انتخاب کنید.");
+                                    om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                     SetCode(20);
                                 }
                             } else if (amozesh == 15.0) {
-                                Mesage("با ایجاد جلسه جدید کلاس شما می توانید به جلسات گذشته دسترسی داشته باشید. درس را انتخاب کنید.");
+                                om.Mesage(MainActivity.this, "با ایجاد جلسه جدید کلاس شما می توانید به جلسات گذشته دسترسی داشته باشید. درس را انتخاب کنید.");
                                 SetCode(16);
                             }
                         } else if (amozesh == 7.0) {
-                            Mesage("اکنون شما می توانید برای کلاس خود جلسه تشکیل دهد.درس را انتخاب کنید.");
+                            om.Mesage(MainActivity.this, "اکنون شما می توانید برای کلاس خود جلسه تشکیل دهد.درس را انتخاب کنید.");
                         }
                     } else if (chek) {
-                        Mesage("کلاس را انتخاب کنید تا برای شما گزینه های مختلف نشان داده شود.");
+                        om.Mesage(MainActivity.this, "کلاس را انتخاب کنید تا برای شما گزینه های مختلف نشان داده شود.");
                     }
                 } else {
-                    Mesage("روزی که کلاس را در آن ثبت کرده اید انتخاب کنید.");
+                    om.Mesage(MainActivity.this, "روزی که کلاس را در آن ثبت کرده اید انتخاب کنید.");
                 }
             } else {
                 drawer.openDrawer(GravityCompat.START);
-                Mesage("برای ایجاد کلاس جدید از منو کشویی برنامه گزینه اضافه کردن کلاس جدید را انتخاب کنید");
+                om.Mesage(MainActivity.this, "برای ایجاد کلاس جدید از منو کشویی برنامه گزینه اضافه کردن کلاس جدید را انتخاب کنید");
             }
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
@@ -633,27 +633,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             AlertDialog aler = builder.create();
             aler.show();
         }
-    }
-
-    void Mesage(String text) {
-        final Dialog massege = new Dialog(MainActivity.this, R.style.NewDialog);
-        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        massege.setContentView(R.layout.dialog_message);
-        massege.setCancelable(false);
-        massege.setCanceledOnTouchOutside(false);
-        massege.show();
-        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
-        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
-        //**********************************************************************
-        txt.setText("" + text);
-        txt.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        ok.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        //**********************************************************************
-        ok.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                massege.dismiss();
-            }
-        });
     }
 
     protected void onResume() {

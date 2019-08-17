@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -36,6 +37,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import aspi.myclass.R;
+import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.class_.dbstudy;
 
 public class OutputDataClassActivity extends Activity {
@@ -52,6 +54,8 @@ public class OutputDataClassActivity extends Activity {
     private boolean view = false;
     private int cunters = 0;
     String[] name, family, sno, status_, nomreh_, Data_;
+    OtherMetod om = new OtherMetod();
+    String TAG = "TAG_OutputDataClassActivity";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,102 +94,6 @@ public class OutputDataClassActivity extends Activity {
         }
         //*****************************************************
         Start();
-    }
-
-    private void TOAST(String TEXT) {
-        Toast toast = Toast.makeText(this, "" + TEXT, Toast.LENGTH_LONG);
-        TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        textView.setTextColor(getResources().getColor(R.color.toast));
-        textView.setTypeface(MainActivity.FONTS);
-        textView.setTextSize(18);
-        textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        View view = toast.getView();
-        view.setBackgroundResource(R.drawable.toast);
-        toast.show();
-    }
-
-    private void Get_Data_Base() {
-       /* try {
-            data.open();
-            String name_ = "", family_ = "", sno_ = "", data_ = "", old_j = "";
-            int cunter = 0, cunt_student = data.count("klas"), cunt_rollcal = data.count("rollcall");
-            progressDialog.setMax(cunt_student + cunt_rollcal);
-            for (int i = 0; i < cunt_student; i++) {
-                String Class[] = data.Display_Class("klas", i).split("~");
-                if (Did_class.equals(Class[5])) {
-                    sno_ += Class[1] + "~";
-                    family_ += Class[2] + "~";
-                    name_ += Class[3] + "~";
-                    cunter += 1;
-                }
-                progressDialog.setProgress(i);
-            }
-            if (cunter > 0) {
-                sno = sno_.split("~");
-                family = family_.split("~");
-                name = name_.split("~");
-                status_ = new String[name.length];
-                nomreh_ = new String[name.length];
-                cunter = 1;
-                int j = 0;
-                for (int i = 0; i < cunt_rollcal; i++) {
-                    String Class[] = data.Display_all("rollcall", i, 0, 9).split("~");
-                    if (i == 0) old_j = Class[8];
-                    if (Did_class.equals(Class[7])) {
-                        if (j == 0 || old_j.equals(Class[8])) {
-                            if (j == 0) data_ += Class[6] + "/" + Class[5] + "/" + Class[4] + "~";
-                            status_[j] += Class[2] + "~";
-                            nomreh_[j] += Class[3] + "~";
-                            j++;
-                            if (j == name.length) {
-                                j = 0;
-                                cunter += 1;
-                            }
-                            old_j = Class[8];
-                        } else {
-                            for (; j < name.length; j++) {
-                                status_[j] += "-~";
-                                nomreh_[j] += "-~";
-                            }
-                            j = 0;
-                            data_ += Class[6] + "/" + Class[5] + "/" + Class[4] + "~";
-                            status_[j] += Class[2] + "~";
-                            nomreh_[j] += Class[3] + "~";
-                            j++;
-                            old_j = Class[8];
-                        }
-
-                    }
-                    progressDialog.setProgress(cunt_student + i);
-                }
-                data.close();
-                for (; j < name.length; j++) {
-                    status_[j] += "-~";
-                    nomreh_[j] += "-~";
-                }
-                Data_ = data_.split("~");
-                cunter -= 1;
-                if (cunter > 0) {
-                    view = true;
-                } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            TOAST("هیچ جلسه ای برای این کلاس ثبت نشده...!");
-                        }
-                    });
-                    finish();
-                }
-            } else {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        TOAST("هیچ دانشجویی در این کلاس ثبت نشده است...!");
-                    }
-                });
-                finish();
-            }
-        } catch (final Exception e) {
-        }
-        */
     }
 
     private void Start() {
@@ -392,12 +300,12 @@ public class OutputDataClassActivity extends Activity {
         builder1.setPositiveButton("بله", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 if (Excel((sno.length + 1), (Data_.length + 1))) {
-                    TOAST(MainActivity.Address_file_app + "/" + Name_class + " " + titel.getText().toString() + ".xls");
+                    om.Toast(OutputDataClassActivity.this, MainActivity.Address_file_app + "/" + Name_class + " " + titel.getText().toString() + ".xls");
                 } else {
                     if (!MainActivity.Address_file_app.exists()) {
-                        TOAST("مشکل در ایجاد پوشه ی  " + MainActivity.Address_file_app + " در حافظه ی گوشی ");
+                        om.Toast(OutputDataClassActivity.this, "مشکل در ایجاد پوشه ی  " + MainActivity.Address_file_app + " در حافظه ی گوشی ");
                     } else {
-                        TOAST("مشکل در ذخیره فایل در حافظه گوشی");
+                        om.Toast(OutputDataClassActivity.this, "مشکل در ذخیره فایل در حافظه گوشی");
                     }
                 }
             }
@@ -412,34 +320,13 @@ public class OutputDataClassActivity extends Activity {
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh > 31) {
             if (amozesh == 33) {
-                Mesage("شما می توانید در این قسمت از برنامه لیست نمرات کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
+                om.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست نمرات کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
                 SetCode(34);
             }
         } else if (amozesh == 31) {
-            Mesage("شما می توانید در این قسمت از برنامه لیست حضور و غیاب کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
+            om.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست حضور و غیاب کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
             SetCode(32);
         }
-    }
-
-    void Mesage(String text) {
-        final Dialog massege = new Dialog(OutputDataClassActivity.this, R.style.NewDialog);
-        massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        massege.setContentView(R.layout.dialog_message);
-        massege.setCancelable(false);
-        massege.setCanceledOnTouchOutside(false);
-        massege.show();
-        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
-        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
-        //**********************************************************************
-        txt.setText("" + text);
-        txt.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        ok.setTypeface(Typeface.createFromAsset(getAssets(), "Font/font2.ttf"));
-        //**********************************************************************
-        ok.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                massege.dismiss();
-            }
-        });
     }
 
     protected void onResume() {
@@ -580,7 +467,7 @@ public class OutputDataClassActivity extends Activity {
                 }
             });
         } catch (final Exception e) {
-            TOAST("qure \n" + e.toString());
+            Log.i(TAG, "Error" + e.toString());
         }
     }
 
