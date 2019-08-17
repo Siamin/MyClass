@@ -7,9 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal"
         android:background="@color/colorPrimary"
-        android:layoutDirection="rtl">
+        android:layoutDirection="rtl"
+        android:orientation="horizontal">
 
 
         <Object.MyTextView
@@ -29,256 +29,231 @@
             android:id="@+id/activity_addclass_save"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:tint="@color/white"
             android:padding="8dp"
-            android:src="@drawable/ic_check_black_24dp"/>
+            android:src="@drawable/ic_check_black_24dp"
+            android:tint="@color/white" />
 
         <ImageView
             android:id="@+id/activity_addclass_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:tint="@color/white"
             android:padding="8dp"
-            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:tint="@color/white" />
 
     </LinearLayout>
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:scrollIndicators="right">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                android:scrollIndicators="right">
-
-                <Object.MyTextView
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" نام درس:     "
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <Object.MyEditText
-                    android:id="@+id/add_class_name_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:padding="8dp"
-                    android:background="@drawable/bacgrond_edittext" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                android:scrollIndicators="right">
-
-                <Object.MyTextView
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="مشخصه درس:"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <Object.MyEditText
-                    android:id="@+id/add_class_code_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:padding="8dp"
-                    android:background="@drawable/bacgrond_edittext"
-                    android:inputType="phone" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                android:scrollIndicators="right">
-
-                <Object.MyTextView
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" روز هفته:"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <Spinner
-                    android:id="@+id/add_class_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="1dp"
-                    android:background="@drawable/bacgrond_spinner"
-                    android:padding="5dp"
-                    android:spinnerMode="dropdown"
-                    android:textAlignment="center"
-                    android:textSize="50dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
-
-                <Object.MyTextView
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="ساعت شروع کلاس:"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_weight="1"
-                    android:background="#4db2ff"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            </LinearLayout>
-
-            <TimePicker
-                android:id="@+id/add_class_start_time_picker"
-                android:layout_width="wrap_content"
+            <Object.MyTextView
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/bacgrond_timepicker"
-                android:foregroundGravity="center_vertical|center_horizontal"
-                android:timePickerMode="spinner" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
-
-                <Object.MyTextView
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" ساعت پایان کلاس:"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_weight="1"
-                    android:background="#4db2ff"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_gravity="top"
                 android:gravity="center_vertical|center_horizontal"
-                android:orientation="horizontal">
+                android:text=" نام درس:     "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TimePicker
-                    android:id="@+id/add_class_end_time_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bacgrond_timepicker2"
-                    android:foregroundGravity="center_vertical|center_horizontal"
-                    android:timePickerMode="spinner" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <Object.MyEditText
+                android:id="@+id/add_class_name_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                android:scrollIndicators="right">
+                android:layout_gravity="top"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/bacgrond_edittext"
+                android:padding="8dp" />
+        </LinearLayout>
 
-                <Object.MyTextView
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="  مکان برگزاری کلاس :"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:scrollIndicators="right">
 
-                <Object.MyEditText
-                    android:id="@+id/add_class_potion_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:padding="8dp"
-                    android:background="@drawable/bacgrond_edittext" />
-            </LinearLayout>
+            <Object.MyTextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="مشخصه درس:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <LinearLayout
+            <Object.MyEditText
+                android:id="@+id/add_class_code_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/bacgrond_edittext"
+                android:inputType="phone"
+                android:padding="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:scrollIndicators="right">
+
+            <Object.MyTextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                android:scrollIndicators="right">
+                android:gravity="center_vertical|center_horizontal"
+                android:text=" روز هفته:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <Object.MyTextView
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="شماره کلاس:"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Spinner
+                android:id="@+id/add_class_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/bacgrond_spinner"
+                android:padding="5dp"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"
+                android:textSize="50dp" />
+        </LinearLayout>
 
-                <Object.MyEditText
-                    android:id="@+id/add_class_class_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="1dp"
-                    android:padding="8dp"
-                    android:layout_marginBottom="1dp"
-                    android:background="@drawable/bacgrond_edittext" />
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/activity_addclass_starttime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
 
+            <Object.MyTextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="ساعت شروع کلاس:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/activity_addclass_starttimetext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
         </LinearLayout>
 
-    </ScrollView>
+        <LinearLayout
+            android:id="@+id/activity_addclass_endtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+            <Object.MyTextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text=" ساعت پایان کلاس:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/activity_addclass_endtimetext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:scrollIndicators="right">
+
+            <Object.MyTextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="  مکان برگزاری کلاس :"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Object.MyEditText
+                android:id="@+id/add_class_potion_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/bacgrond_edittext"
+                android:padding="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:scrollIndicators="right">
+
+            <Object.MyTextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="شماره کلاس:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Object.MyEditText
+                android:id="@+id/add_class_class_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/bacgrond_edittext"
+                android:padding="8dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 </LinearLayout>

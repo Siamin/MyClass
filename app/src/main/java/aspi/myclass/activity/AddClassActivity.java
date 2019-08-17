@@ -4,30 +4,36 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TimePicker;
+import android.widget.TextView;
+
+import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+
 import aspi.myclass.R;
 import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.class_.dbstudy;
 
 
-public class AddClassActivity extends Activity {
+public class AddClassActivity extends Activity implements TimePickerDialog.OnTimeSetListener {
 
     EditText name_edit, code_edit, location_edit, class_edit;
     Spinner day_spinner;
-    TimePicker time_start, time_end;
+    LinearLayout time_start, time_end;
+    TextView textTimeStart, textTimeEnd;
     dbstudy data;
     public static String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
     OtherMetod om = new OtherMetod();
-    ImageView backPage,save_data;
+    ImageView backPage, save_data;
+    String TIMEPICKER = "TimePickerDialog";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,7 @@ public class AddClassActivity extends Activity {
                                     float amozesh = sp.getFloat("LerningActivity", 0);
                                     if (amozesh == 1.0) SetCode(2);
                                     MainActivity.refresh = 1;
+                                    om.Toast(AddClassActivity.this,"کلاس "+name_edit.getText().toString()+" با موفقیت ثبت شد.");
                                     Go_main();
                                 }
                             } else {
@@ -72,6 +79,53 @@ public class AddClassActivity extends Activity {
             }
         });
         //******************************************************************************************
+
+        time_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SetTimeByDialog(textTimeStart);
+            }
+        });
+
+        time_end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SetTimeByDialog(textTimeEnd);
+            }
+        });
+
+
+    }
+
+    void SetTimeByDialog(final TextView text) {
+        PersianCalendar now = new PersianCalendar();
+        TimePickerDialog tpd = TimePickerDialog.newInstance(
+                AddClassActivity.this,
+                now.get(PersianCalendar.HOUR_OF_DAY),
+                now.get(PersianCalendar.MINUTE), true);
+        tpd.setThemeDark(true);
+        tpd.show(getFragmentManager(), TIMEPICKER);
+        tpd.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                String Hour = "00", Min = "00";
+
+
+                if (hourOfDay < 10) {
+                    Hour = "0" + String.valueOf(hourOfDay);
+                } else {
+                    Hour = String.valueOf(hourOfDay);
+                }
+
+                if (minute < 10) {
+                    Min = "0" + String.valueOf(minute);
+                } else {
+                    Min = String.valueOf(minute);
+                }
+
+                text.setText(Hour + ":" + Min);
+            }
+        });
     }
 
     void Go_main() {
@@ -86,49 +140,28 @@ public class AddClassActivity extends Activity {
         code_edit = (EditText) findViewById(R.id.add_class_code_edit);
         location_edit = (EditText) findViewById(R.id.add_class_potion_edit);
         day_spinner = (Spinner) findViewById(R.id.add_class_spinner);
-        time_start = (TimePicker) findViewById(R.id.add_class_start_time_picker);
-        time_end = (TimePicker) findViewById(R.id.add_class_end_time_picker);
+
+        time_start = findViewById(R.id.activity_addclass_starttime);
+        time_end = findViewById(R.id.activity_addclass_endtime);
+
+        textTimeStart = findViewById(R.id.activity_addclass_starttimetext);
+        textTimeEnd = findViewById(R.id.activity_addclass_endtimetext);
+
+
+        textTimeStart.setText(om.Get_Time());
+        textTimeEnd.setText(om.Get_Time());
+
         ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Day_of_week);
         day_spinner.setAdapter(a);
-        FONT(MainActivity.FONTS);
-        time_start.setIs24HourView(true);
-        time_end.setIs24HourView(true);
 
-    }
-
-    void FONT(Typeface font_text) {
-        class_edit.setTypeface(font_text);
-        name_edit.setTypeface(font_text);
-        code_edit.setTypeface(font_text);
-        location_edit.setTypeface(font_text);
     }
 
     boolean save() {
         int day_of = day_spinner.getSelectedItemPosition();
-        int hour_start = time_start.getCurrentHour();
-        int minute_start = time_start.getCurrentMinute();
-        int hour_end = time_end.getCurrentHour();
-        int minute_end = time_end.getCurrentMinute();
-        String HS = String.valueOf(hour_start);
-        String MS = String.valueOf(minute_start);
-        String HE = String.valueOf(hour_end);
-        String ME = String.valueOf(minute_end);
-        if (HE.length() == 1) {
-            HE = "0" + HE;
-        }
-        if (HS.length() == 1) {
-            HS = "0" + HS;
-        }
-        if (MS.length() == 1) {
-            MS = "0" + MS;
-        }
-        if (ME.length() == 1) {
-            ME = "0" + ME;
-        }
         boolean resualt;
         try {
             data.open();
-            data.insert_class(name_edit.getText().toString().replace("~", ""), String.valueOf(day_of), String.valueOf(HS) + ":" + String.valueOf(MS), location_edit.getText().toString().replace("~", ""), String.valueOf(HE) + ":" + String.valueOf(ME), code_edit.getText().toString(), class_edit.getText().toString().replace("~", ""), "");
+            data.insert_class(name_edit.getText().toString().replace("~", ""), String.valueOf(day_of), textTimeStart.getText().toString(), location_edit.getText().toString().replace("~", ""), textTimeEnd.getText().toString(), code_edit.getText().toString(), class_edit.getText().toString().replace("~", ""), "");
             data.close();
             resualt = true;
         } catch (Exception e) {
@@ -141,7 +174,7 @@ public class AddClassActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 1) {
-            om.Mesage(AddClassActivity.this,"ابتدا اطلاعات درس را وارد کنید سپس با انتخاب گزینه ذخیره اطلاعات مورد نظر را در برنامه ذخیره کنید.");
+            om.Mesage(AddClassActivity.this, "ابتدا اطلاعات درس را وارد کنید سپس با انتخاب گزینه ذخیره اطلاعات مورد نظر را در برنامه ذخیره کنید.");
         }
     }
 
@@ -156,5 +189,10 @@ public class AddClassActivity extends Activity {
         SharedPreferences.Editor edit = sp.edit();
         edit.putFloat("LerningActivity", code);
         edit.commit();
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+
     }
 }
