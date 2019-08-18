@@ -35,19 +35,18 @@ import aspi.myclass.class_.dbstudy;
 
 public class NewClassActivity extends Activity {
 
-    private TextView name_class, DATA;
+    TextView name_class, DATA;
     public static String Name_class, did;
-    private dbstudy data;
-    private RecyclerView recyclerView1;
-    private LinearLayoutManager linearLayoutManager;
+    dbstudy data;
+    RecyclerView recyclerView1;
+    LinearLayoutManager linearLayoutManager;
     public static List<AbsentPersentContent> List = new ArrayList<>();
-    private int MINUTE, HOUR;
-    private String[] DATA_IRAN, data_;
+    int MINUTE, HOUR;
+    String[] DATA_IRAN, data_;
     public Timer time;
-    private ProgressDialog progressDialog;
-    private int cunters = 0;
-    private boolean view = false;
-    private Cursor cursor;
+    ProgressDialog progressDialog;
+    int cunters = 0;
+    boolean view = false;
     OtherMetod om = new OtherMetod();
     ImageView backPage;
 
