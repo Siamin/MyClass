@@ -32,6 +32,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.farsitel.bazaar.IUpdateCheckService;
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,7 +52,7 @@ import aspi.myclass.R;
 import aspi.myclass.class_.dbstudy;
 import aspi.myclass.adapter.ClassViewAdapter;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
 
     DrawerLayout drawer;
@@ -519,6 +522,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Return = "";
         }
         return Return;
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
     }
 
     class UpdateServiceConnection implements ServiceConnection {

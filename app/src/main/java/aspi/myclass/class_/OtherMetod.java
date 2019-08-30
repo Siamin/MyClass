@@ -72,13 +72,6 @@ public class OtherMetod {
         return sp.getString(name, Null);
     }
 
-    public boolean isNetworkConnected(Context context) {
-        ConnectivityManager connMgr = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE); // 1
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo(); // 2
-        return networkInfo != null && networkInfo.isConnected(); // 3
-    }
-
     public String date_iran() {
         Calendar c = Calendar.getInstance();
         int year = 0, month = 0, day = 0;
@@ -145,173 +138,8 @@ public class OtherMetod {
         return Time;
     }
 
-    public String Time() {
-        Calendar c = Calendar.getInstance();
-        int H = c.get(Calendar.HOUR_OF_DAY);
-        int M = c.get(Calendar.MINUTE);
-        //**************************************
-        String Hou = String.valueOf(H), Min = String.valueOf(M);
-        if (H >= 0 && H < 10) {
-            Hou = "0" + H;
-        }
-
-        if (M >= 0 && M < 10) {
-            Min = "0" + M;
-        }
-        //**************************************
-        return String.valueOf(Hou) + "/" + Min;
-    }
-
-    public String date_shamsi() {
-        Calendar c = Calendar.getInstance();
-        int year = 0, month = 0, day = 0;
-        int y = c.get(Calendar.YEAR);
-        int x = c.get(Calendar.DAY_OF_YEAR);
-        //*******************************
-        if (x >= 0 && x <= 20) {
-            year = y - 622;
-        } else if (x >= 21 && x <= 50) {
-            year = y - 622;
-        } else if (x >= 51 && x <= 79) {
-            year = y - 622;
-        } else if (x >= 80 && x <= 266) {
-            year = y - 621;
-        } else if (x >= 267 && x <= 365) {
-            year = y - 621;
-        }
-        int mod = year % 33, kabise = 0;
-        if (mod == 1 || mod == 5 || mod == 9 || mod == 13 || mod == 17 || mod == 22 || mod == 26 || mod == 30) {
-            kabise = 1;
-
-        } else {
-            kabise = 0;
-        }
-        //*******************************
-        if (x >= 0 && x <= 20) {
-            month = 10;
-            day = x + 10;
-            Log.i("TAG_DM", "1");
-        } else if (x >= 21 && x <= 50) {
-            month = 11;
-            day = x - 20;
-            Log.i("TAG_DM", "2");
-        } else if (x >= 51 && x <= 79 && kabise == 0) {
-            month = 12;
-            day = x - 50;
-            Log.i("TAG_DM", "3");
-        } else if (x >= 51 && x <= 80 && kabise == 1) {
-            month = 12;
-            day = x - 49;
-            Log.i("TAG_DM", "4");
-        } else if (x >= 80 && x <= 266 && kabise == 0) {
-            x = x - 80;
-            month = (x / 31) + 1;
-            day = (x % 31) + 1;
-            Log.i("TAG_DM", "5");
-        } else if (x >= 81 && x <= 266 && kabise == 1) {
-            x = x - 79;
-            month = (x / 31) + 1;
-            day = (x % 31);
-            Log.i("TAG_DM", "6");
-        } else if (x >= 267 && x <= 365) {
-            x = x - 266;
-            month = (x / 30) + 7;
-            day = (x % 30) + 1;
-            Log.i("TAG_DM", "7");
-        }
-        //**************************************
-        String Month = String.valueOf(month), Day = String.valueOf(day);
-        if (month >= 0 && month < 10) {
-            Month = "0" + month;
-        }
-
-        if (day >= 0 && day < 10) {
-            Day = "0" + day;
-        }
-        //**************************************
-        return String.valueOf(year) + "/" + Month + "/" + Day;
-    }
-
-    public String GetTime() {
-        Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int min = c.get(Calendar.MINUTE);
-        //*******************************
-        String TimeS = "";
-
-        if (hour >= 0 && hour < 10) {
-            TimeS = "0" + hour;
-        } else {
-            TimeS = String.valueOf(hour);
-        }
-
-        if (min >= 0 && min < 10) {
-            TimeS += ":0" + min;
-        } else {
-            TimeS += ":" + String.valueOf(min);
-        }
-        //*******************************
-        return TimeS;
-    }
-
     public Typeface SetFont(Context context, String name) {
         return Typeface.createFromAsset(context.getAssets(), "Font/" + name + ".ttf");
-    }
-
-    public String date_and_time_iran() {
-        Calendar c = Calendar.getInstance();
-        int year = 0, month = 0, day = 0;
-        int y = c.get(Calendar.YEAR);
-        int x = c.get(Calendar.DAY_OF_YEAR);
-        int MINUTE = c.get(Calendar.MINUTE);
-        int HOUR = c.get(Calendar.HOUR_OF_DAY);
-        //*******************************
-        if (x >= 0 && x <= 20) {
-            year = y - 622;
-        } else if (x >= 21 && x <= 50) {
-            year = y - 622;
-        } else if (x >= 51 && x <= 79) {
-            year = y - 622;
-        } else if (x >= 80 && x <= 266) {
-            year = y - 621;
-        } else if (x >= 267 && x <= 365) {
-            year = y - 621;
-        }
-        int mod = year % 33, kabise = 0;
-        if (mod == 1 || mod == 5 || mod == 9 || mod == 13 || mod == 17 || mod == 22 || mod == 26 || mod == 30) {
-            kabise = 1;
-        } else {
-            kabise = 0;
-        }
-        //*******************************
-        if (x >= 0 && x <= 20) {
-            month = 10;
-            day = x + 10;
-        } else if (x >= 21 && x <= 50) {
-            month = 11;
-            day = x - 20;
-        } else if (x >= 51 && x <= 79 && kabise == 0) {
-            month = 12;
-            day = x - 40;
-        } else if (x >= 51 && x <= 80 && kabise == 1) {
-            month = 12;
-            day = x - 49;
-        } else if (x >= 80 && x <= 266 && kabise == 0) {
-            x = x - 80;
-            month = (x / 31) + 1;
-            day = (x % 31) + 1;
-        } else if (x >= 81 && x <= 266 && kabise == 1) {
-            x = x - 79;
-            month = (x / 31) + 1;
-            day = (x % 31);
-        } else if (x >= 267 && x <= 365) {
-            x = x - 266;
-            month = (x / 30) + 7;
-            day = (x % 30) + 1;
-        }
-        String data = String.valueOf(year) + "/" + String.valueOf(month) + "/" + String.valueOf(day) + "\n  در ساعت = "
-                + String.valueOf(HOUR) + ":" + String.valueOf(MINUTE) + ":" + String.valueOf(c.get(Calendar.SECOND));
-        return data;
     }
 
     public void Toast(Context context, String Text) {
@@ -425,6 +253,33 @@ public class OtherMetod {
                 massege.dismiss();
             }
         });
+    }
+
+    public void BackUpFile(Context context){
+        Dialog Week = new Dialog(context, R.style.NewDialog);
+        Week.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Week.setContentView(R.layout.dialog_editclass);
+        Week.setCancelable(false);
+        Week.setCanceledOnTouchOutside(false);
+        Week.show();
+    }
+
+    public void uploadFile(Context context){
+        Dialog Week = new Dialog(context, R.style.NewDialog);
+        Week.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Week.setContentView(R.layout.dialog_editclass);
+        Week.setCancelable(false);
+        Week.setCanceledOnTouchOutside(false);
+        Week.show();
+    }
+
+    public void CleanDatabase(Context context){
+        Dialog Week = new Dialog(context, R.style.NewDialog);
+        Week.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Week.setContentView(R.layout.dialog_editclass);
+        Week.setCancelable(false);
+        Week.setCanceledOnTouchOutside(false);
+        Week.show();
     }
 
 }

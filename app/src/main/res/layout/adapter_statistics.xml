@@ -63,7 +63,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:background="@drawable/backgrond_text_day_class" />
 
-        <TextView
+        <Object.MyTextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -72,7 +72,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:layout_weight="1" />
 
-        <TextView
+        <Object.MyTextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -81,7 +81,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:layout_weight="1" />
 
-        <TextView
+        <Object.MyTextView
             android:layout_width="35dp"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -97,7 +97,7 @@
             android:layout_height="35dp"
             android:layoutDirection="rtl">
 
-            <TextView
+            <Object.MyTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -107,7 +107,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="#000000" />
 
-            <TextView
+            <Object.MyTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -117,7 +117,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="#f43131" />
 
-            <TextView
+            <Object.MyTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"

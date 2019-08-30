@@ -49,6 +49,7 @@ public class NewClassActivity extends Activity {
     boolean view = false;
     OtherMetod om = new OtherMetod();
     ImageView backPage;
+    boolean statusBackPage = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class NewClassActivity extends Activity {
         backPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogBack();
+                onBackPressed();
             }
         });
     }
@@ -242,32 +243,17 @@ public class NewClassActivity extends Activity {
         Amozesh(false);
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            dialogBack();
+    @Override
+    public void onBackPressed() {
+
+        if (statusBackPage){
+            super.onBackPressed();
+            go_main();
+        }else{
+            om.Toast(NewClassActivity.this,"برای بازگشت دوباره کلیک کنید!");
+            statusBackPage = true;
         }
-        return super.onKeyDown(keyCode, event);
     }
 
-    void dialogBack(){
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(NewClassActivity.this, R.style.MyAlertDialogStyle);
-        final TextView input = new TextView(NewClassActivity.this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        input.setText("تمام اطلاعات ذخیره شده است با زدن دکمه بازگشت اطلاعات حذف نمی گردد و در زمان ورود مجدد تغییرات حضور و غیاب جدید اعمال می گردد.");
-        input.setTextSize(15);
-        input.setTextColor(getResources().getColor(R.color.toast));
-        input.setPadding(10, 10, 5, 0);
-        builder1.setView(input);
-        builder1.setTitle("بازگشت");
-        builder1.setPositiveButton("بازگشت", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                go_main();
-            }
-        });
-        builder1.setNegativeButton("ماندن در این صفحه", null);
-        AlertDialog aler1 = builder1.create();
-        aler1.show();
-    }
 
 }

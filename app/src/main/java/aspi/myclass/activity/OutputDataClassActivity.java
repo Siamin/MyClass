@@ -57,12 +57,13 @@ public class OutputDataClassActivity extends Activity {
     String[] name, family, sno, status_, nomreh_, Data_;
     OtherMetod om = new OtherMetod();
     String TAG = "TAG_OutputDataClassActivity";
+    ImageView backPage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outputdataclass);
         data = new dbstudy(this);
-        config();
+        initView();
         //******************************************************************************************
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +72,19 @@ public class OutputDataClassActivity extends Activity {
             }
         });
         //******************************************************************************************
+        backPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
-    private void config() {
+    private void initView() {
         save = (ImageView) findViewById(R.id.output_list_save);
         titel = (TextView) findViewById(R.id.output_list_titel);
         table = (TableLayout) findViewById(R.id.output_list_table);
+        backPage = findViewById(R.id.activity_newclass_back);
         //*****************************************************
         if (STATUS) {
             titel.setText("لیست حضور و غیاب");
@@ -332,11 +340,10 @@ public class OutputDataClassActivity extends Activity {
         edit.commit();
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            finish();
-        }
-        return super.onKeyDown(keyCode, event);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private void Get_qury_Data_Base() {

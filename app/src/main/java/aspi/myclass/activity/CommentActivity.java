@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +19,14 @@ import aspi.myclass.R;
 public class CommentActivity extends Activity {
 
     EditText subject, body, name, email;
-    Button ok, cancel;
+    ImageView ok, cancel;
     String model = "";
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         //******************************************************************************************
-        config();
+        initView();
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         email.setText(sp.getString("Email", ""));
         model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
@@ -83,13 +84,13 @@ public class CommentActivity extends Activity {
         finish();
     }
 
-    void config() {
+    void initView() {
         subject = (EditText) findViewById(R.id.coment_subject);
         name = (EditText) findViewById(R.id.coment_name);
         email = (EditText) findViewById(R.id.coment_email);
         body = (EditText) findViewById(R.id.coment_body);
-        ok = (Button) findViewById(R.id.coment_send);
-        cancel = (Button) findViewById(R.id.coment_cancel);
+        ok = (ImageView) findViewById(R.id.coment_send);
+        cancel = (ImageView) findViewById(R.id.coment_cancel);
     }
 
 }

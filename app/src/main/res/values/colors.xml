@@ -9,4 +9,6 @@
     <color name="table3">#c9ebff</color>
     <color name="yellow">#FFEB3B</color>
     <color name="white">#FFFFFF</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#F44336</color>
 </resources>

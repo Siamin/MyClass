@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +33,22 @@ public class StatisticsActivity extends Activity {
     private boolean view = false;
     private java.util.List<StatisticsContent> List = new ArrayList<>();
     OtherMetod om = new OtherMetod();
+    ImageView backPage;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         data = new dbstudy(this);
+        backPage = findViewById(R.id.statistics_back);
         Start();
+
+        backPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
     }
@@ -152,5 +163,11 @@ public class StatisticsActivity extends Activity {
 
         } catch (final Exception e) {
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

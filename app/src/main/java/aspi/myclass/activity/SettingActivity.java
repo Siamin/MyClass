@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,14 +29,15 @@ import aspi.myclass.class_.OtherMetod;
 
 public class SettingActivity extends Activity {
 
-    private SharedPreferences sp;
-    private Button save, cancel, Bmail;
-    private EditText old_password, new_password1, new_password2, email;
-    private CheckBox checkBox_password, font1, font2, font3, on;
-    private TextView text_old_password, text_new_password1, text_new_password2, test_text;
-    private String password_chek, Font, Number;
-    private int Size_Text, refresh = 0;
-    private Typeface font_1, font_2, font_3;
+    SharedPreferences sp;
+    ImageView save, cancel;
+    Button Bmail;
+    EditText old_password, new_password1, new_password2, email;
+    CheckBox checkBox_password, font1, font2, font3, on;
+    TextView text_old_password, text_new_password1, text_new_password2, test_text;
+    String password_chek, Font, Number;
+    int Size_Text, refresh = 0;
+    Typeface font_1, font_2, font_3;
     static Timer time;
     OtherMetod om = new OtherMetod();
     String TAG= "TAG_SettingActivity";
@@ -213,9 +215,9 @@ public class SettingActivity extends Activity {
         text_new_password1 = (TextView) findViewById(R.id.setting_text_new_password1);
         text_new_password2 = (TextView) findViewById(R.id.setting_text_new_password2);
         test_text = (TextView) findViewById(R.id.setting_text_test);
-        save = (Button) findViewById(R.id.setting_save);
+        save = (ImageView) findViewById(R.id.setting_save);
         Bmail = (Button) findViewById(R.id.setting_bmail);
-        cancel = (Button) findViewById(R.id.setting_cancel);
+        cancel = (ImageView) findViewById(R.id.setting_cancel);
         on = (CheckBox) findViewById(R.id.setting_numberon);
         test_text.setText("متن تست 1" + "text test 1");
         refresh();

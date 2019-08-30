@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -20,12 +19,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
+
+import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.List;
 
-import aspi.myclass.activity.SettingActivity;
 import aspi.myclass.content.ClassContent;
 import aspi.myclass.class_.OtherMetod;
 import aspi.myclass.R;
@@ -46,6 +46,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
     private dbstudy data;
     Activity activity;
     OtherMetod om = new OtherMetod();
+    String TIMEPICKER = "TimePickerDialog", DATEPICKER = "DatePickerDialog", MULTIDATEPICKER = "MultiDatePickerDialog";
 
     public ClassViewAdapter(List<ClassContent> contents, Context context, Activity activitys) {
         content_class_main_shows = contents;
@@ -245,30 +246,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         delete_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (amozesh == 26) SetCode(27);
-                kelas.cancel();
-                AlertDialog.Builder builder = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
-                builder.setIcon(R.drawable.delete);
-                builder.setTitle("حذف درس " + Class).setMessage("شما با حذف درس " + Class + " " + "تمامی کلاس های برگزار شده این درس نیز حذف می شوند.");
-                builder.setPositiveButton("حذف", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        try {
-                            data.open();
-                            data.delete("dars", Integer.parseInt(id));
-                            data.close();
-                            MainActivity.refresh = 1;
-                            om.Toast(contexts, "کلاس حذف شد...!");
-                        } catch (Exception e) {
-                        }
-                    }
-                });
-                builder.setNegativeButton("انصراف", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        if (amozesh == 27) MainActivity.refresh = 1;
-                    }
-                });
-                AlertDialog aler = builder.create();
-                aler.show();
+                dialogDelete(id,kelas);
             }
         });
         //******************************************************************************************
@@ -281,54 +259,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         text_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-                    kelas.dismiss();
-                    final AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
-                    final EditText input = new EditText(contexts);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    lp.setMargins(10, 10, 5, 0);
-                    input.setLayoutParams(lp);
-                    try {
-                        data.open();
-                        int cunt = data.count("dars");
-                        for (int i = 0; i < cunt; i++) {
-                            if (data.Display("dars", i, 0).equals(id)) {
-                                input.setText(data.Display("dars", i, 7));
-                                break;
-                            }
-                        }
-                        data.close();
-                    } catch (Exception e) {
-
-                    }
-                    input.setHint("توضیحات را بنویسید...!" + "\n\n");
-                    input.setInputType(InputType.TYPE_CLASS_TEXT);
-                    builder1.setView(input);
-                    builder1.setTitle("توضیحات درس" + " " + Class);
-                    builder1.setPositiveButton("ذخیره", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            try {
-                                if (!input.getText().toString().equals("")) {
-                                    data.open();
-                                    data.update_one1("dars", "txt", input.getText().toString(), "did=" + did);
-                                    data.close();
-                                    om.Toast(contexts, "ذخیره شد...!");
-                                    if (amozesh != 20) MainActivity.refresh = 1;
-                                }
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-                    builder1.setNegativeButton("انصراف", null);
-                    AlertDialog aler1 = builder1.create();
-                    aler1.show();
-                    if (amozesh == 20) {
-                        SetCode(21);
-                        om.Mesage(contexts, "شما می توانید در این پنجره توضیحات را نوشته و سپس گزینه ی ذخیره را انتخاب کنید.");
-                    }
-                } catch (Exception e) {
-
-                }
+                dialogDescription(did,amozesh,id);
             }
         });
         //******************************************************************************************
@@ -337,55 +268,31 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
     void Set_Of_Week(final String Class, final String location, final String Characteristic, final String did, final String TXT) {
         final Dialog Week = new Dialog(contexts, R.style.NewDialog);
         Week.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Week.setTitle("اضافه کردن به ایام هفته");
         Week.setContentView(R.layout.dialog_editclass);
         Week.setCancelable(false);
         Week.setCanceledOnTouchOutside(false);
         Week.show();
         //**********************************************************************************
-        final Button save_ = (Button) Week.findViewById(R.id.class_of_week_save);
-        final Button cancel_ = (Button) Week.findViewById(R.id.class_of_week_cancel);
+        final TextView save_ = (TextView) Week.findViewById(R.id.class_of_week_save);
+        final TextView cancel_ = (TextView) Week.findViewById(R.id.class_of_week_cancel);
+        final TextView timeStart = (TextView) Week.findViewById(R.id.class_of_week_texttimestart);
+        final TextView timeEnd = (TextView) Week.findViewById(R.id.class_of_week_texttimeend);
         final Spinner Spiner_ = (Spinner) Week.findViewById(R.id.class_of_week_spinner);
         final EditText room = (EditText) Week.findViewById(R.id.class_of_week_class_edit);
-        final TimePicker start_time = (TimePicker) Week.findViewById(R.id.class_of_week_start_time_picker);
-        final TimePicker end_time = (TimePicker) Week.findViewById(R.id.class_of_week_end_time_picker);
-        final TextView t1 = (TextView) Week.findViewById(R.id.class_of_week_class_text);
-        final TextView t2 = (TextView) Week.findViewById(R.id.class_of_week_day_text);
+        final LinearLayout clickTimeStart = (LinearLayout) Week.findViewById(R.id.class_of_week_timestart);
+        final LinearLayout clickTimeEnd = (LinearLayout) Week.findViewById(R.id.class_of_week_timeend);
         //**********************************************************************************
         String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
 
         ArrayAdapter<String> a = new ArrayAdapter<String>(contexts, android.R.layout.simple_spinner_item, Day_of_week);
         Spiner_.setAdapter(a);
-
-        start_time.setIs24HourView(true);
-        end_time.setIs24HourView(true);
         //**********************************************************************************
         save_.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int day_of = Spiner_.getSelectedItemPosition();
-                int hour_start = start_time.getCurrentHour();
-                int minute_start = start_time.getCurrentMinute();
-                int hour_end = end_time.getCurrentHour();
-                int minute_end = end_time.getCurrentMinute();
-                String HS = String.valueOf(hour_start);
-                String MS = String.valueOf(minute_start);
-                String HE = String.valueOf(hour_end);
-                String ME = String.valueOf(minute_end);
-                if (HE.length() == 1) {
-                    HE = "0" + HE;
-                }
-                if (HS.length() == 1) {
-                    HS = "0" + HS;
-                }
-                if (MS.length() == 1) {
-                    MS = "0" + MS;
-                }
-                if (ME.length() == 1) {
-                    ME = "0" + ME;
-                }
                 try {
                     data.open();
-                    data.insert_class(Class, String.valueOf(day_of), String.valueOf(HS) + ":" + String.valueOf(MS), location, String.valueOf(HE) + ":" + String.valueOf(ME), Characteristic, room.getText().toString(), did);
+                    data.insert_class(Class, String.valueOf(day_of), timeStart.getText().toString(), location, timeEnd.getText().toString(), Characteristic, room.getText().toString(), did);
                     data.update_one1("dars", "txt", TXT, "did=" + did);
                     data.close();
                     MainActivity.refresh = 1;
@@ -394,6 +301,21 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                 }
             }
         });
+        //**********************************************************************************
+        clickTimeEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SetTimeByDialog(timeEnd);
+            }
+        });
+
+        clickTimeStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SetTimeByDialog(timeStart);
+            }
+        });
+
         //**********************************************************************************
         cancel_.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -483,4 +405,121 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         }
     }
 
+    void SetTimeByDialog(final TextView text) {
+        PersianCalendar now = new PersianCalendar();
+        TimePickerDialog tpd = TimePickerDialog.newInstance(
+                (TimePickerDialog.OnTimeSetListener) contexts,
+                now.get(PersianCalendar.HOUR_OF_DAY),
+                now.get(PersianCalendar.MINUTE), true);
+        tpd.setThemeDark(true);
+        tpd.show(((Activity) contexts).getFragmentManager(), TIMEPICKER);
+
+        tpd.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                String Hour = "00", Min = "00";
+
+
+                if (hourOfDay < 10) {
+                    Hour = "0" + String.valueOf(hourOfDay);
+                } else {
+                    Hour = String.valueOf(hourOfDay);
+                }
+
+                if (minute < 10) {
+                    Min = "0" + String.valueOf(minute);
+                } else {
+                    Min = String.valueOf(minute);
+                }
+
+                text.setText(Hour + ":" + Min);
+            }
+        });
+    }
+
+    void dialogDescription(final String did, final float amozesh,String id) {
+        final Dialog dialog = new Dialog(contexts, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_description);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //**********************************************************************************
+        final TextView save = (TextView) dialog.findViewById(R.id.dialogdes_save);
+        final TextView cancle = (TextView) dialog.findViewById(R.id.dialogdes_cancle);
+        final EditText description = (EditText) dialog.findViewById(R.id.dialogdes_description);
+        //**********************************************************************************
+        try {
+            data.open();
+            int cunt = data.count("dars");
+            for (int i = 0; i < cunt; i++) {
+                if (data.Display("dars", i, 0).equals(id)) {
+                    description.setText(data.Display("dars", i, 7));
+                    break;
+                }
+            }
+            data.close();
+        } catch (Exception e) {
+
+        }
+        //**********************************************************************************
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (!description.getText().toString().equals("")) {
+                        data.open();
+                        data.update_one1("dars", "txt", description.getText().toString(), "did=" + did);
+                        data.close();
+                        om.Toast(contexts, "ذخیره شد...!");
+                        dialog.dismiss();
+                        if (amozesh != 20) MainActivity.refresh = 1;
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    void dialogDelete(final String id,final Dialog dialogCll){
+        final Dialog dialog = new Dialog(contexts, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_deleteclass);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //**********************************************************************************
+        final TextView save = (TextView) dialog.findViewById(R.id.dialogdelete_save);
+        final TextView cancle = (TextView) dialog.findViewById(R.id.dialogdelete_cancle);
+        //**********************************************************************************
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    data.open();
+                    data.delete("dars", Integer.parseInt(id));
+                    data.close();
+                    MainActivity.refresh = 1;
+                    dialog.dismiss();
+                    dialogCll.dismiss();
+                    om.Toast(contexts, "کلاس حذف شد...!");
+                } catch (Exception e) {
+                }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
 }
