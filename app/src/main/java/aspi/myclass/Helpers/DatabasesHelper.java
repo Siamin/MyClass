@@ -1,4 +1,4 @@
-package aspi.myclass.class_;
+package aspi.myclass.Helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,7 +15,7 @@ import java.io.OutputStream;
 import aspi.myclass.activity.NewClassActivity;
 import aspi.myclass.content.AbsentPersentContent;
 
-public class dbstudy extends SQLiteOpenHelper {
+public class DatabasesHelper extends SQLiteOpenHelper {
 
     public final String path = "data/data/aspi.myclass/databases/";
     public final String Name = "study";
@@ -24,7 +24,7 @@ public class dbstudy extends SQLiteOpenHelper {
     private Context myContext;
 
     //**********************************************************************************************
-    public dbstudy(Context context) {
+    public DatabasesHelper(Context context) {
         super(context, "study", null, 1);
         myContext = context;
     }

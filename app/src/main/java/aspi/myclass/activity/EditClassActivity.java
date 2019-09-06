@@ -2,26 +2,24 @@ package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
+import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
-import aspi.myclass.class_.OtherMetod;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Tools.Tools;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class EditClassActivity extends Activity implements TimePickerDialog.OnTimeSetListener {
@@ -30,10 +28,10 @@ public class EditClassActivity extends Activity implements TimePickerDialog.OnTi
     EditText name_edit, code_edit, location_edit, class_edit;
     Spinner day_spinner;
     LinearLayout time_start, time_end;
-    dbstudy data;
+    DatabasesHelper data;
     public static String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
     public static String Name_Class, Start_Class, End_Class, ID_Class, Location_Class, Code_class, day, Class;
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     ImageView backPage, save_data;
     String TIMEPICKER = "TimePickerDialog",TAG = "TAG_EditClassActivity";
 
@@ -42,16 +40,16 @@ public class EditClassActivity extends Activity implements TimePickerDialog.OnTi
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_addclass);
-        data = new dbstudy(this);
+        data = new DatabasesHelper(this);
         initView();
         //******************************************************************************************
         save_data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (updata()) {
-                    om.Toast(EditClassActivity.this, "ویرایش با موفقیت انجام شد...!");
+                    MessageHelper.Toast(EditClassActivity.this, "ویرایش با موفقیت انجام شد...!");
                     Go_main();
                 } else {
-                    om.Toast(EditClassActivity.this, "هیچ تغییری برای ویرایش اعمال نشده ...!");
+                    MessageHelper.Toast(EditClassActivity.this, "هیچ تغییری برای ویرایش اعمال نشده ...!");
                 }
             }
         });

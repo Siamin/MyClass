@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4db2ff</color>
-    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorPrimary">#043153</color>
+    <color name="colorPrimaryDark">#010211</color>
     <color name="colorAccent">#dafdfc</color>
     <color name="toast">#ffffff</color>
     <color name="table1">#ffd2d2</color>
@@ -11,4 +11,6 @@
     <color name="white">#FFFFFF</color>
     <color name="green">#4CAF50</color>
     <color name="red">#F44336</color>
+    <color name="backgrund">#9EB2B9</color>
+    <color name="nonColor">#02FFFEFE</color>
 </resources>

@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="aspi.myclass.activity.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:background="#e4e2e2"
+    android:background="@color/backgrund"
     android:focusableInTouchMode="false">
 
 
@@ -148,7 +148,7 @@
                         android:layout_height="2dp"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:id="@+id/textView13"
-                        android:background="#4db2ff"
+                        android:background="@color/colorPrimary"
                         android:layout_marginBottom="20dp" />
                 </LinearLayout>
 

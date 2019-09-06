@@ -3,4 +3,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="uri_bazar_my_application_class">bazaar://details?id=aspi.myclass</string>
+    <string name="uri_bazar_my_application">"bazaar://collection?slug=by_author&amp;aid=aminsyahi1369"</string>
+    <string name="package_bazar">com.farsitel.bazaar</string>
+    <string name="Email">amin.syahi.1369@gmail.com</string>
+    <string name="pass_Email">amin.syahi.1369@gmail.com</string>
 </resources>

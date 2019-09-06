@@ -13,8 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
+import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Tools.Tools;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private String get_password = "", set_password = "";
     private TextView show,forget;
     private SharedPreferences sp;
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String password_chek = sp.getString("Password_App", "null");
                                 BackgroundMail.newBuilder(LoginActivity.this)
                                         .withUsername("amin.syahi.1369@gmail.com")
-                                        .withPassword("919121318")
+                                        .withPassword("942134025")
                                         .withMailto(sp.getString("Email", ""))
                                         .withType(BackgroundMail.TYPE_PLAIN)
                                         .withSubject("رمز عبور نرم افزار دفتر نمره حضور و غیاب "+sp.getString("Email", ""))
@@ -183,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (get_password.equals(set_password)) {
                     Go_to_main();
                 } else {
-                    om.Toast(LoginActivity.this,"رمزاشتباه است");
+                    MessageHelper.Toast(LoginActivity.this,"رمزاشتباه است");
                 }
             }
         });

@@ -1,27 +1,20 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -37,16 +30,17 @@ import java.io.FileOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
-import aspi.myclass.class_.OtherMetod;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Tools.Tools;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 public class OutputDataClassActivity extends Activity {
 
     TableRow.LayoutParams llp;
     LinearLayout cell;
     TableLayout table;
-    dbstudy data;
+    DatabasesHelper data;
     public static boolean STATUS;
     ImageView save;
     TextView titel;
@@ -55,14 +49,14 @@ public class OutputDataClassActivity extends Activity {
     boolean view = false;
     int cunters = 0;
     String[] name, family, sno, status_, nomreh_, Data_;
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     String TAG = "TAG_OutputDataClassActivity";
     ImageView backPage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outputdataclass);
-        data = new dbstudy(this);
+        data = new DatabasesHelper(this);
         initView();
         //******************************************************************************************
         save.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +78,7 @@ public class OutputDataClassActivity extends Activity {
         save = (ImageView) findViewById(R.id.output_list_save);
         titel = (TextView) findViewById(R.id.output_list_titel);
         table = (TableLayout) findViewById(R.id.output_list_table);
-        backPage = findViewById(R.id.activity_newclass_back);
+        backPage = (ImageView) findViewById(R.id.outputlist_back);
         //*****************************************************
         if (STATUS) {
             titel.setText("لیست حضور و غیاب");
@@ -299,12 +293,12 @@ public class OutputDataClassActivity extends Activity {
         builder1.setPositiveButton("بله", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 if (Excel((sno.length + 1), (Data_.length + 1))) {
-                    om.Toast(OutputDataClassActivity.this, MainActivity.Address_file_app + "/" + Name_class + " " + titel.getText().toString() + ".xls");
+                    MessageHelper.Toast(OutputDataClassActivity.this, MainActivity.Address_file_app + "/" + Name_class + " " + titel.getText().toString() + ".xls");
                 } else {
                     if (!MainActivity.Address_file_app.exists()) {
-                        om.Toast(OutputDataClassActivity.this, "مشکل در ایجاد پوشه ی  " + MainActivity.Address_file_app + " در حافظه ی گوشی ");
+                        MessageHelper.Toast(OutputDataClassActivity.this, "مشکل در ایجاد پوشه ی  " + MainActivity.Address_file_app + " در حافظه ی گوشی ");
                     } else {
-                        om.Toast(OutputDataClassActivity.this, "مشکل در ذخیره فایل در حافظه گوشی");
+                        MessageHelper.Toast(OutputDataClassActivity.this, "مشکل در ذخیره فایل در حافظه گوشی");
                     }
                 }
             }
@@ -319,11 +313,11 @@ public class OutputDataClassActivity extends Activity {
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh > 31) {
             if (amozesh == 33) {
-                om.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست نمرات کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
+                MessageHelper.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست نمرات کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
                 SetCode(34);
             }
         } else if (amozesh == 31) {
-            om.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست حضور و غیاب کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
+            MessageHelper.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست حضور و غیاب کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
             SetCode(32);
         }
     }

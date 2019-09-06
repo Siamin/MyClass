@@ -1,8 +1,6 @@
 package aspi.myclass.activity;
 
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,9 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.farsitel.bazaar.IUpdateCheckService;
@@ -36,20 +32,20 @@ import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.Helpers.DialogHelper;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.content.ClassContent;
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.R;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.adapter.ClassViewAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
@@ -59,23 +55,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
     Toolbar toolbar;
-    public static Typeface font_1, font_2, font_3, FONTS;
+    public static Typeface FONTS;
     SharedPreferences sp;
-    String Font, BACKUP_class = "", BACKUP_student = "", BACKUP_roll;
-    public static int Size_Text, DAY, refresh = 0;
+    public static int DAY, refresh = 0;
     Button Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday;
     TextView text_day_class;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     List<ClassContent> List = new ArrayList<>();
-    dbstudy data;
+    DatabasesHelper data;
     public static String BUYAPP = "", status_number = "off";
     public static Timer time;
     public static File Backup_File_App = new File(Environment.getExternalStorageDirectory(), "BackupClass"), Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
     IUpdateCheckService service;
     UpdateServiceConnection connection;
     private static final String TAG = "TAG_Main";
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     int t = 0;
 
 
@@ -83,9 +78,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.main);
-        data = new dbstudy(this);
+
+        data = new DatabasesHelper(this);
         data.database();
-        Config();
+
+        initView();
+
         //******************************************************************************************
         Saturday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -129,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         //******************************************************************************************
+
         initService();
     }
 
@@ -149,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (amozesh == 0.5) SetCode(1);
             startActivity(new Intent(this, AddClassActivity.class));
         } else if (id == R.id.nav_abute) {
-            om.Abute(MainActivity.this);
+            DialogHelper.Abute(MainActivity.this);
         } else if (id == R.id.nav_coment) {
             startActivity(new Intent(this, CommentActivity.class));
             finish();
@@ -159,72 +158,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_exit) {
             finish();
         } else if (id == R.id.nav_ClearDataBase) {
-            Clear_DataBaese();
+            DialogHelper.cleanDatabase(MainActivity.this, data);
         } else if (id == R.id.nav_backup) {
-            if (om.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-                final TextView input = new TextView(this);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                input.setLayoutParams(lp);
-                input.setText("ایا شما میخواهید از اطلاعات خود فایل پشتیبان در حافظه ای زیر ایجاد کنید؟" + "\n" + Backup_File_App);
-                input.setTypeface(FONTS);
-                input.setTextSize(15);
-                input.setTextColor(getResources().getColor(R.color.toast));
-                input.setPadding(10, 10, 5, 0);
-                builder1.setView(input);
-                builder1.setTitle("پشتیبانی اطلاعات");
-                builder1.setPositiveButton("پشتیبانی", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        BackUpDataBase();
-                        if (amozesh == 34) {
-                            SetCode(35);
-                            Amozesh(false);
-                        }
-                    }
-                });
-                builder1.setNegativeButton("انصراف", null);
-                AlertDialog aler1 = builder1.create();
-                aler1.show();
+            if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
+                DialogHelper.backupFile(MainActivity.this, "ایا شما میخواهید از اطلاعات خود فایل پشتیبان در حافظه ای زیر ایجاد کنید؟" + "\n" + Backup_File_App, data);
             } else {
-                om.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                MessageHelper.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
             }
 
         } else if (id == R.id.nav_upload) {
-            if (om.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-                final TextView input = new TextView(this);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                input.setLayoutParams(lp);
-                input.setText("ایا شما میخواهید از حافظه ای  " + "زیر" + " اطلاعات خود را بازخوانی کنید؟" + "\n" + Backup_File_App);
-                input.setTypeface(FONTS);
-                input.setTextSize(15);
-                input.setTextColor(getResources().getColor(R.color.toast));
-                input.setPadding(10, 10, 5, 0);
-                builder1.setView(input);
-                builder1.setTitle("بازخوانی اطلاعات");
-                builder1.setPositiveButton("بازخوانی", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        upload_backup();
-                        if (amozesh == 35) {
-                            SetCode(36);
-                            Amozesh(false);
-                        }
-                    }
-                });
-                builder1.setNegativeButton("انصراف", null);
-                AlertDialog aler1 = builder1.create();
-                aler1.show();
+            if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
+                DialogHelper.uploadBackupFile(MainActivity.this, "ایا شما میخواهید از حافظه ای  " + "زیر" + " اطلاعات خود را بازخوانی کنید؟" + "\n" + Backup_File_App, data);
             } else {
-                om.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                MessageHelper.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
             }
         } else if (id == R.id.nav_amozesh) {
             startActivity(new Intent(this, LerningActivity.class));
         } else if (id == R.id.buyapp) {
-            if (om.get_Data("‌Buy_App", "NO", MainActivity.this).equals("NO")) {
+            if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("NO")) {
                 startActivity(new Intent(this, BuyAppActivity.class));
                 finish();
             } else {
-                om.Toast(MainActivity.this, "شما قبلا برنامه را خریداری کرده اید.");
+                MessageHelper.Toast(MainActivity.this, "شما قبلا برنامه را خریداری کرده اید.");
             }
         }
 
@@ -233,63 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    void Clear_DataBaese() {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-        final TextView input = new TextView(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        input.setText("با پاک کردن حافظه نرم افزار تمام اسامی ، درس ها و جلسات برگزار شده در نرم افزار ،حذف می شوند!");
-        input.setTypeface(FONTS);
-        input.setTextSize(15);
-        input.setTextColor(getResources().getColor(R.color.toast));
-        input.setPadding(10, 10, 5, 0);
-        builder1.setView(input);
-        builder1.setTitle("پاک کردن حافظه نرم افزار");
-        builder1.setPositiveButton("پاک کردن", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                Clear_databaese();
-            }
-        });
-        builder1.setNegativeButton("انصراف", null);
-        AlertDialog aler1 = builder1.create();
-        aler1.show();
-    }
-
-    void Clear_databaese() {
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this, R.style.NewDialog);
-        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        progressDialog.setProgress(0);
-        progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("پاک کردن حافظه");
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("لطفا صبر کنید ...!");
-        progressDialog.show();
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    data.open();
-                    data.delete_("klas", "");
-                    data.delete_("dars", "");
-                    data.delete_("rollcall", "");
-                    data.close();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            om.Toast(MainActivity.this, "حافظه نرم افزار با موفقیت پاک شد...!");
-                            refresh = 1;
-                        }
-                    });
-                } catch (Exception e) {
-
-                }
-                progressDialog.cancel();
-            }
-        }).start();
-
-    }
-
-    void Config() {
+    void initView() {
         sp = getApplicationContext().getSharedPreferences("myclass", 0);
         BUYAPP = sp.getString("‌Buy_App", "NO");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -438,92 +337,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }, 1, 1000);
     }
 
-    void write(String name, String Text) {
-        try {
-            File Backups = new File(Backup_File_App, name);
-            FileWriter fileWriter = new FileWriter(Backups);
-            fileWriter.append(Text);
-            fileWriter.close();
-        } catch (Exception e) {
-        }
-    }
-
-    void BackUpDataBase() {
-        try {
-            try {
-                data.open();
-                int cunt_class = data.count("dars");
-                int cunt_student = data.count("klas");
-                int cunt_roll = data.count("rollcall");
-                BACKUP_class = "";
-                for (int i = 0; i < cunt_class; i++) {
-                    BACKUP_class += data.Display_all("dars", i, 1, 9) + "\n";
-                }
-                for (int i = 0; i < cunt_student; i++) {
-                    BACKUP_student += data.Display_all("klas", i, 1, 8) + "\n";
-                }
-                for (int i = 0; i < cunt_roll; i++) {
-                    BACKUP_roll += data.Display_all("rollcall", i, 1, 9) + "\n";
-                }
-                data.close();
-                write("class", BACKUP_class);
-                write("student", BACKUP_student);
-                write("rollcall", BACKUP_roll);
-                om.Toast(MainActivity.this, "فایل پشتیبانی گرفته شد...!");
-            } catch (Exception e) {
-                Log.i(TAG, e.toString());
-            }
-        } catch (Exception e) {
-            Log.i(TAG, e.toString());
-        }
-    }
-
-    void upload_backup() {
-        Calendar c = Calendar.getInstance();
-        final String NC = "" + c.get(Calendar.MINUTE) + c.get(Calendar.SECOND) + "";
-        final String Class[] = ReadFileExternal("/class").split("%");
-        final String Student[] = ReadFileExternal("/student").split("%");
-        final String Rollcall[] = ReadFileExternal("/rollcall").split("%");
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    data.open();
-                    for (int i = 0; i < Class.length; i++) {
-                        String[] item = Class[i].split("~");
-                        data.insert_class2(item[0], item[1], item[2], item[3], item[4], item[5], item[6], NC + item[7], item[8]);
-                    }
-                    for (int i = 0; i < Student.length; i++) {
-                        String[] item = Student[i].split("~");
-                        data.insert_student2(item[0], item[1], item[2], item[3], NC + item[4]);
-                    }
-                    for (int i = 0; i < Rollcall.length; i++) {
-                        String[] item = Rollcall[i].split("~");
-                        boolean status = true;
-                        if (item[1].equals("0")) status = false;
-                        data.insert_Rollcall(item[0], status, item[2], item[3], item[4], item[5], NC + item[6], item[7] + NC, item[8]);
-                    }
-                    data.close();
-                    om.Toast(MainActivity.this, "بارگزاری انجام شد...!");
-                    refresh = 1;
-                } catch (Exception e) {
-                }
-            }
-        }).start();
-    }
-
-    String ReadFileExternal(String name) {
-        String Return = "", Line = "", External = Backup_File_App.toString();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(External + name));
-            while ((Line = bufferedReader.readLine()) != null) {
-                Return += Line.replace("%", "").replace("null", "") + "%";
-            }
-        } catch (Exception e) {
-            Return = "";
-        }
-        return Return;
-    }
-
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
 
@@ -541,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 long vCode = service.getVersionCode("aspi.myclass");
                 if (vCode != -1) {
-                    om.Qusins(MainActivity.this);
+                    DialogHelper.Qusins(MainActivity.this);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -580,52 +393,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                 if (amozesh > 27.0) {
                                                     if (amozesh > 34.0) {
                                                         if (amozesh == 36.0) {
-                                                            om.Mesage(MainActivity.this, "موفق و پیروز باشید!");
+                                                            MessageHelper.Mesage(MainActivity.this, "موفق و پیروز باشید!");
                                                             SetCode(37);
                                                         } else if (amozesh == 35.0) {
                                                             drawer.openDrawer(GravityCompat.START);
-                                                            om.Mesage(MainActivity.this, "شما همچنین می توانید فایل پشتیبانی هر ترم را در داخل پوشه ی BackupClass قرار دهد و با انتخاب گزینه ی بارگیری فایل پشتیبانی اطلاعات ترم مورد نظرتان را به برنامه اضافه کنید.گزینه ی بارگیری فایل پشتیبانی را انتخاب کنید.");
+                                                            MessageHelper.Mesage(MainActivity.this, "شما همچنین می توانید فایل پشتیبانی هر ترم را در داخل پوشه ی BackupClass قرار دهد و با انتخاب گزینه ی بارگیری فایل پشتیبانی اطلاعات ترم مورد نظرتان را به برنامه اضافه کنید.گزینه ی بارگیری فایل پشتیبانی را انتخاب کنید.");
                                                         }
                                                     } else if (amozesh == 34.0) {
                                                         drawer.openDrawer(GravityCompat.START);
-                                                        om.Mesage(MainActivity.this, "شما می توانید زمانی پایان ترم از اطلاعات تمامی کلاس های تشکیل شده در برنامه فایل پشتیبانی تهیه کنید .از منو کشویی برنامه گزینه ی پشتیبان گیری از نرم افزار را انتخاب کنید ،با انتخاب این گزینه برای شما سه فایل پشتیبان گیری از اطلاعات کلاس های شما گرفته می شود و در حافظه ی اصلی گوشی در پوشه ی  BackupClass ذخیره می شود.");
+                                                        MessageHelper.Mesage(MainActivity.this, "شما می توانید زمانی پایان ترم از اطلاعات تمامی کلاس های تشکیل شده در برنامه فایل پشتیبانی تهیه کنید .از منو کشویی برنامه گزینه ی پشتیبان گیری از نرم افزار را انتخاب کنید ،با انتخاب این گزینه برای شما سه فایل پشتیبان گیری از اطلاعات کلاس های شما گرفته می شود و در حافظه ی اصلی گوشی در پوشه ی  BackupClass ذخیره می شود.");
                                                     }
                                                 } else if (amozesh == 27.0) {
-                                                    om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
+                                                    MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                                     SetCode(28);
                                                 }
                                             } else if (amozesh == 25.0) {
-                                                om.Mesage(MainActivity.this, "پس از ثبت کلاس در دیگر ایام هفته تمام اطلاعات کلاس از جمله اطلاعات دانشجویان و جلسات برگزار شده انتقال می یابد." + "\n درس را انتخاب کنید.");
+                                                MessageHelper.Mesage(MainActivity.this, "پس از ثبت کلاس در دیگر ایام هفته تمام اطلاعات کلاس از جمله اطلاعات دانشجویان و جلسات برگزار شده انتقال می یابد." + "\n درس را انتخاب کنید.");
                                                 SetCode(26);
                                             }
                                         } else if (amozesh == 23.0) {
-                                            om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
+                                            MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                             SetCode(24);
                                         }
                                     } else if (amozesh == 21.0) {
-                                        om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
+                                        MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                         SetCode(22);
                                     }
                                 } else if (amozesh == 19.0) {
-                                    om.Mesage(MainActivity.this, "درس را انتخاب کنید.");
+                                    MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
                                     SetCode(20);
                                 }
                             } else if (amozesh == 15.0) {
-                                om.Mesage(MainActivity.this, "با ایجاد جلسه جدید کلاس شما می توانید به جلسات گذشته دسترسی داشته باشید. درس را انتخاب کنید.");
+                                MessageHelper.Mesage(MainActivity.this, "با ایجاد جلسه جدید کلاس شما می توانید به جلسات گذشته دسترسی داشته باشید. درس را انتخاب کنید.");
                                 SetCode(16);
                             }
                         } else if (amozesh == 7.0) {
-                            om.Mesage(MainActivity.this, "اکنون شما می توانید برای کلاس خود جلسه تشکیل دهد.درس را انتخاب کنید.");
+                            MessageHelper.Mesage(MainActivity.this, "اکنون شما می توانید برای کلاس خود جلسه تشکیل دهد.درس را انتخاب کنید.");
                         }
                     } else if (chek) {
-                        om.Mesage(MainActivity.this, "کلاس را انتخاب کنید تا برای شما گزینه های مختلف نشان داده شود.");
+                        MessageHelper.Mesage(MainActivity.this, "کلاس را انتخاب کنید تا برای شما گزینه های مختلف نشان داده شود.");
                     }
                 } else {
-                    om.Mesage(MainActivity.this, "روزی که کلاس را در آن ثبت کرده اید انتخاب کنید.");
+                    MessageHelper.Mesage(MainActivity.this, "روزی که کلاس را در آن ثبت کرده اید انتخاب کنید.");
                 }
             } else {
                 drawer.openDrawer(GravityCompat.START);
-                om.Mesage(MainActivity.this, "برای ایجاد کلاس جدید از منو کشویی برنامه گزینه اضافه کردن کلاس جدید را انتخاب کنید");
+                MessageHelper.Mesage(MainActivity.this, "برای ایجاد کلاس جدید از منو کشویی برنامه گزینه اضافه کردن کلاس جدید را انتخاب کنید");
             }
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
@@ -654,10 +467,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void SetCode(float code) {
-        sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("LerningActivity", code);
-        edit.commit();
+        SharedPreferencesHelper.SetCode("LerningActivity",String.valueOf(code),MainActivity.this);
     }
 
 

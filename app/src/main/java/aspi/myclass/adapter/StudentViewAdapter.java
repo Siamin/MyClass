@@ -1,10 +1,8 @@
 package aspi.myclass.adapter;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -12,34 +10,33 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.content.AbsentPersentContent;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
 import aspi.myclass.activity.NewClassActivity;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.cvh> {
     private List<AbsentPersentContent> Content_new_class;
     private Context contexts;
-    private dbstudy data;
-    OtherMetod om = new OtherMetod();
+    private DatabasesHelper data;
+    Tools om = new Tools();
     String TAG = "TAG_StudentViewAdapter";
 
     public StudentViewAdapter(List<AbsentPersentContent> contents, Context context) {
         this.Content_new_class = contents;
         this.contexts = context;
-        data = new dbstudy(context);
+        data = new DatabasesHelper(context);
     }
 
     @Override
@@ -98,7 +95,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                 }
                 if (amozesh == 9) {
                     SetCode(10);
-                    om.Mesage(contexts, "و همچنین شما می توانید با انتخاب کادر سبز رنگی که روبه روی نام دانشجو قرار دارد برای دانشجو نمره کلاسی یا میان ترم وارد کنید.");
+                    MessageHelper.Mesage(contexts, "و همچنین شما می توانید با انتخاب کادر سبز رنگی که روبه روی نام دانشجو قرار دارد برای دانشجو نمره کلاسی یا میان ترم وارد کنید.");
                 }
             }
         });
@@ -128,14 +125,14 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
 
                                 if (S) {
-                                    om.Toast(contexts, "این شماره دانشجویی در کلاس وجود دارد.");
+                                    MessageHelper.Toast(contexts, "این شماره دانشجویی در کلاس وجود دارد.");
                                 } else {
                                     holder.sno.setText(input.getText().toString());
                                 }
 
                                 if (amozesh == 11) {
                                     SetCode(12);
-                                    om.Mesage(contexts, "همچنین می توانید با انتخاب نام دانشجو را ویرایش کنید.");
+                                    MessageHelper.Mesage(contexts, "همچنین می توانید با انتخاب نام دانشجو را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
                                 Log.i(TAG, "Error" + e.toString());
@@ -174,7 +171,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 content.family = input.getText().toString();
                                 if (amozesh == 13) {
                                     SetCode(14);
-                                    om.Mesage(contexts, "شما هم می توانید با انتخاب توضیحات دانشجو برای دانشجویی انتخاب شده توضیحات لازم را به برنامه اضافه کنید.");
+                                    MessageHelper.Mesage(contexts, "شما هم می توانید با انتخاب توضیحات دانشجو برای دانشجویی انتخاب شده توضیحات لازم را به برنامه اضافه کنید.");
                                 }
                             } catch (Exception e) {
                             }
@@ -214,7 +211,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 content.name = input.getText().toString();
                                 if (amozesh == 12) {
                                     SetCode(13);
-                                    om.Mesage(contexts, "همچنین می توانید با انتخاب نام خانوادگی  دانشجو را ویرایش کنید.");
+                                    MessageHelper.Mesage(contexts, "همچنین می توانید با انتخاب نام خانوادگی  دانشجو را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
                             }
@@ -298,7 +295,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 content.nomreh = input.getText().toString();
                                 if (amozesh == 10) {
                                     SetCode(11);
-                                    om.Mesage(contexts, "همچنین می توانید با انتخاب شماره ی دانشجویی را ویرایش کنید.");
+                                    MessageHelper.Mesage(contexts, "همچنین می توانید با انتخاب شماره ی دانشجویی را ویرایش کنید.");
                                 }
                             } catch (Exception e) {
                             }

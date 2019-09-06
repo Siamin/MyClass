@@ -20,8 +20,9 @@ import android.widget.ImageView;
 
 import com.race604.drawable.wave.WaveDrawable;
 
+import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.activity.LoginActivity;
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Tools.Tools;
 import tyrantgit.explosionfield.ExplosionField;
 
 public class SplashScreanActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback, PermissionResultCallback {
@@ -32,7 +33,7 @@ public class SplashScreanActivity extends Activity implements ActivityCompat.OnR
     ExplosionField mExplosionField;
     PermissionUtils permissionUtils;
     ArrayList<String> permissions = new ArrayList<>();
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +96,7 @@ public class SplashScreanActivity extends Activity implements ActivityCompat.OnR
 
             permissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults);
             if (!isGranted) {
-                om.SetCode("permissions", "1", SplashScreanActivity.this);
+                SharedPreferencesHelper.SetCode("permissions", "1", SplashScreanActivity.this);
                 Timer();
 
 

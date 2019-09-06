@@ -3,32 +3,31 @@ package aspi.myclass.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.util.List;
 
 import aspi.myclass.content.StatisticsContent;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cvh> {
 
     private List<StatisticsContent> Content_student;
     private Context contexts;
-    private dbstudy data;
+    private DatabasesHelper data;
     Activity activity;
 
     public StatusticsAdapter(List<StatisticsContent> contents, Context context) {
         this.Content_student = contents;
         this.contexts = context;
-        data = new dbstudy(context);
+        data = new DatabasesHelper(context);
     }
 
     @Override

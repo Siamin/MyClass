@@ -7,39 +7,38 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.content.StatisticsContent;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StatusticsAdapter;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class StatisticsActivity extends Activity {
 
 
     public static String Name_class, Id_class, Did_class;
-    private dbstudy data;
+    private DatabasesHelper data;
     private ProgressDialog progressDialog;
     private int cunters = 0;
     private RecyclerView recyclerView_show_student;
     private LinearLayoutManager linearLayoutManager_show_student;
     private boolean view = false;
     private java.util.List<StatisticsContent> List = new ArrayList<>();
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     ImageView backPage;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
-        data = new dbstudy(this);
+        data = new DatabasesHelper(this);
         backPage = findViewById(R.id.statistics_back);
         Start();
 
@@ -154,7 +153,7 @@ public class StatisticsActivity extends Activity {
 
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        om.Toast(StatisticsActivity.this," برای آمار حضور و غیاب شما باید جلسه برای کلاس خود تشکیل دهید...! ");
+                        MessageHelper.Toast(StatisticsActivity.this," برای آمار حضور و غیاب شما باید جلسه برای کلاس خود تشکیل دهید...! ");
                     }
                 });
             }

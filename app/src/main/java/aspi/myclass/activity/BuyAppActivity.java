@@ -9,13 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Tools.Tools;
 import util.IabHelper;
 import util.IabResult;
 import util.Inventory;
@@ -37,7 +38,7 @@ public class BuyAppActivity extends Activity {
     private Button buy, cancel;
     private SharedPreferences sp;
     private ProgressDialog progressDialog;
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +87,7 @@ public class BuyAppActivity extends Activity {
                                 String model = android.os.Build.MODEL + " " + android.os.Build.BRAND +" (" + android.os.Build.VERSION.RELEASE+")" + " API-" + android.os.Build.VERSION.SDK_INT;
                                 BackgroundMail.newBuilder(BuyAppActivity.this)
                                         .withUsername("amin.syahi.1369@gmail.com")
-                                        .withPassword("919121318")
+                                        .withPassword("942134025")
                                         .withMailto("aspi.program@gmail.com")
                                         .withType(BackgroundMail.TYPE_PLAIN)
                                         .withSubject("خرید برنامه")
@@ -94,27 +95,27 @@ public class BuyAppActivity extends Activity {
                                         .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                                             public void onSuccess() {
                                                 SetCode("myclass", "‌Buy_App", "Buy_App");
-                                                om.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
+                                                MessageHelper.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
                                                 Back();
                                             }
                                         })
                                         .withOnFailCallback(new BackgroundMail.OnFailCallback() {
                                             public void onFail() {
                                                 SetCode("myclass", "‌Buy_App", "Buy_App");
-                                                om.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
+                                                MessageHelper.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
                                                 Back();
                                             }
                                         })
                                         .send();
                             } else {
-                                om.Toast(BuyAppActivity.this,"عملیات خرید ناموفق ...!");
+                                MessageHelper.Toast(BuyAppActivity.this,"عملیات خرید ناموفق ...!");
                                 Back();
                             }
 
                         }
                     });
         } catch (Exception e) {
-            om.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            MessageHelper.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
         }
     }
 
@@ -135,7 +136,7 @@ public class BuyAppActivity extends Activity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            om.Toast(BuyAppActivity.this,"مشکل ارتباط با کافه بازار...!");
+                                            MessageHelper.Toast(BuyAppActivity.this,"مشکل ارتباط با کافه بازار...!");
                                         }
                                     });
                                     progressDialog.cancel();
@@ -146,7 +147,7 @@ public class BuyAppActivity extends Activity {
                 }
             });
         } catch (Exception e) {
-            om.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            MessageHelper.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
         }
 
     }

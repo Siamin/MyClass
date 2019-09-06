@@ -3,12 +3,9 @@ package aspi.myclass.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +23,10 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.List;
 
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.content.ClassContent;
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.R;
 import aspi.myclass.activity.AddStudentActivity;
 import aspi.myclass.activity.EditClassActivity;
@@ -36,22 +35,22 @@ import aspi.myclass.activity.NewClassActivity;
 import aspi.myclass.activity.OutputDataClassActivity;
 import aspi.myclass.activity.OldClassListActivity;
 import aspi.myclass.activity.StatisticsActivity;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh> {
 
     private List<ClassContent> content_class_main_shows;
     private Context contexts;
-    private dbstudy data;
+    private DatabasesHelper data;
     Activity activity;
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     String TIMEPICKER = "TimePickerDialog", DATEPICKER = "DatePickerDialog", MULTIDATEPICKER = "MultiDatePickerDialog";
 
     public ClassViewAdapter(List<ClassContent> contents, Context context, Activity activitys) {
         content_class_main_shows = contents;
         contexts = context;
-        data = new dbstudy(context);
+        data = new DatabasesHelper(context);
         activity = activitys;
     }
 
@@ -122,28 +121,28 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                                             if (amozesh > 26) {
                                                 if (amozesh > 28) {
                                                 } else if (amozesh == 27 || amozesh == 28) {
-                                                    om.Mesage(contexts, "شما میتوانید برای گرفتن مستندات از کلاس مورد نظرتان از گزینه ی خروجی گرفتن استفاده کنید .گزینه ی خروجی از کلاس را انتخاب کنید.");
+                                                    MessageHelper.Mesage(contexts, "شما میتوانید برای گرفتن مستندات از کلاس مورد نظرتان از گزینه ی خروجی گرفتن استفاده کنید .گزینه ی خروجی از کلاس را انتخاب کنید.");
                                                 }
                                             } else if (amozesh == 25 || amozesh == 26) {
-                                                om.Mesage(contexts, "شما می توانید با انتخاب گزینه ی حذف کلاس اطلاعات کلاس مورد نظرتان را حذف کنید.");
+                                                MessageHelper.Mesage(contexts, "شما می توانید با انتخاب گزینه ی حذف کلاس اطلاعات کلاس مورد نظرتان را حذف کنید.");
                                             }
                                         } else if (amozesh == 23 || amozesh == 24) {
-                                            om.Mesage(contexts, "شما همچنین می توانید با انتخاب گزینه ی ایام هفته کلاس انتخاب شده ی خود را در دیگر روز های ایام هفته ذخیره کنید.گزینه ی ایام هفته را انتخاب کنید.");
+                                            MessageHelper.Mesage(contexts, "شما همچنین می توانید با انتخاب گزینه ی ایام هفته کلاس انتخاب شده ی خود را در دیگر روز های ایام هفته ذخیره کنید.گزینه ی ایام هفته را انتخاب کنید.");
                                         }
                                     } else if (amozesh == 21 || amozesh == 22) {
-                                        om.Mesage(contexts, "شما همچنین می توانید با انتخاب گزینه ی ویرایش کلاس، اطلاعات کلاس خود را ویرایش کنید.");
+                                        MessageHelper.Mesage(contexts, "شما همچنین می توانید با انتخاب گزینه ی ویرایش کلاس، اطلاعات کلاس خود را ویرایش کنید.");
                                     }
                                 } else if (amozesh == 19 || amozesh == 20) {
-                                    om.Mesage(contexts, "شما همچنین می توانید با انتخاب گزینه ی توضیحات،برای درس مورد نظرتان توضیحات وارد کنیداین توضیحات تا زمانی که کلاس درس را حذف نکنید پاک نمی شود و در قسمت توضیحات کلاس نمایش داده می شود.");
+                                    MessageHelper.Mesage(contexts, "شما همچنین می توانید با انتخاب گزینه ی توضیحات،برای درس مورد نظرتان توضیحات وارد کنیداین توضیحات تا زمانی که کلاس درس را حذف نکنید پاک نمی شود و در قسمت توضیحات کلاس نمایش داده می شود.");
                                 }
                             } else {
-                                om.Mesage(contexts, "با انتخاب گزینه جلسات گذشته شما می توانید لیست جلسات برگزار شده درس را مشاهده کنید.گزینه ی جلسات گذشته را انتخاب کنید.");
+                                MessageHelper.Mesage(contexts, "با انتخاب گزینه جلسات گذشته شما می توانید لیست جلسات برگزار شده درس را مشاهده کنید.گزینه ی جلسات گذشته را انتخاب کنید.");
                             }
                         } else if (amozesh == 7) {
-                            om.Mesage(contexts, "با انتخاب گزینه جلسه ی جدید شما وارد کلاس می شوید و برای کلاس یک لیست حضور و غیاب تشکیل داده می شود.");
+                            MessageHelper.Mesage(contexts, "با انتخاب گزینه جلسه ی جدید شما وارد کلاس می شوید و برای کلاس یک لیست حضور و غیاب تشکیل داده می شود.");
                         }
                     } else {
-                        om.Mesage(contexts, "برای تشکیل جلسات کلاس ابتدا باید با انتخاب گزینه ی دانشجوی جدید به کلاس تان دانشجو اضافه کنید.");
+                        MessageHelper.Mesage(contexts, "برای تشکیل جلسات کلاس ابتدا باید با انتخاب گزینه ی دانشجوی جدید به کلاس تان دانشجو اضافه کنید.");
                     }
                     if (amozesh == 3) SetCode(4);
                     else if (amozesh == 7) SetCode(8);
@@ -185,12 +184,12 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         week_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (om.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App") || Integer.parseInt(did) <= 10) {
+                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App") || Integer.parseInt(did) <= 10) {
                     kelas.cancel();
                     Set_Of_Week(Class, location, Characteristic, did, TXT);
                     if (amozesh == 24) SetCode(25);
                 } else {
-                    om.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
             }
         });
@@ -343,7 +342,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         absent_student.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (om.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
+                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
                     if (amozesh == 28 || amozesh == 29) SetCode(30);
                     statistics_.cancel();
                     StatisticsActivity.Name_class = Class;
@@ -351,7 +350,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     StatisticsActivity.Did_class = did;
                     contexts.startActivity(new Intent(contexts, StatisticsActivity.class));
                 } else {
-                    om.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
 
             }
@@ -359,7 +358,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         absent_students.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (om.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
+                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
                     if (amozesh == 30) SetCode(31);
                     statistics_.cancel();
                     OutputDataClassActivity.Name_class = Class;
@@ -368,7 +367,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     OutputDataClassActivity.STATUS = true;
                     contexts.startActivity(new Intent(contexts, OutputDataClassActivity.class));
                 } else {
-                    om.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
 
             }
@@ -376,7 +375,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         nomreh_students.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (om.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
+                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
                     if (amozesh == 32) SetCode(33);
                     statistics_.cancel();
                     OutputDataClassActivity.Name_class = Class;
@@ -385,7 +384,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     OutputDataClassActivity.STATUS = false;
                     contexts.startActivity(new Intent(contexts, OutputDataClassActivity.class));
                 } else {
-                    om.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
 
             }
@@ -394,13 +393,13 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         if (amozesh > 29) {
             if (amozesh > 30) {
                 if (amozesh == 32) {
-                    om.Mesage(contexts, "گزینه ی لیست نمرات را انتخاب کنید.");
+                    MessageHelper.Mesage(contexts, "گزینه ی لیست نمرات را انتخاب کنید.");
                 }
             } else if (amozesh == 30) {
-                om.Mesage(contexts, "گزینه ی لیست حضور و غیاب را انتخاب کنید.");
+                MessageHelper.Mesage(contexts, "گزینه ی لیست حضور و غیاب را انتخاب کنید.");
             }
         } else if (amozesh == 28 || amozesh == 29) {
-            om.Mesage(contexts, "می توانید در این قسمت با انتخاب گزینه های آمار حضور و غیاب بصورت آماری حضور و غیاب دانشجویان خود در کل جلسات مشاهده کنید و نیز می توانید با انتخاب گزینه ی لیست حضور و غیاب ،لیست حضور و غیاب دانشجویان خود در تاریخ های برگزاری جلسات مشاهده کنید و لیست درس خود را ذخیره کنیدو همچنین می توانید با انتخاب گزینه ی لیست نمرات،لیست نمرات دانشجویان خود را در تاریخ های برگزاری جلسات مشاهده کنید و لیست را ذخیره کنید." + "\n گزینه ی آمار حضور و غیاب را انتخاب کنید.");
+            MessageHelper.Mesage(contexts, "می توانید در این قسمت با انتخاب گزینه های آمار حضور و غیاب بصورت آماری حضور و غیاب دانشجویان خود در کل جلسات مشاهده کنید و نیز می توانید با انتخاب گزینه ی لیست حضور و غیاب ،لیست حضور و غیاب دانشجویان خود در تاریخ های برگزاری جلسات مشاهده کنید و لیست درس خود را ذخیره کنیدو همچنین می توانید با انتخاب گزینه ی لیست نمرات،لیست نمرات دانشجویان خود را در تاریخ های برگزاری جلسات مشاهده کنید و لیست را ذخیره کنید." + "\n گزینه ی آمار حضور و غیاب را انتخاب کنید.");
             SetCode(29);
         }
     }
@@ -471,7 +470,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                         data.open();
                         data.update_one1("dars", "txt", description.getText().toString(), "did=" + did);
                         data.close();
-                        om.Toast(contexts, "ذخیره شد...!");
+                        MessageHelper.Toast(contexts, "ذخیره شد...!");
                         dialog.dismiss();
                         if (amozesh != 20) MainActivity.refresh = 1;
                     }
@@ -509,7 +508,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     MainActivity.refresh = 1;
                     dialog.dismiss();
                     dialogCll.dismiss();
-                    om.Toast(contexts, "کلاس حذف شد...!");
+                    MessageHelper.Toast(contexts, "کلاس حذف شد...!");
                 } catch (Exception e) {
                 }
             }

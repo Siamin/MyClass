@@ -1,43 +1,35 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Helpers.DateHelper;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.content.AbsentPersentContent;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StudentViewAdapter;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class NewClassActivity extends Activity {
 
     TextView name_class, DATA;
     public static String Name_class, did;
-    dbstudy data;
+    DatabasesHelper data;
     RecyclerView recyclerView1;
     LinearLayoutManager linearLayoutManager;
     public static List<AbsentPersentContent> List = new ArrayList<>();
@@ -47,7 +39,7 @@ public class NewClassActivity extends Activity {
     ProgressDialog progressDialog;
     int cunters = 0;
     boolean view = false;
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     ImageView backPage;
     boolean statusBackPage = false;
 
@@ -56,7 +48,7 @@ public class NewClassActivity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_newclass);
         //******************************************************************************************
-        data = new dbstudy(this);
+        data = new DatabasesHelper(this);
         initView();
         //******************************************************************************************
         backPage.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +65,9 @@ public class NewClassActivity extends Activity {
         DATA = (TextView) findViewById(R.id.new_class_data);
         //*************************************************************
         name_class.setText("کلاس " + Name_class);
-        DATA.setText("" + om.date_iran());
-        HOUR = Integer.parseInt(om.Get_Time().split(":")[0]);
-        MINUTE = Integer.parseInt(om.Get_Time().split(":")[1]);
+        DATA.setText("" + DateHelper.date_iran());
+        HOUR = Integer.parseInt(DateHelper.Get_Time().split(":")[0]);
+        MINUTE = Integer.parseInt(DateHelper.Get_Time().split(":")[1]);
         //*************************************************************
         Start();
     }
@@ -124,7 +116,7 @@ public class NewClassActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 9)
-            om.Mesage(NewClassActivity.this,"شما می توانید در این صفحه حضور،غیاب و نمرات دانشجویان را وارد کنید.وهمچنین می توانید با انتخاب تیک که روبه روی اسم دانشجو قرار دارد برای دانشجو غیبت وارد لیست نمایید.");
+            MessageHelper.Mesage(NewClassActivity.this,"شما می توانید در این صفحه حضور،غیاب و نمرات دانشجویان را وارد کنید.وهمچنین می توانید با انتخاب تیک که روبه روی اسم دانشجو قرار دارد برای دانشجو غیبت وارد لیست نمایید.");
     }
 
     void GET_QURY() {
@@ -192,7 +184,7 @@ public class NewClassActivity extends Activity {
                 Abs = abs.split("~");
                 Per = per.split("~");
 
-                DATA_IRAN = om.date_iran().split("/");
+                DATA_IRAN = DateHelper.date_iran().split("/");
 
                 data.open();
                 int cunt_roll = data.count("rollcall");
@@ -223,7 +215,7 @@ public class NewClassActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        om.Toast(NewClassActivity.this, "هیچ دانشجویی برای این کلاس ثبت نشده...!");
+                        MessageHelper.Toast(NewClassActivity.this, "هیچ دانشجویی برای این کلاس ثبت نشده...!");
                         go_main();
                     }
                 });
@@ -250,7 +242,7 @@ public class NewClassActivity extends Activity {
             super.onBackPressed();
             go_main();
         }else{
-            om.Toast(NewClassActivity.this,"برای بازگشت دوباره کلیک کنید!");
+            MessageHelper.Toast(NewClassActivity.this,"برای بازگشت دوباره کلیک کنید!");
             statusBackPage = true;
         }
     }

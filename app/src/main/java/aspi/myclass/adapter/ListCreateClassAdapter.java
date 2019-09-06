@@ -21,32 +21,33 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.util.Calendar;
 import java.util.List;
 
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.content.OldClassContent;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
 import aspi.myclass.activity.OldClassActivity;
 import aspi.myclass.activity.OldClassListActivity;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClassAdapter.cvh> {
 
     private List<OldClassContent> Content_list_old;
     private Context contexts;
-    private dbstudy data;
+    private DatabasesHelper data;
     Activity activity;
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     String TAG = "TAG_ListCreateClassAdapter";
 
     public ListCreateClassAdapter(List<OldClassContent> contents, Context context, Activity Act) {
         this.Content_list_old = contents;
         this.contexts = context;
-        data = new dbstudy(context);
+        data = new DatabasesHelper(context);
         activity = Act;
     }
 
@@ -99,7 +100,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                     Intent old_class=new Intent(contexts, OldClassActivity.class);
                     contexts.startActivity(old_class);
                 }else{
-                    om.Toast(contexts,"برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts,"برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
             }
         });
@@ -127,7 +128,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                     AlertDialog aler1 = builder1.create();
                     aler1.show();
                 }else{
-                    om.Toast(contexts,"برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts,"برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
             }
         });
@@ -180,7 +181,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                         data.close();
                         activity.runOnUiThread(new Runnable() {
                             public void run() {
-                                om.Toast(contexts,"جلسه با موفقیت حذف شد..!");
+                                MessageHelper.Toast(contexts,"جلسه با موفقیت حذف شد..!");
                                 OldClassListActivity.refresh = "1";
                             }
                         });
@@ -266,7 +267,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
             data.open();
             data.update("day",Yaer[yaer.getSelectedItemPosition()],"month",Month[month.getSelectedItemPosition()],"year",Day[day.getSelectedItemPosition()],"jalase="+jalase);
             data.close();
-            om.Toast(contexts,"ویرایش انجام شد.");
+            MessageHelper.Toast(contexts,"ویرایش انجام شد.");
             edit.dismiss();
             OldClassListActivity.refresh = "1";
         }catch (Exception e){

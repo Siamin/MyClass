@@ -1,24 +1,18 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,9 +26,10 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
-import aspi.myclass.class_.OtherMetod;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Tools.Tools;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class AddStudentActivity extends Activity {
@@ -42,17 +37,17 @@ public class AddStudentActivity extends Activity {
     ImageView save, cancel, download, Reload;
     private TextView nameclass, starttime, locationclass, numbers[];
     private EditText sno_student[], name_student[], family_student[];
-    private dbstudy data;
+    private DatabasesHelper data;
     public static String id_class, Name_class, Start_time, location;
     private int not_save = 0;
     private String Upload = "", TAG = "TAG_AddStudentActivity";
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_addstudent);
-        data = new dbstudy(this);
+        data = new DatabasesHelper(this);
         initView();
         //***********************************************
         download.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +55,9 @@ public class AddStudentActivity extends Activity {
             public void onClick(View view) {
                 if (MainActivity.BUYAPP.equals("Buy_App")) {
                     ReadFileExternal("/App_class/IO.txt");
-                    om.Mesage(AddStudentActivity.this, "برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
+                    MessageHelper.Mesage(AddStudentActivity.this, "برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
                 } else {
-                    om.Toast(AddStudentActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(AddStudentActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
             }
         });
@@ -81,7 +76,7 @@ public class AddStudentActivity extends Activity {
                     if (save()) {
                         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
                         float amozesh = sp.getFloat("LerningActivity", 0);
-                        om.Toast(AddStudentActivity.this, "ذخیره شد...!");
+                        MessageHelper.Toast(AddStudentActivity.this, "ذخیره شد...!");
                         if (amozesh == 4 || amozesh == 5) {
                             SetCode(6);
                             Amozesh(false);
@@ -89,10 +84,10 @@ public class AddStudentActivity extends Activity {
 
                     }
                     if (not_save > 0) {
-                        om.Toast(AddStudentActivity.this, "اطلاعاتی که بعد از ذخیره پاک نشده اند قبلا شماره آنها وارد شده است...!");
+                        MessageHelper.Toast(AddStudentActivity.this, "اطلاعاتی که بعد از ذخیره پاک نشده اند قبلا شماره آنها وارد شده است...!");
                     }
                 } else {
-                    om.Toast(AddStudentActivity.this, "لطفا تمامی مشخصات را به ترتیب وارد نمایید...!");
+                    MessageHelper.Toast(AddStudentActivity.this, "لطفا تمامی مشخصات را به ترتیب وارد نمایید...!");
                 }
             }
         });
@@ -330,11 +325,11 @@ public class AddStudentActivity extends Activity {
             if (amozesh > 6) {
 
             } else {
-                om.Mesage(AddStudentActivity.this, "همچنین شما می توانید با انتخاب ایکون سبز رنگ بالای صفحه،اطلاعات دانشجویان را بصورت لیست وارد برنامه کنید");
+                MessageHelper.Mesage(AddStudentActivity.this, "همچنین شما می توانید با انتخاب ایکون سبز رنگ بالای صفحه،اطلاعات دانشجویان را بصورت لیست وارد برنامه کنید");
                 SetCode(7);
             }
         } else {
-            om.Mesage(AddStudentActivity.this, "در این قسمت شما می توانید اطلاعات دانشجویان را بصورت دستی وارد کنید.اطلاعات چند دانشجو را وارد کرده و گزینه ی ذخیره را انتخاب کنید.");
+            MessageHelper.Mesage(AddStudentActivity.this, "در این قسمت شما می توانید اطلاعات دانشجویان را بصورت دستی وارد کنید.اطلاعات چند دانشجو را وارد کرده و گزینه ی ذخیره را انتخاب کنید.");
         }
     }
 
@@ -398,7 +393,7 @@ public class AddStudentActivity extends Activity {
             }
             get_upload(Uploads);
         } catch (Exception e) {
-            om.Toast(AddStudentActivity.this, "لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");
+            MessageHelper.Toast(AddStudentActivity.this, "لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");
         }
 
     }

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/bac1314"
+    android:background="@color/colorPrimary"
     android:layoutDirection="rtl"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -25,7 +25,7 @@
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:src="@drawable/icon" />
 
-        <TextView
+        <Object.MyTextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,9 +34,10 @@
             android:layout_toLeftOf="@+id/imageView"
             android:layout_toStartOf="@+id/imageView"
             android:text="دفتر حضور و غیاب"
+            android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#615959"
-            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:textSize="18dp"
             android:textStyle="bold" />
     </LinearLayout>
 

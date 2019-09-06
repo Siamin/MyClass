@@ -2,46 +2,43 @@ package aspi.myclass.activity;
 
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.content.AbsentPersentContent;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StudentViewAdapter;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 public class OldClassActivity extends Activity {
 
     private TextView name_class, DATA, Time, Titel;
     public static String Name_class, did_class, Data_class, Jalase, HOUR;
-    private dbstudy data;
+    private DatabasesHelper data;
     private RecyclerView recyclerView_Old;
     private LinearLayoutManager linearLayoutManagers;
     public static java.util.List<AbsentPersentContent> List = new ArrayList<>();
     String TAG = "TAG_OldClassActivity";
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     ImageView backPage;
     
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_newclass);
-        data = new dbstudy(this);
+        data = new DatabasesHelper(this);
         initView();
         //************************************************
         backPage.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +68,7 @@ public class OldClassActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 18) {
-            om.Mesage(OldClassActivity.this, "شما در این صفحه اطلاعات مربوط به جلسه ی برگزار شده تاریخ مورد نظرتان را مشاهده می کنین و می توانید تغییرات خود را اعمال کنید.پس از ثبت تغییرات خود به صفحه ی اصلی برنامه برگردید.");
+            MessageHelper.Mesage(OldClassActivity.this, "شما در این صفحه اطلاعات مربوط به جلسه ی برگزار شده تاریخ مورد نظرتان را مشاهده می کنین و می توانید تغییرات خود را اعمال کنید.پس از ثبت تغییرات خود به صفحه ی اصلی برنامه برگردید.");
             SetCode(19);
         }
     }

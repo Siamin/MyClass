@@ -3,14 +3,14 @@ package Object;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Tools.Tools;
 
 public class MyRadioButton extends android.support.v7.widget.AppCompatRadioButton {
 
 
     public MyRadioButton(Context context, AttributeSet attis) {
         super(context, attis);
-        OtherMetod om = new OtherMetod();
+        Tools om = new Tools();
 
         this.setTypeface(om.SetFont(context, "fa"));
     }

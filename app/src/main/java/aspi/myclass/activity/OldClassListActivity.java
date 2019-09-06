@@ -1,37 +1,34 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import aspi.myclass.class_.OtherMetod;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.content.OldClassContent;
 import aspi.myclass.R;
 import aspi.myclass.adapter.ListCreateClassAdapter;
-import aspi.myclass.class_.dbstudy;
+import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class OldClassListActivity extends Activity {
 
     public static String Name_class, id_class, refresh = "";
     private TextView name_class;
-    private dbstudy data;
+    private DatabasesHelper data;
     private RecyclerView recyclerView2;
     private LinearLayoutManager linearLayoutManager;
     private java.util.List<OldClassContent> List = new ArrayList<>();
@@ -40,13 +37,13 @@ public class OldClassListActivity extends Activity {
     private int cunters = 0;
     private boolean view = false;
     String TAG = "TAG_OldClassListActivity";
-    OtherMetod om = new OtherMetod();
+    Tools om = new Tools();
     ImageView backPage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oldclasslist);
-        data = new dbstudy(this);
+        data = new DatabasesHelper(this);
         initView();
         //************************************************
         backPage.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +125,7 @@ public class OldClassListActivity extends Activity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
         float amozesh = sp.getFloat("LerningActivity", 0);
         if (amozesh == 17.0)
-            om.Mesage(OldClassListActivity.this, "شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
+            MessageHelper.Mesage(OldClassListActivity.this, "شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -204,7 +201,7 @@ public class OldClassListActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        om.Toast(OldClassListActivity.this, "هیچ جلسه ای برای کلاس تشکیل نشده...!");
+                        MessageHelper.Toast(OldClassListActivity.this, "هیچ جلسه ای برای کلاس تشکیل نشده...!");
                         finish();
                     }
                 });
