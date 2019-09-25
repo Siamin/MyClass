@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
+import aspi.myclass.Helpers.EmailHelper;
+import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.R;
 
 public class CommentActivity extends Activity {
@@ -34,41 +37,25 @@ public class CommentActivity extends Activity {
         ok.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                BackgroundMail.newBuilder(CommentActivity.this)
-                        .withUsername("amin.syahi.1369@gmail.com")
-                        .withPassword("919121318")
-                        .withMailto("aspi.program@gmail.com")
-                        .withType(BackgroundMail.TYPE_PLAIN)
-                        .withSubject(subject.getText().toString())
-                        .withBody(body.getText().toString() + "\n ارسال شده از  طرف \n" + name.getText().toString() + "\n ایمیل \n" + email.getText().toString() + "\n مدل دستگاه = " + model)
-                        .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                            public void onSuccess() {
-                                Toast toast = Toast.makeText(CommentActivity.this, " نظر ارسال شد ", Toast.LENGTH_LONG);
-                                TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-                                textView.setTextColor(getResources().getColor(R.color.toast));
-                                textView.setTypeface(MainActivity.FONTS);
-                                textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                                textView.setTextSize(18);
-                                View view = toast.getView();
-                                view.setBackgroundResource(R.drawable.toast);
-                                toast.show();
-                                Back();
+                if (ValidationHelper.isValidationNull(name.getText().toString())) {
+                    if (ValidationHelper.isValidationNull(email.getText().toString())) {
+                        if (ValidationHelper.isValidationNull(subject.getText().toString())) {
+                            if (ValidationHelper.isValidationNull(body.getText().toString())) {
+                                String Body = body.getText().toString() + "\n ارسال شده از  طرف \n" + name.getText().toString() + "\n ایمیل \n" + email.getText().toString() + "\n مدل دستگاه = " + model;
+                                EmailHelper.SendEmail(CommentActivity.this, "amin.syahi.69@gmail.com", subject.getText().toString(), Body, " نظر ارسال شد ", 2);
+                            } else {
+                                MessageHelper.Toast(CommentActivity.this, "متن پیام را وارد کنید");
                             }
-                        })
-                        .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                            public void onFail() {
-                                Toast toast = Toast.makeText(CommentActivity.this, " خطا در ارسال نظر ", Toast.LENGTH_LONG);
-                                TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-                                textView.setTextColor(getResources().getColor(R.color.toast));
-                                textView.setTypeface(MainActivity.FONTS);
-                                textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                                textView.setTextSize(18);
-                                View view = toast.getView();
-                                view.setBackgroundResource(R.drawable.toast);
-                                toast.show();
-                            }
-                        })
-                        .send();
+                        } else {
+                            MessageHelper.Toast(CommentActivity.this, "موضوع را وارد کنید");
+                        }
+                    } else {
+                        MessageHelper.Toast(CommentActivity.this, "ایمیل خود را وارد کنید");
+                    }
+                } else {
+                    MessageHelper.Toast(CommentActivity.this, "نام و نام خانوادگی را وارد کنید");
+                }
+
             }
         });
         //*************************************************************************************_cancel form

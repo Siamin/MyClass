@@ -12,10 +12,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Tools.Tools;
 import aspi.myclass.content.OldClassContent;
@@ -24,18 +28,17 @@ import aspi.myclass.adapter.ListCreateClassAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
-public class OldClassListActivity extends Activity {
+public class OldClassListActivity extends Activity implements  DatePickerDialog.OnDateSetListener {
 
     public static String Name_class, id_class, refresh = "";
-    private TextView name_class;
-    private DatabasesHelper data;
-    private RecyclerView recyclerView2;
-    private LinearLayoutManager linearLayoutManager;
-    private java.util.List<OldClassContent> List = new ArrayList<>();
+    TextView name_class;
+    DatabasesHelper data;
+    RecyclerView recyclerView2;
+    LinearLayoutManager linearLayoutManager;
+    java.util.List<OldClassContent> List = new ArrayList<>();
     public static Timer time;
-    private ProgressDialog progressDialog;
-    private int cunters = 0;
-    private boolean view = false;
+    int cunters = 0;
+    boolean view = false;
     String TAG = "TAG_OldClassListActivity";
     Tools om = new Tools();
     ImageView backPage;
@@ -90,14 +93,7 @@ public class OldClassListActivity extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            progressDialog = new ProgressDialog(OldClassListActivity.this);
-                            //progressDialog.setProgress(0);
-                            //progressDialog.setProgressDrawable(getResources().getDrawable(R.drawable.dialog));
-                            //progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            progressDialog.setTitle("درحال دریافت اطلاعات");
-                            progressDialog.setCancelable(false);
-                            progressDialog.setMessage("لطفا صبر کنید ...!");
-                            progressDialog.show();
+                            IndicatorHelper.IndicatorCreate(OldClassListActivity.this,"درحال دریافت اطلاعات","لطفا صبر کنید ...!");
                             new Thread(new Runnable() {
                                 public void run() {
                                     // get_database();
@@ -106,26 +102,19 @@ public class OldClassListActivity extends Activity {
                             }).start();
                         }
                         if (view) {
+                            IndicatorHelper.IndicatorDismiss();
                             view = false;
                             recyclerView2 = (RecyclerView) findViewById(R.id.show_list_old_class_recyclerview);
                             linearLayoutManager = new LinearLayoutManager(OldClassListActivity.this);
                             recyclerView2.setLayoutManager(linearLayoutManager);
                             recyclerView2.setHasFixedSize(true);
                             recyclerView2.setAdapter(new ListCreateClassAdapter(List, OldClassListActivity.this, OldClassListActivity.this));
-                            progressDialog.cancel();
-                            Amozesh(false);
+
                         }
                     }
                 });
             }
         }, 1, 1000);
-    }
-
-    void Amozesh(final boolean chek) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("LerningActivity", 0);
-        if (amozesh == 17.0)
-            MessageHelper.Mesage(OldClassListActivity.this, "شما در این قسمت از برنامه می توانید با انتخاب گزینه ی حذف،جلسه ی مورد نظرتان را حذف کنید و یا با انتخاب گزینه ی نمایش،اطلاعات جلسه ی مورد نظرتان را مشاهده کنید و تغییرات مورد نظرتان را اعمال کنید و نیز می توانید با انتخاب تاریخ هر جلسه ، تاریخ را ویرایش کنید.گزینه ی نمایش را انتخاب کند.");
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -171,13 +160,7 @@ public class OldClassListActivity extends Activity {
 
                 }
             }
-  /*          final String TO=String.valueOf(cual);
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    TOAST(""+TO);
-                }
-            });
-*/
+
 
             if (STATUS) {
 
@@ -215,6 +198,11 @@ public class OldClassListActivity extends Activity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
     }
 }
 

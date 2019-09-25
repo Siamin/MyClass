@@ -53,9 +53,7 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
                         if (!location_edit.getText().toString().equals("")) {
                             if (!class_edit.getText().toString().equals("")) {
                                 if (save()) {
-                                    SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                                    float amozesh = sp.getFloat("LerningActivity", 0);
-                                    if (amozesh == 1.0) SetCode(2);
+
                                     MainActivity.refresh = 1;
                                     MessageHelper.Toast(AddClassActivity.this,"کلاس "+name_edit.getText().toString()+" با موفقیت ثبت شد.");
                                     Go_main();
@@ -172,25 +170,10 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
         return resualt;
     }
 
-    void Amozesh() {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("LerningActivity", 0);
-        if (amozesh == 1) {
-            MessageHelper.Mesage(AddClassActivity.this, "ابتدا اطلاعات درس را وارد کنید سپس با انتخاب گزینه ذخیره اطلاعات مورد نظر را در برنامه ذخیره کنید.");
-        }
-    }
 
     protected void onResume() {
         super.onResume();
-        Amozesh();
 
-    }
-
-    void SetCode(float code) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("LerningActivity", code);
-        edit.commit();
     }
 
     @Override

@@ -112,12 +112,7 @@ public class NewClassActivity extends Activity {
         }, 1, 1000);
     }
 
-    void Amozesh(final boolean chek) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("LerningActivity", 0);
-        if (amozesh == 9)
-            MessageHelper.Mesage(NewClassActivity.this,"شما می توانید در این صفحه حضور،غیاب و نمرات دانشجویان را وارد کنید.وهمچنین می توانید با انتخاب تیک که روبه روی اسم دانشجو قرار دارد برای دانشجو غیبت وارد لیست نمایید.");
-    }
+
 
     void GET_QURY() {
         try {
@@ -232,7 +227,6 @@ public class NewClassActivity extends Activity {
 
     protected void onResume() {
         super.onResume();
-        Amozesh(false);
     }
 
     @Override

@@ -143,7 +143,7 @@ public class SettingActivity extends Activity {
                 if (!email.getText().toString().isEmpty()) {
                     if (ValidationHelper.isValidEmailId(email.getText().toString())) {
                         try {
-                            DialogHelper.sendEmail(SettingActivity.this, email.getText().toString());
+                            DialogHelper.sendCodeEmail(SettingActivity.this, email.getText().toString());
                         } catch (Exception e) {
                             Log.i(TAG, "Error " + e.toString());
                         }

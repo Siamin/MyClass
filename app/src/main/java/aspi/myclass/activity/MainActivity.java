@@ -142,10 +142,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        final float amozesh = sp.getFloat("LerningActivity", 0);
+
+
         if (id == R.id.nav_add_class) {
-            if (amozesh == 0.5) SetCode(1);
             startActivity(new Intent(this, AddClassActivity.class));
         } else if (id == R.id.nav_abute) {
             DialogHelper.Abute(MainActivity.this);
@@ -153,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, CommentActivity.class));
             finish();
         } else if (id == R.id.nav_setting) {
-            startActivity(new Intent(this, SettingActivity.class));
+            startActivity(new Intent(MainActivity.this, SettingActivity.class));
             finish();
         } else if (id == R.id.nav_exit) {
             finish();
@@ -173,10 +172,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 MessageHelper.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
             }
         } else if (id == R.id.nav_amozesh) {
-            startActivity(new Intent(this, LerningActivity.class));
+            startActivity(new Intent(MainActivity.this, LerningActivity.class));
         } else if (id == R.id.buyapp) {
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("NO")) {
-                startActivity(new Intent(this, BuyAppActivity.class));
+                startActivity(new Intent(MainActivity.this, BuyAppActivity.class));
                 finish();
             } else {
                 MessageHelper.Toast(MainActivity.this, "شما قبلا برنامه را خریداری کرده اید.");
@@ -267,9 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             data.close();
 
             if (chek) {
-                sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                float amozesh = sp.getFloat("LerningActivity", 0);
-                if (amozesh == 2.0) SetCode(3);
+
                 String[] name, start, end, id, location, class_, id_class, characteristic, Text_class;
                 name = Name.split("~");
                 start = Start.split("~");
@@ -300,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this, MainActivity.this));
-                Amozesh(true);
+
             } else {
                 List.clear();
                 recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
@@ -326,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (refresh == 1) {
                             get_data_class(DAY);
                             refresh = 0;
-                            Amozesh(false);
+
                         } else if (refresh == 2) {
                             refresh = 0;
                             finish();
@@ -354,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 long vCode = service.getVersionCode("aspi.myclass");
                 if (vCode != -1) {
-                    DialogHelper.Qusins(MainActivity.this);
+                    DialogHelper.UpdateApplication(MainActivity.this);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -377,97 +374,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d(TAG, "initService() bound value: " + ret);
     }
 
-    void Amozesh(final boolean chek) {
-        sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("LerningActivity", 0);
-        if (amozesh > 0) {
-            if (amozesh > 0.5) {
-                if (amozesh > 2.0) {
-                    if (amozesh > 3.0) {
-                        if (amozesh > 7.0) {
-                            if (amozesh > 15.0) {
-                                if (amozesh > 19.0) {
-                                    if (amozesh > 21.0) {
-                                        if (amozesh > 23.0) {
-                                            if (amozesh > 25.0) {
-                                                if (amozesh > 27.0) {
-                                                    if (amozesh > 34.0) {
-                                                        if (amozesh == 36.0) {
-                                                            MessageHelper.Mesage(MainActivity.this, "موفق و پیروز باشید!");
-                                                            SetCode(37);
-                                                        } else if (amozesh == 35.0) {
-                                                            drawer.openDrawer(GravityCompat.START);
-                                                            MessageHelper.Mesage(MainActivity.this, "شما همچنین می توانید فایل پشتیبانی هر ترم را در داخل پوشه ی BackupClass قرار دهد و با انتخاب گزینه ی بارگیری فایل پشتیبانی اطلاعات ترم مورد نظرتان را به برنامه اضافه کنید.گزینه ی بارگیری فایل پشتیبانی را انتخاب کنید.");
-                                                        }
-                                                    } else if (amozesh == 34.0) {
-                                                        drawer.openDrawer(GravityCompat.START);
-                                                        MessageHelper.Mesage(MainActivity.this, "شما می توانید زمانی پایان ترم از اطلاعات تمامی کلاس های تشکیل شده در برنامه فایل پشتیبانی تهیه کنید .از منو کشویی برنامه گزینه ی پشتیبان گیری از نرم افزار را انتخاب کنید ،با انتخاب این گزینه برای شما سه فایل پشتیبان گیری از اطلاعات کلاس های شما گرفته می شود و در حافظه ی اصلی گوشی در پوشه ی  BackupClass ذخیره می شود.");
-                                                    }
-                                                } else if (amozesh == 27.0) {
-                                                    MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
-                                                    SetCode(28);
-                                                }
-                                            } else if (amozesh == 25.0) {
-                                                MessageHelper.Mesage(MainActivity.this, "پس از ثبت کلاس در دیگر ایام هفته تمام اطلاعات کلاس از جمله اطلاعات دانشجویان و جلسات برگزار شده انتقال می یابد." + "\n درس را انتخاب کنید.");
-                                                SetCode(26);
-                                            }
-                                        } else if (amozesh == 23.0) {
-                                            MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
-                                            SetCode(24);
-                                        }
-                                    } else if (amozesh == 21.0) {
-                                        MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
-                                        SetCode(22);
-                                    }
-                                } else if (amozesh == 19.0) {
-                                    MessageHelper.Mesage(MainActivity.this, "درس را انتخاب کنید.");
-                                    SetCode(20);
-                                }
-                            } else if (amozesh == 15.0) {
-                                MessageHelper.Mesage(MainActivity.this, "با ایجاد جلسه جدید کلاس شما می توانید به جلسات گذشته دسترسی داشته باشید. درس را انتخاب کنید.");
-                                SetCode(16);
-                            }
-                        } else if (amozesh == 7.0) {
-                            MessageHelper.Mesage(MainActivity.this, "اکنون شما می توانید برای کلاس خود جلسه تشکیل دهد.درس را انتخاب کنید.");
-                        }
-                    } else if (chek) {
-                        MessageHelper.Mesage(MainActivity.this, "کلاس را انتخاب کنید تا برای شما گزینه های مختلف نشان داده شود.");
-                    }
-                } else {
-                    MessageHelper.Mesage(MainActivity.this, "روزی که کلاس را در آن ثبت کرده اید انتخاب کنید.");
-                }
-            } else {
-                drawer.openDrawer(GravityCompat.START);
-                MessageHelper.Mesage(MainActivity.this, "برای ایجاد کلاس جدید از منو کشویی برنامه گزینه اضافه کردن کلاس جدید را انتخاب کنید");
-            }
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-            builder.setIcon(R.drawable.play);
 
-            builder.setTitle("آموزش").setMessage("آیا می خواهید آموزش برنامه اجرا شود؟");
-            builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    SetCode((float) 0.5);
-                    Amozesh(false);
-                }
-            });
-            builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    SetCode(500);
-                }
-            });
-            AlertDialog aler = builder.create();
-            aler.show();
-        }
-    }
 
     protected void onResume() {
         super.onResume();
-        Amozesh(false);
+
     }
 
     void SetCode(float code) {
-        SharedPreferencesHelper.SetCode("LerningActivity",String.valueOf(code),MainActivity.this);
+        SharedPreferencesHelper.SetCode("LerningActivity", String.valueOf(code), MainActivity.this);
     }
 
 

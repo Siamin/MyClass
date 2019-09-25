@@ -2,15 +2,18 @@
 <resources>
     <color name="colorPrimary">#043153</color>
     <color name="colorPrimaryDark">#010211</color>
-    <color name="colorAccent">#dafdfc</color>
+    <color name="colorAccent">#028A88</color>
     <color name="toast">#ffffff</color>
     <color name="table1">#ffd2d2</color>
     <color name="table2">#ccffb4</color>
     <color name="table3">#c9ebff</color>
     <color name="yellow">#FFEB3B</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_lite">#70F194</color>
     <color name="green">#4CAF50</color>
+    <color name="green_dark">#057E09</color>
     <color name="red">#F44336</color>
+    <color name="red_dark">#C50F02</color>
     <color name="backgrund">#9EB2B9</color>
     <color name="nonColor">#02FFFEFE</color>
 </resources>

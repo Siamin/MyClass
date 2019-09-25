@@ -1,19 +1,17 @@
 package aspi.myclass.activity;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
+import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
 
@@ -21,78 +19,25 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button zero, one, tow, three, four, five, six, seven, eight, nine, claer, login;
     private String get_password = "", set_password = "";
-    private TextView show,forget;
-    private SharedPreferences sp;
+    private TextView show, forget;
     Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
-        config();
+        initView();
         getpassword();
         //******************************************
         forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                    if (!sp.getString("Email", "").equals(""))
-                    {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyAlertDialogStyle);
-                        builder.setTitle("ارسال رمز عبور").setMessage("آیا دستگاه شما به اینترنت متصل است؟");
-                        builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                                String password_chek = sp.getString("Password_App", "null");
-                                BackgroundMail.newBuilder(LoginActivity.this)
-                                        .withUsername("amin.syahi.1369@gmail.com")
-                                        .withPassword("942134025")
-                                        .withMailto(sp.getString("Email", ""))
-                                        .withType(BackgroundMail.TYPE_PLAIN)
-                                        .withSubject("رمز عبور نرم افزار دفتر نمره حضور و غیاب "+sp.getString("Email", ""))
-                                        .withBody(" با سلام رمز عبور شما \n" + password_chek)
-                                        .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                                            @Override
-                                            public void onSuccess() {
-                                                Toast toast = Toast.makeText(LoginActivity.this, "ایمیل ارسال شد...!", Toast.LENGTH_LONG);
-                                                TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-                                                textView.setTextColor(getResources().getColor(R.color.toast));
-                                                textView.setTypeface(MainActivity.FONTS);
-                                                textView.setTextSize(18);
-                                                textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                                                View view = toast.getView();
-                                                view.setBackgroundResource(R.drawable.toast);
-                                                toast.show();
-                                            }
-                                        })
-                                        .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                                            @Override
-                                            public void onFail() {
-                                                Toast toast = Toast.makeText(LoginActivity.this, "خطا در ارسال ایمیل...!", Toast.LENGTH_LONG);
-                                                TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-                                                textView.setTextColor(getResources().getColor(R.color.toast));
-                                                textView.setTypeface(MainActivity.FONTS);
-                                                textView.setTextSize(18);
-                                                textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                                                View view = toast.getView();
-                                                view.setBackgroundResource(R.drawable.toast);
-                                                toast.show();
-                                            }
-                                        })
-                                        .send();
-                            }
-                        });
-                        builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface arg0, int arg1) {
-                            }
-                        });
-                        AlertDialog aler = builder.create();
-                        aler.show();
-                    }
-                }catch (Exception e){
 
+                if (!SharedPreferencesHelper.get_Data("Email", "", LoginActivity.this).equals("")) {
+
+                    DialogHelper.ForgotPassword(LoginActivity.this);
                 }
+
             }
         });
         //******************************************
@@ -184,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (get_password.equals(set_password)) {
                     Go_to_main();
                 } else {
-                    MessageHelper.Toast(LoginActivity.this,"رمزاشتباه است");
+                    MessageHelper.Toast(LoginActivity.this, "رمزاشتباه است");
                 }
             }
         });
@@ -210,8 +155,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getpassword() {
-        sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        String password_chek = sp.getString("Password_App", "null");
+        String password_chek = SharedPreferencesHelper.get_Data("Password_App", "null", LoginActivity.this);
         if (password_chek.equals("null")) {
             Go_to_main();
         } else {
@@ -220,10 +164,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void config() {
+    private void initView() {
         //******************************************
         show = (TextView) findViewById(R.id.key_text);
-        forget= (TextView) findViewById(R.id.forget);
+        forget = (TextView) findViewById(R.id.forget);
         //******************************************
         zero = (Button) findViewById(R.id.key_0);
         one = (Button) findViewById(R.id.key_1);

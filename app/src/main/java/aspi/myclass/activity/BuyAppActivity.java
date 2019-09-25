@@ -9,12 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import aspi.myclass.Helpers.EmailHelper;
+import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
 import util.IabHelper;
@@ -26,18 +26,13 @@ import util.SkuDetails;
 
 public class BuyAppActivity extends Activity {
 
-    static final String TAG = "amin.syahi.69@chmail.ir";
+    static final String TAG = "BuyAppActivity";
     static final String SKU_PREMIUM = "buyApp";
-    boolean mIsPremium = false;
-    static final int RC_REQUEST = 0;
     IabHelper buyhelper;
-    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener;
-    IabHelper.QueryInventoryFinishedListener mGotInventoryListener;
     String AppKey = "MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==";
-    private TextView textView;
-    private Button buy, cancel;
-    private SharedPreferences sp;
-    private ProgressDialog progressDialog;
+    TextView textView;
+    Button buy, cancel;
+
     Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +40,9 @@ public class BuyAppActivity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_buyapp);
         try {
-            config();
+            initView();
             buyhelper = new IabHelper(this, AppKey);
-            progressDialog = new ProgressDialog(BuyAppActivity.this);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setTitle("در حال دریافت اطلاعات از بازار");
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage("لطفا صبر کنید ...!");
-            progressDialog.show();
+            IndicatorHelper.IndicatorCreate(BuyAppActivity.this,"در حال دریافت اطلاعات","لطفا صبر کنید ...!");
             new Thread(new Runnable() {
                 public void run() {
                     get_price();
@@ -83,39 +73,22 @@ public class BuyAppActivity extends Activity {
                         @Override
                         public void onIabPurchaseFinished(IabResult result, Purchase info) {
                             if (result.isSuccess()) {
-                                SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                                String model = android.os.Build.MODEL + " " + android.os.Build.BRAND +" (" + android.os.Build.VERSION.RELEASE+")" + " API-" + android.os.Build.VERSION.SDK_INT;
-                                BackgroundMail.newBuilder(BuyAppActivity.this)
-                                        .withUsername("amin.syahi.1369@gmail.com")
-                                        .withPassword("942134025")
-                                        .withMailto("aspi.program@gmail.com")
-                                        .withType(BackgroundMail.TYPE_PLAIN)
-                                        .withSubject("خرید برنامه")
-                                        .withBody("\n خریداری شده توسط = " + sp.getString("Email", "")+"\n  در تاریخ = "+date_iran()+"\n مدل دستگاه = "+model)
-                                        .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                                            public void onSuccess() {
-                                                SetCode("myclass", "‌Buy_App", "Buy_App");
-                                                MessageHelper.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
-                                                Back();
-                                            }
-                                        })
-                                        .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                                            public void onFail() {
-                                                SetCode("myclass", "‌Buy_App", "Buy_App");
-                                                MessageHelper.Toast(BuyAppActivity.this,"با تشکر از خرید شما...!");
-                                                Back();
-                                            }
-                                        })
-                                        .send();
+                                String model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
+                                SharedPreferencesHelper.SetCode("‌Buy_App", "Buy_App", BuyAppActivity.this);
+                                String Body = "\n خریداری شده توسط = " + SharedPreferencesHelper.get_Data("Email", "",BuyAppActivity.this) + "\n  در تاریخ = " + date_iran() + "\n مدل دستگاه = " + model;
+
+                                EmailHelper.SendEmail(BuyAppActivity.this, "amin.syahi.69@gmail.com", "خرید برنامه", Body, "با تشکر از خرید شما...!", 0);
+
+                                Back();
                             } else {
-                                MessageHelper.Toast(BuyAppActivity.this,"عملیات خرید ناموفق ...!");
+                                MessageHelper.Toast(BuyAppActivity.this, "عملیات خرید ناموفق ...!");
                                 Back();
                             }
 
                         }
                     });
         } catch (Exception e) {
-            MessageHelper.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            MessageHelper.Toast(BuyAppActivity.this, "لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
         }
     }
 
@@ -131,15 +104,15 @@ public class BuyAppActivity extends Activity {
                                 if (result.isSuccess()) {
                                     SkuDetails details = inv.getSkuDetails(SKU_PREMIUM);
                                     textView.setText(details.getTitle() + "\n\n" + details.getDescription() + "\n" + "\n قیمت :" + details.getPrice());
-                                    progressDialog.cancel();
+                                    IndicatorHelper.IndicatorDismiss();
                                 } else {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            MessageHelper.Toast(BuyAppActivity.this,"مشکل ارتباط با کافه بازار...!");
+                                            MessageHelper.Toast(BuyAppActivity.this, "مشکل ارتباط با کافه بازار...!");
                                         }
                                     });
-                                    progressDialog.cancel();
+                                    IndicatorHelper.IndicatorDismiss();
                                 }
                             }
                         });
@@ -147,24 +120,16 @@ public class BuyAppActivity extends Activity {
                 }
             });
         } catch (Exception e) {
-            MessageHelper.Toast(BuyAppActivity.this,"لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            MessageHelper.Toast(BuyAppActivity.this, "لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
         }
 
     }
 
-    void SetCode(String App, String name, String code) {
-        sp = getApplicationContext().getSharedPreferences(App, 0);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putString(name, code);
-        edit.commit();
-    }
-
-    void config() {
+    void initView() {
         textView = (TextView) findViewById(R.id.buyapp_text);
         buy = (Button) findViewById(R.id.buyapp_buy);
         cancel = (Button) findViewById(R.id.buyapp_cancel);
         textView.setTypeface(MainActivity.FONTS);
-        textView.setText("");
     }
 
     void Back() {
@@ -232,7 +197,7 @@ public class BuyAppActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             buyhelper.handleActivityResult(requestCode, resultCode, data);
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 }

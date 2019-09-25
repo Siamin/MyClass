@@ -1,6 +1,8 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -26,6 +28,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
@@ -34,13 +37,14 @@ import aspi.myclass.Helpers.DatabasesHelper;
 
 public class AddStudentActivity extends Activity {
 
-    ImageView save, cancel, download, Reload;
+    ImageView save, cancel, download;
+    static ImageView Reload;
     private TextView nameclass, starttime, locationclass, numbers[];
-    private EditText sno_student[], name_student[], family_student[];
+    private static EditText sno_student[], name_student[], family_student[];
     private DatabasesHelper data;
     public static String id_class, Name_class, Start_time, location;
     private int not_save = 0;
-    private String Upload = "", TAG = "TAG_AddStudentActivity";
+    private static String Upload = "", TAG = "TAG_AddStudentActivity";
     Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,7 @@ public class AddStudentActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (MainActivity.BUYAPP.equals("Buy_App")) {
-                    ReadFileExternal("/App_class/IO.txt");
+                    DialogHelper.Import(AddStudentActivity.this);
                     MessageHelper.Mesage(AddStudentActivity.this, "برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
                 } else {
                     MessageHelper.Toast(AddStudentActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
@@ -75,12 +79,9 @@ public class AddStudentActivity extends Activity {
                 if (!sno_student[0].getText().toString().equals("") && !name_student[0].getText().toString().equals("") && !family_student[0].getText().toString().equals("")) {
                     if (save()) {
                         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-                        float amozesh = sp.getFloat("LerningActivity", 0);
+
                         MessageHelper.Toast(AddStudentActivity.this, "ذخیره شد...!");
-                        if (amozesh == 4 || amozesh == 5) {
-                            SetCode(6);
-                            Amozesh(false);
-                        }
+
 
                     }
                     if (not_save > 0) {
@@ -252,41 +253,9 @@ public class AddStudentActivity extends Activity {
         return resualt;
     }
 
-    void ReadFileExternal(final String path) {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-        final TextView input = new TextView(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        input.setText("آیا میخواهید اسامی دانشجویان را از حافظه ای  " + MainActivity.Address_file_app + "در فایل Text با نام " + "IO.txt" + " و یا در فایل Excel با نام " + "IO.xls" + " دریافت کنید؟ ");
-        input.setTypeface(MainActivity.FONTS);
-        input.setTextSize(15);
-        input.setPadding(10, 10, 5, 0);
-        builder1.setView(input);
-        builder1.setTitle("دانشجویان");
-        builder1.setPositiveButton("فایل text", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                String Return = "", Line = "", External = Environment.getExternalStorageDirectory().toString();
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(External + path));
 
-                    while ((Line = bufferedReader.readLine()) != null) {
-                        Return += ((Line.replace("%", "")).replace("null", "")) + "%";
-                    }
-                    get_upload(Return.replace("-", "~"));
-                } catch (Exception e) {
-                }
-            }
-        });
-        builder1.setNegativeButton("فایل Excel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                readExcelFile(Environment.getExternalStorageDirectory() + "/App_class/IO.xls");
-            }
-        });
-        AlertDialog aler1 = builder1.create();
-        aler1.show();
-    }
 
-    void get_upload(String GET) {
+    public static void get_upload(String GET) {
         String[] All = GET.split("%");
 
         for (int i = 0; i < 20; i++) {
@@ -318,34 +287,13 @@ public class AddStudentActivity extends Activity {
         }
     }
 
-    void Amozesh(final boolean chek) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("LerningActivity", 0);
-        if (amozesh > 5) {
-            if (amozesh > 6) {
-
-            } else {
-                MessageHelper.Mesage(AddStudentActivity.this, "همچنین شما می توانید با انتخاب ایکون سبز رنگ بالای صفحه،اطلاعات دانشجویان را بصورت لیست وارد برنامه کنید");
-                SetCode(7);
-            }
-        } else {
-            MessageHelper.Mesage(AddStudentActivity.this, "در این قسمت شما می توانید اطلاعات دانشجویان را بصورت دستی وارد کنید.اطلاعات چند دانشجو را وارد کرده و گزینه ی ذخیره را انتخاب کنید.");
-        }
-    }
 
     protected void onResume() {
         super.onResume();
-        Amozesh(false);
+
     }
 
-    void SetCode(float code) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("LerningActivity", code);
-        edit.commit();
-    }
-
-    void readExcelFile(String filename) {
+    public static void readExcelFile(String filename, Context context, Dialog dialog) {
 
 
         if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
@@ -392,8 +340,10 @@ public class AddStudentActivity extends Activity {
 
             }
             get_upload(Uploads);
+            dialog.dismiss();
         } catch (Exception e) {
-            MessageHelper.Toast(AddStudentActivity.this, "لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");
+            MessageHelper.Toast(context, "لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");
+            dialog.dismiss();
         }
 
     }

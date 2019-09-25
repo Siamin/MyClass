@@ -8,8 +8,8 @@ android {
         applicationId "aspi.myclass"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 25
-        versionName '4.0.5'
+        versionCode 27
+        versionName '4.0.7'
 
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

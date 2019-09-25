@@ -70,24 +70,24 @@
 
         </LinearLayout>
 
-        <Button
+        <Object.MyButton
             style="?android:attr/buttonStyleSmall"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:text="نمایش"
             android:id="@+id/list_lists_old_class_loggin"
-            android:textColor="#04740f"
+            android:textColor="@color/green_dark"
             android:background="@drawable/button_style_save"
             android:layout_margin="5dp"
             android:textSize="10dp" />
 
-        <Button
+        <Object.MyButton
             style="?android:attr/buttonStyleSmall"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:text="حذف"
             android:id="@+id/list_lists_old_class_delete"
-            android:textColor="#960707"
+            android:textColor="@color/red_dark"
             android:background="@drawable/button_style_cancel"
             android:layout_margin="5dp"
             android:textSize="10dp" />

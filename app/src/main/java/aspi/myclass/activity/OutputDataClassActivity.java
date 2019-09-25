@@ -308,23 +308,10 @@ public class OutputDataClassActivity extends Activity {
         aler1.show();
     }
 
-    void Amozesh(final boolean chek) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("LerningActivity", 0);
-        if (amozesh > 31) {
-            if (amozesh == 33) {
-                MessageHelper.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست نمرات کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
-                SetCode(34);
-            }
-        } else if (amozesh == 31) {
-            MessageHelper.Mesage(OutputDataClassActivity.this, "شما می توانید در این قسمت از برنامه لیست حضور و غیاب کل جلسات برگزار شده کلاس خود را مشاهده کنید و همچنین می توانید با انتخاب گزینه ی سبز رنگ بالای صفحه اطلاعات کلاس خود را در یک فایل اکسل در حافظه ی گوشی در پوشه ی App_class با نام درس انتخاب شده ی خود ذخیره کنید.");
-            SetCode(32);
-        }
-    }
 
     protected void onResume() {
         super.onResume();
-        Amozesh(false);
+
     }
 
     void SetCode(float code) {

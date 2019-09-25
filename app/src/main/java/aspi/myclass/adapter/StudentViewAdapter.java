@@ -54,6 +54,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         holder.name.setText(content.name);
         holder.family.setText(content.family);
         holder.nomreh.setText(content.nomreh);
+
         if (content.status.equals("1")) {
             holder.status.setChecked(true);
         } else {
@@ -73,8 +74,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         //*****************************************************************
         holder.status.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                float amozesh = sp.getFloat("LerningActivity", 0);
+
 
                 String STATUS = "1";
                 if (holder.status.isChecked()) {
@@ -93,18 +93,14 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                     }
                 } catch (Exception e) {
                 }
-                if (amozesh == 9) {
-                    SetCode(10);
-                    MessageHelper.Mesage(contexts, "و همچنین شما می توانید با انتخاب کادر سبز رنگی که روبه روی نام دانشجو قرار دارد برای دانشجو نمره کلاسی یا میان ترم وارد کنید.");
-                }
+
             }
         });
         //*****************************************************************
         holder.sno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity", 0);
+
 
                     final String sno_old = holder.sno.getText().toString();
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
@@ -130,10 +126,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                     holder.sno.setText(input.getText().toString());
                                 }
 
-                                if (amozesh == 11) {
-                                    SetCode(12);
-                                    MessageHelper.Mesage(contexts, "همچنین می توانید با انتخاب نام دانشجو را ویرایش کنید.");
-                                }
+
                             } catch (Exception e) {
                                 Log.i(TAG, "Error" + e.toString());
                             }
@@ -150,8 +143,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         holder.family.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity", 0);
+
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -169,10 +161,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
                                 holder.family.setText("" + input.getText().toString());
                                 content.family = input.getText().toString();
-                                if (amozesh == 13) {
-                                    SetCode(14);
-                                    MessageHelper.Mesage(contexts, "شما هم می توانید با انتخاب توضیحات دانشجو برای دانشجویی انتخاب شده توضیحات لازم را به برنامه اضافه کنید.");
-                                }
+
                             } catch (Exception e) {
                             }
                         }
@@ -190,8 +179,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         holder.name.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity", 0);
+
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -209,10 +197,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
                                 holder.name.setText("" + input.getText().toString());
                                 content.name = input.getText().toString();
-                                if (amozesh == 12) {
-                                    SetCode(13);
-                                    MessageHelper.Mesage(contexts, "همچنین می توانید با انتخاب نام خانوادگی  دانشجو را ویرایش کنید.");
-                                }
+
                             } catch (Exception e) {
                             }
                         }
@@ -229,8 +214,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         holder.text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity", 0);
+
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -252,9 +236,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                     holder.text.setText(input.getText().toString().replace("\n", "  "));
                                 }
                                 content.text = input.getText().toString();
-                                if (amozesh == 14) {
-                                    SetCode(15);
-                                }
+
 
                             } catch (Exception e) {
                             }
@@ -271,8 +253,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         holder.nomreh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-                    final float amozesh = sp.getFloat("LerningActivity", 0);
+
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
                     final EditText input = new EditText(contexts);
@@ -293,10 +274,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
                                 data.close();
                                 holder.nomreh.setText("" + input.getText().toString());
                                 content.nomreh = input.getText().toString();
-                                if (amozesh == 10) {
-                                    SetCode(11);
-                                    MessageHelper.Mesage(contexts, "همچنین می توانید با انتخاب شماره ی دانشجویی را ویرایش کنید.");
-                                }
+
                             } catch (Exception e) {
                             }
                         }

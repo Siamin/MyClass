@@ -15,5 +15,12 @@ public class ValidationHelper {
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
 
+    public static boolean isValidationNull(String text){
+        if (text.length()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }

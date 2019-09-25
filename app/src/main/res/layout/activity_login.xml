@@ -6,82 +6,71 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:gravity="center_vertical|center_horizontal"
-    android:background="@color/bright_foreground_disabled_material_light">
+    android:padding="@dimen/_15sdp"
+    android:background="@color/white">
 
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:padding="10dp"
-        app:cardBackgroundColor="@color/cardview_dark_background"
-        app:cardElevation="7dp"
-        app:cardCornerRadius="12dp"
-        android:id="@+id/textView18"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="37dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
+            android:gravity="center_vertical|center_horizontal"
             android:layoutDirection="ltr"
-            android:gravity="center_vertical|center_horizontal">
+            android:orientation="vertical">
 
 
             <TextView
+                android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="رمز عبور را وارد کنید"
-                android:id="@+id/textView17"
-                android:textColor="#ffffff"
-                android:layout_above="@+id/textView18"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="32dp"
-                android:textSize="20dp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:text="رمز عبور را وارد کنید"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_weight="1"
-                android:gravity="center_vertical|center_horizontal"
-                android:layout_marginBottom="10dp">
+                android:gravity="center_vertical|center_horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2sdp"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary" />
+                    android:background="@color/colorPrimary"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
                     android:id="@+id/key_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:paddingRight="2dp"
-                    android:paddingLeft="2dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:allowUndo="false"
-                    android:textColor="#ffffff" />
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingLeft="@dimen/_2sdp"
+                    android:paddingRight="@dimen/_2sdp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2sdp"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary" />
+                    android:background="@color/colorPrimary"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
             </LinearLayout>
 
@@ -89,46 +78,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layoutDirection="ltr"
-                android:gravity="center_vertical|center_horizontal">
+                android:layout_margin="@dimen/_5sdp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layoutDirection="ltr">
 
                 <Button
                     android:id="@+id/key_7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="7"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="8"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="9"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -137,46 +127,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layoutDirection="ltr"
-                android:gravity="center_vertical|center_horizontal">
+                android:layout_margin="@dimen/_5sdp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layoutDirection="ltr">
 
                 <Button
                     android:id="@+id/key_4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="4"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="5"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="6"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -185,45 +176,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layoutDirection="ltr"
-                android:gravity="center_vertical|center_horizontal">
+                android:layout_margin="@dimen/_5sdp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layoutDirection="ltr">
+
                 <Button
                     android:id="@+id/key_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="1"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="2"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="3"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -232,46 +225,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layoutDirection="ltr"
-                android:gravity="center_vertical|center_horizontal">
+                android:layout_margin="@dimen/_5sdp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layoutDirection="ltr">
 
                 <Button
                     android:id="@+id/key_c"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="تصحیح"
-                    android:textColor="#ff6352"
-                    android:textSize="15dp"
+                    android:textColor="@color/red_dark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="0"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/key_enter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
                     android:text="ورود"
-                    android:textColor="#69fd37"
-                    android:textSize="15dp"
+                    android:textColor="@color/green_dark"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -280,15 +274,14 @@
                 android:id="@+id/forget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:gravity="center_vertical|center_horizontal"
-                android:padding="5dp"
+                android:padding="@dimen/_5sdp"
                 android:text="رمز عبور را فراموش کرده ام"
-                android:textColor="#ffffff" />
+                android:textColor="@color/colorPrimaryDark" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
 
 
 </RelativeLayout>

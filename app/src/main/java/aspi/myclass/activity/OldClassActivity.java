@@ -64,14 +64,7 @@ public class OldClassActivity extends Activity {
         Get_qury();
     }
 
-    void Amozesh(final boolean chek) {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        float amozesh = sp.getFloat("LerningActivity", 0);
-        if (amozesh == 18) {
-            MessageHelper.Mesage(OldClassActivity.this, "شما در این صفحه اطلاعات مربوط به جلسه ی برگزار شده تاریخ مورد نظرتان را مشاهده می کنین و می توانید تغییرات خود را اعمال کنید.پس از ثبت تغییرات خود به صفحه ی اصلی برنامه برگردید.");
-            SetCode(19);
-        }
-    }
+
 
     void SetCode(float code) {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
@@ -163,7 +156,7 @@ public class OldClassActivity extends Activity {
             recyclerView_Old.setLayoutManager(linearLayoutManagers);
             recyclerView_Old.setHasFixedSize(true);
             recyclerView_Old.setAdapter(new StudentViewAdapter(List, OldClassActivity.this));
-            Amozesh(false);
+
 
 //**************************************************************************************************
         } catch (Exception e) {

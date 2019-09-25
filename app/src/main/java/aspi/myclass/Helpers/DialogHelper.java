@@ -6,12 +6,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +27,10 @@ import java.util.Calendar;
 
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
+import aspi.myclass.activity.AddStudentActivity;
 import aspi.myclass.activity.MainActivity;
 import aspi.myclass.activity.SettingActivity;
+import aspi.myclass.adapter.ListCreateClassAdapter;
 
 public class DialogHelper {
 
@@ -266,96 +270,123 @@ public class DialogHelper {
     }
 
     public static void Abute(final Context context) {
+        PackageInfo pInfo = null;
         try {
-            PackageInfo pInfo = context.getPackageManager().getPackageInfo("aspi.myclass", 0);
-            String version = pInfo.versionName;
-            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-            builder.setIcon(R.drawable.abute);
-
-            builder.setTitle("درباره ما").setMessage("نرم افزار حضور وغیاب برای راحتی کار اساتید و معلمین گرامی طراحی و ساخته شده است برای حمایت از ما در نرم افزار بازار به ما رای بدهید" + "\n" + "\n" + "نرم افزار حضور و غیاب اساتید" + version);
-            builder.setPositiveButton("امتیاز دادن به برنامه", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application_class), context.getResources().getString(R.string.package_bazar));
-                }
-            });
-            builder.setNegativeButton("دیگر برنامه های ما", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application), context.getResources().getString(R.string.package_bazar));
-
-                }
-            });
-            AlertDialog aler = builder.create();
-            aler.show();
-        } catch (Exception e) {
+            pInfo = context.getPackageManager().getPackageInfo("aspi.myclass", 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
+        String version = pInfo.versionName;
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("درباره ما");
+        body.setText("نرم افزار حضور وغیاب برای راحتی کار اساتید و معلمین گرامی طراحی و ساخته شده است برای حمایت از ما در نرم افزار بازار به ما رای بدهید" + "\n" + "\n" + "نرم افزار حضور و غیاب اساتید" + version);
+        cancle.setText("امتیاز دادن به برنامه");
+        okey.setText("دیگر برنامه های ما");
+        cancle.setTextColor(context.getResources().getColor(R.color.green));
+//        title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.abute, 0);
+        //*************************************************
+        okey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application), context.getResources().getString(R.string.package_bazar));
+
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application_class), context.getResources().getString(R.string.package_bazar));
+            }
+        });
+
     }
 
-    public static void Qusins(final Context context) {
-        try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-            builder.setIcon(R.drawable.abute);
+    public static void UpdateApplication(final Context context) {
 
-            builder.setTitle("بروزرسانی").setMessage("آیا مایلید برنامه حضور و غیاب را بروزرسانی کنید ؟");
-            builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application_class), context.getResources().getString(R.string.package_bazar));
-                }
-            });
-            builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                }
-            });
-            AlertDialog aler = builder.create();
-            aler.show();
-        } catch (Exception e) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("بروزرسانی");
+        body.setText("آیا مایلید برنامه حضور و غیاب را بروزرسانی کنید ؟");
+        cancle.setText("خیر");
+        okey.setText("بله");
+        //*************************************************
+        okey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application_class), context.getResources().getString(R.string.package_bazar));
 
-        }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
-    public static void sendEmail(final Context context, final String Email) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
-        builder.setTitle("ارسال کد تایید").setMessage("آیا میخواهید کد تایید برای ایمیل شما ارسال شود؟");
-        builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
+    public static void sendCodeEmail(final Context context, final String Email) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("ارسال کد تایید");
+        body.setText("آیا میخواهید کد تایید برای ایمیل شما ارسال شود؟");
+        cancle.setText("خیر");
+        okey.setText("بله");
+        //*************************************************
+        okey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 String model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
                 final String codes = Tools.Pin_Cod(4);
 
                 String Subject = "کد تایید نرم افزار دفتر نمره حضور و غیاب ";
                 String Body = Email + "\n" + model + "\nکد تایید\n" + codes + "\n ایمیل شما \n" + Email;
-
-                BackgroundMail.newBuilder(context)
-                        .withUsername("amin.syahi.1369@gmail.com")
-                        .withPassword("942134025")
-                        .withMailto(Email)
-                        .withType(BackgroundMail.TYPE_PLAIN)
-                        .withSubject(Subject)
-                        .withBody(Body)
-                        .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                            public void onSuccess() {
-                                MessageHelper.Toast(context, "کد برای ایمیل شما ارسال شد...!");
-                                SharedPreferencesHelper.SetCode("EC_Email", codes, context);
-                                SharedPreferencesHelper.SetCode("Email", Email, context);
-                                SharedPreferencesHelper.SetCode("save_Email", "0", context);
-                                VirifyCodeEmail(context);
-
-                            }
-                        })
-                        .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                            public void onFail() {
-
-                                MessageHelper.Toast(context, "خطا در ارسال ایمیل...!");
-                            }
-                        })
-                        .send();
-            }
-        });
-        builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
+                EmailHelper.SendEmail(context, Email, Subject, Body, "کد برای ایمیل شما ارسال شد...!", 1, codes, Email);
 
             }
         });
-        AlertDialog aler = builder.create();
-        aler.show();
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
     public static void VirifyCodeEmail(final Context context) {
@@ -391,6 +422,118 @@ public class DialogHelper {
             }
         });
         //******************************************************************************************
+
+    }
+
+    public static void ForgotPassword(final Context context) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("ارسال رمز عبور");
+        body.setText("آیا دستگاه شما به اینترنت متصل است؟");
+        cancle.setText("خیر");
+        okey.setText("بله");
+        //*************************************************
+        okey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Body = " با سلام رمز عبور شما \n" + SharedPreferencesHelper.get_Data("Password_App", "null", context);
+                String Subject = "رمز عبور نرم افزار دفتر نمره حضور و غیاب " + SharedPreferencesHelper.get_Data("Email", "", context);
+                String MailTo = SharedPreferencesHelper.get_Data("Email", "", context);
+                EmailHelper.SendEmail(context, MailTo, Subject, Body,"ایمیل ارسال شد...!",0);
+
+            }
+        });
+    }
+
+    public static void Import(final Context context){
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView textFile = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView excllFile = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("اضافه کردن دانشجو");
+        body.setText("آیا میخواهید اسامی دانشجویان را از حافظه ای  " + MainActivity.Address_file_app + "در فایل Text با نام " + "IO.txt" + " و یا در فایل Excel با نام " + "IO.xls" + " دریافت کنید؟ ");
+        textFile.setText("فایل متنی");
+        excllFile.setText("فایل اکسل");
+        //************************************************
+        excllFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddStudentActivity.readExcelFile(Environment.getExternalStorageDirectory() + "/App_class/IO.xls",context,dialog);
+            }
+        });
+
+        textFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Return = "", Line = "", External = Environment.getExternalStorageDirectory().toString();
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(External + "/App_class/IO.txt"));
+
+                    while ((Line = bufferedReader.readLine()) != null) {
+                        Return += ((Line.replace("%", "")).replace("null", "")) + "%";
+                    }
+                    AddStudentActivity.get_upload(Return.replace("-", "~"));
+                    dialog.dismiss();
+                } catch (Exception e) {
+                    MessageHelper.Toast(context, "فایل در پوشه مورد نظر وجود ندارد ");
+                    dialog.dismiss();
+                }
+            }
+        });
+
+
+    }
+
+    public static void DeleteOldSession(final Context context,String Body,final String session){
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView Delete = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("حذف جلسه");
+        body.setText(Body);
+        Delete.setText("حذف");
+        cancle.setText("انصراف");
+        //************************************************
+        Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListCreateClassAdapter.Delete_rollcall(context,session,dialog);
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
 
     }
 
