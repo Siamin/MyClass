@@ -21,8 +21,8 @@ import java.util.List;
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
-import aspi.myclass.Helpers.SharedPreferencesHelper;
-import aspi.myclass.content.OldClassContent;
+import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.model.OldClassModel;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
 import aspi.myclass.activity.OldClassActivity;
@@ -32,14 +32,14 @@ import aspi.myclass.Helpers.DatabasesHelper;
 
 public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClassAdapter.cvh> {
 
-    private List<OldClassContent> Content_list_old;
+    private List<OldClassModel> Content_list_old;
     private Context contexts;
     static DatabasesHelper data;
     Activity activity;
     static String TAG = "TAG_ListCreateClassAdapter";
     String TIMEPICKER = "TimePickerDialog", DATEPICKER = "DatePickerDialog", MULTIDATEPICKER = "MultiDatePickerDialog";
 
-    public ListCreateClassAdapter(List<OldClassContent> contents, Context context, Activity Act) {
+    public ListCreateClassAdapter(List<OldClassModel> contents, Context context, Activity Act) {
         this.Content_list_old = contents;
         this.contexts = context;
         data = new DatabasesHelper(context);
@@ -54,7 +54,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
     @Override
     public void onBindViewHolder(final cvh holder, final int position) {
-        final OldClassContent content = Content_list_old.get(position);
+        final OldClassModel content = Content_list_old.get(position);
         //*************************************************************************
         holder.row.setText("" + (position + 1));
         holder.Data.setText("" + content.DATA);
@@ -81,7 +81,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
         //*************************************************************************
         holder.loggin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App") || position < 3) {
+                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || position < 3) {
                     OldClassActivity.did_class = OldClassListActivity.id_class;
                     OldClassActivity.Name_class = OldClassListActivity.Name_class;
                     OldClassActivity.Data_class = content.DATA;
@@ -97,7 +97,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
         //*************************************************************************
         holder.delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App") || position < 3) {
+                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || position < 3) {
                     DialogHelper.DeleteOldSession(contexts, "آیا میخواهید جلسه" + content.DATA + " در ساعت " + content.Hour + " را حذف کنید؟", content.jalase);
                 } else {
                     MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
@@ -126,7 +126,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    OldClassContent conlist = Content_list_old.get(getPosition());
+                    OldClassModel conlist = Content_list_old.get(getPosition());
                 }
             });
         }

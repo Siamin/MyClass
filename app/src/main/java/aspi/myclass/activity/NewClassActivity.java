@@ -2,7 +2,6 @@ package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,9 +16,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import aspi.myclass.Helpers.DateHelper;
+import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Tools.Tools;
-import aspi.myclass.content.AbsentPersentContent;
+import aspi.myclass.model.AbsentPersentModel;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StudentViewAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
@@ -32,14 +32,12 @@ public class NewClassActivity extends Activity {
     DatabasesHelper data;
     RecyclerView recyclerView1;
     LinearLayoutManager linearLayoutManager;
-    public static List<AbsentPersentContent> List = new ArrayList<>();
+    public static List<AbsentPersentModel> absentPersentModels = new ArrayList<>();
     int MINUTE, HOUR;
-    String[] DATA_IRAN, data_;
+    String[] DATA_IRAN;
     public Timer time;
-    ProgressDialog progressDialog;
     int cunters = 0;
     boolean view = false;
-    Tools om = new Tools();
     ImageView backPage;
     boolean statusBackPage = false;
 
@@ -48,7 +46,6 @@ public class NewClassActivity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_newclass);
         //******************************************************************************************
-        data = new DatabasesHelper(this);
         initView();
         //******************************************************************************************
         backPage.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +57,13 @@ public class NewClassActivity extends Activity {
     }
 
     void initView() {
+        data = new DatabasesHelper(this);
+
         backPage = findViewById(R.id.activity_newclass_back);
         name_class = (TextView) findViewById(R.id.new_class_name_class);
         DATA = (TextView) findViewById(R.id.new_class_data);
+        recyclerView1 = (RecyclerView) findViewById(R.id.recyclerview_new_classsss);
+        linearLayoutManager = new LinearLayoutManager(NewClassActivity.this);
         //*************************************************************
         name_class.setText("کلاس " + Name_class);
         DATA.setText("" + DateHelper.date_iran());
@@ -84,26 +85,19 @@ public class NewClassActivity extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            progressDialog = new ProgressDialog(NewClassActivity.this);
-                            progressDialog.setTitle("درحال دریافت اطلاعات");
-                            progressDialog.setCancelable(false);
-                            progressDialog.setMessage("لطفا صبر کنید ...!");
-                            progressDialog.show();
+                            IndicatorHelper.IndicatorCreate(NewClassActivity.this,"در حال دریافت اطلاعات","لطفا صبر کنید ...!");
                             new Thread(new Runnable() {
                                 public void run() {
-                                    //get_data_for_database();
-                                    GET_QURY();
+                                    Data();
                                 }
                             }).start();
                         }
                         if (view) {
                             view = false;
-                            recyclerView1 = (RecyclerView) findViewById(R.id.recyclerview_new_classsss);
-                            linearLayoutManager = new LinearLayoutManager(NewClassActivity.this);
                             recyclerView1.setLayoutManager(linearLayoutManager);
                             recyclerView1.setHasFixedSize(true);
-                            recyclerView1.setAdapter(new StudentViewAdapter(List, NewClassActivity.this));
-                            progressDialog.cancel();
+                            recyclerView1.setAdapter(new StudentViewAdapter(absentPersentModels, NewClassActivity.this));
+                            IndicatorHelper.IndicatorDismiss();
                             time.cancel();
                         }
                     }
@@ -112,72 +106,16 @@ public class NewClassActivity extends Activity {
         }, 1, 1000);
     }
 
-
-
-    void GET_QURY() {
+    void Data() {
         try {
-            int c = 0;
-            List.clear();
-            String name_ = "", family_ = "", sno_ = "", text_ = "", id_ = "", abs = "", per = "", Status = "", cun = "";
+
+            absentPersentModels.clear();
 
             data.open();
-            Status = data.Get_name_student_of_class(did);
+            absentPersentModels = data.NameStudentClassByModel(did);
             data.close();
 
-            if (!Status.equals("")) {
-
-                for (int i = 0, j = 0, start = 0; i < Status.length(); i++) {
-
-                    if (Status.charAt(i) == '|') {
-                        String TE = Status.substring(start, i);
-                        start = i + 1;
-
-                        if (j == 0) {
-                            id_ = TE;
-                            j += 1;
-                        } else if (j == 1) {
-                            sno_ = TE;
-                            j += 1;
-                        } else if (j == 2) {
-                            family_ = TE;
-                            j += 1;
-                        } else if (j == 3) {
-                            name_ = TE;
-                            j += 1;
-                        } else if (j == 4) {
-                            text_ = TE;
-                            j += 1;
-                        } else if (j == 5) {
-                            abs = TE;
-                            j += 1;
-                        } else if (j == 6) {
-                            per = TE;
-                            j += 1;
-                        } else if (j == 7) {
-                            cun = TE;
-                            j += 1;
-                        }
-                    }
-
-                }
-
-                c = Integer.parseInt(cun);
-
-            } else {
-                c = 0;
-            }
-            data.close();
-
-            if (c > 0) {
-                //**********************************************************************************
-                String[] Name, Family, Sno, Text, Id, Abs, Per;
-                Name = name_.split("~");
-                Family = family_.split("~");
-                Sno = sno_.split("~");
-                Text = text_.split("~");
-                Id = id_.split("~");
-                Abs = abs.split("~");
-                Per = per.split("~");
+            if (absentPersentModels.size() > 0) {
 
                 DATA_IRAN = DateHelper.date_iran().split("/");
 
@@ -188,21 +126,10 @@ public class NewClassActivity extends Activity {
                     jalase = Integer.parseInt(data.Display("rollcall", (cunt_roll - 1), 8)) + 1;
                 }
 
-                //cunt_roll=Integer.parseInt(data.Display("rollcall", cunt_roll-1, 0))+1;
-                for (int i = 0; i < c; i++) {
-                    AbsentPersentContent content = new AbsentPersentContent();
-                    content.name = Name[i];
-                    content.family = Family[i];
-                    content.sno = Sno[i];
-                    content.id = Id[i];
-                    content.text = Text[i];
-                    content.status = "1";
-                    content.absent = Abs[i];
-                    content.prezent = Per[i];
-                    data.insert_Rollcall(Sno[i], true, "", DATA_IRAN[0], DATA_IRAN[1], DATA_IRAN[2], did, String.valueOf(jalase), String.valueOf(HOUR) + ":" + String.valueOf(MINUTE));
-                    content.id_rull = content.id_rull = data.Display("rollcall", cunt_roll, 0);
+                for (int i = 0; i < absentPersentModels.size(); i++) {
+                    data.insert_Rollcall(absentPersentModels.get(i).sno, true, "", DATA_IRAN[0], DATA_IRAN[1], DATA_IRAN[2], did, String.valueOf(jalase), String.valueOf(HOUR) + ":" + String.valueOf(MINUTE));
+                    absentPersentModels.get(i).id_rull = data.Display("rollcall", cunt_roll, 0);
                     cunt_roll += 1;
-                    List.add(content);
                 }
                 data.close();
                 view = true;
@@ -223,10 +150,6 @@ public class NewClassActivity extends Activity {
                 }
             });
         }
-    }
-
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override

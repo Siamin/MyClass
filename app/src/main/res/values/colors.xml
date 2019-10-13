@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#010211</color>
     <color name="colorAccent">#028A88</color>
     <color name="toast">#ffffff</color>
-    <color name="table1">#ffd2d2</color>
-    <color name="table2">#ccffb4</color>
-    <color name="table3">#c9ebff</color>
+    <color name="table1">#3F51B5</color>
+    <color name="table2">#043153</color>
+    <color name="table3">#028A88</color>
     <color name="yellow">#FFEB3B</color>
     <color name="white">#FFFFFF</color>
     <color name="white_lite">#70F194</color>

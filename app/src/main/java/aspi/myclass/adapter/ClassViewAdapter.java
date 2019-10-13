@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +24,14 @@ import java.util.List;
 
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
-import aspi.myclass.content.ClassContent;
-import aspi.myclass.Tools.Tools;
+import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.model.ClassModel;
 import aspi.myclass.R;
 import aspi.myclass.activity.AddStudentActivity;
 import aspi.myclass.activity.EditClassActivity;
 import aspi.myclass.activity.MainActivity;
 import aspi.myclass.activity.NewClassActivity;
-import aspi.myclass.activity.OutputDataClassActivity;
+import aspi.myclass.activity.ReportClassActivity;
 import aspi.myclass.activity.OldClassListActivity;
 import aspi.myclass.activity.StatisticsActivity;
 import aspi.myclass.Helpers.DatabasesHelper;
@@ -40,17 +39,17 @@ import aspi.myclass.Helpers.DatabasesHelper;
 
 public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh> {
 
-    private List<ClassContent> content_class_main_shows;
+    private List<ClassModel> content_class_main_shows;
     private Context contexts;
     private DatabasesHelper data;
     Activity activity;
     String TIMEPICKER = "TimePickerDialog";
 
-    public ClassViewAdapter(List<ClassContent> contents, Context context, Activity activitys) {
-        content_class_main_shows = contents;
+    public ClassViewAdapter(List<ClassModel> model, Context context) {
+        content_class_main_shows = model;
         contexts = context;
         data = new DatabasesHelper(context);
-        activity = activitys;
+        activity = ((Activity)context);
     }
 
     @Override
@@ -61,7 +60,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
 
     @Override
     public void onBindViewHolder(cvh holder, int position) {
-        final ClassContent content = content_class_main_shows.get(position);
+        final ClassModel content = content_class_main_shows.get(position);
 
         if (!content.name_class.equals("")) {
             holder.row.setText("" + (position + 1) + "");
@@ -104,7 +103,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ClassContent conlist = content_class_main_shows.get(getPosition());
+                    ClassModel conlist = content_class_main_shows.get(getPosition());
 
                     if (conlist.APP) {
                         items(conlist.name_class, conlist.id, conlist.location, conlist.time_start, conlist.time_end, conlist.characteristic, conlist.id_class, conlist.text_class);
@@ -139,7 +138,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         week_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App") || Integer.parseInt(did) <= 10) {
+                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || Integer.parseInt(did) <= 10) {
                     kelas.cancel();
                     Set_Of_Week(Class, location, Characteristic, did, TXT);
                 } else {
@@ -195,7 +194,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         delete_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dialogDelete(id,kelas);
+                dialogDelete(id, kelas);
             }
         });
         //******************************************************************************************
@@ -208,7 +207,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         text_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dialogDescription(did,id);
+                dialogDescription(did, id);
             }
         });
         //******************************************************************************************
@@ -291,7 +290,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         absent_student.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
+                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App")) {
                     statistics_.cancel();
                     StatisticsActivity.Name_class = Class;
                     StatisticsActivity.Id_class = id;
@@ -308,11 +307,11 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             public void onClick(View v) {
                 if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
                     statistics_.cancel();
-                    OutputDataClassActivity.Name_class = Class;
-                    OutputDataClassActivity.Id_class = id;
-                    OutputDataClassActivity.Did_class = did;
-                    OutputDataClassActivity.STATUS = true;
-                    contexts.startActivity(new Intent(contexts, OutputDataClassActivity.class));
+                    ReportClassActivity.Name_class = Class;
+                    ReportClassActivity.Id_class = id;
+                    ReportClassActivity.Did_class = did;
+                    ReportClassActivity.STATUS = true;
+                    contexts.startActivity(new Intent(contexts, ReportClassActivity.class));
                 } else {
                     MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
@@ -324,11 +323,11 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             public void onClick(View v) {
                 if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
                     statistics_.cancel();
-                    OutputDataClassActivity.Name_class = Class;
-                    OutputDataClassActivity.Id_class = id;
-                    OutputDataClassActivity.Did_class = did;
-                    OutputDataClassActivity.STATUS = false;
-                    contexts.startActivity(new Intent(contexts, OutputDataClassActivity.class));
+                    ReportClassActivity.Name_class = Class;
+                    ReportClassActivity.Id_class = id;
+                    ReportClassActivity.Did_class = did;
+                    ReportClassActivity.STATUS = false;
+                    contexts.startActivity(new Intent(contexts, ReportClassActivity.class));
                 } else {
                     MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
                 }
@@ -371,7 +370,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         });
     }
 
-    void dialogDescription(final String did,String id) {
+    void dialogDescription(final String did, String id) {
         final Dialog dialog = new Dialog(contexts, R.style.NewDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_description);
@@ -422,7 +421,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         });
     }
 
-    void dialogDelete(final String id,final Dialog dialogCll){
+    void dialogDelete(final String id, final Dialog dialogCll) {
         final Dialog dialog = new Dialog(contexts, R.style.NewDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_deleteclass);

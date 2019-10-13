@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.R;
+import aspi.myclass.Services.FireBaseAnalyticsService;
 import aspi.myclass.Tools.Tools;
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,7 +23,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button zero, one, tow, three, four, five, six, seven, eight, nine, claer, login;
     private String get_password = "", set_password = "";
     private TextView show, forget;
-    Tools om = new Tools();
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(login.getId()),"login","Button");
                 if (get_password.equals(set_password)) {
                     Go_to_main();
                 } else {
@@ -165,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         //******************************************
         show = (TextView) findViewById(R.id.key_text);
         forget = (TextView) findViewById(R.id.forget);

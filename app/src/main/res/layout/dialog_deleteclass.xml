@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -43,7 +43,7 @@
                 android:layout_height="2dp"
                 android:background="@color/white"/>
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="18dp"
@@ -64,7 +64,7 @@
                     android:layoutDirection="ltr">
 
 
-                    <Object.MyTextView
+                    <CustomObject.TextViewCustom
                         android:id="@+id/dialogdelete_cancle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                         android:textSize="14dp"
                         android:textStyle="bold" />
 
-                    <Object.MyTextView
+                    <CustomObject.TextViewCustom
                         android:id="@+id/dialogdelete_save"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

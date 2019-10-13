@@ -1,14 +1,10 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,21 +12,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-
-import java.util.Calendar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.R;
-import aspi.myclass.Tools.Tools;
+import aspi.myclass.Services.FireBaseAnalyticsService;
 
 public class SettingActivity extends Activity {
 
@@ -42,17 +32,18 @@ public class SettingActivity extends Activity {
     CheckBox checkBox_password, font1, font2, font3, on;
     TextView text_old_password, text_new_password1, text_new_password2, test_text;
     String password_chek, Font, Number;
-    int Size_Text, refresh = 0;
+    int Size_Text;
     Typeface font_1, font_2, font_3;
-    static Timer time;
-    Tools om = new Tools();
     String TAG = "TAG_SettingActivity";
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_setting);
+
         initView();
 
         font_1 = Typeface.createFromAsset(getAssets(), "Font/font1.ttf");
@@ -64,6 +55,8 @@ public class SettingActivity extends Activity {
 
         on.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(on.getId()),on.getText().toString(),"CheckBox");
+
                 if (on.isChecked()) {
                     Number = "on";
                 } else {
@@ -93,6 +86,7 @@ public class SettingActivity extends Activity {
 
         font1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(font1.getId()),font1.getText().toString(),"CheckBox");
                 if (font1.isChecked()) {
                     font2.setChecked(false);
                     font3.setChecked(false);
@@ -103,6 +97,7 @@ public class SettingActivity extends Activity {
 
         font2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(font2.getId()),font2.getText().toString(),"CheckBox");
                 if (font2.isChecked()) {
                     font1.setChecked(false);
                     font3.setChecked(false);
@@ -113,6 +108,7 @@ public class SettingActivity extends Activity {
 
         font3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(font3.getId()),font3.getText().toString(),"CheckBox");
                 if (font3.isChecked()) {
                     font1.setChecked(false);
                     font2.setChecked(false);
@@ -161,22 +157,24 @@ public class SettingActivity extends Activity {
     }
 
     void initView() {
-        email = (EditText) findViewById(R.id.setting_Email);
-        old_password = (EditText) findViewById(R.id.setting_password_old);
-        new_password1 = (EditText) findViewById(R.id.setting_password1_new);
-        new_password2 = (EditText) findViewById(R.id.setting_password2_new);
-        checkBox_password = (CheckBox) findViewById(R.id.setting_check);
-        font1 = (CheckBox) findViewById(R.id.setting_font1);
-        font2 = (CheckBox) findViewById(R.id.setting_font2);
-        font3 = (CheckBox) findViewById(R.id.setting_font3);
-        text_old_password = (TextView) findViewById(R.id.setting_text_old_password);
-        text_new_password1 = (TextView) findViewById(R.id.setting_text_new_password1);
-        text_new_password2 = (TextView) findViewById(R.id.setting_text_new_password2);
-        test_text = (TextView) findViewById(R.id.setting_text_test);
-        save = (ImageView) findViewById(R.id.setting_save);
-        Bmail = (Button) findViewById(R.id.setting_bmail);
-        cancel = (ImageView) findViewById(R.id.setting_cancel);
-        on = (CheckBox) findViewById(R.id.setting_numberon);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        email = findViewById(R.id.setting_Email);
+        old_password = findViewById(R.id.setting_password_old);
+        new_password1 = findViewById(R.id.setting_password1_new);
+        new_password2 = findViewById(R.id.setting_password2_new);
+        checkBox_password = findViewById(R.id.setting_check);
+        font1 = findViewById(R.id.setting_font1);
+        font2 = findViewById(R.id.setting_font2);
+        font3 = findViewById(R.id.setting_font3);
+        text_old_password = findViewById(R.id.setting_text_old_password);
+        text_new_password1 = findViewById(R.id.setting_text_new_password1);
+        text_new_password2 = findViewById(R.id.setting_text_new_password2);
+        test_text = findViewById(R.id.setting_text_test);
+        save = findViewById(R.id.setting_save);
+        Bmail = findViewById(R.id.setting_bmail);
+        cancel = findViewById(R.id.setting_cancel);
+        on = findViewById(R.id.setting_numberon);
         test_text.setText("متن تست 1" + "text test 1");
 
     }
@@ -209,6 +207,7 @@ public class SettingActivity extends Activity {
         } else {
             on.setChecked(true);
         }
+
         if (password_chek.equals("null")) {
             checkBox_password.setChecked(true);
             password_chek = "0000";

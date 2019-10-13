@@ -12,7 +12,7 @@
         android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -25,7 +25,7 @@
                 android:textStyle="bold"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true">
-            </Object.MyTextView>
+            </CustomObject.TextViewCustom>
 
         <ImageView
             android:id="@+id/activity_listoldclass_back"

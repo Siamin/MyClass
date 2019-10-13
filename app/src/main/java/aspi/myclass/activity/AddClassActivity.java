@@ -170,7 +170,6 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
         return resualt;
     }
 
-
     protected void onResume() {
         super.onResume();
 

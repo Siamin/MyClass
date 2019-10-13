@@ -76,7 +76,7 @@
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/add_student_name_class"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -88,7 +88,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/add_student_start_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -102,7 +102,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/add_student_location"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -136,7 +136,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                     android:text=" 1 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
                     android:inputType="phone" />
 
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                     android:text=" 2 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -246,7 +246,7 @@
                     android:text=" 3 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -287,7 +287,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -296,7 +296,7 @@
                     android:text=" 4 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -307,7 +307,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -316,7 +316,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -337,7 +337,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -346,7 +346,7 @@
                     android:text=" 5 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -357,7 +357,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -366,7 +366,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -387,7 +387,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -396,7 +396,7 @@
                     android:text=" 6 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -407,7 +407,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -416,7 +416,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -437,7 +437,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -446,7 +446,7 @@
                     android:text=" 7 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -457,7 +457,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -466,7 +466,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -487,7 +487,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -496,7 +496,7 @@
                     android:text=" 8 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -507,7 +507,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -516,7 +516,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -537,7 +537,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -546,7 +546,7 @@
                     android:text=" 9 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -557,7 +557,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -566,7 +566,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -587,7 +587,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -596,7 +596,7 @@
                     android:text=" 10 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -607,7 +607,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -616,7 +616,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -637,7 +637,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -646,7 +646,7 @@
                     android:text=" 11 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -657,7 +657,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -666,7 +666,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -687,7 +687,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -696,7 +696,7 @@
                     android:text=" 12 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -707,7 +707,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -716,7 +716,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -737,7 +737,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -746,7 +746,7 @@
                     android:text=" 13 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno13"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -757,7 +757,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name13"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -766,7 +766,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family13"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -787,7 +787,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -796,7 +796,7 @@
                     android:text=" 14 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -807,7 +807,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -816,7 +816,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -837,7 +837,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -846,7 +846,7 @@
                     android:text=" 15 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -857,7 +857,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -866,7 +866,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -887,7 +887,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -896,7 +896,7 @@
                     android:text=" 16 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -907,7 +907,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -916,7 +916,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -937,7 +937,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -946,7 +946,7 @@
                     android:text=" 17 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -957,7 +957,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -966,7 +966,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -987,7 +987,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -996,7 +996,7 @@
                     android:text=" 18 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1007,7 +1007,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1016,7 +1016,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1037,7 +1037,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1046,7 +1046,7 @@
                     android:text=" 19 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1057,7 +1057,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1066,7 +1066,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1087,7 +1087,7 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/add_student_number19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1096,7 +1096,7 @@
                     android:text=" 20 "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1107,7 +1107,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:inputType="phone" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_name20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1116,7 +1116,7 @@
                     android:background="@drawable/bacgrond_edittext"
                     android:gravity="center_vertical|center_horizontal" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/add_student_family20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

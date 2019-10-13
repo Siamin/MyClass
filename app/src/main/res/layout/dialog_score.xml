@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="8dp"
+        android:foregroundGravity="center_vertical|center_horizontal"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CustomObject.TextViewCustom
+                android:id="@+id/dialog_score_tite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal|right"
+                android:padding="5dp"
+                android:text="توضیحات درس"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"/>
+
+            <CustomObject.EditTextCustom
+                android:id="@+id/dialog_score_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:hint="نمره را وارد کنید"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:layout_marginLeft="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layoutDirection="ltr">
+
+
+                <CustomObject.TextViewCustom
+                    android:id="@+id/dialog_score_cancle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="8dp"
+                    android:layout_marginRight="10dp"
+                    android:text="انصراف"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/red"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <CustomObject.TextViewCustom
+                    android:id="@+id/dialog_score_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="8dp"
+                    android:text="ثبت"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/green"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

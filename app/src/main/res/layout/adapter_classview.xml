@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutDirection="rtl">
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -45,7 +45,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="7dp" />
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:textSize="15dp" />
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:textSize="15dp" />
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -94,7 +94,7 @@
             android:layoutDirection="rtl"
             android:layout_marginTop="2dp">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -104,7 +104,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="#000000" />
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -115,7 +115,7 @@
                 android:textColor="#000000" />
         </LinearLayout>
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"

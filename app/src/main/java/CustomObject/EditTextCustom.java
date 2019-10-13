@@ -1,4 +1,4 @@
-package Object;
+package CustomObject;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,10 +10,10 @@ import aspi.myclass.Tools.Tools;
  * Created by AmIn on 12/21/2018.
  */
 
-public class MyEditText extends android.support.v7.widget.AppCompatEditText {
+public class EditTextCustom extends android.support.v7.widget.AppCompatEditText {
 
 
-     public MyEditText(final Context context, AttributeSet attis) {
+     public EditTextCustom(final Context context, AttributeSet attis) {
             super(context, attis);
             final Tools om = new Tools();
 

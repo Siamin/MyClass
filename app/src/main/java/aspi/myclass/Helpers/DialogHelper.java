@@ -15,22 +15,24 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Calendar;
+import java.util.List;
 
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
 import aspi.myclass.activity.AddStudentActivity;
 import aspi.myclass.activity.MainActivity;
+import aspi.myclass.activity.NewClassActivity;
+import aspi.myclass.activity.ReportClassActivity;
 import aspi.myclass.activity.SettingActivity;
 import aspi.myclass.adapter.ListCreateClassAdapter;
+import aspi.myclass.model.AbsentPersentModel;
+import aspi.myclass.model.ReportDataModel;
 
 public class DialogHelper {
 
@@ -291,8 +293,8 @@ public class DialogHelper {
         //*************************************************
         title.setText("درباره ما");
         body.setText("نرم افزار حضور وغیاب برای راحتی کار اساتید و معلمین گرامی طراحی و ساخته شده است برای حمایت از ما در نرم افزار بازار به ما رای بدهید" + "\n" + "\n" + "نرم افزار حضور و غیاب اساتید" + version);
-        cancle.setText("امتیاز دادن به برنامه");
-        okey.setText("دیگر برنامه های ما");
+        cancle.setText("امتیاز دادن");
+        okey.setText("دیگر برنامه ها");
         cancle.setTextColor(context.getResources().getColor(R.color.green));
 //        title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.abute, 0);
         //*************************************************
@@ -449,13 +451,13 @@ public class DialogHelper {
                 String Body = " با سلام رمز عبور شما \n" + SharedPreferencesHelper.get_Data("Password_App", "null", context);
                 String Subject = "رمز عبور نرم افزار دفتر نمره حضور و غیاب " + SharedPreferencesHelper.get_Data("Email", "", context);
                 String MailTo = SharedPreferencesHelper.get_Data("Email", "", context);
-                EmailHelper.SendEmail(context, MailTo, Subject, Body,"ایمیل ارسال شد...!",0);
+                EmailHelper.SendEmail(context, MailTo, Subject, Body, "ایمیل ارسال شد...!", 0);
 
             }
         });
     }
 
-    public static void Import(final Context context){
+    public static void Import(final Context context) {
         final Dialog dialog = new Dialog(context, R.style.NewDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_custom);
@@ -465,44 +467,32 @@ public class DialogHelper {
         //************************************************
         TextView title = dialog.findViewById(R.id.dialog_custom_title);
         TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
-        TextView textFile = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView excllFile = dialog.findViewById(R.id.dialog_custom_okey);
         //*************************************************
         title.setText("اضافه کردن دانشجو");
         body.setText("آیا میخواهید اسامی دانشجویان را از حافظه ای  " + MainActivity.Address_file_app + "در فایل Text با نام " + "IO.txt" + " و یا در فایل Excel با نام " + "IO.xls" + " دریافت کنید؟ ");
-        textFile.setText("فایل متنی");
+        cancle.setText("انصراف");
         excllFile.setText("فایل اکسل");
         //************************************************
         excllFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddStudentActivity.readExcelFile(Environment.getExternalStorageDirectory() + "/App_class/IO.xls",context,dialog);
+                ExcellHelper.readExcelFile(Environment.getExternalStorageDirectory() + "/App_class/IO.xls", context, dialog);
             }
         });
 
-        textFile.setOnClickListener(new View.OnClickListener() {
+        cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Return = "", Line = "", External = Environment.getExternalStorageDirectory().toString();
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(External + "/App_class/IO.txt"));
-
-                    while ((Line = bufferedReader.readLine()) != null) {
-                        Return += ((Line.replace("%", "")).replace("null", "")) + "%";
-                    }
-                    AddStudentActivity.get_upload(Return.replace("-", "~"));
-                    dialog.dismiss();
-                } catch (Exception e) {
-                    MessageHelper.Toast(context, "فایل در پوشه مورد نظر وجود ندارد ");
-                    dialog.dismiss();
-                }
+                dialog.dismiss();
             }
         });
 
 
     }
 
-    public static void DeleteOldSession(final Context context,String Body,final String session){
+    public static void DeleteOldSession(final Context context, String Body, final String session) {
         final Dialog dialog = new Dialog(context, R.style.NewDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_custom);
@@ -523,7 +513,7 @@ public class DialogHelper {
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListCreateClassAdapter.Delete_rollcall(context,session,dialog);
+                ListCreateClassAdapter.Delete_rollcall(context, session, dialog);
             }
         });
 
@@ -533,6 +523,263 @@ public class DialogHelper {
                 dialog.dismiss();
             }
         });
+
+
+    }
+
+    public static void SnoStudent(final Context context, String Title, final TextView Sno, final DatabasesHelper data, final AbsentPersentModel content, final String did) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_score);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_score_tite);
+        final EditText sno = dialog.findViewById(R.id.dialog_score_score);
+        TextView submit = dialog.findViewById(R.id.dialog_score_save);
+        TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
+        //*************************************************
+        title.setText(Title);
+        sno.setText(content.sno);
+        //************************************************
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    data.open();
+
+                    if (data.Update_sno(sno.getText().toString(), did, content.sno)) {
+                        Sno.setText(sno.getText().toString());
+                        content.sno = sno.getText().toString();
+                    } else {
+                        MessageHelper.Toast(context, "خطا در ثبت اطلاعات");
+                    }
+
+                    data.close();
+                    dialog.dismiss();
+                } catch (Exception e) {
+
+                }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public static void NameStudent(final Context context, String Title, final TextView Name, final DatabasesHelper data, final AbsentPersentModel content) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_score);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_score_tite);
+        final EditText name = dialog.findViewById(R.id.dialog_score_score);
+        TextView submit = dialog.findViewById(R.id.dialog_score_save);
+        TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
+        //*************************************************
+        title.setText(Title);
+        name.setHint("نام را وارد کنید");
+        name.setText(content.name);
+        //************************************************
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    data.open();
+                    data.update_one("klas", "name", name.getText().toString(), Integer.parseInt(content.id));
+                    data.close();
+                    Name.setText("" + name.getText().toString());
+                    content.name = name.getText().toString();
+                    dialog.dismiss();
+                } catch (Exception e) {
+                }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public static void FamilyStudent(final Context context, String Title, final TextView Family, final DatabasesHelper data, final AbsentPersentModel content) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_score);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_score_tite);
+        final EditText family = dialog.findViewById(R.id.dialog_score_score);
+        TextView submit = dialog.findViewById(R.id.dialog_score_save);
+        TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
+        //*************************************************
+        title.setText(Title);
+        family.setHint("نام خانوادگی را وارد کنید");
+        family.setText(content.family);
+        //************************************************
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    data.open();
+                    data.update_one("klas", "family", family.getText().toString(), Integer.parseInt(content.id));
+                    data.close();
+                    Family.setText("" + family.getText().toString());
+                    content.family = family.getText().toString();
+                    dialog.dismiss();
+                } catch (Exception e) {
+                }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public static void ScoreStudent(final Context context, String Title, final TextView Score, final DatabasesHelper data, final AbsentPersentModel content) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_score);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_score_tite);
+        final EditText score = dialog.findViewById(R.id.dialog_score_score);
+        TextView submit = dialog.findViewById(R.id.dialog_score_save);
+        TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
+        //*************************************************
+        title.setText(Title);
+        //************************************************
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    data.open();
+                    data.update_one("rollcall", "am", score.getText().toString(), Integer.parseInt(content.id_rull));
+                    data.close();
+                    Score.setText("" + score.getText().toString());
+                    content.nomreh = score.getText().toString();
+                    dialog.dismiss();
+                } catch (Exception e) {
+                }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public static void DescriptionStudent(final Context context, String Title, final TextView Description, final DatabasesHelper data, final AbsentPersentModel content) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_score);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_score_tite);
+        final EditText description = dialog.findViewById(R.id.dialog_score_score);
+        TextView submit = dialog.findViewById(R.id.dialog_score_save);
+        TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
+        //*************************************************
+        title.setText(Title);
+        if (content.text.isEmpty())
+            description.setText("توضیحات...");
+        else
+            description.setText(content.text);
+        //************************************************
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    data.open();
+                    data.update_one("klas", "tx", description.getText().toString(), Integer.parseInt(content.id));
+                    data.close();
+                    if (description.getText().toString().replace("\n", "  ").length() > 50) {
+                        Description.setText(description.getText().toString().replace("\n", "  ").substring(0, 50) + "  توضایحات ادامه دارد...");
+                    } else {
+                        Description.setText(description.getText().toString().replace("\n", "  "));
+                    }
+                    content.text = description.getText().toString();
+
+                    dialog.dismiss();
+
+                } catch (Exception e) {
+                }
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public static void qustionSaveExcll(final Context context,final List<ReportDataModel> model, final String Title , final String NameClass,final boolean TypePage) {
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView save = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("ذخیره اطلاعات");
+        body.setText("آیا می خواهید اطلاعات کلاس " + NameClass + " را در یک فایل اکسل ذخیره کنید؟");
+        cancle.setText("انصراف");
+        save.setText("ذخیره");
+        //************************************************
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ExcellHelper.ExcelSaveDataClassByTypePage(context,model,NameClass,NameClass + " " + Title ,TypePage)) {
+                    MessageHelper.Toast(context, MainActivity.Address_file_app + "/" + NameClass + " " + Title + ".xls");
+                } else {
+                    if (!MainActivity.Address_file_app.exists()) {
+                        MessageHelper.Toast(context, "مشکل در ایجاد پوشه ی  " + MainActivity.Address_file_app + " در حافظه ی گوشی ");
+                    } else {
+                        MessageHelper.Toast(context, "مشکل در ذخیره فایل در حافظه گوشی");
+                    }
+                }
+                dialog.dismiss();
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
 
 
     }

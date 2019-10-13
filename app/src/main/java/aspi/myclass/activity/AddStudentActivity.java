@@ -3,24 +3,21 @@ package aspi.myclass.activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -30,22 +27,23 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.R;
-import aspi.myclass.Tools.Tools;
 import aspi.myclass.Helpers.DatabasesHelper;
+import aspi.myclass.model.ImportExcellModel;
 
 
 public class AddStudentActivity extends Activity {
 
     ImageView save, cancel, download;
     static ImageView Reload;
-    private TextView nameclass, starttime, locationclass, numbers[];
-    private static EditText sno_student[], name_student[], family_student[];
-    private DatabasesHelper data;
+    TextView nameclass, starttime, locationclass, numbers[];
+    static EditText sno_student[], name_student[], family_student[];
+    DatabasesHelper data;
     public static String id_class, Name_class, Start_time, location;
-    private int not_save = 0;
-    private static String Upload = "", TAG = "TAG_AddStudentActivity";
-    Tools om = new Tools();
+    int not_save = 0;
+    static List<ImportExcellModel> modelsImport = new ArrayList<>();
+    static String TAG = "TAG_AddStudentActivity";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +55,7 @@ public class AddStudentActivity extends Activity {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (MainActivity.BUYAPP.equals("Buy_App")) {
+                if (ValidationHelper.isValidationBuyApp(AddStudentActivity.this, "‌Buy_App")) {
                     DialogHelper.Import(AddStudentActivity.this);
                     MessageHelper.Mesage(AddStudentActivity.this, "برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
                 } else {
@@ -69,8 +67,8 @@ public class AddStudentActivity extends Activity {
         Reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!Upload.equals(""))
-                    get_upload(Upload);
+                if (modelsImport.size() > 0)
+                    get_upload(modelsImport);
             }
         });
         //***********************************************
@@ -102,7 +100,7 @@ public class AddStudentActivity extends Activity {
         //***********************************************
     }
 
-    void initView(){
+    void initView() {
         numbers = new TextView[20];
         sno_student = new EditText[20];
         name_student = new EditText[20];
@@ -205,10 +203,10 @@ public class AddStudentActivity extends Activity {
         starttime.setText("" + Start_time);
         locationclass.setText("" + location);
 
-        for (int i=0;i<20;i++){
-            sno_student[i].setHint("شماره "+(i+1));
-            name_student[i].setHint("نام "+(i+1));
-            family_student[i].setHint("نام خانوادگی "+(i+1));
+        for (int i = 0; i < 20; i++) {
+            sno_student[i].setHint("شماره " + (i + 1));
+            name_student[i].setHint("نام " + (i + 1));
+            family_student[i].setHint("نام خانوادگی " + (i + 1));
         }
     }
 
@@ -253,115 +251,29 @@ public class AddStudentActivity extends Activity {
         return resualt;
     }
 
-
-
-    public static void get_upload(String GET) {
-        String[] All = GET.split("%");
+    public static void get_upload(List<ImportExcellModel> models) {
 
         for (int i = 0; i < 20; i++) {
             sno_student[i].setText("");
             name_student[i].setText("");
             family_student[i].setText("");
         }
-        int min = All.length;
+        int min = models.size();
         if (min > 20) min = 20;
         for (int i = 0; i < min; i++) {
-            String item[] = All[i].split("~");
-            try {
-                int no = Integer.parseInt(item[0]);
-                sno_student[i].setText(item[0]);
-            } catch (Exception e) {
-                sno_student[i].setText(item[0].substring(0, (item[0].length() - 2)).replace(".", ""));
-            }
-            name_student[i].setText(item[1]);
-            family_student[i].setText(item[2]);
+            sno_student[i].setText(models.get(i).sno.replace(".0", ""));
+            name_student[i].setText(models.get(i).name);
+            family_student[i].setText(models.get(i).family);
         }
-        Upload = "";
-        if (All.length > 20) {
+        if (models.size() > 20) {
             Reload.setVisibility(View.VISIBLE);
-            for (int i = 20; i < All.length; i++) {
-                Upload += All[i] + "%";
+            modelsImport.clear();
+            for (int i = 20; i < models.size(); i++) {
+                modelsImport.add(models.get(i));
             }
         } else {
             Reload.setVisibility(View.INVISIBLE);
         }
-    }
-
-
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    public static void readExcelFile(String filename, Context context, Dialog dialog) {
-
-
-        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
-            return;
-        }
-
-        try {
-
-            File file = new File(filename);
-
-            FileInputStream myInput = new FileInputStream(file);
-
-            // Create a POIFSFileSystem object
-            POIFSFileSystem myFileSystem = new POIFSFileSystem(myInput);
-
-            // Create a workbook using the File System
-            HSSFWorkbook myWorkBook = new HSSFWorkbook(myFileSystem);
-
-            // Get the first sheet from workbook
-            HSSFSheet mySheet = myWorkBook.getSheetAt(0);
-
-            /** We now need something to iterate through the cells.**/
-            Iterator rowIter = mySheet.rowIterator();
-
-
-            String Uploads = "";
-            int i = 0;
-
-            while (rowIter.hasNext()) {
-
-                HSSFRow myRow = (HSSFRow) rowIter.next();
-                Iterator cellIter = myRow.cellIterator();
-                while (cellIter.hasNext()) {
-                    HSSFCell myCell = (HSSFCell) cellIter.next();
-
-                    if (i < 2) {
-                        Uploads += ((myCell.toString().replace("%", "")).replace("null", "")) + "~";
-                        i++;
-                    } else {
-                        Uploads += ((myCell.toString().replace("%", "")).replace("null", "")) + "%";
-                        i = 0;
-                    }
-                }
-
-            }
-            get_upload(Uploads);
-            dialog.dismiss();
-        } catch (Exception e) {
-            MessageHelper.Toast(context, "لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");
-            dialog.dismiss();
-        }
-
-    }
-
-    public static boolean isExternalStorageReadOnly() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isExternalStorageAvailable() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
-            return true;
-        }
-        return false;
     }
 
 

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import aspi.myclass.content.StatisticsContent;
+import aspi.myclass.model.StatisticsModel;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
 import aspi.myclass.Helpers.DatabasesHelper;
@@ -19,12 +19,12 @@ import aspi.myclass.Helpers.DatabasesHelper;
 
 public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cvh> {
 
-    private List<StatisticsContent> Content_student;
+    private List<StatisticsModel> Content_student;
     private Context contexts;
     private DatabasesHelper data;
     Activity activity;
 
-    public StatusticsAdapter(List<StatisticsContent> contents, Context context) {
+    public StatusticsAdapter(List<StatisticsModel> contents, Context context) {
         this.Content_student = contents;
         this.contexts = context;
         data = new DatabasesHelper(context);
@@ -38,7 +38,7 @@ public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cv
 
     @Override
     public void onBindViewHolder(final cvh holder, int position) {
-        final StatisticsContent content = Content_student.get(position);
+        final StatisticsModel content = Content_student.get(position);
         //*************************************************************************
         if (position<9)holder.row.setText("  " + (position + 1)+" ");
         if (position>9)holder.row.setText(" " + (position + 1)+" ");
@@ -87,7 +87,7 @@ public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cv
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    StatisticsContent content = Content_student.get(getPosition());
+                    StatisticsModel content = Content_student.get(getPosition());
                 }
             });
         }

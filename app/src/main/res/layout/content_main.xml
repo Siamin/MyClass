@@ -45,7 +45,7 @@
 
                     android:layoutDirection="rtl">
 
-                    <Object.MyButton
+                    <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="شنبه"
@@ -54,7 +54,7 @@
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp" />
 
-                    <Object.MyButton
+                    <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="یکشنبه"
@@ -63,7 +63,7 @@
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
-                    <Object.MyButton
+                    <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="دوشنبه"
@@ -72,7 +72,7 @@
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp" />
 
-                    <Object.MyButton
+                    <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="سه شنبه"
@@ -81,7 +81,7 @@
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
-                    <Object.MyButton
+                    <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="چهارشنبه"
@@ -90,7 +90,7 @@
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
-                    <Object.MyButton
+                    <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="پنج شنبه"
@@ -99,7 +99,7 @@
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
-                    <Object.MyButton
+                    <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="جمعه"
@@ -118,7 +118,7 @@
                 android:layoutDirection="rtl"
                 android:gravity="center_vertical|center_horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceMedium"

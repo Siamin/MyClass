@@ -70,7 +70,7 @@
 
         </LinearLayout>
 
-        <Object.MyButton
+        <CustomObject.ButtonCustom
             style="?android:attr/buttonStyleSmall"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -81,7 +81,7 @@
             android:layout_margin="5dp"
             android:textSize="10dp" />
 
-        <Object.MyButton
+        <CustomObject.ButtonCustom
             style="?android:attr/buttonStyleSmall"
             android:layout_width="60dp"
             android:layout_height="60dp"

@@ -1,10 +1,10 @@
-package aspi.myclass.content;
+package aspi.myclass.model;
 
 /**
  * Created by AmIn on 12/21/2018.
  */
 
-public class Contact_contact_rollcall {
+public class ContactRollcallModel {
 
     public String person = " ", nomreh = " ", time = " ", date = " ", jalase = " ";
 

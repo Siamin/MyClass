@@ -3,10 +3,8 @@ package aspi.myclass.activity;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +25,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.farsitel.bazaar.IUpdateCheckService;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -42,8 +40,8 @@ import java.util.TimerTask;
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
-import aspi.myclass.content.ClassContent;
-import aspi.myclass.Tools.Tools;
+import aspi.myclass.Services.FireBaseAnalyticsService;
+import aspi.myclass.model.ClassModel;
 import aspi.myclass.R;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.adapter.ClassViewAdapter;
@@ -56,31 +54,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar;
     public static Typeface FONTS;
-    SharedPreferences sp;
     public static int DAY, refresh = 0;
     Button Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday;
     TextView text_day_class;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
-    List<ClassContent> List = new ArrayList<>();
+    List<ClassModel> List = new ArrayList<>();
     DatabasesHelper data;
-    public static String BUYAPP = "", status_number = "off";
     public static Timer time;
-    public static File Backup_File_App = new File(Environment.getExternalStorageDirectory(), "BackupClass"), Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
+    public static File Backup_File_App = new File(Environment.getExternalStorageDirectory()
+            , "BackupClass"), Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
     IUpdateCheckService service;
     UpdateServiceConnection connection;
     private static final String TAG = "TAG_Main";
-    Tools om = new Tools();
     int t = 0;
-
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.main);
-
-        data = new DatabasesHelper(this);
-        data.database();
 
         initView();
 
@@ -143,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-
+        fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(id),item.getTitle().toString(),"menu");
         if (id == R.id.nav_add_class) {
             startActivity(new Intent(this, AddClassActivity.class));
         } else if (id == R.id.nav_abute) {
@@ -188,8 +182,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void initView() {
-        sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        BUYAPP = sp.getString("‌Buy_App", "NO");
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        data = new DatabasesHelper(this);
+        data.database();
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -206,6 +203,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Thursday = (Button) findViewById(R.id.main_Thursday);
         Friday = (Button) findViewById(R.id.main_Friday);
         text_day_class = (TextView) findViewById(R.id.main_text_day_class);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        linearLayoutManager = new LinearLayoutManager(this);
         //****************************************************************
         Calendar calendar = Calendar.getInstance();
         DAY = calendar.get(Calendar.DAY_OF_WEEK);
@@ -279,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Text_class = txt_class.split("~");
                 List.clear();
                 for (int i = 0; i < name.length; i++) {
-                    ClassContent content = new ClassContent();
+                    ClassModel content = new ClassModel();
                     content.APP = chek;
                     content.name_class = name[i];
                     content.time_start = start[i];
@@ -292,19 +291,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     content.text_class = Text_class[i];
                     List.add(content);
                 }
-                recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-                linearLayoutManager = new LinearLayoutManager(this);
+
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this, MainActivity.this));
+                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this));
 
             } else {
                 List.clear();
-                recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-                linearLayoutManager = new LinearLayoutManager(this);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this, MainActivity.this));
+                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this));
             }
             Set_day();
         } catch (Exception e) {
@@ -374,16 +370,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d(TAG, "initService() bound value: " + ret);
     }
 
-
-
     protected void onResume() {
         super.onResume();
 
     }
 
-    void SetCode(float code) {
-        SharedPreferencesHelper.SetCode("LerningActivity", String.valueOf(code), MainActivity.this);
-    }
 
 
 }

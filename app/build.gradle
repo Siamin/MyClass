@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
-//    buildToolsVersion '28.0.0'
     dataBinding.enabled = true
     defaultConfig {
         applicationId "aspi.myclass"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 27
-        versionName '4.0.7'
+        versionCode 29
+        versionName '4.0.9'
 
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -26,6 +26,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     testImplementation 'junit:junit:4.12'
     implementation "com.android.support:appcompat-v7:+"
     implementation "com.android.support:support-v4:+"
@@ -38,6 +40,7 @@ dependencies {
     implementation 'tyrantgit:explosionfield:1.0.1'
     implementation files('libs/jxl.jar')
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
 }
 
 repositories {

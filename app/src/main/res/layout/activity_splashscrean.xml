@@ -15,7 +15,7 @@
         app:srcCompat="@drawable/aspiy" />
 
 
-    <Object.MyTextViewVersion
+    <CustomObject.TextViewVersionCustom
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_60sdp"
         android:layout_below="@+id/flash_img"

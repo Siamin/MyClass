@@ -12,7 +12,7 @@
         android:orientation="horizontal">
 
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/add_class_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -60,7 +60,7 @@
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
@@ -68,7 +68,7 @@
                 android:text=" نام درس:     "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <Object.MyEditText
+            <CustomObject.EditTextCustom
                 android:id="@+id/add_class_name_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
@@ -97,7 +97,7 @@
                 android:text="مشخصه درس:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <Object.MyEditText
+            <CustomObject.EditTextCustom
                 android:id="@+id/add_class_code_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
@@ -151,7 +151,7 @@
             android:layoutDirection="rtl"
             android:orientation="horizontal">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
@@ -178,7 +178,7 @@
             android:layoutDirection="rtl"
             android:orientation="horizontal">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -208,14 +208,14 @@
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="  مکان برگزاری کلاس :"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <Object.MyEditText
+            <CustomObject.EditTextCustom
                 android:id="@+id/add_class_potion_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -235,14 +235,14 @@
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="شماره کلاس:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <Object.MyEditText
+            <CustomObject.EditTextCustom
                 android:id="@+id/add_class_class_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

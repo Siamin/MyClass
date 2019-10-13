@@ -6,19 +6,27 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-import aspi.myclass.activity.NewClassActivity;
-import aspi.myclass.content.AbsentPersentContent;
+import aspi.myclass.model.AbsentPersentModel;
+import aspi.myclass.model.OldClassModel;
+import aspi.myclass.model.ReportDataModel;
+import aspi.myclass.model.ReportModel;
+import aspi.myclass.model.StatisticsModel;
+
+import static java.lang.Integer.parseInt;
 
 public class DatabasesHelper extends SQLiteOpenHelper {
 
     public final String path = "data/data/aspi.myclass/databases/";
-    public final String Name = "study";
+    public final String Name = "study", TAG = "TAG_DatabasesHelper";
 
     public SQLiteDatabase mydb;
     private Context myContext;
@@ -129,18 +137,6 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         mydb.insert("dars", "ndars", cv);
     }
 
-    //**********************************************************************************************update_class
-    public void update_class(String name_dars, String day, String time, String location, String Minute, String Characteristic, int id) {
-        ContentValues cv = new ContentValues();
-        cv.put("ndars", name_dars);
-        cv.put("dey", day);
-        cv.put("time", time);
-        cv.put("location", location);
-        cv.put("Minute", Minute);
-        cv.put("Characteristic", Characteristic);
-        mydb.update("dars", cv, "id=" + id, null);
-    }
-
     //**********************************************************************************************insert_student
     public boolean insert_student(String sno, String family, String name, String id_class) {
 
@@ -165,48 +161,49 @@ public class DatabasesHelper extends SQLiteOpenHelper {
     }
 
     //**********************************************************************************************New Class
-    public String Get_name_student_of_class(String id_class) {
-        String name = "", family = "", sno = "", text = "", id = "", abs = "", per = "";
-        Cursor cursor = mydb.rawQuery("SELECT  * FROM klas WHERE did= '" + id_class + "'", null);
-
-        int cunt = 0;
+    public List<AbsentPersentModel> NameStudentClassByModel(String id_class) {
+        List<AbsentPersentModel> studentModels = new ArrayList<>();
+        Cursor cursor = mydb.rawQuery("SELECT  * FROM klas WHERE did= '" + id_class + "' ORDER BY family ASC ,name ASC ", null);
 
         if (cursor.moveToFirst()) {
             do {
-                id += cursor.getString(0) + "~";
-                sno += cursor.getString(1) + "~";
-                family += cursor.getString(2) + " ~";
-                name += cursor.getString(3) + "~";
-                text += cursor.getString(4) + " ~";
-                abs += cursor.getString(7) + "~";
-                per += cursor.getString(8) + "~";
-                cunt += 1;
+                AbsentPersentModel _studentModel = new AbsentPersentModel();
+
+                _studentModel.id = cursor.getString(0);
+                _studentModel.sno = cursor.getString(1);
+                _studentModel.family = cursor.getString(2);
+                _studentModel.name = cursor.getString(3);
+                _studentModel.text = cursor.getString(4);
+                _studentModel.absent = cursor.getString(7);
+                _studentModel.prezent = cursor.getString(8);
+
+                studentModels.add(_studentModel);
+
             } while (cursor.moveToNext());
 
-            return id + "|" + sno + "|" + family + "|" + name + "|" + text + "|" + abs + "|" + per + "|" + String.valueOf(cunt) + "|";
+            return studentModels;
         } else {
-            return "";
+            return studentModels;
         }
     }
 
-    //**********************************************************************************************New Class
-    public String Get_old_class(String id_class) {
-        String DATA = "", jalase = "", HOUR = "";
+    //**********************************************************************************************Class Session
+    public List<OldClassModel> ListOldClssByIdClass(String id_class) {
+        List<OldClassModel> oldClassModels = new ArrayList<>();
         Cursor cursor = mydb.rawQuery("SELECT  DISTINCT jalase,day,month,year,HOUR  FROM rollcall WHERE iddars= '" + id_class + "'", null);
-
-        int cunt = 0;
 
         if (cursor.moveToFirst()) {
             do {
-                DATA += cursor.getString(1) + "/" + cursor.getString(2) + "/" + cursor.getString(3) + "~";
-                jalase += cursor.getString(0) + "~";
-                HOUR += cursor.getString(4) + " ~";
-                cunt += 1;
+                OldClassModel _oldClassModel = new OldClassModel();
+                _oldClassModel.DATA = cursor.getString(1) + "/" + cursor.getString(2) + "/" + cursor.getString(3);
+                _oldClassModel.jalase = cursor.getString(0);
+                _oldClassModel.Hour = cursor.getString(4);
+                oldClassModels.add(_oldClassModel);
             } while (cursor.moveToNext());
 
-            return DATA + "|" + jalase + "|" + HOUR + "|" + String.valueOf(cunt) + "|";
+            return oldClassModels;
         } else {
-            return "";
+            return oldClassModels;
         }
     }
 
@@ -247,22 +244,6 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         return Return;
     }
 
-    //*********************************************************************************************Display_class_List
-    public String Display_Class(String table, int row) {
-        Cursor cu = mydb.query(table, null, null, null, null, null, null);
-        cu.moveToPosition(row);
-        String Return = cu.getString(0) + "~";
-        Return += cu.getString(1) + "~";
-        Return += cu.getString(2) + "~";
-        Return += cu.getString(3) + "~";
-        Return += cu.getString(4) + "~";
-        Return += cu.getString(5) + "~";
-        Return += cu.getString(6) + "~";
-        Return += cu.getString(7) + "~";
-        Return += cu.getString(8) + "~";
-        return Return;
-    }
-
     //*********************************************************************************************Display_class_all
     public String Display_all(String table, int row, int start, int end) {
         Cursor cu = mydb.query(table, null, null, null, null, null, null);
@@ -271,35 +252,6 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         for (int i = start; i <= end; i++) {
             Return += cu.getString(i) + "~";
         }
-        return Return;
-    }
-
-    //*********************************************************************************************Display_Rullcall_list
-    public String Display_Rullcall(String table, int row) {
-        Cursor cu = mydb.query(table, null, null, null, null, null, null);
-        cu.moveToPosition(row);
-        String Return = cu.getString(8) + "~";
-        Return += cu.getString(7) + "~";
-        Return += cu.getString(4) + "~";
-        Return += cu.getString(5) + "~";
-        Return += cu.getString(6) + "~";
-        Return += cu.getString(9) + "~";
-        Return += cu.getString(0) + "~";
-        return Return;
-    }
-
-    //*********************************************************************************************Display_Rullcall2old_list
-    public String Display_Rullcall2old(int row) {
-        Cursor cu = mydb.query("rollcall", null, null, null, null, null, null);
-        cu.moveToPosition(row);
-        String Return = cu.getString(0) + "~";
-        Return += cu.getString(1) + "~";
-        Return += cu.getString(2) + "~";
-        Return += cu.getString(3) + "~";
-        Return += cu.getString(4) + "/" + cu.getString(5) + "/" + cu.getString(6) + "~";
-        Return += cu.getString(7) + "~";
-        Return += cu.getString(8) + "~";
-        Return += cu.getString(9) + "~";
         return Return;
     }
 
@@ -329,80 +281,49 @@ public class DatabasesHelper extends SQLiteOpenHelper {
 
     //*********************************************************************************************_set_id_class
     private void set_id_class() {
-        int id = Integer.parseInt(Display("dars", (count("dars") - 1), 0));
+        int id = parseInt(Display("dars", (count("dars") - 1), 0));
         update_one("dars", "did", String.valueOf(id), id);
     }
 
     //*********************************************************************************************
-    public void update_one1(String table, String fild, String text, String where) {
+    public int update_one1(String table, String fild, String text, String where) {
         ContentValues cv = new ContentValues();
         cv.put(fild, text);
-        mydb.update(table, cv, where, null);
-    }
-
-    //******************************************************************************* Qury New Class
-    public boolean Qury(String selectQuery, String[] DATA_IRAN, String did, int HOUR, int MINUTE) {
-        boolean Status = false;
-        Cursor cursor = mydb.rawQuery(selectQuery, null);
-        int cunt_roll = count("rollcall");
-        int jalase = 1;
-        if (cunt_roll > 0) {
-            jalase = Integer.parseInt(Display("rollcall", (cunt_roll - 1), 8)) + 1;
-        }
-        if (cursor.moveToFirst()) {
-            do {
-                AbsentPersentContent content = new AbsentPersentContent();
-                content.name = cursor.getString(3);
-                content.family = cursor.getString(2);
-                content.sno = cursor.getString(1);
-                content.id = cursor.getString(0);
-                content.text = cursor.getString(4);
-                content.status = "1";
-                content.absent = cursor.getString(7);
-                content.prezent = cursor.getString(8);
-                insert_Rollcall(cursor.getString(1), true, "", DATA_IRAN[0], DATA_IRAN[1], DATA_IRAN[2], did, String.valueOf(jalase), String.valueOf(HOUR) + ":" + String.valueOf(MINUTE));
-                content.id_rull = Display("rollcall", cunt_roll, 0);
-                cunt_roll += 1;
-                NewClassActivity.List.add(content);
-                Status = true;
-            } while (cursor.moveToNext());
-        }
-
-        return Status;
+        return mydb.update(table, cv, where, null);
     }
 
     //******************************************************************************* Qury Old Class
-    public String Qury_old_class(String selectQuery) {
+    public List<AbsentPersentModel> OldClassByQuery(String selectQuery) {
 
-        String id_rull = "", sno = "", status = "", nomreh = "", id = "", family = "", name = "", text = "";
+        List<AbsentPersentModel> absentPersentModels = new ArrayList<>();
         Cursor cursor = mydb.rawQuery(selectQuery, null);
-        int Cunter = 0;
+
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    //r.id,r.sno,r.abs,r.am,r.iddars,r.jalase,k.id6,k.name,k.family,k.sno,k.tx,k.did
-
-                    id_rull += cursor.getString(0) + "~";
-                    sno += cursor.getString(1) + "~";
-                    status += cursor.getString(2) + "~";
-                    nomreh += cursor.getString(3) + " " + "~";
+                    AbsentPersentModel _absentPersentModels = new AbsentPersentModel();
+                    _absentPersentModels.id_rull = cursor.getString(0);
+                    _absentPersentModels.sno = cursor.getString(1);
+                    _absentPersentModels.status = cursor.getString(2);
+                    _absentPersentModels.nomreh = cursor.getString(3);
                     //*****************************************
-                    id += cursor.getString(6) + "~";
-                    family += cursor.getString(8) + "~";
-                    name += cursor.getString(7) + "~";
-                    text += cursor.getString(10) + " " + "~";
-                    Cunter += 1;
+                    _absentPersentModels.id = cursor.getString(6);
+                    _absentPersentModels.family = cursor.getString(8);
+                    _absentPersentModels.name = cursor.getString(7);
+                    _absentPersentModels.text = cursor.getString(10);
+
+                    absentPersentModels.add(_absentPersentModels);
                 } while (cursor.moveToNext());
             }
-            return id_rull + "|" + sno + "|" + status + "|" + nomreh + "|" + id + "|" + family + "|" + name + "|" + text + "|" + String.valueOf(Cunter) + "|";
+            return absentPersentModels;
         }
-        return "";
+        return absentPersentModels;
     }
 
-    //******************************************************************************* Qury Amar Class
-    public String Qury_amar_class(String selectQuery, String did) {
+    //******************************************************************************* Qury Statistics Class
+    public List<StatisticsModel> Statistics(String selectQuery, String did) {
 
-        String abs = "", per = "", name = "", family = "", Old_sno = "";
+        List<StatisticsModel> statisticsModels = new ArrayList<>();
         Cursor cursor = mydb.rawQuery(selectQuery, null);
         //******************************************************************************************
         Cursor c = mydb.rawQuery("SELECT  COUNT(DISTINCT jalase) FROM rollcall WHERE iddars= '" + did + "'", null);
@@ -410,112 +331,98 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         c.moveToFirst();
         //******************************************************************************************
         String max = c.getString(0);// jalase
-        int Cunter = 1, Abs = 0, Per = 0;
+        String Old_sno = "";
 
         if (cursor != null) {
+            StatisticsModel _statisticsModel = new StatisticsModel();
             if (cursor.moveToFirst()) {
+
                 Old_sno = cursor.getString(0);
-                name = cursor.getString(4) + "~";
-                family = cursor.getString(5) + "~";
+
+                _statisticsModel.name = cursor.getString(4);
+                _statisticsModel.family = cursor.getString(5);
+                _statisticsModel.max = parseInt(max);
+
                 do {
 
                     if (Old_sno.equals(cursor.getString(0)) && Old_sno.equals(cursor.getString(6))) {
                         if (cursor.getString(1).equals("1")) {
-                            Abs += 1;
+                            _statisticsModel.set += 1;
                         } else {
-                            Per += 1;
+                            _statisticsModel.per += 1;
                         }
                     } else {
-                        Cunter += 1;
+
+
+                        statisticsModels.add(_statisticsModel);
+                        _statisticsModel = new StatisticsModel();
+
                         Old_sno = cursor.getString(0);
-                        name += cursor.getString(4) + "~";
-                        family += cursor.getString(5) + "~";
-                        abs += String.valueOf(Abs) + "~";
-                        per += String.valueOf(Per) + "~";
-                        Abs = 0;
-                        Per = 0;
+
+                        _statisticsModel.name = cursor.getString(4);
+                        _statisticsModel.family = cursor.getString(5);
+                        _statisticsModel.max = parseInt(max);
+
                         if (cursor.getString(1).equals("1")) {
-                            Abs += 1;
+                            _statisticsModel.set += 1;
                         } else {
-                            Per += 1;
+                            _statisticsModel.per += 1;
                         }
                     }
 
                 } while (cursor.moveToNext());
             }
-            abs += String.valueOf(Abs) + "~";
-            per += String.valueOf(Per) + "~";
-            return abs + "|" + per + "|" + name + "|" + family + "|" + String.valueOf(Cunter) + "|" + max + "|";
+
+            statisticsModels.add(_statisticsModel);
+            return statisticsModels;
         }
-        return "";
+        return statisticsModels;
     }
 
     //***************************************************************************** Qury Output List
-    public String Qury_output_list(String selectQuery, String did) {
-        String R = "", R1 = "", R2 = "", R3 = "", jal = "", data = "", data1 = "", data2 = "";
-        int cunt_jalase, cunt_stud_jalase, cunt_stud, cunt_qury;
-        //******************************************************************************************
-        Cursor c = mydb.rawQuery("SELECT   COUNT(DISTINCT jalase) FROM rollcall WHERE iddars= " + Integer.parseInt(did), null);
-        Cursor c0 = mydb.rawQuery("SELECT  COUNT(DISTINCT sno) FROM rollcall WHERE iddars= " + Integer.parseInt(did), null);
-        Cursor c1 = mydb.rawQuery("SELECT  COUNT(DISTINCT id) FROM klas WHERE did= " + Integer.parseInt(did), null);
+    public List<ReportDataModel> ReportCalss(String selectQuery) {
+
+        List<ReportDataModel> returnModel = new ArrayList<>();
+
         Cursor cursor = mydb.rawQuery(selectQuery, null);
-        //******************************************************************************************
-        c1.moveToFirst();
-        c0.moveToFirst();
-        c.moveToFirst();
-        //******************************************************************************************
-        cunt_jalase = Integer.parseInt(c.getString(0));// jalase
-        cunt_stud_jalase = Integer.parseInt(c0.getString(0));//Student_jalase
-        cunt_stud = Integer.parseInt(c1.getString(0));//Student
-        cunt_qury = cursor.getCount();//Cunt Qury
+
         //   0     1    2    3      4      5        6        7       8      9       10     11    12
         //r.sno,r.abs,r.am,r.day,r.month,r.year,r.iddars,r.jalase,r.HOUR,k.name,k.family,k.sno,k.did
         //******************************************************************************************
-        String sno = "";
-        int jalase = 0, jalase1 = 9, jalase2 = 99;
+
 
         if (cursor.moveToFirst()) {
 
             do {
-                int new_jal = Integer.parseInt(cursor.getString(7));
-                if (!sno.equals(cursor.getString(0))) {
-                    R += cursor.getString(0) + "|" + cursor.getString(9) + "^" + cursor.getString(10) + "*" + cursor.getString(1) + "$" + cursor.getString(2) + "#";
-                    sno = cursor.getString(0);
-                } else {
-                    R += cursor.getString(1) + "$" + cursor.getString(2) + "#";
-                }
-
-
-                if (new_jal > jalase && new_jal < 10) {
-                    data += cursor.getString(3).substring(2, cursor.getString(3).length()) + "/" + cursor.getString(4) + "/" + cursor.getString(5) + "^";
-                    jalase = new_jal;
-                } else if (new_jal > jalase1 && new_jal < 100 && new_jal > 9) {
-                    data += cursor.getString(3).substring(2, cursor.getString(3).length()) + "/" + cursor.getString(4) + "/" + cursor.getString(5) + "^";
-                    jalase1 = new_jal;
-                } else if (new_jal > jalase2 && new_jal < 1000 && new_jal > 99) {
-                    data += cursor.getString(3).substring(2, cursor.getString(3).length()) + "/" + cursor.getString(4) + "/" + cursor.getString(5) + "^";
-                    jalase2 = new_jal;
-                }
-
+                ReportDataModel reportDataModel = new ReportDataModel();
+                reportDataModel.sno = cursor.getString(0);
+                reportDataModel.name = cursor.getString(9);
+                reportDataModel.family = cursor.getString(10);
+                reportDataModel.date = cursor.getString(3) + "/" + cursor.getString(4) + "/" + cursor.getString(5);
+                reportDataModel.status = cursor.getString(1);
+                reportDataModel.score = cursor.getString(2);
+                reportDataModel.idJalase = Integer.parseInt(cursor.getString(7));
+                returnModel.add(reportDataModel);
 
             } while (cursor.moveToNext());
-            data += data1;
-            data += data2;
-            R = String.valueOf(cunt_jalase) + "|" + String.valueOf(cunt_stud) + "|" + data + "|" + R;
+
             //**************************************************************************************
         }
-        return R;
+        return returnModel;
     }
     //**********************************************************************************************
 
     public boolean Update_sno(String sno, String did, String old_sno) {
         Cursor cursor = mydb.rawQuery("SELECT  * FROM klas WHERE did= '" + did + "' AND sno='" + sno + "'", null);
         if (cursor.getCount() == 0) {
-            update_one1("klas", "sno", sno, "did= '" + did + "' AND sno='" + old_sno + "'");
-            update_one1("rollcall", "sno", sno, "iddars= '" + did + "' AND sno='" + old_sno + "'");
-            return false;
+
+            cursor = mydb.rawQuery("UPDATE klas SET sno = '" + sno + "' WHERE did= '" + did + "' AND sno='" + old_sno + "'", null);
+            Log.i(TAG, "Count " + cursor.getCount());
+            cursor = mydb.rawQuery("UPDATE rollcall SET sno = '" + sno + "' WHERE iddars= '" + did + "' AND sno='" + old_sno + "'", null);
+            Log.i(TAG, "Count " + cursor.getCount());
+            return true;
         }
-        return true;
+        return false;
     }
     //**********************************************************************************************
 

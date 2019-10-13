@@ -1,14 +1,14 @@
-package Object;
+package CustomObject;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
 import aspi.myclass.Tools.Tools;
 
-public class MyRadioButton extends android.support.v7.widget.AppCompatRadioButton {
+public class RadioButtonCustom extends android.support.v7.widget.AppCompatRadioButton {
 
 
-    public MyRadioButton(Context context, AttributeSet attis) {
+    public RadioButtonCustom(Context context, AttributeSet attis) {
         super(context, attis);
         Tools om = new Tools();
 

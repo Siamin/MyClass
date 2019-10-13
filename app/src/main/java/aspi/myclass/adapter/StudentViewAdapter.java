@@ -17,9 +17,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Tools.Tools;
-import aspi.myclass.content.AbsentPersentContent;
+import aspi.myclass.model.AbsentPersentModel;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
 import aspi.myclass.activity.NewClassActivity;
@@ -27,13 +29,13 @@ import aspi.myclass.Helpers.DatabasesHelper;
 
 
 public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.cvh> {
-    private List<AbsentPersentContent> Content_new_class;
+    private List<AbsentPersentModel> Content_new_class;
     private Context contexts;
     private DatabasesHelper data;
     Tools om = new Tools();
     String TAG = "TAG_StudentViewAdapter";
 
-    public StudentViewAdapter(List<AbsentPersentContent> contents, Context context) {
+    public StudentViewAdapter(List<AbsentPersentModel> contents, Context context) {
         this.Content_new_class = contents;
         this.contexts = context;
         data = new DatabasesHelper(context);
@@ -47,7 +49,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
 
     @Override
     public void onBindViewHolder(final cvh holder, int position) {
-        final AbsentPersentContent content = Content_new_class.get(position);
+        final AbsentPersentModel content = Content_new_class.get(position);
         //*****************************************************************
         holder.row.setText("  " + (position + 1) + " ");
         holder.sno.setText(content.sno);
@@ -60,7 +62,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         } else {
             holder.status.setChecked(false);
         }
-        if (!content.text.equals(" ")) {
+        if (!content.text.isEmpty()) {
             if (content.text.replace("\n", "  ").length() > 50) {
                 holder.text.setText(content.text.replace("\n", "  ").substring(0, 50) + "  توضایحات ادامه دارد...");
             } else {
@@ -99,192 +101,34 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         //*****************************************************************
         holder.sno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
+//                DialogHelper.SnoStudent(contexts, "ویرایش شماره دانشجویی " + content.name + " " + content.family, holder.sno, data, content,NewClassActivity.did);
 
-
-                    final String sno_old = holder.sno.getText().toString();
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
-                    final EditText input = new EditText(contexts);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10, 10, 5, 0);
-                    input.setLayoutParams(lp);
-                    input.setHint("" + sno_old);
-                    input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                    builder1.setView(input);
-                    builder1.setTitle("ویرایش شماره دانشجویی" + content.sno + " را انجام دهید." + "\n\n");
-                    builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            try {
-                                data.open();
-                                boolean S;
-                                S = data.Update_sno(input.getText().toString(), NewClassActivity.did, holder.sno.getText().toString());
-                                data.close();
-
-                                if (S) {
-                                    MessageHelper.Toast(contexts, "این شماره دانشجویی در کلاس وجود دارد.");
-                                } else {
-                                    holder.sno.setText(input.getText().toString());
-                                }
-
-
-                            } catch (Exception e) {
-                                Log.i(TAG, "Error" + e.toString());
-                            }
-                        }
-                    });
-                    builder1.setNegativeButton("انصراف", null);
-                    AlertDialog aler1 = builder1.create();
-                    aler1.show();
-                } catch (Exception e) {
-                }
             }
         });
         //*****************************************************************
         holder.family.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-
-
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
-                    final EditText input = new EditText(contexts);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10, 10, 5, 0);
-                    input.setLayoutParams(lp);
-                    input.setText("" + holder.family.getText().toString());
-                    builder1.setView(input);
-                    builder1.setTitle("ویرایش نام خانوادگی " + content.family + " را انجام دهید." + "\n\n");
-                    builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            try {
-                                data.open();
-                                data.update_one("klas", "family", input.getText().toString(), Integer.parseInt(content.id));
-                                data.close();
-                                holder.family.setText("" + input.getText().toString());
-                                content.family = input.getText().toString();
-
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-                    builder1.setNegativeButton("انصراف", null);
-                    AlertDialog aler1 = builder1.create();
-                    aler1.show();
-
-                } catch (Exception e) {
-
-                }
+                DialogHelper.FamilyStudent(contexts, "ویرایش نام خانوادگی " + content.name + " " + content.family, holder.family, data, content);
             }
         });
         //*****************************************************************
         holder.name.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
+                DialogHelper.NameStudent(contexts, "ویرایش نام " + content.name + " " + content.family, holder.name, data, content);
 
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
-                    final EditText input = new EditText(contexts);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10, 10, 5, 0);
-                    input.setLayoutParams(lp);
-                    input.setText("" + holder.name.getText().toString());
-                    builder1.setView(input);
-                    builder1.setTitle("ویرایش نام  " + content.name + " را انجام دهید." + "\n\n");
-                    builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            try {
-                                data.open();
-                                data.update_one("klas", "name", input.getText().toString(), Integer.parseInt(content.id));
-                                data.close();
-                                holder.name.setText("" + input.getText().toString());
-                                content.name = input.getText().toString();
-
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-                    builder1.setNegativeButton("انصراف", null);
-                    AlertDialog aler1 = builder1.create();
-                    aler1.show();
-
-                } catch (Exception e) {
-                }
             }
         });
         //*****************************************************************
         holder.text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-
-
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
-                    final EditText input = new EditText(contexts);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10, 10, 5, 0);
-                    input.setLayoutParams(lp);
-                    input.setText("" + content.text);
-                    builder1.setView(input);
-                    builder1.setTitle("توضیحات " + content.name + " " + content.family + " را وارد کنید." + "\n\n");
-                    builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            try {
-                                data.open();
-                                data.update_one("klas", "tx", input.getText().toString(), Integer.parseInt(content.id));
-                                data.close();
-                                if (input.getText().toString().replace("\n", "  ").length() > 50) {
-                                    holder.text.setText(input.getText().toString().replace("\n", "  ").substring(0, 50) + "  توضایحات ادامه دارد...");
-                                } else {
-                                    holder.text.setText(input.getText().toString().replace("\n", "  "));
-                                }
-                                content.text = input.getText().toString();
-
-
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-                    builder1.setNegativeButton("انصراف", null);
-                    AlertDialog aler1 = builder1.create();
-                    aler1.show();
-                } catch (Exception e) {
-                }
+                DialogHelper.DescriptionStudent(contexts, "توضیحات " + content.name + " " + content.family, holder.text, data, content);
             }
         });
         //*****************************************************************
         holder.nomreh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-
-
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(contexts, R.style.MyAlertDialogStyle);
-                    final EditText input = new EditText(contexts);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    lp.setMargins(10, 10, 5, 0);
-                    input.setLayoutParams(lp);
-                    input.setHint("نمره را وارد کنید");
-                    builder1.setView(input);
-                    if (MainActivity.status_number.equals("on")) {
-                        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                    }
-                    builder1.setTitle("نمره دانشجو " + content.name + " " + content.family + " را وارد کنید." + "\n\n");
-                    builder1.setPositiveButton("ثبت", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            try {
-                                data.open();
-                                data.update_one("rollcall", "am", input.getText().toString(), Integer.parseInt(content.id_rull));
-                                data.close();
-                                holder.nomreh.setText("" + input.getText().toString());
-                                content.nomreh = input.getText().toString();
-
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-                    builder1.setNegativeButton("انصراف", null);
-                    AlertDialog aler1 = builder1.create();
-                    aler1.show();
-
-                } catch (Exception e) {
-                }
+                DialogHelper.ScoreStudent(contexts, "نمره دانشجو " + content.name + " " + content.family, holder.nomreh, data, content);
             }
         });
         //******************************************************************************************end onBindViewHolder
@@ -314,17 +158,11 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AbsentPersentContent conlist = Content_new_class.get(getPosition());
+                    AbsentPersentModel conlist = Content_new_class.get(getPosition());
                 }
             });
         }
 
     }
 
-    void SetCode(float code) {
-        SharedPreferences sp = contexts.getSharedPreferences("myclass", 0);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putFloat("LerningActivity", code);
-        edit.commit();
-    }
 }

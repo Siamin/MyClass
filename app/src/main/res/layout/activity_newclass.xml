@@ -13,7 +13,7 @@
         android:layoutDirection="rtl"
         android:orientation="horizontal">
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/New_class_titel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -27,9 +27,10 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:textStyle="bold"></Object.MyTextView>
+            android:textStyle="bold"></CustomObject.TextViewCustom>
 
-        <Object.MyTextView
+
+        <CustomObject.TextViewCustom
             android:id="@+id/old_classsss_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -64,7 +65,7 @@
         android:layoutDirection="rtl"
         android:orientation="horizontal">
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/new_class_name_class"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -78,7 +79,7 @@
             android:textColor="@color/white"
             android:textSize="15dp" />
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/new_class_data"
             android:layout_width="0dp"
             android:layout_height="match_parent"

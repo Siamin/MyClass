@@ -1,4 +1,4 @@
-package Object;
+package CustomObject;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,10 +9,10 @@ import aspi.myclass.Tools.Tools;
  * Created by AmIn on 12/21/2018.
  */
 
-public class MyTextViewEN extends android.support.v7.widget.AppCompatTextView {
+public class TextViewENCustom extends android.support.v7.widget.AppCompatTextView {
 
 
-    public MyTextViewEN(Context context, AttributeSet attis) {
+    public TextViewENCustom(Context context, AttributeSet attis) {
         super(context, attis);
         Tools om = new Tools();
 

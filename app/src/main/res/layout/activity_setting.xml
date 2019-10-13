@@ -22,7 +22,7 @@
                 android:background="@color/colorPrimary"
                 android:layoutDirection="rtl">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -61,7 +61,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginTop="3dp">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -97,7 +97,7 @@
                 android:gravity="right"
                 android:layout_marginTop="5dp">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -106,7 +106,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingRight="5dp" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -127,7 +127,7 @@
                 android:gravity="right"
                 android:layout_marginTop="5dp">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -136,7 +136,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingRight="5dp" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -157,7 +157,7 @@
                 android:gravity="right"
                 android:layout_marginTop="5dp">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -166,7 +166,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingRight="5dp" />
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number|phone"
@@ -187,7 +187,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginTop="5dp">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -247,7 +247,7 @@
 
             </LinearLayout>
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/setting_text_test"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -264,7 +264,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginTop="5dp">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -312,7 +312,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginTop="3dp">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -331,7 +331,7 @@
 
             </LinearLayout>
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/textviweset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -351,7 +351,7 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
 
-                <Object.MyEditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/setting_Email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -362,7 +362,7 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp" />
 
-                <Object.MyButton
+                <CustomObject.ButtonCustom
                     android:id="@+id/setting_bmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

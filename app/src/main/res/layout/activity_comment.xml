@@ -11,7 +11,7 @@
         android:padding="3dp"
         android:layoutDirection="rtl">
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -50,7 +50,7 @@
         android:padding="20dp"
         android:orientation="vertical">
 
-        <Object.MyEditText
+        <CustomObject.EditTextCustom
             android:id="@+id/coment_name"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -60,7 +60,7 @@
             android:hint="نام و نام خانوادگی"
             android:inputType="textPersonName" />
 
-        <Object.MyEditText
+        <CustomObject.EditTextCustom
             android:id="@+id/coment_email"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -71,7 +71,7 @@
             android:hint="ایمیل"
             android:inputType="textEmailAddress" />
 
-        <Object.MyEditText
+        <CustomObject.EditTextCustom
             android:id="@+id/coment_subject"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -82,7 +82,7 @@
             android:hint="موضوع پیام"
             android:inputType="textPersonName" />
 
-        <Object.MyEditText
+        <CustomObject.EditTextCustom
             android:id="@+id/coment_body"
             android:layout_width="match_parent"
             android:layout_height="0dp"

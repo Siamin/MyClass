@@ -33,7 +33,7 @@
                 android:layoutDirection="rtl"
                 android:gravity="center_vertical">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -63,7 +63,7 @@
                     android:layout_marginRight="2dp"
                     android:layout_weight="1">
 
-                    <Object.MyTextView
+                    <CustomObject.TextViewCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="نام"
@@ -72,7 +72,7 @@
                         android:gravity="center_vertical|center_horizontal"
                         android:textSize="15dp" />
 
-                    <Object.MyTextView
+                    <CustomObject.TextViewCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="نام خانوادگی"
@@ -84,7 +84,7 @@
 
 
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -108,7 +108,7 @@
 
             </LinearLayout>
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:text="توضیحات دانشجو"

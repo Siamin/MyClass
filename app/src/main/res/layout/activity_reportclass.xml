@@ -14,7 +14,7 @@
         android:layoutDirection="rtl"
         android:orientation="horizontal">
 
-        <Object.MyTextView
+        <CustomObject.TextViewCustom
             android:id="@+id/output_list_titel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -28,7 +28,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:textStyle="bold"></Object.MyTextView>
+            android:textStyle="bold"></CustomObject.TextViewCustom>
 
         <ImageView
             android:id="@+id/output_list_save"

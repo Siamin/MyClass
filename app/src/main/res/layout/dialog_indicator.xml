@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Object.MyTextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/dialog_indicator_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Object.MyTextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/dialog_indicator_bodetxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

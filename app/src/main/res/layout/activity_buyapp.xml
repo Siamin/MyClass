@@ -15,7 +15,7 @@
         android:paddingBottom="@dimen/_5sdp"
         android:id="@+id/linearLayout5">
 
-        <Object.MyButton
+        <CustomObject.ButtonCustom
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="بازگشت"
@@ -30,7 +30,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp" />
 
-        <Object.MyButton
+        <CustomObject.ButtonCustom
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="خرید"
@@ -46,7 +46,7 @@
             android:layout_marginBottom="5dp" />
     </LinearLayout>
 
-    <Object.MyTextView
+    <CustomObject.TextViewCustom
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -59,7 +59,7 @@
         android:textStyle="bold"
         android:textSize="20dp" />
 
-    <Object.MyTextView
+    <CustomObject.TextViewCustom
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
