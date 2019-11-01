@@ -1,9 +1,7 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +17,6 @@ import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.R;
-import aspi.myclass.Tools.Tools;
 import util.IabHelper;
 import util.IabResult;
 import util.Inventory;
@@ -211,4 +208,5 @@ public class BuyAppActivity extends Activity {
         } catch (Exception e) {
         }
     }
+
 }
