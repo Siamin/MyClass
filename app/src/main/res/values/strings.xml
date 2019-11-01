@@ -9,4 +9,7 @@
     <string name="Email">amin.syahi.1369@gmail.com</string>
     <string name="pass_Email">amin.syahi.1369@gmail.com</string>
 
+
+    <string name="ApiSendMail">http://eyeshospital.ir/SendEmail.php</string>
+
 </resources>

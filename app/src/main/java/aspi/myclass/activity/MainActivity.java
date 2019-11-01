@@ -46,7 +46,8 @@ import aspi.myclass.R;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.adapter.ClassViewAdapter;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class MainActivity extends AppCompatActivity
+            implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
 
     DrawerLayout drawer;
@@ -315,7 +316,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        Log.i(TAG, "Time : " + t++);
                         if (refresh == 1) {
                             get_data_class(DAY);
                             refresh = 0;

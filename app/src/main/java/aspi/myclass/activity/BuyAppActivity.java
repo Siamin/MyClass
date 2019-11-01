@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import aspi.myclass.Helpers.EmailHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
@@ -26,14 +29,13 @@ import util.SkuDetails;
 
 public class BuyAppActivity extends Activity {
 
-    static final String TAG = "BuyAppActivity";
-    static final String SKU_PREMIUM = "buyApp";
+    static final String TAG = "TAG_BuyAppActivity";
+    static final String SKU_PREMIUM[] = {"buyApp","buyAppOne","buyAppthiree"};
     IabHelper buyhelper;
     String AppKey = "MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==";
     TextView textView;
     Button buy, cancel;
 
-    Tools om = new Tools();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class BuyAppActivity extends Activity {
         try {
             initView();
             buyhelper = new IabHelper(this, AppKey);
-            IndicatorHelper.IndicatorCreate(BuyAppActivity.this,"در حال دریافت اطلاعات","لطفا صبر کنید ...!");
+            IndicatorHelper.IndicatorCreate(BuyAppActivity.this, "در حال دریافت اطلاعات", "لطفا صبر کنید ...!");
             new Thread(new Runnable() {
                 public void run() {
                     get_price();
@@ -68,14 +70,17 @@ public class BuyAppActivity extends Activity {
 
     void Buy_App() {
         try {
-            buyhelper.launchPurchaseFlow(this, SKU_PREMIUM, 1001,
+            buyhelper.launchPurchaseFlow(this, SKU_PREMIUM[0], 1001,
                     new IabHelper.OnIabPurchaseFinishedListener() {
                         @Override
                         public void onIabPurchaseFinished(IabResult result, Purchase info) {
                             if (result.isSuccess()) {
+                                //getMessage : Success (response: 0:OK) old buy app
+                                Log.i(TAG, "getMessage : " + result.getMessage());
+
                                 String model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
                                 SharedPreferencesHelper.SetCode("‌Buy_App", "Buy_App", BuyAppActivity.this);
-                                String Body = "\n خریداری شده توسط = " + SharedPreferencesHelper.get_Data("Email", "",BuyAppActivity.this) + "\n  در تاریخ = " + date_iran() + "\n مدل دستگاه = " + model;
+                                String Body = "\n خریداری شده توسط = " + SharedPreferencesHelper.get_Data("Email", "", BuyAppActivity.this) + "\n  در تاریخ = " + date_iran() + "\n مدل دستگاه = " + model;
 
                                 EmailHelper.SendEmail(BuyAppActivity.this, "amin.syahi.69@gmail.com", "خرید برنامه", Body, "با تشکر از خرید شما...!", 0);
 
@@ -97,12 +102,18 @@ public class BuyAppActivity extends Activity {
             buyhelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                 public void onIabSetupFinished(IabResult result) {
                     if (result.isSuccess()) {
-                        ArrayList<String> moreSkus = new ArrayList<String>();
-                        moreSkus.add(SKU_PREMIUM);
+                        final ArrayList<String> moreSkus = new ArrayList<String>();
+                        moreSkus.add(SKU_PREMIUM[0]);
+                        moreSkus.add(SKU_PREMIUM[1]);
+                        moreSkus.add(SKU_PREMIUM[2]);
+
                         buyhelper.queryInventoryAsync(true, moreSkus, new IabHelper.QueryInventoryFinishedListener() {
                             public void onQueryInventoryFinished(final IabResult result, Inventory inv) {
                                 if (result.isSuccess()) {
-                                    SkuDetails details = inv.getSkuDetails(SKU_PREMIUM);
+                                    for (int i=0;i<moreSkus.size();i++)
+                                        Log.i(TAG, "moreSkus : " + inv.getSkuDetails(SKU_PREMIUM[i]).getTitle());
+
+                                    SkuDetails details = inv.getSkuDetails(SKU_PREMIUM[0]);
                                     textView.setText(details.getTitle() + "\n\n" + details.getDescription() + "\n" + "\n قیمت :" + details.getPrice());
                                     IndicatorHelper.IndicatorDismiss();
                                 } else {
