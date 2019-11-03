@@ -116,10 +116,22 @@ public class DialogHelper {
                     }
                     data.close();
                     dialog.dismiss();
-                    MessageHelper.Toast(context, "بارگزاری انجام شد...!");
+                    ((Activity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            MessageHelper.Toast(context, "بارگزاری انجام شد...!");
+                        }
+                    });
+
                 } catch (Exception e) {
                     Log.i(TAG, e.toString());
-                    MessageHelper.Toast(context, "فایل پشتیبانی خراب است");
+                    ((Activity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            MessageHelper.Toast(context, "فایل پشتیبانی خراب است");
+                        }
+                    });
+
                     dialog.dismiss();
                 }
             }

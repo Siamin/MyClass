@@ -6,7 +6,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +42,7 @@ public class NewClassActivity extends Activity {
     int cunters = 0;
     boolean view = false;
     ImageView backPage;
+    EditText Search;
     boolean statusBackPage = false;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,31 @@ public class NewClassActivity extends Activity {
                 onBackPressed();
             }
         });
+
+
+        Search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch(Search.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+
+        });
+    }
+
+    void performSearch(String search) {
+        List<AbsentPersentModel> searchList = new ArrayList<>();
+        for (int i = 0; i < absentPersentModels.size(); i++) {
+            if (absentPersentModels.get(i).family.contains(search)) {
+                searchList.add(absentPersentModels.get(i));
+            }
+        }
+
+        ShowAdapter(searchList.size() > 0 ? searchList : absentPersentModels);
+
     }
 
     void initView() {
@@ -64,6 +93,7 @@ public class NewClassActivity extends Activity {
         DATA = (TextView) findViewById(R.id.new_class_data);
         recyclerView1 = (RecyclerView) findViewById(R.id.recyclerview_new_classsss);
         linearLayoutManager = new LinearLayoutManager(NewClassActivity.this);
+        Search = findViewById(R.id.newclass_search);
         //*************************************************************
         name_class.setText("کلاس " + Name_class);
         DATA.setText("" + DateHelper.date_iran());
@@ -85,7 +115,7 @@ public class NewClassActivity extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            IndicatorHelper.IndicatorCreate(NewClassActivity.this,"در حال دریافت اطلاعات","لطفا صبر کنید ...!");
+                            IndicatorHelper.IndicatorCreate(NewClassActivity.this, "در حال دریافت اطلاعات", "لطفا صبر کنید ...!");
                             new Thread(new Runnable() {
                                 public void run() {
                                     Data();
@@ -94,9 +124,7 @@ public class NewClassActivity extends Activity {
                         }
                         if (view) {
                             view = false;
-                            recyclerView1.setLayoutManager(linearLayoutManager);
-                            recyclerView1.setHasFixedSize(true);
-                            recyclerView1.setAdapter(new StudentViewAdapter(absentPersentModels, NewClassActivity.this));
+                            ShowAdapter(absentPersentModels);
                             IndicatorHelper.IndicatorDismiss();
                             time.cancel();
                         }
@@ -152,14 +180,20 @@ public class NewClassActivity extends Activity {
         }
     }
 
+    void ShowAdapter(List<AbsentPersentModel> ListClass) {
+        recyclerView1.setLayoutManager(linearLayoutManager);
+        recyclerView1.setHasFixedSize(true);
+        recyclerView1.setAdapter(new StudentViewAdapter(ListClass, NewClassActivity.this));
+    }
+
     @Override
     public void onBackPressed() {
 
-        if (statusBackPage){
+        if (statusBackPage) {
             super.onBackPressed();
             go_main();
-        }else{
-            MessageHelper.Toast(NewClassActivity.this,"برای بازگشت دوباره کلیک کنید!");
+        } else {
+            MessageHelper.Toast(NewClassActivity.this, "برای بازگشت دوباره کلیک کنید!");
             statusBackPage = true;
         }
     }

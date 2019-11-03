@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
+
 import aspi.myclass.model.AbsentPersentModel;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StudentViewAdapter;
@@ -26,6 +31,7 @@ public class OldClassActivity extends Activity {
     public static java.util.List<AbsentPersentModel> List = new ArrayList<>();
     String TAG = "TAG_OldClassActivity";
     ImageView backPage;
+    EditText Search;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,30 @@ public class OldClassActivity extends Activity {
                 finish();
             }
         });
+
+        Search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch(Search.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+
+        });
+    }
+
+    void performSearch(String search) {
+        java.util.List<AbsentPersentModel> searchList = new ArrayList<>();
+        for (int i = 0; i < List.size(); i++) {
+            if (List.get(i).family.contains(search)) {
+                searchList.add(List.get(i));
+            }
+        }
+
+        ShowAdapter(searchList.size() > 0 ? searchList : List);
+
     }
 
     void initView() {
@@ -50,6 +80,7 @@ public class OldClassActivity extends Activity {
         Titel = (TextView) findViewById(R.id.New_class_titel);
         recyclerView_Old = (RecyclerView) findViewById(R.id.recyclerview_new_classsss);
         linearLayoutManagers = new LinearLayoutManager(this);
+        Search = findViewById(R.id.newclass_search);
         //*************************************************************
         Titel.setText("لیست گذشته کلاس");
         Time.setText("ساعت: " + HOUR);
@@ -65,6 +96,13 @@ public class OldClassActivity extends Activity {
         finish();
     }
 
+    void ShowAdapter(List<AbsentPersentModel> ListClass) {
+        recyclerView_Old.setLayoutManager(linearLayoutManagers);
+        recyclerView_Old.setHasFixedSize(true);
+        recyclerView_Old.setAdapter(new StudentViewAdapter(ListClass, OldClassActivity.this));
+    }
+
+
     void Data() {
         try {
             List.clear();
@@ -75,10 +113,7 @@ public class OldClassActivity extends Activity {
                     " AND r.jalase= '" + Jalase + "' AND r.sno = k.sno AND r.iddars = k.did  ORDER BY k.family ASC ,k.name ASC ");
             data.close();
 
-            recyclerView_Old.setLayoutManager(linearLayoutManagers);
-            recyclerView_Old.setHasFixedSize(true);
-            recyclerView_Old.setAdapter(new StudentViewAdapter(List, OldClassActivity.this));
-
+            ShowAdapter(List);
 
 //**************************************************************************************************
         } catch (Exception e) {
