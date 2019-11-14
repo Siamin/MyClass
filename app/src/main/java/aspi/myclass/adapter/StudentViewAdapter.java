@@ -101,7 +101,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         //*****************************************************************
         holder.sno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                DialogHelper.SnoStudent(contexts, "ویرایش شماره دانشجویی " + content.name + " " + content.family, holder.sno, data, content,NewClassActivity.did);
+                DialogHelper.SnoStudent(contexts, "ویرایش شماره دانشجویی " + content.name + " " + content.family, holder.sno, data, content,NewClassActivity.did);
 
             }
         });

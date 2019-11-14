@@ -33,7 +33,6 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
     TextView textTimeStart, textTimeEnd;
     DatabasesHelper data;
     public static String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
-    Tools om = new Tools();
     ImageView backPage, save_data;
     String TIMEPICKER = "TimePickerDialog";
 
@@ -48,10 +47,10 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
             @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (!name_edit.getText().toString().equals("")) {
-                    if (!code_edit.getText().toString().equals("")) {
-                        if (!location_edit.getText().toString().equals("")) {
-                            if (!class_edit.getText().toString().equals("")) {
+                if (!name_edit.getText().toString().isEmpty()) {
+                    if (!code_edit.getText().toString().isEmpty()) {
+                        if (!location_edit.getText().toString().isEmpty()) {
+                            if (!class_edit.getText().toString().isEmpty()) {
                                 if (save()) {
 
                                     MainActivity.refresh = 1;
@@ -179,4 +178,5 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
 
     }
+
 }

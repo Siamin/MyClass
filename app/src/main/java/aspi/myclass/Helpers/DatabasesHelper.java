@@ -31,6 +31,7 @@ public class DatabasesHelper extends SQLiteOpenHelper {
     public SQLiteDatabase mydb;
     private Context myContext;
 
+
     //**********************************************************************************************
     public DatabasesHelper(Context context) {
         super(context, "study", null, 1);
@@ -68,6 +69,10 @@ public class DatabasesHelper extends SQLiteOpenHelper {
     //**********************************************************************************************
     public void close() {
         mydb.close();
+    }
+
+    public boolean databaseIsOpen() {
+        return mydb.isOpen();
     }
 
     //**********************************************************************************************
@@ -416,10 +421,10 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         Cursor cursor = mydb.rawQuery("SELECT  * FROM klas WHERE did= '" + did + "' AND sno='" + sno + "'", null);
         if (cursor.getCount() == 0) {
 
-            cursor = mydb.rawQuery("UPDATE klas SET sno = '" + sno + "' WHERE did= '" + did + "' AND sno='" + old_sno + "'", null);
-            Log.i(TAG, "Count " + cursor.getCount());
-            cursor = mydb.rawQuery("UPDATE rollcall SET sno = '" + sno + "' WHERE iddars= '" + did + "' AND sno='" + old_sno + "'", null);
-            Log.i(TAG, "Count " + cursor.getCount());
+            Cursor cursorClass = mydb.rawQuery("UPDATE klas SET sno = " + sno + " WHERE did= '" + did + "' AND sno='" + old_sno + "'", null);
+            Log.i(TAG, "Count Class " + cursorClass.getCount());
+            Cursor cursorRollcall = mydb.rawQuery("UPDATE rollcall SET sno = " + sno + " WHERE iddars= '" + did + "' AND sno='" + old_sno + "'", null);
+            Log.i(TAG, "Count Rollcall" + cursorRollcall.getCount());
             return true;
         }
         return false;

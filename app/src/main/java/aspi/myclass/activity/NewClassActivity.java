@@ -1,11 +1,13 @@
 package aspi.myclass.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -21,7 +23,6 @@ import java.util.TimerTask;
 import aspi.myclass.Helpers.DateHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
-import aspi.myclass.Tools.Tools;
 import aspi.myclass.model.AbsentPersentModel;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StudentViewAdapter;
@@ -38,8 +39,9 @@ public class NewClassActivity extends Activity {
     public static List<AbsentPersentModel> absentPersentModels = new ArrayList<>();
     int MINUTE, HOUR;
     String[] DATA_IRAN;
+    String TAG = "TAG_NewClassActivity";
     public Timer time;
-    int cunters = 0;
+    int counters = 0;
     boolean view = false;
     ImageView backPage;
     EditText Search;
@@ -70,6 +72,23 @@ public class NewClassActivity extends Activity {
                 return false;
             }
 
+        });
+
+        Search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                performSearch(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
     }
 
@@ -113,8 +132,8 @@ public class NewClassActivity extends Activity {
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        cunters += 1;
-                        if (cunters == 1) {
+                        counters += 1;
+                        if (counters == 1) {
                             IndicatorHelper.IndicatorCreate(NewClassActivity.this, "در حال دریافت اطلاعات", "لطفا صبر کنید ...!");
                             new Thread(new Runnable() {
                                 public void run() {
@@ -165,7 +184,7 @@ public class NewClassActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        MessageHelper.Toast(NewClassActivity.this, "هیچ دانشجویی برای این کلاس ثبت نشده...!");
+                        MessageHelper.Toast(NewClassActivity.this, "هیچ دانشجویی برای تشکیل جلسه ثبت نشده...!");
                         go_main();
                     }
                 });
@@ -174,7 +193,7 @@ public class NewClassActivity extends Activity {
         } catch (final Exception e) {
             runOnUiThread(new Runnable() {
                 public void run() {
-                    // TOAST(""+e.toString());
+                    Log.i(TAG, "" + e.toString());
                 }
             });
         }

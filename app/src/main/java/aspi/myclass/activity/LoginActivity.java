@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (!SharedPreferencesHelper.get_Data("Email", "", LoginActivity.this).equals("")) {
-
                     DialogHelper.ForgotPassword(LoginActivity.this);
                 }
 
@@ -131,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(login.getId()),"login","Button");
+                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics, String.valueOf(login.getId()), "login", "Button");
                 if (get_password.equals(set_password)) {
                     Go_to_main();
                 } else {
@@ -143,13 +142,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void Go_to_main() {
+    void Go_to_main() {
         Intent Main = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(Main);
         finish();
     }
 
-    private void GetPasswordUser(String number) {
+    void GetPasswordUser(String number) {
         if (show.getText().toString().equals("رمز پیش فرض '0000'")) {
             show.setText("*");
         } else {
@@ -160,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void getpassword() {
+    void getpassword() {
         String password_chek = SharedPreferencesHelper.get_Data("Password_App", "null", LoginActivity.this);
         if (password_chek.equals("null")) {
             Go_to_main();
@@ -170,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void initView() {
+    void initView() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         //******************************************
         show = (TextView) findViewById(R.id.key_text);

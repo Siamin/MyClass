@@ -8,8 +8,8 @@ android {
         applicationId "aspi.myclass"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 32
-        versionName '4.1.2'
+        versionCode 34
+        versionName '4.1.4'
 
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -43,8 +43,15 @@ dependencies {
     implementation 'com.mcxiaoke.volley:library:1.0.19'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 
+    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
+        transitive = true;
+    }
+
+    implementation 'im.crisp:crisp-sdk:0.1.14'
 }
 
 repositories {
     maven { url "https://jitpack.io" }
+    maven { url 'https://maven.fabric.io/public' }
+
 }

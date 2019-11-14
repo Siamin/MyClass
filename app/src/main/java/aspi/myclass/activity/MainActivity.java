@@ -1,16 +1,22 @@
 package aspi.myclass.activity;
 
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
+
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +30,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.farsitel.bazaar.IUpdateCheckService;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
@@ -40,14 +47,18 @@ import java.util.TimerTask;
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
+
+import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.Services.FireBaseAnalyticsService;
 import aspi.myclass.model.ClassModel;
 import aspi.myclass.R;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.adapter.ClassViewAdapter;
 
+
 public class MainActivity extends AppCompatActivity
-            implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener
+        , DatePickerDialog.OnDateSetListener {
 
 
     DrawerLayout drawer;
@@ -67,10 +78,12 @@ public class MainActivity extends AppCompatActivity
             , "BackupClass"), Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
     IUpdateCheckService service;
     UpdateServiceConnection connection;
-    private static final String TAG = "TAG_Main";
-    int t = 0;
-    private FirebaseAnalytics mFirebaseAnalytics;
-    private FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
+    static final String TAG = "TAG_Main";
+    FirebaseAnalytics mFirebaseAnalytics;
+    FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
+    static final int STORAGE_PERMISSION_CODE = 101;
+    String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +139,15 @@ public class MainActivity extends AppCompatActivity
         initService();
     }
 
+    public void helpMe(View v) {
+        if (!SharedPreferencesHelper.get_Data("Email", "",MainActivity.this).equals("")){
+        startActivity(new Intent(MainActivity.this,CrispActivity.class));
+        finish();
+        }else{
+            MessageHelper.Mesage(MainActivity.this,"برای استفاده از این بخش باید ایمیل خود را در قسمت تنظیمات ثبت کنید.");
+        }
+    }
+
     public void onBackPressed() {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -138,7 +160,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(id),item.getTitle().toString(),"menu");
+        fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics, String.valueOf(id), item.getTitle().toString(), "menu");
         if (id == R.id.nav_add_class) {
             startActivity(new Intent(this, AddClassActivity.class));
         } else if (id == R.id.nav_abute) {
@@ -155,14 +177,26 @@ public class MainActivity extends AppCompatActivity
             DialogHelper.cleanDatabase(MainActivity.this, data);
         } else if (id == R.id.nav_backup) {
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
-                DialogHelper.backupFile(MainActivity.this, "ایا شما میخواهید از اطلاعات خود فایل پشتیبان در حافظه ای زیر ایجاد کنید؟" + "\n" + Backup_File_App, data);
+                if (ValidationHelper.checkPerimission(MainActivity.this)) {
+                    DialogHelper.backupFile(MainActivity.this, "ایا شما میخواهید از اطلاعات خود فایل پشتیبان در حافظه ای زیر ایجاد کنید؟" + "\n" + Backup_File_App, data);
+
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, STORAGE_PERMISSION_CODE);
+                }
             } else {
                 MessageHelper.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
             }
 
         } else if (id == R.id.nav_upload) {
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
-                DialogHelper.uploadBackupFile(MainActivity.this, "ایا شما میخواهید از حافظه ای  " + "زیر" + " اطلاعات خود را بازخوانی کنید؟" + "\n" + Backup_File_App, data);
+
+                if (ValidationHelper.checkPerimission(MainActivity.this)) {
+                    DialogHelper.uploadBackupFile(MainActivity.this, "ایا شما میخواهید از حافظه ای  " + "زیر" + " اطلاعات خود را بازخوانی کنید؟" + "\n" + Backup_File_App, data);
+
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, STORAGE_PERMISSION_CODE);
+                }
+
             } else {
                 MessageHelper.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
             }
@@ -182,11 +216,26 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // This function is called when the user accepts or decline the permission.
+    // Request Code is used to check which permission called this function.
+    // This request code is provided when the user is prompt for permission.
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            }
+        }
+    }
+
     void initView() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         data = new DatabasesHelper(this);
         data.database();
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -340,6 +389,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
     class UpdateServiceConnection implements ServiceConnection {
         public void onServiceConnected(ComponentName name, IBinder boundService) {
             service = IUpdateCheckService.Stub
@@ -374,7 +424,6 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
 
     }
-
 
 
 }

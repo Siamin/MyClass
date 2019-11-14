@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:layout_height="2dp"
                 android:background="@color/white"/>
 
-            <EditText
+            <CustomObject.EditTextCustom
                 android:id="@+id/setcode_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,33 +52,38 @@
                 android:ems="10"
                 android:hint="کد را وارد کنید"
                 android:gravity="right"
-                android:inputType="numberPassword" />
+                android:inputType="number" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/set_cancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:text="انصراف"
-                    android:textColor="#faee0c" />
-
-                <TextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/set_ok"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:gravity="left"
-                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:padding="@dimen/_8sdp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_margin="@dimen/_5sdp"
                     android:text="تایید"
-                    android:textColor="#faee0c" />
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/green" />
+
+                <CustomObject.TextViewCustom
+                    android:id="@+id/set_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:padding="@dimen/_8sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:text="انصراف"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/red" />
+
+
             </LinearLayout>
 
         </LinearLayout>

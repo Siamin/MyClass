@@ -1,23 +1,24 @@
 package aspi.myclass.Helpers;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Calendar;
@@ -25,10 +26,8 @@ import java.util.List;
 
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
-import aspi.myclass.activity.AddStudentActivity;
+
 import aspi.myclass.activity.MainActivity;
-import aspi.myclass.activity.NewClassActivity;
-import aspi.myclass.activity.ReportClassActivity;
 import aspi.myclass.activity.SettingActivity;
 import aspi.myclass.adapter.ListCreateClassAdapter;
 import aspi.myclass.model.AbsentPersentModel;
@@ -64,7 +63,9 @@ public class DialogHelper {
         okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 upload_backup(data, context, dialog);
+
             }
         });
 
@@ -84,10 +85,11 @@ public class DialogHelper {
             while ((Line = bufferedReader.readLine()) != null) {
                 Return += Line.replace("%", "").replace("null", "") + "%";
             }
+            return Return;
         } catch (Exception e) {
-            Return = "";
+            return "";
         }
-        return Return;
+
     }
 
     static void upload_backup(final DatabasesHelper data, final Context context, final Dialog dialog) {
@@ -99,33 +101,53 @@ public class DialogHelper {
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    data.open();
-                    for (int i = 0; i < Class.length; i++) {
-                        String[] item = Class[i].split("~");
-                        data.insert_class2(item[0], item[1], item[2], item[3], item[4], item[5], item[6], NC + item[7], item[8]);
-                    }
-                    for (int i = 0; i < Student.length; i++) {
-                        String[] item = Student[i].split("~");
-                        data.insert_student2(item[0], item[1], item[2], item[3], NC + item[4]);
-                    }
-                    for (int i = 0; i < Rollcall.length; i++) {
-                        String[] item = Rollcall[i].split("~");
-                        boolean status = true;
-                        if (item[1].equals("0")) status = false;
-                        data.insert_Rollcall(item[0], status, item[2], item[3], item[4], item[5], NC + item[6], item[7] + NC, item[8]);
-                    }
-                    data.close();
-                    dialog.dismiss();
-                    ((Activity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            MessageHelper.Toast(context, "بارگزاری انجام شد...!");
+
+                    if (Class.length > 0 && Tools.checkFileInFolder(Backup_File_App,"/class")) {
+                        data.open();
+                        for (int i = 0; i < Class.length; i++) {
+                            String[] item = Class[i].split("~");
+                            data.insert_class2(item[0], item[1], item[2], item[3], item[4], item[5], item[6], NC + item[7], item[8]);
                         }
-                    });
+
+                        if (Student.length > 0 && Tools.checkFileInFolder(Backup_File_App,"/student")) {
+                            for (int i = 0; i < Student.length; i++) {
+                                String[] item = Student[i].split("~");
+                                data.insert_student2(item[0], item[1], item[2], item[3], NC + item[4]);
+                            }
+
+                            if (Rollcall.length > 0 && Tools.checkFileInFolder(Backup_File_App,"/rollcall")) {
+                                for (int i = 0; i < Rollcall.length; i++) {
+                                    String[] item = Rollcall[i].split("~");
+                                    boolean status = true;
+                                    if (item[1].equals("0")) status = false;
+                                    data.insert_Rollcall(item[0], status, item[2], item[3], item[4], item[5], NC + item[6], item[7] + NC, item[8]);
+                                }
+
+
+
+                            }
+                        }
+
+                        data.close();
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MessageHelper.Toast(context, "بارگزاری انجام شد...!");
+                            }
+                        });
+                    } else {
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MessageHelper.Toast(context, "اطلاعاتی برای بازیابی وجود ندارد...!");
+                            }
+                        });
+                    }
+                    dialog.dismiss();
 
                 } catch (Exception e) {
                     Log.i(TAG, e.toString());
-                    ((Activity)context).runOnUiThread(new Runnable() {
+                    ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             MessageHelper.Toast(context, "فایل پشتیبانی خراب است");
@@ -151,31 +173,47 @@ public class DialogHelper {
     static void BackUpDataBase(DatabasesHelper data, Context context, Dialog dialog) {
         String BACKUP_class = "", BACKUP_student = "", BACKUP_roll = "";
         try {
-            try {
-                data.open();
-                int cunt_class = data.count("dars");
-                int cunt_student = data.count("klas");
-                int cunt_roll = data.count("rollcall");
+            data.open();
+            int count_class = data.count("dars");
+            int count_student = data.count("klas");
+            int count_roll = data.count("rollcall");
 
-                for (int i = 0; i < cunt_class; i++) {
+            Log.i(TAG, "dars : " + count_class);
+            Log.i(TAG, "klas : " + count_student);
+            Log.i(TAG, "rollcall : " + count_roll);
+
+            if (count_class > 0) {
+
+                for (int i = 0; i < count_class; i++) {
                     BACKUP_class += data.Display_all("dars", i, 1, 9) + "\n";
                 }
-                for (int i = 0; i < cunt_student; i++) {
-                    BACKUP_student += data.Display_all("klas", i, 1, 8) + "\n";
+
+
+                if (count_student > 0) {
+                    for (int i = 0; i < count_student; i++) {
+                        BACKUP_student += data.Display_all("klas", i, 1, 8) + "\n";
+                    }
+
+                    if (count_roll > 0) {
+                        for (int i = 0; i < count_roll; i++) {
+                            BACKUP_roll += data.Display_all("rollcall", i, 1, 9) + "\n";
+                        }
+
+                        write("rollcall", BACKUP_roll);
+
+                    }
+                    write("student", BACKUP_student);
                 }
-                for (int i = 0; i < cunt_roll; i++) {
-                    BACKUP_roll += data.Display_all("rollcall", i, 1, 9) + "\n";
-                }
-                data.close();
                 write("class", BACKUP_class);
-                write("student", BACKUP_student);
-                write("rollcall", BACKUP_roll);
-                dialog.dismiss();
+
                 MessageHelper.Toast(context, "فایل پشتیبانی گرفته شد...!");
-            } catch (Exception e) {
-                Log.i(TAG, e.toString());
+            } else {
+                MessageHelper.Toast(context, "اطلاعاتی برای پشتیبانی گرفت ثبت نشده!");
             }
+            dialog.dismiss();
+            data.close();
         } catch (Exception e) {
+            dialog.dismiss();
             Log.i(TAG, e.toString());
         }
     }
@@ -389,7 +427,7 @@ public class DialogHelper {
 
                 String Subject = "کد تایید نرم افزار دفتر نمره حضور و غیاب ";
                 String Body = Email + "\n" + model + "\nکد تایید\n" + codes + "\n ایمیل شما \n" + Email;
-                EmailHelper.SendEmail(context, Email, Subject, Body, "کد برای ایمیل شما ارسال شد...!", 1, codes, Email);
+                EmailHelper.SendEmail(context, Email, Subject, Body, "کد برای ایمیل شما ارسال شد...!", 1,dialog, codes, Email);
 
             }
         });
@@ -463,7 +501,7 @@ public class DialogHelper {
                 String Body = " با سلام رمز عبور شما \n" + SharedPreferencesHelper.get_Data("Password_App", "null", context);
                 String Subject = "رمز عبور نرم افزار دفتر نمره حضور و غیاب " + SharedPreferencesHelper.get_Data("Email", "", context);
                 String MailTo = SharedPreferencesHelper.get_Data("Email", "", context);
-                EmailHelper.SendEmail(context, MailTo, Subject, Body, "ایمیل ارسال شد...!", 0);
+                EmailHelper.SendEmail(context, MailTo, Subject, Body, "ایمیل ارسال شد...!", 0,dialog);
 
             }
         });
@@ -565,7 +603,7 @@ public class DialogHelper {
                         Sno.setText(sno.getText().toString());
                         content.sno = sno.getText().toString();
                     } else {
-                        MessageHelper.Toast(context, "خطا در ثبت اطلاعات");
+                        MessageHelper.Toast(context, "این شماره برای دانشجویی دیگه ثبت شده!");
                     }
 
                     data.close();
@@ -750,7 +788,7 @@ public class DialogHelper {
         });
     }
 
-    public static void qustionSaveExcll(final Context context,final List<ReportDataModel> model, final String Title , final String NameClass,final boolean TypePage) {
+    public static void qustionSaveExcll(final Context context, final List<ReportDataModel> model, final String Title, final String NameClass, final boolean TypePage) {
         final Dialog dialog = new Dialog(context, R.style.NewDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_custom);
@@ -771,7 +809,7 @@ public class DialogHelper {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ExcellHelper.ExcelSaveDataClassByTypePage(context,model,NameClass,NameClass + " " + Title ,TypePage)) {
+                if (ExcellHelper.ExcelSaveDataClassByTypePage(context, model, NameClass, NameClass + " " + Title, TypePage)) {
                     MessageHelper.Toast(context, MainActivity.Address_file_app + "/" + NameClass + " " + Title + ".xls");
                 } else {
                     if (!MainActivity.Address_file_app.exists()) {
@@ -790,8 +828,6 @@ public class DialogHelper {
                 dialog.dismiss();
             }
         });
-
-
 
 
     }

@@ -16,6 +16,7 @@ import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import aspi.myclass.Helpers.EmailHelper;
 import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.R;
 
@@ -30,32 +31,13 @@ public class CommentActivity extends Activity {
         setContentView(R.layout.activity_comment);
         //******************************************************************************************
         initView();
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
-        email.setText(sp.getString("Email", ""));
+
+        email.setText(SharedPreferencesHelper.get_Data("Email", "",CommentActivity.this));
         model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
         //******************************************************************************************
         ok.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
-                if (ValidationHelper.isValidationNull(name.getText().toString())) {
-                    if (ValidationHelper.isValidationNull(email.getText().toString())) {
-                        if (ValidationHelper.isValidationNull(subject.getText().toString())) {
-                            if (ValidationHelper.isValidationNull(body.getText().toString())) {
-                                String Body = body.getText().toString() + "\n ارسال شده از  طرف \n" + name.getText().toString() + "\n ایمیل \n" + email.getText().toString() + "\n مدل دستگاه = " + model;
-                                EmailHelper.SendEmail(CommentActivity.this, "amin.syahi.69@gmail.com", subject.getText().toString(), Body, " نظر ارسال شد ", 2);
-                            } else {
-                                MessageHelper.Toast(CommentActivity.this, "متن پیام را وارد کنید");
-                            }
-                        } else {
-                            MessageHelper.Toast(CommentActivity.this, "موضوع را وارد کنید");
-                        }
-                    } else {
-                        MessageHelper.Toast(CommentActivity.this, "ایمیل خود را وارد کنید");
-                    }
-                } else {
-                    MessageHelper.Toast(CommentActivity.this, "نام و نام خانوادگی را وارد کنید");
-                }
-
+                sendComment();
             }
         });
         //*************************************************************************************_cancel form
@@ -64,6 +46,31 @@ public class CommentActivity extends Activity {
                 Back();
             }
         });
+    }
+
+    void sendComment(){
+        if (ValidationHelper.isValidationNull(name.getText().toString())) {
+            if (ValidationHelper.isValidationNull(email.getText().toString())) {
+                if (ValidationHelper.isValidationNull(subject.getText().toString())) {
+                    if (ValidationHelper.isValidationNull(body.getText().toString())) {
+                        if (ValidationHelper.isValidEmailId(email.getText().toString())) {
+                            String Body = body.getText().toString() + "\n ارسال شده از  طرف \n" + name.getText().toString() + "\n ایمیل \n" + email.getText().toString() + "\n مدل دستگاه = " + model;
+                            EmailHelper.SendEmail(CommentActivity.this, "amin.syahi.69@gmail.com", subject.getText().toString(), Body, " نظر ارسال شد ", 2,null);
+                        } else {
+                            MessageHelper.Toast(CommentActivity.this, "ایمیل وارد شده صحیح نمی باشد.");
+                        }
+                    } else {
+                        MessageHelper.Toast(CommentActivity.this, "متن پیام را وارد کنید");
+                    }
+                } else {
+                    MessageHelper.Toast(CommentActivity.this, "موضوع را وارد کنید");
+                }
+            } else {
+                MessageHelper.Toast(CommentActivity.this, "ایمیل خود را وارد کنید");
+            }
+        } else {
+            MessageHelper.Toast(CommentActivity.this, "نام و نام خانوادگی را وارد کنید");
+        }
     }
 
     void Back() {
@@ -80,4 +87,9 @@ public class CommentActivity extends Activity {
         cancel = (ImageView) findViewById(R.id.coment_cancel);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Back();
+    }
 }

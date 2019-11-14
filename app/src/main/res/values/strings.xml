@@ -13,4 +13,7 @@
 
     <string name="ApiSendMail">http://eyeshospital.ir/SendEmail.php</string>
 
+    <string name="FirebaseApiKey">AIzaSyAK4vnzSWr01YFg0h2TmIse6I2R-K-scE8</string>
+    <string name="CrispWebId">dd4fefd7-c5c9-46aa-af7e-0197acb6068b</string>
+
 </resources>

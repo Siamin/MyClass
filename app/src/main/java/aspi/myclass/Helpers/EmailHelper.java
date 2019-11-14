@@ -2,6 +2,7 @@ package aspi.myclass.Helpers;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,7 +21,15 @@ public class EmailHelper {
     static String TAG = "TAG_EmailHelper";
     static NetWork netWork = new NetWork();
 
-    public static void SendEmail(final Context context, final String MailTo, final String Subject, final String Body, final String Message_sucsess, final int Action, final String... param) {
+    public static void SendEmail(final Context context, final String MailTo, final String Subject, final String Body, final String Message_sucsess, final int Action, final Dialog dialog, final String... param) {
+
+        if (!ValidationHelper.isValidationInternet(context)){
+            MessageHelper.Toast(context, "اتصال اینترنت خود را بررسی کنید!");
+            dialog.dismiss();
+            return;
+        }
+
+
         IndicatorHelper.IndicatorCreate(context, "", "لطفا صبر کنید");
         new AsyncTask<String, Void, String>() {
 
@@ -36,12 +45,13 @@ public class EmailHelper {
             @Override
             protected void onPostExecute(String result) {
                 Log.i(TAG, result);
+                dialog.dismiss();
                 IndicatorHelper.IndicatorDismiss();
                 if (result.equals("1")) {
                     MessageHelper.Toast(context, Message_sucsess);
                     if (Action > 0) SucsessMail(context, Action, param);
                 } else {
-                    MessageHelper.Toast(context, "خطا در ارسال ایمیل...!");
+                    MessageHelper.Toast(context, "خطا در ارسال ...!");
 
                 }
 
@@ -65,6 +75,5 @@ public class EmailHelper {
 
 
     }
-
 
 }

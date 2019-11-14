@@ -79,7 +79,7 @@ public class BuyAppActivity extends Activity {
                                 SharedPreferencesHelper.SetCode("‌Buy_App", "Buy_App", BuyAppActivity.this);
                                 String Body = "\n خریداری شده توسط = " + SharedPreferencesHelper.get_Data("Email", "", BuyAppActivity.this) + "\n  در تاریخ = " + date_iran() + "\n مدل دستگاه = " + model;
 
-                                EmailHelper.SendEmail(BuyAppActivity.this, "amin.syahi.69@gmail.com", "خرید برنامه", Body, "با تشکر از خرید شما...!", 0);
+                                EmailHelper.SendEmail(BuyAppActivity.this, "amin.syahi.69@gmail.com", "خرید برنامه", Body, "با تشکر از خرید شما...!", 0,null);
 
                                 Back();
                             } else {

@@ -1,18 +1,26 @@
 package aspi.myclass.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.TableHelper;
+import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.R;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.model.ReportDataModel;
@@ -28,6 +36,8 @@ public class ReportClassActivity extends Activity {
     public static String Name_class, Id_class, Did_class;
     String TAG = "TAG_ReportClassActivity";
     ImageView backPage;
+    private static final int STORAGE_PERMISSION_CODE = 101;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +48,15 @@ public class ReportClassActivity extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogHelper.qustionSaveExcll(ReportClassActivity.this, reportModels, titel.getText().toString(), Name_class, STATUS);
+
+
+                if (ValidationHelper.checkPerimission(ReportClassActivity.this)) {
+                    DialogHelper.qustionSaveExcll(ReportClassActivity.this, reportModels, titel.getText().toString(), Name_class, STATUS);
+                } else {
+                    // Requesting the permission
+                    String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                    ActivityCompat.requestPermissions(ReportClassActivity.this, new String[]{permission}, STORAGE_PERMISSION_CODE);
+                }
             }
         });
         //******************************************************************************************
@@ -89,7 +107,7 @@ public class ReportClassActivity extends Activity {
                     + " ORDER BY r.day ASC ,r.month ASC ,r.year ASC ,r.HOUR ASC ,k.family ASC , k.name ASC , r.jalase ASC");
             data.close();
             if (reportModels.size() > 0) {
-                TableHelper.creatTabel(ReportClassActivity.this, reportModels, STATUS,table);
+                TableHelper.creatTabel(ReportClassActivity.this, reportModels, STATUS, table);
             } else {
                 finish();
             }
@@ -98,5 +116,23 @@ public class ReportClassActivity extends Activity {
             Log.i(TAG, "Error" + e.toString());
         }
     }
+
+    // This function is called when the user accepts or decline the permission.
+    // Request Code is used to check which permission called this function.
+    // This request code is provided when the user is prompt for permission.
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            }
+        }
+    }
+
 
 }

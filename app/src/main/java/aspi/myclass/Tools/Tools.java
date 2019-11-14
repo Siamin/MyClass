@@ -1,14 +1,16 @@
 package aspi.myclass.Tools;
 
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
+
+import java.io.File;
 import java.util.Random;
+
 import aspi.myclass.Helpers.MessageHelper;
 
 public class Tools {
@@ -56,7 +58,7 @@ public class Tools {
         }
     }
 
-    public static void openApplicationByUriAndPackage(Context context,String uri,String Package) {
+    public static void openApplicationByUriAndPackage(Context context, String uri, String Package) {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(uri));
@@ -67,4 +69,10 @@ public class Tools {
         }
     }
 
+    public static boolean checkFileInFolder(File folder, String name) {
+
+        File file = new File(folder.toString() + name);
+
+        return file.exists();
+    }
 }
