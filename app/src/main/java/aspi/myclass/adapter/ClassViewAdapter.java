@@ -25,6 +25,7 @@ import java.util.List;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.activity.EditStudentActivity;
 import aspi.myclass.model.ClassModel;
 import aspi.myclass.R;
 import aspi.myclass.activity.AddStudentActivity;
@@ -39,14 +40,14 @@ import aspi.myclass.Helpers.DatabasesHelper;
 
 public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh> {
 
-    private List<ClassModel> content_class_main_shows;
+    private List<ClassModel> Model;
     private Context contexts;
     private DatabasesHelper data;
     Activity activity;
     String TIMEPICKER = "TimePickerDialog";
 
     public ClassViewAdapter(List<ClassModel> model, Context context) {
-        content_class_main_shows = model;
+        Model = model;
         contexts = context;
         data = new DatabasesHelper(context);
         activity = ((Activity)context);
@@ -60,7 +61,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
 
     @Override
     public void onBindViewHolder(cvh holder, int position) {
-        final ClassModel content = content_class_main_shows.get(position);
+        final ClassModel content = Model.get(position);
 
         if (!content.name_class.equals("")) {
             holder.row.setText("" + (position + 1) + "");
@@ -82,7 +83,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
 
     @Override
     public int getItemCount() {
-        return content_class_main_shows.size();
+        return Model.size();
     }
 
     public class cvh extends RecyclerView.ViewHolder {
@@ -103,10 +104,10 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ClassModel conlist = content_class_main_shows.get(getPosition());
+                    ClassModel conlist = Model.get(getPosition());
 
                     if (conlist.APP) {
-                        items(conlist.name_class, conlist.id, conlist.location, conlist.time_start, conlist.time_end, conlist.characteristic, conlist.id_class, conlist.text_class);
+                        Option(conlist.name_class, conlist.id, conlist.location, conlist.time_start, conlist.time_end, conlist.characteristic, conlist.id_class, conlist.text_class);
                     }
 
                 }
@@ -115,7 +116,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
 
     }
 
-    void items(final String Class, final String id, final String location, final String starttime, final String endtime, final String Characteristic, final String did, final String TXT) {
+    void Option(final String Class, final String id, final String location, final String starttime, final String endtime, final String Characteristic, final String did, final String TXT) {
 
         final Dialog kelas = new Dialog(contexts, R.style.NewDialog);
         kelas.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -132,6 +133,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         final Button output_class = (Button) kelas.findViewById(R.id.list_class_chang_output_class);
         final Button text_class = (Button) kelas.findViewById(R.id.list_class_chang_text_class);
         final Button week_class = (Button) kelas.findViewById(R.id.list_class_chang_add_class_of_week_class);
+        final Button editStudent = (Button) kelas.findViewById(R.id.option_editstudent);
         //******************************************************************************************
 
 
@@ -211,6 +213,14 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             }
         });
         //******************************************************************************************
+        editStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(contexts, EditStudentActivity.class);
+                intent.putExtra("idClass",did);
+                ((Activity)contexts).startActivity(intent);
+            }
+        });
     }
 
     void Set_Of_Week(final String Class, final String location, final String Characteristic, final String did, final String TXT) {
@@ -229,6 +239,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         final EditText room = (EditText) Week.findViewById(R.id.class_of_week_class_edit);
         final LinearLayout clickTimeStart = (LinearLayout) Week.findViewById(R.id.class_of_week_timestart);
         final LinearLayout clickTimeEnd = (LinearLayout) Week.findViewById(R.id.class_of_week_timeend);
+
         //**********************************************************************************
         String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
 

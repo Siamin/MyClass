@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aspi.myclass.model.AbsentPersentModel;
+import aspi.myclass.model.ClassModel;
 import aspi.myclass.model.OldClassModel;
 import aspi.myclass.model.ReportDataModel;
 import aspi.myclass.model.ReportModel;
 import aspi.myclass.model.StatisticsModel;
+import aspi.myclass.model.StudentModel;
 
 import static java.lang.Integer.parseInt;
 
@@ -284,6 +286,35 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         return cou;
     }
 
+    //*********************************************************************************************Get Class By Id
+    public List<ClassModel> getClassById(String dayOfWeek) {
+        List<ClassModel> returnModel = new ArrayList<>();
+        Cursor cursor = mydb.rawQuery("SELECT  * FROM dars WHERE dey='" + dayOfWeek + "'", null);
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+
+                    ClassModel model = new ClassModel();
+                    model.id = cursor.getString(0);
+                    model.name_class = cursor.getString(1);
+                    model.time_start = cursor.getString(3);
+                    model.location = cursor.getString(4);
+                    model.time_end = cursor.getString(5);
+                    model.characteristic = cursor.getString(6);
+                    model.text_class = cursor.getString(7);
+                    model.id_class = cursor.getString(8);
+                    model.Class_ = cursor.getString(9);
+                    model.APP = true;
+
+                    returnModel.add(model);
+                } while (cursor.moveToNext());
+            }
+        }
+
+        return returnModel;
+    }
+
     //*********************************************************************************************_set_id_class
     private void set_id_class() {
         int id = parseInt(Display("dars", (count("dars") - 1), 0));
@@ -429,7 +460,34 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
     //**********************************************************************************************
+    public List<AbsentPersentModel> getStudentClass(String idClass, int delete) {
+        List<AbsentPersentModel> returnModel = new ArrayList<>();
+        Cursor cursor = mydb.rawQuery("SELECT  * FROM klas WHERE did='" + idClass + "' AND d='" + delete + "'", null);
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+
+                    AbsentPersentModel model = new AbsentPersentModel();
+                    model.id = cursor.getString(0);
+                    model.sno = cursor.getString(1);
+                    model.family = cursor.getString(2);
+                    model.name = cursor.getString(3);
+                    model.text = cursor.getString(4);
+                    model.classId = cursor.getString(5);
+                    model.delete = cursor.getString(6);
+                    model.absent = cursor.getString(7);
+                    model.prezent = cursor.getString(8);
+
+                    returnModel.add(model);
+                } while (cursor.moveToNext());
+            }
+        }
+
+        return returnModel;
+    }
 
 
 }

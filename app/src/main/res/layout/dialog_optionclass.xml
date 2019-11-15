@@ -33,7 +33,7 @@
             android:layoutDirection="rtl"
             android:orientation="horizontal">
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_old_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -43,7 +43,7 @@
                 android:text="جلسات گذشته"
                 android:textSize="15dp" />
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_new_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -61,7 +61,7 @@
             android:layoutDirection="rtl"
             android:orientation="horizontal">
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_output_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -71,7 +71,7 @@
                 android:text="خروجی از کلاس"
                 android:textSize="15dp" />
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_edit_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -89,7 +89,7 @@
             android:layoutDirection="rtl"
             android:orientation="horizontal">
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_add_student_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -99,7 +99,7 @@
                 android:text=" دانشجو جدید"
                 android:textSize="15dp" />
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_text_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -117,7 +117,7 @@
             android:layoutDirection="rtl"
             android:orientation="horizontal">
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_add_class_of_week_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -128,7 +128,7 @@
                 android:textSize="15dp" />
 
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_class_chang_delete_class"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -136,9 +136,18 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector"
                 android:text="حذف کلاس"
-                android:textColor="#fe0202"
+                android:textColor="@color/red"
                 android:textSize="15dp" />
         </LinearLayout>
+
+        <CustomObject.ButtonCustom
+            android:id="@+id/option_editstudent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@drawable/selector"
+            android:text="دانشجویان کلاس"
+            android:textSize="15dp" />
 
     </LinearLayout>
 

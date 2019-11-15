@@ -140,11 +140,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void helpMe(View v) {
-        if (!SharedPreferencesHelper.get_Data("Email", "",MainActivity.this).equals("")){
-        startActivity(new Intent(MainActivity.this,CrispActivity.class));
-        finish();
-        }else{
-            MessageHelper.Mesage(MainActivity.this,"برای استفاده از این بخش باید ایمیل خود را در قسمت تنظیمات ثبت کنید.");
+        if (!SharedPreferencesHelper.get_Data("Email", "", MainActivity.this).equals("")) {
+            startActivity(new Intent(MainActivity.this, CrispActivity.class));
+            finish();
+        } else {
+            MessageHelper.Mesage(MainActivity.this, "برای استفاده از این بخش باید ایمیل خود را در قسمت تنظیمات ثبت کنید.");
         }
     }
 
@@ -293,54 +293,11 @@ public class MainActivity extends AppCompatActivity
 
         try {
             DAY = day;
-            String Name = "", Start = "", End = "", Id = "", Location = "", Class_ = "", Id_class = "", Characteristic = "", txt_class = "";
             data.open();
-            int cunt = data.count("dars");
-            boolean chek = false;
-            for (int i = 0; i < cunt; i++) {
-                int Day = Integer.parseInt(data.Display("dars", i, 2));
-                if (Day == day) {
-                    Name += data.Display("dars", i, 1) + "~";
-                    Start += data.Display("dars", i, 3) + "~";
-                    End += data.Display("dars", i, 5) + "~";
-                    Id += data.Display("dars", i, 0) + "~";
-                    Id_class += data.Display("dars", i, 8) + "~";
-                    Location += data.Display("dars", i, 4) + "~";
-                    Class_ += data.Display("dars", i, 9) + "~";
-                    Characteristic += data.Display("dars", i, 6) + "~";
-                    txt_class += data.Display("dars", i, 7) + " ~";
-                    chek = true;
-                }
-            }
+            List = data.getClassById(String.valueOf(day));
             data.close();
+            if (List.size() > 0) {
 
-            if (chek) {
-
-                String[] name, start, end, id, location, class_, id_class, characteristic, Text_class;
-                name = Name.split("~");
-                start = Start.split("~");
-                end = End.split("~");
-                id = Id.split("~");
-                id_class = Id_class.split("~");
-                location = Location.split("~");
-                class_ = Class_.split("~");
-                characteristic = Characteristic.split("~");
-                Text_class = txt_class.split("~");
-                List.clear();
-                for (int i = 0; i < name.length; i++) {
-                    ClassModel content = new ClassModel();
-                    content.APP = chek;
-                    content.name_class = name[i];
-                    content.time_start = start[i];
-                    content.time_end = end[i];
-                    content.id = id[i];
-                    content.location = location[i];
-                    content.Class_ = class_[i];
-                    content.id_class = id_class[i];
-                    content.characteristic = characteristic[i];
-                    content.text_class = Text_class[i];
-                    List.add(content);
-                }
 
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
@@ -354,6 +311,7 @@ public class MainActivity extends AppCompatActivity
             }
             Set_day();
         } catch (Exception e) {
+            Log.i(TAG, e.toString());
         }
 
     }

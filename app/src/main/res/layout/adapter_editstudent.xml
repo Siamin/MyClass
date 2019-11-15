@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:elevation="8dp"
+        android:foregroundGravity="center_vertical|center_horizontal"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
+
+
+            <CustomObject.TextViewCustom
+                android:id="@+id/adapter_editestudent_sno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="2dp"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:gravity="center_vertical|right"
+                android:padding="@dimen/_5sdp"
+                android:text="شماره دانشجویی"
+                android:textSize="15dp" />
+
+            <CustomObject.TextViewCustom
+                android:id="@+id/adapter_editestudent_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:gravity="center_vertical|right"
+                android:padding="@dimen/_5sdp"
+                android:text="نام"
+                android:textSize="15dp" />
+
+            <CustomObject.TextViewCustom
+                android:id="@+id/adapter_editestudent_family"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:padding="@dimen/_5sdp"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:text="نام خانوادگی"
+                android:textSize="15dp" />
+
+            <CustomObject.TextViewCustom
+                android:id="@+id/adapter_editestudent_titledescription"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical|right"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_24dp"
+                android:drawableTint="@color/white"
+                android:text="توضیحات دانشجو"
+                android:textColor="@color/white" />
+
+            <CustomObject.TextViewCustom
+                android:id="@+id/adapter_editestudent_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<CustomObject.TextViewCustom-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"/>-->
+
+                <!--<CustomObject.TextViewCustom-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"/>-->
+
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
