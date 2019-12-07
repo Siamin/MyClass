@@ -1,7 +1,7 @@
 package aspi.myclass.Helpers;
 
+
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Window;
 import android.widget.TextView;

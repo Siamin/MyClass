@@ -29,9 +29,9 @@ public class EditClassActivity extends Activity implements TimePickerDialog.OnTi
     Spinner day_spinner;
     LinearLayout time_start, time_end;
     DatabasesHelper data;
-    public static String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
+    public static String[] Day_of_week ;
     public static String Name_Class, Start_Class, End_Class, ID_Class, Location_Class, Code_class, day, Class;
-    Tools om = new Tools();
+
     ImageView backPage, save_data;
     String TIMEPICKER = "TimePickerDialog",TAG = "TAG_EditClassActivity";
 
@@ -41,15 +41,16 @@ public class EditClassActivity extends Activity implements TimePickerDialog.OnTi
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_addclass);
         data = new DatabasesHelper(this);
+        Day_of_week = getResources().getStringArray(R.array.weekName);
         initView();
         //******************************************************************************************
         save_data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (updata()) {
-                    MessageHelper.Toast(EditClassActivity.this, "ویرایش با موفقیت انجام شد...!");
+                    MessageHelper.Toast(EditClassActivity.this, getResources().getString(R.string.editingDoneSuccessfully));
                     Go_main();
                 } else {
-                    MessageHelper.Toast(EditClassActivity.this, "هیچ تغییری برای ویرایش اعمال نشده ...!");
+                    MessageHelper.Toast(EditClassActivity.this, getResources().getString(R.string.noEditsHaveBeenMade));
                 }
             }
         });
@@ -125,7 +126,7 @@ public class EditClassActivity extends Activity implements TimePickerDialog.OnTi
         textTimeStart = findViewById(R.id.activity_addclass_starttimetext);
         textTimeEnd = findViewById(R.id.activity_addclass_endtimetext);
 
-        title.setText("ویرایش کلاس");
+        title.setText(getResources().getString(R.string.classEdit_));
 
         ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Day_of_week);
         day_spinner.setAdapter(a);

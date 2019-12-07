@@ -4,17 +4,21 @@ package CustomObject;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
+import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Tools.Tools;
 
-public class TextViewCustom extends android.support.v7.widget.AppCompatTextView {
+public class TextViewCustom extends AppCompatTextView {
 
 
     public TextViewCustom(Context context, AttributeSet attis) {
         super(context, attis);
-        Tools om = new Tools();
+        Tools tools = new Tools();
 
-        this.setTypeface(om.SetFont(context, SharedPreferencesHelper.get_Data("Font_App","font1",context)));
+        String lang = LanguageHelper.loadLanguage(context);
+        this.setTypeface(tools.SetFont(context, (lang.equals("fa") ? "font1" : "en")));
     }
 
 }

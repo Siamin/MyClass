@@ -18,58 +18,59 @@
         <CustomObject.ButtonCustom
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="بازگشت"
+            android:text="@string/cancle"
             android:id="@+id/buyapp_cancel"
             android:layout_weight="1"
             android:background="@drawable/button_style_cancel"
-            android:textSize="15dp"
+            android:textSize="@dimen/_14sdp"
             android:textColor="@color/red_dark"
             android:textStyle="bold"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp" />
 
         <CustomObject.ButtonCustom
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="خرید"
+            android:text="@string/buy"
             android:id="@+id/buyapp_buy"
             android:layout_weight="1"
             android:background="@drawable/button_style_save"
-            android:textSize="15dp"
+            android:textSize="@dimen/_14sdp"
             android:textColor="@color/green_dark"
             android:textStyle="bold"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"  />
     </LinearLayout>
 
     <CustomObject.TextViewCustom
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="خرید برنامه"
+        android:text="@string/buyApplication"
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
-        android:gravity="center_vertical|right"
+        android:gravity="center_vertical"
         android:textColor="@color/white"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingRight="@dimen/_8sdp"
         android:textStyle="bold"
-        android:textSize="20dp" />
+        android:textSize="@dimen/_16sdp" />
 
     <CustomObject.TextViewCustom
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
         android:id="@+id/buyapp_text"
         android:padding="@dimen/_10sdp"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/linearLayout5"
-        android:textSize="20dp"
+        android:textSize="@dimen/_16sdp"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold" />

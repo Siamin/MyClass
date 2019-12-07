@@ -4,49 +4,54 @@
     <item
         android:id="@+id/nav_add_class"
         android:icon="@drawable/bookopenpagevariant"
-        android:title="اضافه کردن کلاس جدید" />
+        android:title="@string/addNewClass" />
 
 
     <item
         android:id="@+id/nav_backup"
         android:icon="@drawable/cloudupload"
-        android:title="پشتیبان گیری از نرم افزار" />
+        android:title="@string/backupApplication" />
 
     <item
         android:id="@+id/nav_upload"
         android:icon="@drawable/clouddownload"
-        android:title="بارگیری فایل پشتیبانی" />
+        android:title="@string/uploadBackupApplication" />
 
     <item
         android:id="@+id/nav_amozesh"
         android:icon="@drawable/play"
-        android:title="آموزش اضافه کردن گروهی دانشجویان به کلاس" />
+        android:title="@string/educationApplication"  />
 
     <item
         android:id="@+id/nav_ClearDataBase"
         android:icon="@drawable/clear_database"
-        android:title="پاک کردن حافظه نرم افزار" />
+        android:title="@string/clearDatabase"  />
 
     <item
         android:id="@+id/nav_abute"
         android:icon="@drawable/abute"
-        android:title="درباره ما" />
+        android:title="@string/aboutUs"  />
     <item
         android:id="@+id/nav_setting"
         android:icon="@drawable/settings"
-        android:title="تنظیمات" />
+        android:title="@string/setting"  />
     <item
         android:id="@+id/nav_coment"
         android:icon="@drawable/ic_menu_send"
-        android:title="انتقادات و پیشنهادات" />
+        android:title="@string/Suggestions"  />
     <item
         android:id="@+id/buyapp"
         android:icon="@drawable/pay"
-        android:title="خرید کامل برنامه" />
+        android:title="@string/buyApplication"  />
+
+    <item
+        android:id="@+id/changeLanguage"
+        android:icon="@drawable/language"
+        android:title="@string/languageChange"  />
 
     <item
         android:id="@+id/nav_exit"
         android:icon="@drawable/logout"
-        android:title="خروج" />
+        android:title="@string/exitApplication"  />
 
 </menu>

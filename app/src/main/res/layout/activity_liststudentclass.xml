@@ -26,7 +26,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:textStyle="bold"></CustomObject.TextViewCustom>
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/old_classsss_time"
@@ -50,13 +50,13 @@
         android:layout_below="@+id/linearLayout3"
         android:layoutDirection="rtl">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_student_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 </RelativeLayout>

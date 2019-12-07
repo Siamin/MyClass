@@ -121,13 +121,11 @@
         android:layoutDirection="rtl"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_new_classsss"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_weight="1"/>
 
     </LinearLayout>
 </RelativeLayout>

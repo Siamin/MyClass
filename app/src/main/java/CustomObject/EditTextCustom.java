@@ -3,22 +3,24 @@ package CustomObject;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import aspi.myclass.Helpers.SharedPreferencesHelper;
+import androidx.appcompat.widget.AppCompatEditText;
+
+import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.Tools.Tools;
 
 /**
  * Created by AmIn on 12/21/2018.
  */
 
-public class EditTextCustom extends android.support.v7.widget.AppCompatEditText {
+public class EditTextCustom extends AppCompatEditText {
 
 
-     public EditTextCustom(final Context context, AttributeSet attis) {
-            super(context, attis);
-            final Tools om = new Tools();
+    public EditTextCustom(final Context context, AttributeSet attis) {
+        super(context, attis);
+        Tools tools = new Tools();
 
-            this.setTypeface(om.SetFont(context, SharedPreferencesHelper.get_Data("Font_App","font1",context)));
-
-     }
-
+        String lang = LanguageHelper.loadLanguage(context);
+        this.setTypeface(tools.SetFont(context, (lang.equals("fa") ? "font1" : "en")));
     }
+
+}

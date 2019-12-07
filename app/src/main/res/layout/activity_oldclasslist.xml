@@ -73,13 +73,11 @@
         android:layout_below="@+id/linearLayout3"
         android:layoutDirection="rtl">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/show_list_old_class_recyclerview">
-
-        </android.support.v7.widget.RecyclerView>
+            android:id="@+id/show_list_old_class_recyclerview"/>
 
     </LinearLayout>
 </RelativeLayout>

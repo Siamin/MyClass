@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="aspi.myclass">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="aspi.myclass">
 
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -17,8 +19,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        //************************************************************* Activity
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="whateverString">
 
 
         <activity
@@ -74,6 +77,7 @@
         <activity
             android:name=".activity.OldClassActivity"
             android:label="@string/app_name"/>
+
         <activity
             android:name=".activity.ReportClassActivity"
             android:label="@string/app_name"/>
@@ -95,7 +99,7 @@
             android:label="@string/app_name"/>
 
 
-        //************************************************************* Service
+        <!--************************************************************* Service-->
         <service android:name=".Services.FirebaseInstanceService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -109,12 +113,12 @@
         </service>
 
 
-        //************************************************************* meta-data
+        <!--************************************************************* meta-data-->
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="@string/FirebaseApiKey"
-            />
+        <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="@string/FirebaseApiKey"-->
+            <!--/>-->
 
 
     </application>

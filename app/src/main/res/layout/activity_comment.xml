@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
-        android:padding="3dp"
-        android:layoutDirection="rtl">
+        android:padding="@dimen/_3sdp">
 
         <CustomObject.TextViewCustom
             android:layout_width="0dp"
@@ -17,12 +16,12 @@
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/textView3"
-            android:text="نظر"
+            android:text="@string/Suggestions"
             android:gravity="center_vertical"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
             android:textStyle="bold"
-            android:paddingRight="10dp"/>
+            android:paddingRight="@dimen/_10sdp"/>
 
 
         <ImageView
@@ -34,7 +33,7 @@
             android:rotation="-30"
             android:tint="@color/white" />
 
-        <ImageView
+        <CustomObject.ImageViewCustom
             android:id="@+id/coment_cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -43,6 +42,7 @@
             android:tint="@color/white" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,7 +57,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:background="@drawable/bacgrond_edittext"
-            android:hint="نام و نام خانوادگی"
+            android:hint="@string/CommentName"
             android:inputType="textPersonName" />
 
         <CustomObject.EditTextCustom
@@ -65,10 +65,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:ems="10"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bacgrond_edittext"
             android:layout_weight="1"
-            android:hint="ایمیل"
+            android:hint="@string/CommentEmail"
             android:inputType="textEmailAddress" />
 
         <CustomObject.EditTextCustom
@@ -79,7 +79,7 @@
             android:background="@drawable/bacgrond_edittext"
             android:layout_weight="1"
             android:layout_marginTop="10dp"
-            android:hint="موضوع پیام"
+            android:hint="@string/CommentSubject"
             android:inputType="textPersonName" />
 
         <CustomObject.EditTextCustom
@@ -90,8 +90,8 @@
             android:ems="10"
             android:layout_marginTop="10dp"
             android:background="@drawable/bacgrond_edittext"
-            android:gravity="top|right"
-            android:hint="متن پیام"
+            android:gravity="top"
+            android:hint="@string/CommentMessage"
             android:inputType="textPersonName" />
 
 

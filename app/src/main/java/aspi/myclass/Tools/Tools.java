@@ -1,6 +1,8 @@
 package aspi.myclass.Tools;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.util.Random;
 
 import aspi.myclass.Helpers.MessageHelper;
+import aspi.myclass.SplashScreanActivity;
 
 public class Tools {
 
@@ -75,4 +78,13 @@ public class Tools {
 
         return file.exists();
     }
+
+    public static void restartApplication(Context context){
+        Intent mStartActivity = new Intent(context, SplashScreanActivity.class);
+        int mPendingIntentId = 123456;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        System.exit(0);    }
 }

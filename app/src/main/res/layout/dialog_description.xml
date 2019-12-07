@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -30,9 +30,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:gravity="center_horizontal|right"
+                android:gravity="center_horizontal"
                 android:padding="5dp"
-                android:text="توضیحات درس"
+                android:text= "@string/Desciption"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="15dp"
-                android:hint="توضیحات خود را بنویسید"
+                android:hint="@string/EnterDescription"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
                 android:textSize="16dp"
@@ -57,9 +57,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:layoutDirection="ltr">
+                android:layout_marginTop="8dp">
 
+                <CustomObject.TextViewCustom
+                    android:id="@+id/dialogdes_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="8dp"
+                    android:text="@string/save"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/green"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
 
                 <CustomObject.TextViewCustom
                     android:id="@+id/dialogdes_cancle"
@@ -68,27 +78,17 @@
                     android:layout_marginLeft="10dp"
                     android:padding="8dp"
                     android:layout_marginRight="10dp"
-                    android:text="انصراف"
+                    android:text="@string/cancle"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/red"
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/dialogdes_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:padding="8dp"
-                    android:text="ذخیره"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/green"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
+
 
 
             </LinearLayout>
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

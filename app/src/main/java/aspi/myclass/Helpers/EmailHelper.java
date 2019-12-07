@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import aspi.myclass.NetWork;
 import aspi.myclass.R;
@@ -24,13 +23,13 @@ public class EmailHelper {
     public static void SendEmail(final Context context, final String MailTo, final String Subject, final String Body, final String Message_sucsess, final int Action, final Dialog dialog, final String... param) {
 
         if (!ValidationHelper.isValidationInternet(context)){
-            MessageHelper.Toast(context, "اتصال اینترنت خود را بررسی کنید!");
+            MessageHelper.Toast(context, context.getResources().getString(R.string.checkYourInternetConnection));
             dialog.dismiss();
             return;
         }
 
 
-        IndicatorHelper.IndicatorCreate(context, "", "لطفا صبر کنید");
+        IndicatorHelper.IndicatorCreate(context, "",context.getResources().getString(R.string.pleaseWait));
         new AsyncTask<String, Void, String>() {
 
             @Override
@@ -45,13 +44,18 @@ public class EmailHelper {
             @Override
             protected void onPostExecute(String result) {
                 Log.i(TAG, result);
-                dialog.dismiss();
+                try{
+                    dialog.dismiss();
+                }catch (Exception e){
+
+                }
+
                 IndicatorHelper.IndicatorDismiss();
                 if (result.equals("1")) {
                     MessageHelper.Toast(context, Message_sucsess);
                     if (Action > 0) SucsessMail(context, Action, param);
                 } else {
-                    MessageHelper.Toast(context, "خطا در ارسال ...!");
+                    MessageHelper.Toast(context, context.getResources().getString(R.string.Errorposting));
 
                 }
 

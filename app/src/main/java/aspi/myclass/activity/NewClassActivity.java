@@ -3,8 +3,6 @@ package aspi.myclass.activity;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -22,6 +23,7 @@ import java.util.TimerTask;
 
 import aspi.myclass.Helpers.DateHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
+import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.model.AbsentPersentModel;
 import aspi.myclass.R;
@@ -50,6 +52,9 @@ public class NewClassActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        LanguageHelper.loadLanguage(NewClassActivity.this);
+
         setContentView(R.layout.activity_newclass);
         //******************************************************************************************
         initView();

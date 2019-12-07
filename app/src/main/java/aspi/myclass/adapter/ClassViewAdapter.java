@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -40,9 +42,9 @@ import aspi.myclass.Helpers.DatabasesHelper;
 
 public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh> {
 
-    private List<ClassModel> Model;
-    private Context contexts;
-    private DatabasesHelper data;
+    List<ClassModel> Model;
+    Context contexts;
+    DatabasesHelper data;
     Activity activity;
     String TIMEPICKER = "TimePickerDialog";
 
@@ -50,7 +52,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         Model = model;
         contexts = context;
         data = new DatabasesHelper(context);
-        activity = ((Activity)context);
+        activity = ((Activity) context);
     }
 
     @Override
@@ -64,18 +66,13 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         final ClassModel content = Model.get(position);
 
         if (!content.name_class.equals("")) {
-            holder.row.setText("" + (position + 1) + "");
-            holder.class_.setText("کلاس: " + content.Class_);
-        } else {
-            holder.row.setVisibility(View.INVISIBLE);
-            content.name_class = "هیچ کلاسی در این روز ثبت نشده";
-            holder.class_.setText("  ");
-
+            holder.class_.setText(contexts.getResources().getString(R.string.classNumber)+" :" +content.Class_);
         }
-        holder.name_class.setText("" + content.name_class);
-        holder.time_start.setText("" + content.time_start);
-        holder.time_end.setText("" + content.time_end);
-        holder.location.setText("" + content.location);
+
+        holder.name_class.setText(contexts.getResources().getString(R.string.className)+ " :" + content.name_class);
+        holder.time_start.setText(content.time_start);
+        holder.time_end.setText(content.time_end);
+        holder.location.setText(contexts.getResources().getString(R.string.classLocation)+" :" + content.location);
         if (content.text_class.length() > 2) holder.txt.setText("" + content.text_class);
 
         //***********************************************
@@ -88,12 +85,12 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
 
     public class cvh extends RecyclerView.ViewHolder {
 
-        private TextView row, name_class, time_start, time_end, location, class_, txt;
+        private TextView name_class, time_start, time_end, location, class_, txt;
 
         public cvh(View itemView) {
             super(itemView);
 
-            row = (TextView) itemView.findViewById(R.id.list_class_in_main_row);
+
             name_class = (TextView) itemView.findViewById(R.id.list_class_in_main_name_class);
             time_start = (TextView) itemView.findViewById(R.id.list_class_in_main_start_time);
             time_end = (TextView) itemView.findViewById(R.id.list_class_in_main_end_time);
@@ -120,7 +117,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
 
         final Dialog kelas = new Dialog(contexts, R.style.NewDialog);
         kelas.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        kelas.setTitle("درس " + Class);
+        kelas.setTitle(contexts.getResources().getString(R.string.Class) + " " + Class);
         kelas.setContentView(R.layout.dialog_optionclass);
         kelas.setCancelable(true);
         kelas.setCanceledOnTouchOutside(true);
@@ -144,7 +141,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     kelas.cancel();
                     Set_Of_Week(Class, location, Characteristic, did, TXT);
                 } else {
-                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
             }
         });
@@ -217,8 +214,8 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(contexts, EditStudentActivity.class);
-                intent.putExtra("idClass",did);
-                ((Activity)contexts).startActivity(intent);
+                intent.putExtra("idClass", did);
+                ((Activity) contexts).startActivity(intent);
             }
         });
     }
@@ -241,7 +238,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         final LinearLayout clickTimeEnd = (LinearLayout) Week.findViewById(R.id.class_of_week_timeend);
 
         //**********************************************************************************
-        String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
+        String[] Day_of_week = contexts.getResources().getStringArray(R.array.weekName);
 
         ArrayAdapter<String> a = new ArrayAdapter<String>(contexts, android.R.layout.simple_spinner_item, Day_of_week);
         Spiner_.setAdapter(a);
@@ -288,7 +285,6 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
 
         final Dialog statistics_ = new Dialog(contexts, R.style.NewDialog);
         statistics_.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        statistics_.setTitle("درس " + Class);
         statistics_.setContentView(R.layout.dialog_optionoutputclass);
         statistics_.setCancelable(true);
         statistics_.setCanceledOnTouchOutside(true);
@@ -308,7 +304,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     StatisticsActivity.Did_class = did;
                     contexts.startActivity(new Intent(contexts, StatisticsActivity.class));
                 } else {
-                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
 
             }
@@ -324,7 +320,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     ReportClassActivity.STATUS = true;
                     contexts.startActivity(new Intent(contexts, ReportClassActivity.class));
                 } else {
-                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
 
             }
@@ -340,7 +336,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     ReportClassActivity.STATUS = false;
                     contexts.startActivity(new Intent(contexts, ReportClassActivity.class));
                 } else {
-                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
 
             }
@@ -415,7 +411,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                         data.open();
                         data.update_one1("dars", "txt", description.getText().toString(), "did=" + did);
                         data.close();
-                        MessageHelper.Toast(contexts, "ذخیره شد...!");
+                        MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.Saved));
                         dialog.dismiss();
                         MainActivity.refresh = 1;
                     }
@@ -453,7 +449,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
                     MainActivity.refresh = 1;
                     dialog.dismiss();
                     dialogCll.dismiss();
-                    MessageHelper.Toast(contexts, "کلاس حذف شد...!");
+                    MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ClassDeleted));
                 } catch (Exception e) {
                 }
             }

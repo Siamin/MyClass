@@ -41,14 +41,12 @@
                     android:layout_height="match_parent"
                     android:gravity="end"
                     android:layout_gravity="end"
-                    android:id="@+id/LinearLayout_maim"
-
-                    android:layoutDirection="rtl">
+                    android:id="@+id/LinearLayout_maim">
 
                     <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="شنبه"
+                        android:text="@string/Saturday"
                         android:id="@+id/main_Saturday"
                         android:layout_weight="1"
                         android:background="@drawable/button_style3"
@@ -57,7 +55,7 @@
                     <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="یکشنبه"
+                        android:text="@string/Sunday"
                         android:id="@+id/main_Sunday"
                         android:layout_weight="1"
                         android:background="@drawable/button_style3"
@@ -66,7 +64,7 @@
                     <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="دوشنبه"
+                        android:text="@string/Monday"
                         android:id="@+id/main_Monday"
                         android:layout_weight="1"
                         android:background="@drawable/button_style3"
@@ -75,7 +73,7 @@
                     <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="سه شنبه"
+                        android:text="@string/Tuesday"
                         android:id="@+id/main_Tuesday"
                         android:layout_weight="1"
                         android:background="@drawable/button_style3"
@@ -84,7 +82,7 @@
                     <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="چهارشنبه"
+                        android:text="@string/Wednesday"
                         android:id="@+id/main_Wednesday"
                         android:layout_weight="1"
                         android:background="@drawable/button_style3"
@@ -93,7 +91,7 @@
                     <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="پنج شنبه"
+                        android:text="@string/Thursday"
                         android:id="@+id/main_Thursday"
                         android:layout_weight="1"
                         android:background="@drawable/button_style3"
@@ -102,7 +100,7 @@
                     <CustomObject.ButtonCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="جمعه"
+                        android:text="@string/Friday"
                         android:id="@+id/main_Friday"
                         android:layout_weight="1"
                         android:background="@drawable/button_style3"
@@ -115,17 +113,16 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layoutDirection="rtl"
                 android:gravity="center_vertical|center_horizontal">
 
                 <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="لیست کلاس های روز:"
+                    android:text="@string/TextWeekend"
                     android:id="@+id/main_text_day_class"
                     android:gravity="center_vertical|center_horizontal"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:textSize="20dp" />
 
@@ -157,13 +154,11 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/recyclerview">
-
-        </android.support.v7.widget.RecyclerView>
+            android:id="@+id/recyclerview"/>
 
     </LinearLayout>
 </RelativeLayout>

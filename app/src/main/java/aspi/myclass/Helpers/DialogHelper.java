@@ -1,24 +1,25 @@
 package aspi.myclass.Helpers;
 
-import android.Manifest;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Calendar;
@@ -520,10 +521,12 @@ public class DialogHelper {
         TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView excllFile = dialog.findViewById(R.id.dialog_custom_okey);
         //*************************************************
-        title.setText("اضافه کردن دانشجو");
-        body.setText("آیا میخواهید اسامی دانشجویان را از حافظه ای  " + MainActivity.Address_file_app + "در فایل Text با نام " + "IO.txt" + " و یا در فایل Excel با نام " + "IO.xls" + " دریافت کنید؟ ");
-        cancle.setText("انصراف");
-        excllFile.setText("فایل اکسل");
+        title.setText(context.getResources().getString(R.string.addStudent));
+        body.setText(context.getResources().getString(R.string.textGetExcellFile1)
+                + MainActivity.Address_file_app
+                + context.getResources().getString(R.string.textGetExcellFile2));
+        cancle.setText(context.getResources().getString(R.string.cancle));
+        excllFile.setText(context.getResources().getString(R.string.save));
         //************************************************
         excllFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -832,4 +835,27 @@ public class DialogHelper {
 
     }
 
+    public static void ChangeLanguage(final Context context){
+        final String[] listLang ={"English","فارسی"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(context.getResources().getString(R.string.chooseLanguage));
+        builder.setSingleChoiceItems(listLang, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i){
+                    case 0:
+                        LanguageHelper.setLocal(context,"en");
+                        break;
+                    case 1:
+                        LanguageHelper.setLocal(context,"fa");
+                        break;
+                }
+                dialogInterface.dismiss();
+                Tools.restartApplication(context);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

@@ -13,25 +13,25 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.farsitel.bazaar.IUpdateCheckService;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
@@ -45,6 +45,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import aspi.myclass.Helpers.DialogHelper;
+import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        LanguageHelper.loadLanguage(MainActivity.this);
+
         setContentView(R.layout.main);
 
         initView();
@@ -163,18 +167,27 @@ public class MainActivity extends AppCompatActivity
         fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics, String.valueOf(id), item.getTitle().toString(), "menu");
         if (id == R.id.nav_add_class) {
             startActivity(new Intent(this, AddClassActivity.class));
+
         } else if (id == R.id.nav_abute) {
             DialogHelper.Abute(MainActivity.this);
+
         } else if (id == R.id.nav_coment) {
             startActivity(new Intent(this, CommentActivity.class));
             finish();
+
         } else if (id == R.id.nav_setting) {
             startActivity(new Intent(MainActivity.this, SettingActivity.class));
             finish();
+
+        } else if (id == R.id.changeLanguage) {
+            DialogHelper.ChangeLanguage(MainActivity.this);
+
         } else if (id == R.id.nav_exit) {
             finish();
+
         } else if (id == R.id.nav_ClearDataBase) {
             DialogHelper.cleanDatabase(MainActivity.this, data);
+
         } else if (id == R.id.nav_backup) {
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
                 if (ValidationHelper.checkPerimission(MainActivity.this)) {
@@ -184,7 +197,7 @@ public class MainActivity extends AppCompatActivity
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, STORAGE_PERMISSION_CODE);
                 }
             } else {
-                MessageHelper.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                MessageHelper.Toast(MainActivity.this, getResources().getString(R.string.ErrorBuyApplication));
             }
 
         } else if (id == R.id.nav_upload) {
@@ -198,10 +211,12 @@ public class MainActivity extends AppCompatActivity
                 }
 
             } else {
-                MessageHelper.Toast(MainActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                MessageHelper.Toast(MainActivity.this, getResources().getString(R.string.ErrorBuyApplication));
             }
+
         } else if (id == R.id.nav_amozesh) {
             startActivity(new Intent(MainActivity.this, LerningActivity.class));
+
         } else if (id == R.id.buyapp) {
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("NO")) {
                 startActivity(new Intent(MainActivity.this, BuyAppActivity.class));
@@ -272,20 +287,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     void Set_day() {
-        if (DAY == 0) {
-            text_day_class.setText(" " + "کلاس های روز شنبه" + " ");
-        } else if (DAY == 1) {
-            text_day_class.setText(" " + "کلاس های روز یکشنبه" + " ");
-        } else if (DAY == 2) {
-            text_day_class.setText(" " + "کلاس های روز دوشنبه" + " ");
-        } else if (DAY == 3) {
-            text_day_class.setText(" " + "کلاس های روز سه شنبه" + " ");
-        } else if (DAY == 4) {
-            text_day_class.setText(" " + "کلاس های روز چهارشنبه" + " ");
-        } else if (DAY == 5) {
-            text_day_class.setText(" " + "کلاس های روز پنج شنبه" + " ");
-        } else if (DAY == 6) {
-            text_day_class.setText(" " + "کلاس های روز جمعه" + " ");
+        String[] weekName = getResources().getStringArray(R.array.weekName);
+        String lang = LanguageHelper.loadLanguage(MainActivity.this);
+        if (lang.equals("fa")) {
+            text_day_class.setText(getResources().getString(R.string.TextWeekend) + " " + weekName[DAY]);
+
+        } else {
+            text_day_class.setText(weekName[DAY] + " " + getResources().getString(R.string.TextWeekend));
+
         }
     }
 

@@ -29,7 +29,6 @@ public class BuyAppActivity extends Activity {
     static final String TAG = "TAG_BuyAppActivity";
     static final String SKU_PREMIUM[] = {"buyApp","buyAppOne","buyAppthiree"};
     IabHelper buyhelper;
-    String AppKey = "MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==";
     TextView textView;
     Button buy, cancel;
 
@@ -40,14 +39,15 @@ public class BuyAppActivity extends Activity {
         setContentView(R.layout.activity_buyapp);
         try {
             initView();
-            buyhelper = new IabHelper(this, AppKey);
-            IndicatorHelper.IndicatorCreate(BuyAppActivity.this, "در حال دریافت اطلاعات", "لطفا صبر کنید ...!");
+            buyhelper = new IabHelper(this, getResources().getString(R.string.KeyBazar));
+            IndicatorHelper.IndicatorCreate(BuyAppActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
             new Thread(new Runnable() {
                 public void run() {
                     get_price();
                 }
             }).start();
         } catch (Exception e) {
+            Log.i(TAG,e.toString());
         }
 
         buy.setOnClickListener(new View.OnClickListener() {
@@ -79,18 +79,18 @@ public class BuyAppActivity extends Activity {
                                 SharedPreferencesHelper.SetCode("‌Buy_App", "Buy_App", BuyAppActivity.this);
                                 String Body = "\n خریداری شده توسط = " + SharedPreferencesHelper.get_Data("Email", "", BuyAppActivity.this) + "\n  در تاریخ = " + date_iran() + "\n مدل دستگاه = " + model;
 
-                                EmailHelper.SendEmail(BuyAppActivity.this, "amin.syahi.69@gmail.com", "خرید برنامه", Body, "با تشکر از خرید شما...!", 0,null);
+                                EmailHelper.SendEmail(BuyAppActivity.this, "amin.syahi.69@gmail.com", "خرید برنامه", Body, getResources().getString(R.string.thanksForYourPurchase), 0,null);
 
                                 Back();
                             } else {
-                                MessageHelper.Toast(BuyAppActivity.this, "عملیات خرید ناموفق ...!");
+                                MessageHelper.Toast(BuyAppActivity.this, getResources().getString(R.string.failedPurchaseOperation));
                                 Back();
                             }
 
                         }
                     });
         } catch (Exception e) {
-            MessageHelper.Toast(BuyAppActivity.this, "لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            MessageHelper.Toast(BuyAppActivity.this, getResources().getString(R.string.errorConnectAccountBazar));
         }
     }
 
@@ -107,17 +107,16 @@ public class BuyAppActivity extends Activity {
                         buyhelper.queryInventoryAsync(true, moreSkus, new IabHelper.QueryInventoryFinishedListener() {
                             public void onQueryInventoryFinished(final IabResult result, Inventory inv) {
                                 if (result.isSuccess()) {
-                                    for (int i=0;i<moreSkus.size();i++)
-                                        Log.i(TAG, "moreSkus : " + inv.getSkuDetails(SKU_PREMIUM[i]).getTitle());
 
                                     SkuDetails details = inv.getSkuDetails(SKU_PREMIUM[0]);
-                                    textView.setText(details.getTitle() + "\n\n" + details.getDescription() + "\n" + "\n قیمت :" + details.getPrice());
+
+                                    textView.setText(details.getTitle() + "\n\n" + details.getDescription() + "\n" + "\n"+getResources().getString(R.string.price_)+":" + details.getPrice());
                                     IndicatorHelper.IndicatorDismiss();
                                 } else {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            MessageHelper.Toast(BuyAppActivity.this, "مشکل ارتباط با کافه بازار...!");
+                                            MessageHelper.Toast(BuyAppActivity.this, getResources().getString(R.string.problemConnectingToBazar));
                                         }
                                     });
                                     IndicatorHelper.IndicatorDismiss();
@@ -128,7 +127,7 @@ public class BuyAppActivity extends Activity {
                 }
             });
         } catch (Exception e) {
-            MessageHelper.Toast(BuyAppActivity.this, "لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.");
+            MessageHelper.Toast(BuyAppActivity.this, getResources().getString(R.string.errorConnectAccountBazar));
         }
 
     }

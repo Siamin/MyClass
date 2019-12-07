@@ -33,7 +33,7 @@
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/imageView"
             android:layout_toStartOf="@+id/imageView"
-            android:text="دفتر حضور و غیاب"
+            android:text="@string/app_name"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"

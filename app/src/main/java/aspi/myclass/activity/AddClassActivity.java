@@ -19,6 +19,7 @@ import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import aspi.myclass.Helpers.DateHelper;
+import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
@@ -32,16 +33,20 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
     LinearLayout time_start, time_end;
     TextView textTimeStart, textTimeEnd;
     DatabasesHelper data;
-    public static String[] Day_of_week = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"};
+    public static String[] Day_of_week;
     ImageView backPage, save_data;
     String TIMEPICKER = "TimePickerDialog";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        LanguageHelper.loadLanguage(AddClassActivity.this);
         setContentView(R.layout.activity_addclass);
         data = new DatabasesHelper(this);
+        Day_of_week = getResources().getStringArray(R.array.weekName);
+
         initView();
+
         //******************************************************************************************
         save_data.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.M)
@@ -54,20 +59,23 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
                                 if (save()) {
 
                                     MainActivity.refresh = 1;
-                                    MessageHelper.Toast(AddClassActivity.this,"کلاس "+name_edit.getText().toString()+" با موفقیت ثبت شد.");
+                                    MessageHelper.Toast(AddClassActivity.this,
+                                            getResources().getString(R.string.Class) + " "
+                                                    + name_edit.getText().toString() + " "
+                                                    + getResources().getString(R.string.SuccessRegistered));
                                     Go_main();
                                 }
                             } else {
-                                MessageHelper.Toast(AddClassActivity.this, "لطفا شماره کلاس را وارد نمایید...!");
+                                MessageHelper.Toast(AddClassActivity.this, getResources().getString(R.string.PleaseEnterClassNumber));
                             }
                         } else {
-                            MessageHelper.Toast(AddClassActivity.this, "لطفا مکان برگزاری کلاس را وارد نمایید...!");
+                            MessageHelper.Toast(AddClassActivity.this, getResources().getString(R.string.PleaseEnterClassLocation));
                         }
                     } else {
-                        MessageHelper.Toast(AddClassActivity.this, "لطفا کد مشخصه درس را وارد نمایید...!");
+                        MessageHelper.Toast(AddClassActivity.this, getResources().getString(R.string.PleaseEnterClassAttribute));
                     }
                 } else {
-                    MessageHelper.Toast(AddClassActivity.this, "لطفا نام درس را وارد نمایید...!");
+                    MessageHelper.Toast(AddClassActivity.this, getResources().getString(R.string.PleaseEnterClassName));
                 }
             }
         });

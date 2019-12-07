@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">حضور و غیاب</string>
+
+    <!-- String Object Application-->
+    <string name="Search">نام خانوادگی را وارد کنید</string>
+    <string name="chooseLanguage">انتخاب زبان</string>
+    <string name="Language">فارسی</string>
+    <string name="Version">نگارش:</string>
+    <string name="Class">کلاس</string>
+    <string name="save">ذخیره</string>
+    <string name="okey">خب</string>
+    <string name="pleaseWait">لطفا صبر کنید ...!</string>
+    <string name="gettingData">در حال دریافت اطلاعات</string>
+    <string name="cancle">انصراف</string>
+    <string name="delete">حذف</string>
+    <string name="show">نمایش</string>
+    <string name="EnterDescription">توضیحات خود را بنویسید</string>
+    <string name="textClassDelete">با حذف در تمامی جلسه های برگزار شده کلاس حذف می شود!</string>
+    <string name="checkYourInternetConnection">اتصال اینترنت خود را بررسی کنید!</string>
+
+
+
+    <!--Toast Message Application-->
+    <string name="ErrorBuyApplication">برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.</string>
+    <string name="Saved">ذخیره شد...!</string>
+    <string name="ClassDeleted">کلاس حذف شد...!</string>
+    <string name="SuccessRegistered">با موفقیت ثبت شد.</string>
+    <string name="PleaseEnterClassNumber">لطفا شماره کلاس را وارد نمایید...!</string>
+    <string name="PleaseEnterClassLocation">لطفا مکان برگزاری کلاس را وارد نمایید...!</string>
+    <string name="PleaseEnterClassAttribute">لطفا کد مشخصه کلاس را وارد نمایید...!</string>
+    <string name="PleaseEnterClassName">لطفا نام کلاس را وارد نمایید...!</string>
+    <string name="thanksForYourPurchase">با تشکر از خرید شما...!</string>
+    <string name="failedPurchaseOperation">عملیات خرید ناموفق ...!</string>
+    <string name="errorConnectAccountBazar">لطفا به حساب کافه بازاری خود در نرم افزار بازار متصل شوید.</string>
+    <string name="problemConnectingToBazar">مشکل ارتباط با کافه بازار...!</string>
+    <string name="ErrorValidEmail">ایمیل وارد شده صحیح نمی باشد.</string>
+    <string name="ErrorTextComment">متن پیام را وارد کنید</string>
+    <string name="ErrorSubject">موضوع را وارد کنید</string>
+    <string name="ErrorEnterEmail">ایمیل خود را وارد کنید</string>
+    <string name="ErrorEnterNameAndLastname">نام و نام خانوادگی را وارد کنید</string>
+    <string name="Errorposting">خطا در ارسال ...!</string>
+    <string name="editingDoneSuccessfully">ویرایش با موفقیت انجام شد...!</string>
+    <string name="noEditsHaveBeenMade">هیچ تغییری برای ویرایش اعمال نشده ...!</string>
+
+    <!--BuyAppActivity-->
+    <string name="price_">قیمت</string>
+    <string name="buy">خرید</string>
+
+    <!--CommentActivity-->
+    <string name="CommentName">نام و نام خانوادگی</string>
+    <string name="CommentEmail">ایمیل</string>
+    <string name="CommentSubject">موضوع پیام</string>
+    <string name="CommentMessage">متن پیام</string>
+
+    <!--MainActivity-->
+    <string name="TextWeekend">کلاس های روز </string>
+    <string name="Saturday">شنبه</string>
+    <string name="Sunday">یکشنبه</string>
+    <string name="Monday">دوشنبه</string>
+    <string name="Tuesday">سه شنبه</string>
+    <string name="Wednesday">چهارشنبه</string>
+    <string name="Thursday">پنج شنبه</string>
+    <string name="Friday">جمعه</string>
+
+    <array name="weekName">
+        <item>شنبه</item>
+        <item>یکشنبه</item>
+        <item>دوشنبه</item>
+        <item>سه شنبه</item>
+        <item>چهارشنبه</item>
+        <item>پنج شنبه</item>
+        <item>جمعه</item>
+    </array>
+
+    <!--MainActivity Adapter-->
+    <string name="classLocation">مکان کلاس</string>
+    <string name="classNumber">شماره کلاس</string>
+    <string name="classDescription">توضیحات کلاس</string>
+    <string name="className">اسم کلاس</string>
+    <string name="classStartTime">ساعت شروع کلاس</string>
+    <string name="classEndTime">ساعت خاتمه کلاس</string>
+
+    <!--MainActivity Option Dialog-->
+    <string name="pastMeetings">جلسات گذشته</string>
+    <string name="newMeeting">جلسه ی جدید</string>
+    <string name="classOutput">خروجی از کلاس</string>
+    <string name="classEdit_">ویرایش کلاس</string>
+    <string name="addStudent">دانشجو جدید</string>
+    <string name="Desciption">توضیحات</string>
+    <string name="daysofTheWeek">ایام هفته</string>
+    <string name="ClassDelete">حذف کلاس</string>
+    <string name="studentsClass">دانشجویان کلاس</string>
+
+    <!--MainActivity dialog option output class-->
+    <string name="absenceStats">آمار حضور غیاب</string>
+    <string name="absenceList">لیست حضور و غیاب</string>
+    <string name="scoreList">لیست نمرات</string>
+
+    <!--MainActivity dialog Class of the week-->
+    <string name="weekDay_">روز هفته:</string>
+
+    <!--AddClassActivity-->
+    <string name="classCharacteristic">مشخصه درس:</string>
+
+    <!--AddStudentActivity-->
+    <string name="Code">کد</string>
+    <string name="studentName">نام</string>
+    <string name="studentFamily">فامیلی</string>
+    <string name="textLerningExcell">برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید.
+\nکد دانشجویی-نام-نام خانوادگی
+\nاسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n
+آموزش کامل تصویری این قسمت در منو کشویی قرار دارد</string>
+    <string name="ErrorSaveDataInAddStudentActivityInformation">اطلاعاتی که بعد از ذخیره پاک نشده اند قبلا کد آنها وارد شده است...!</string>
+    <string name="ErrorSaveDataInAddStudentActivityEmptyData">لطفا تمامی مشخصات را به ترتیب وارد نمایید...!</string>
+    <string name="textGetExcellFile1">آیا میخواهید اسامی دانشجویان را از حافظه ای</string>
+    <string name="textGetExcellFile2">در فایل Excel با نام IO.xls دریافت کنید؟</string>
+
+    <!--Menu Item-->
+    <string name="addNewClass">اضافه کردن کلاس جدید</string>
+    <string name="backupApplication">پشتیبان گیری از نرم افزار</string>
+    <string name="uploadBackupApplication">بارگیری فایل پشتیبانی</string>
+    <string name="educationApplication">آموزش اضافه کردن گروهی دانشجویان به کلاس</string>
+    <string name="clearDatabase">پاک کردن حافظه نرم افزار</string>
+    <string name="aboutUs">درباره ما</string>
+    <string name="setting">تنظیمات</string>
+    <string name="Suggestions">انتقادات و پیشنهادات</string>
+    <string name="buyApplication">خرید برنامه</string>
+    <string name="languageChange">تغییر زبان</string>
+    <string name="exitApplication">خروج</string>
+
+
+    <!-- String Application-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="uri_bazar_my_application_class">bazaar://details?id=aspi.myclass</string>
+    <string name="uri_bazar_my_application">"bazaar://collection?slug=by_author&amp;aid=aminsyahi1369"</string>
+    <string name="package_bazar">com.farsitel.bazaar</string>
+    <string name="Email">amin.syahi.1369@gmail.com</string>
+    <string name="pass_Email">amin.syahi.1369@gmail.com</string>
+
+
+    <!-- Api Application-->
+    <string name="ApiSendMail">http://eyeshospital.ir/SendEmail.php</string>
+    <!-- Key Application-->
+    <string name="FirebaseApiKey">AIzaSyAK4vnzSWr01YFg0h2TmIse6I2R-K-scE8</string>
+    <string name="CrispWebId">dd4fefd7-c5c9-46aa-af7e-0197acb6068b</string>
+    <string name="KeyBazar">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==å</string>
+
+</resources>

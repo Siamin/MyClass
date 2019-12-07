@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
+
+import androidx.annotation.Nullable;
 
 import aspi.myclass.Helpers.EmailHelper;
 import aspi.myclass.Helpers.MessageHelper;
@@ -57,19 +54,19 @@ public class CommentActivity extends Activity {
                             String Body = body.getText().toString() + "\n ارسال شده از  طرف \n" + name.getText().toString() + "\n ایمیل \n" + email.getText().toString() + "\n مدل دستگاه = " + model;
                             EmailHelper.SendEmail(CommentActivity.this, "amin.syahi.69@gmail.com", subject.getText().toString(), Body, " نظر ارسال شد ", 2,null);
                         } else {
-                            MessageHelper.Toast(CommentActivity.this, "ایمیل وارد شده صحیح نمی باشد.");
+                            MessageHelper.Toast(CommentActivity.this, getResources().getString(R.string.ErrorValidEmail));
                         }
                     } else {
-                        MessageHelper.Toast(CommentActivity.this, "متن پیام را وارد کنید");
+                        MessageHelper.Toast(CommentActivity.this, getResources().getString(R.string.ErrorTextComment));
                     }
                 } else {
-                    MessageHelper.Toast(CommentActivity.this, "موضوع را وارد کنید");
+                    MessageHelper.Toast(CommentActivity.this, getResources().getString(R.string.ErrorSubject));
                 }
             } else {
-                MessageHelper.Toast(CommentActivity.this, "ایمیل خود را وارد کنید");
+                MessageHelper.Toast(CommentActivity.this, getResources().getString(R.string.ErrorEnterEmail));
             }
         } else {
-            MessageHelper.Toast(CommentActivity.this, "نام و نام خانوادگی را وارد کنید");
+            MessageHelper.Toast(CommentActivity.this, getResources().getString(R.string.ErrorEnterNameAndLastname));
         }
     }
 

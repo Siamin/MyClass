@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/massge_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,12 +32,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:password="false"
-                android:phoneNumber="false"
-                android:text="متن پیام"
+                android:padding="@dimen/_8sdp"
+                android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff"
+                android:textColor="@color/white"
                 android:textSize="25dp" />
 
             <LinearLayout
@@ -45,26 +43,22 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/massge_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:padding="5dp"
-                    android:text="خب"
+                    android:text="@string/okey"
+                    android:layout_margin="@dimen/_8sdp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#ffee04"
+                    android:textColor="@color/yellow"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
             </LinearLayout>
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

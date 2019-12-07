@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
-        android:layoutDirection="rtl"
         android:orientation="horizontal">
 
 
@@ -18,10 +17,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:paddingRight="10dp"
-            android:text="کلاس جدید"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:text="@string/addNewClass"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
             android:src="@drawable/ic_check_black_24dp"
             android:tint="@color/white" />
 
-        <ImageView
+        <CustomObject.ImageViewCustom
             android:id="@+id/activity_addclass_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -47,8 +47,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_vertical|center_horizontal">
+        android:paddingTop="@dimen/_15sdp"
+        android:orientation="vertical">
 
 
         <LinearLayout
@@ -56,21 +56,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:layoutDirection="rtl"
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
             <CustomObject.TextViewCustom
-                android:layout_width="140dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
-                android:text=" نام درس:     "
+                android:text="@string/className"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CustomObject.EditTextCustom
                 android:id="@+id/add_class_name_edit"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:layout_marginLeft="8dp"
@@ -85,21 +86,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:layoutDirection="rtl"
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
             <CustomObject.TextViewCustom
-                android:layout_width="140dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="مشخصه درس:"
+                android:text="@string/classCharacteristic"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CustomObject.EditTextCustom
                 android:id="@+id/add_class_code_edit"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:layout_marginLeft="8dp"
@@ -114,23 +116,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layoutDirection="rtl"
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
             <CustomObject.TextViewCustom
-                android:layout_width="140dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text=" روز هفته:"
+                android:text="@string/weekDay_"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
                 android:id="@+id/add_class_spinner"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="match_parent"
                 android:layout_gravity="top"
                 android:layout_marginLeft="8dp"
@@ -148,22 +151,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layoutDirection="rtl"
             android:orientation="horizontal">
 
             <CustomObject.TextViewCustom
-                android:layout_width="140dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="ساعت شروع کلاس:"
+                android:text="@string/classStartTime"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/activity_addclass_starttimetext"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_edit_black_24dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10dp"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -175,24 +178,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layoutDirection="rtl"
             android:orientation="horizontal">
 
             <CustomObject.TextViewCustom
-                android:layout_width="140dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
-                android:text=" ساعت پایان کلاس:"
+                android:text="@string/classEndTime"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/activity_addclass_endtimetext"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_edit_black_24dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10dp"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -204,20 +207,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layoutDirection="rtl"
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
             <CustomObject.TextViewCustom
-                android:layout_width="140dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="  مکان برگزاری کلاس :"
+                android:text="@string/classLocation"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CustomObject.EditTextCustom
                 android:id="@+id/add_class_potion_edit"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="1dp"
@@ -231,20 +236,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layoutDirection="rtl"
             android:orientation="horizontal"
             android:scrollIndicators="right">
 
             <CustomObject.TextViewCustom
-                android:layout_width="140dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="شماره کلاس:"
+                android:text="@string/classNumber"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CustomObject.EditTextCustom
                 android:id="@+id/add_class_class_edit"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="1dp"

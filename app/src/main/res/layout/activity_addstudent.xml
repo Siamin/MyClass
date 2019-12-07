@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="right"
-    android:layoutDirection="rtl"
     android:orientation="vertical">
 
     <LinearLayout
@@ -11,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
-        android:gravity="right"
-        android:layoutDirection="rtl"
         android:orientation="horizontal">
 
         <TextView
@@ -24,10 +21,11 @@
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
-            android:paddingRight="10dp"
-            android:text="اضافه کردن دانشجو"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:text="@string/addStudent"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"></TextView>
 
@@ -55,7 +53,7 @@
             android:src="@drawable/ic_check_black_24dp"
             android:tint="@color/white" />
 
-        <ImageView
+        <CustomObject.ImageViewCustom
             android:id="@+id/add_student_cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -71,8 +69,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/linearLayout"
-        android:layout_gravity="right"
-        android:layoutDirection="rtl"
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
@@ -83,7 +79,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:text="کلاس:"
+            android:text="@string/Class"
             android:textColor="@color/white"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
@@ -98,7 +94,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:gravity="center_vertical|center_horizontal"
-            android:text="ساعت شروع کلاس"
+            android:text="@string/classStartTime"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
 
@@ -110,7 +106,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:gravity="center_vertical|center_horizontal"
-            android:text="مکان برگزاری کلاس"
+            android:text="@string/classLocation"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15dp" />
 
@@ -133,17 +129,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 1 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno1"
@@ -184,17 +170,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 2 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno2"
@@ -234,17 +210,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 3 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno3"
@@ -284,17 +250,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 4 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno4"
@@ -334,17 +290,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 5 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno5"
@@ -384,17 +330,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
+
                 android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 6 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno6"
@@ -434,17 +372,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 7 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno7"
@@ -484,17 +413,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 8 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno8"
@@ -534,17 +454,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 9 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno9"
@@ -584,17 +495,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 10 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno10"
@@ -634,17 +536,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
+
                 android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 11 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno11"
@@ -684,17 +578,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
+
                 android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 12 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno12"
@@ -734,17 +620,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
+
                 android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 13 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno13"
@@ -784,17 +662,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 14 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno14"
@@ -834,17 +703,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 15 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno15"
@@ -884,17 +744,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 16 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno16"
@@ -934,17 +785,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 17 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno17"
@@ -984,17 +826,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 18 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno18"
@@ -1034,17 +867,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
 
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 19 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:orientation="horizontal">
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno19"
@@ -1084,17 +908,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
-                <CustomObject.TextViewCustom
-                    android:id="@+id/add_student_number19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=" 20 "
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CustomObject.EditTextCustom
                     android:id="@+id/add_student_sno20"

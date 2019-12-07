@@ -5,13 +5,15 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
@@ -90,7 +92,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                     Intent old_class = new Intent(contexts, OldClassActivity.class);
                     contexts.startActivity(old_class);
                 } else {
-                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
             }
         });
@@ -100,7 +102,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                 if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || position < 3) {
                     DialogHelper.DeleteOldSession(contexts, "آیا میخواهید جلسه" + content.DATA + " در ساعت " + content.Hour + " را حذف کنید؟", content.jalase);
                 } else {
-                    MessageHelper.Toast(contexts, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
             }
         });

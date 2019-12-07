@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layoutDirection="rtl"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -30,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layoutDirection="rtl"
             android:orientation="horizontal">
 
             <CustomObject.ButtonCustom
@@ -40,7 +38,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text="جلسات گذشته"
+                android:text="@string/pastMeetings"
                 android:textSize="15dp" />
 
             <CustomObject.ButtonCustom
@@ -50,7 +48,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text="جلسه ی جدید"
+                android:text="@string/newMeeting"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -58,7 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layoutDirection="rtl"
             android:orientation="horizontal">
 
             <CustomObject.ButtonCustom
@@ -68,7 +65,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text="خروجی از کلاس"
+                android:text="@string/classOutput"
                 android:textSize="15dp" />
 
             <CustomObject.ButtonCustom
@@ -78,7 +75,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text="ویرایش کلاس"
+                android:text="@string/classEdit_"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -86,7 +83,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layoutDirection="rtl"
             android:orientation="horizontal">
 
             <CustomObject.ButtonCustom
@@ -96,7 +92,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text=" دانشجو جدید"
+                android:text="@string/addStudent"
                 android:textSize="15dp" />
 
             <CustomObject.ButtonCustom
@@ -106,7 +102,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text="توضیحات"
+                android:text="@string/classDescription"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -114,7 +110,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layoutDirection="rtl"
             android:orientation="horizontal">
 
             <CustomObject.ButtonCustom
@@ -124,7 +119,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text="     ایام هفته     "
+                android:text="@string/daysofTheWeek"
                 android:textSize="15dp" />
 
 
@@ -135,7 +130,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:text="حذف کلاس"
+                android:text="@string/ClassDelete"
                 android:textColor="@color/red"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -146,11 +141,11 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:background="@drawable/selector"
-            android:text="دانشجویان کلاس"
+            android:text="@string/studentsClass"
             android:textSize="15dp" />
 
     </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

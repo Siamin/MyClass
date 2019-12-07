@@ -2,13 +2,15 @@ package CustomObject;
 
 import android.content.Context;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.race604.drawable.wave.WaveDrawable;
 
 /**
  * Created by AmIn on 12/20/2018.
  */
 
-public class LoadingCustom extends android.support.v7.widget.AppCompatImageView {
+public class LoadingCustom extends AppCompatImageView {
 
     WaveDrawable mWaveDrawable;
 

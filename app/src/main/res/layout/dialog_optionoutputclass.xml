@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_statistics_class_absent_student"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,10 +35,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/selector"
-                android:text="آمار حضور غیاب"
+                android:text="@string/absenceStats"
                 android:textSize="15dp" />
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_statistics_class_absent_students"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,10 +46,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/selector"
-                android:text="لیست حضور و غیاب"
+                android:text="@string/absenceList"
                 android:textSize="15dp" />
 
-            <Button
+            <CustomObject.ButtonCustom
                 android:id="@+id/list_statistics_class_nomreh_students"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,10 +59,10 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/selector"
-                android:text="لیست نمرات"
+                android:text="@string/scoreList"
                 android:textSize="15dp" />
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

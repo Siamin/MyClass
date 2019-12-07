@@ -1,25 +1,17 @@
 package aspi.myclass.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import aspi.myclass.Helpers.DialogHelper;
-import aspi.myclass.Helpers.MessageHelper;
-import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Tools.Tools;
 import aspi.myclass.model.AbsentPersentModel;
 import aspi.myclass.R;

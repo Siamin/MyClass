@@ -1,21 +1,14 @@
 package aspi.myclass.Helpers;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.widget.Toast;
 
-import java.net.InetAddress;
+import androidx.core.content.ContextCompat;
+
 import java.util.List;
 import java.util.regex.Pattern;
-
-import aspi.myclass.activity.MainActivity;
 import aspi.myclass.model.ReportDataModel;
 
 public class ValidationHelper {

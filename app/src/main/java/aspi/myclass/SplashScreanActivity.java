@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import com.race604.drawable.wave.WaveDrawable;
 
+import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.activity.LoginActivity;
 import tyrantgit.explosionfield.ExplosionField;
 
@@ -30,6 +31,9 @@ public class SplashScreanActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LanguageHelper.loadLanguage(SplashScreanActivity.this);
+
         setContentView(R.layout.activity_splashscrean);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

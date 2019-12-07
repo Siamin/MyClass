@@ -4,10 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layoutDirection="rtl"
     android:gravity="center_vertical|center_horizontal">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -26,43 +25,30 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="rtl">
-            <CustomObject.TextViewCustom
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="1"
-                android:id="@+id/list_class_in_main_row"
-                android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/backgrond_text_day_class"
-                android:layoutDirection="rtl"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="7dp" />
+            android:layout_height="wrap_content">
 
             <CustomObject.TextViewCustom
-                android:layout_width="150dp"
+                android:id="@+id/list_class_in_main_name_class"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="name class"
-                android:id="@+id/list_class_in_main_name_class"
-                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/className"
+                android:padding="@dimen/_8sdp"
                 android:layout_margin="2dp"
                 android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_weight="2"
                 android:textSize="15dp" />
 
             <CustomObject.TextViewCustom
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="start"
+                android:text="@string/classStartTime"
                 android:id="@+id/list_class_in_main_start_time"
                 android:layoutDirection="rtl"
                 android:gravity="center_vertical|center_horizontal"
@@ -73,10 +59,10 @@
                 android:textSize="15dp" />
 
             <CustomObject.TextViewCustom
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="end"
+                android:text="@string/classEndTime"
                 android:id="@+id/list_class_in_main_end_time"
                 android:gravity="center_vertical|center_horizontal"
                 android:layout_margin="2dp"
@@ -91,43 +77,43 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layoutDirection="rtl"
             android:layout_marginTop="2dp">
 
             <CustomObject.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="مکان کلاس"
+                android:text="@string/classLocation"
                 android:id="@+id/list_class_in_main_location"
                 android:layout_weight="1"
-                android:gravity="center_vertical|center_horizontal"
-                android:textColor="#000000" />
+                android:padding="@dimen/_5sdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black" />
 
             <CustomObject.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="شماره کلاس"
+                android:text="@string/classNumber"
+                android:padding="@dimen/_5sdp"
                 android:id="@+id/list_class_in_main_class"
                 android:layout_weight="1"
-                android:gravity="center_vertical|center_horizontal"
-                android:textColor="#000000" />
+                android:gravity="center_vertical"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <CustomObject.TextViewCustom
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="توضیحات کلاس"
+            android:text="@string/classDescription"
             android:id="@+id/list_class_in_main_txt"
-            android:gravity="right"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp" />
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp" />
 
     </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Attendance</string>
-    <!-- String Class Application-->
+
+    <!-- String Object Application-->
     <string name="Search">Enter Family</string>
     <string name="chooseLanguage">Choose Language</string>
     <string name="Language">English</string>
@@ -23,15 +25,14 @@
     <string name="Saved">Saved...!</string>
     <string name="ClassDeleted">Class deleted ...!</string>
     <string name="SuccessRegistered">Successfully registered.</string>
-
     <string name="PleaseEnterClassNumber">Please enter class number ...!</string>
     <string name="PleaseEnterClassLocation">Please enter the Class Location ...!</string>
     <string name="PleaseEnterClassAttribute">Please enter the class attribute code ...!</string>
     <string name="PleaseEnterClassName">Please enter the class name ...!</string>
     <string name="thanksForYourPurchase">Thanks for your purchase ...!</string>
     <string name="failedPurchaseOperation">Failed purchase operation ...!</string>
-    <string name="errorConnectAccountBazar">Please log in to your Bazar Cafe account in Market Software.</string>
-    <string name="problemConnectingToBazar">Problem connecting to market cafe ...!</string>
+    <string name="errorConnectAccountBazar">Please log in to your cafe Bazar account in Market Software.</string>
+    <string name="problemConnectingToBazar">Problem connecting to cafe Bazar ...!</string>
     <string name="ErrorValidEmail">The entered email is not correct.</string>
     <string name="ErrorTextComment">Enter the text of the message</string>
     <string name="ErrorSubject">Enter the subject</string>
@@ -51,7 +52,6 @@
     <string name="CommentSubject">Enter the subject</string>
     <string name="CommentMessage">Enter the message</string>
 
-
     <!--MainActivity-->
     <string name="TextWeekend">classes</string>
     <string name="Saturday">Saturday</string>
@@ -61,7 +61,6 @@
     <string name="Wednesday">Wednesday</string>
     <string name="Thursday">Thursday</string>
     <string name="Friday">Friday</string>
-
     <array name="weekName">
         <item>Saturday</item>
         <item>Sunday</item>
@@ -99,15 +98,13 @@
     <!--MainActivity dialog Class of the week-->
     <string name="weekDay_">Week day</string>
 
-
-
     <!--AddClassActivity-->
     <string name="classCharacteristic">Class characteristic</string>
 
     <!--AddStudentActivity-->
     <string name="Code">Code</string>
-    <string name="studentName">Student Name</string>
-    <string name="studentFamily">Student Family</string>
+    <string name="studentName">Name</string>
+    <string name="studentFamily">Family</string>
     <string name="textLerningExcell">To enter the student list you must first create a text file and enter the information as follows.
 \n Code-Name-Family
 \n Provide your students\’ names inside the Excel file so that you have the student number in column A, the student name in column B, and the student\’s last name in column C, and store the name IO.xls in the App_class folder.
@@ -116,7 +113,6 @@
     <string name="ErrorSaveDataInAddStudentActivityEmptyData">Please enter all the details in order ...!</string>
     <string name="textGetExcellFile1">Do you want student names from memory</string>
     <string name="textGetExcellFile2">Get it in an Excel file called IO.xls?</string>
-
 
     <!--Menu Item-->
     <string name="addNewClass">add new Class</string>
@@ -130,7 +126,6 @@
     <string name="buyApplication">buy application</string>
     <string name="languageChange">change Language</string>
     <string name="exitApplication">exit</string>
-
 
     <!-- String Application-->
     <string name="navigation_drawer_open">Open navigation drawer</string>

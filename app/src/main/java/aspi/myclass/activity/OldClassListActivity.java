@@ -2,13 +2,14 @@ package aspi.myclass.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 
@@ -18,7 +19,7 @@ import java.util.TimerTask;
 
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
-import aspi.myclass.Tools.Tools;
+
 import aspi.myclass.model.OldClassModel;
 import aspi.myclass.R;
 import aspi.myclass.adapter.ListCreateClassAdapter;

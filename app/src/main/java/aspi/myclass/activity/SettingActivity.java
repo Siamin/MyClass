@@ -29,11 +29,10 @@ public class SettingActivity extends Activity {
     Button Bmail;
     EditText old_password, new_password1, new_password2;
     static EditText email;
-    CheckBox checkBox_password, font1, font2, font3, on;
-    TextView text_old_password, text_new_password1, text_new_password2, test_text;
-    String password_chek, Font, Number;
+    CheckBox checkBox_password, on;
+    TextView text_old_password, text_new_password1, text_new_password2;
+    String password_chek, Number;
     int Size_Text;
-    Typeface font_1, font_2, font_3;
     String TAG = "TAG_SettingActivity";
     private FirebaseAnalytics mFirebaseAnalytics;
     private FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
@@ -45,10 +44,6 @@ public class SettingActivity extends Activity {
         setContentView(R.layout.activity_setting);
 
         initView();
-
-        font_1 = Typeface.createFromAsset(getAssets(), "Font/font1.ttf");
-        font_2 = Typeface.createFromAsset(getAssets(), "Font/font2.ttf");
-        font_3 = Typeface.createFromAsset(getAssets(), "Font/font3.ttf");
 
         getpassword();
 
@@ -84,45 +79,12 @@ public class SettingActivity extends Activity {
             }
         });
 
-        font1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(font1.getId()),font1.getText().toString(),"CheckBox");
-                if (font1.isChecked()) {
-                    font2.setChecked(false);
-                    font3.setChecked(false);
-                    test_text.setTypeface(font_1);
-                }
-            }
-        });
-
-        font2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(font2.getId()),font2.getText().toString(),"CheckBox");
-                if (font2.isChecked()) {
-                    font1.setChecked(false);
-                    font3.setChecked(false);
-                    test_text.setTypeface(font_2);
-                }
-            }
-        });
-
-        font3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(font3.getId()),font3.getText().toString(),"CheckBox");
-                if (font3.isChecked()) {
-                    font1.setChecked(false);
-                    font2.setChecked(false);
-                    test_text.setTypeface(font_3);
-                }
-            }
-        });
-
 
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (save()) {
                     Go_main();
-                    MessageHelper.Toast(SettingActivity.this, "ذخیره شد...!");
+                    MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.Saved));
                 }
 
             }
@@ -164,18 +126,16 @@ public class SettingActivity extends Activity {
         new_password1 = findViewById(R.id.setting_password1_new);
         new_password2 = findViewById(R.id.setting_password2_new);
         checkBox_password = findViewById(R.id.setting_check);
-        font1 = findViewById(R.id.setting_font1);
-        font2 = findViewById(R.id.setting_font2);
-        font3 = findViewById(R.id.setting_font3);
         text_old_password = findViewById(R.id.setting_text_old_password);
         text_new_password1 = findViewById(R.id.setting_text_new_password1);
         text_new_password2 = findViewById(R.id.setting_text_new_password2);
-        test_text = findViewById(R.id.setting_text_test);
+
         save = findViewById(R.id.setting_save);
         Bmail = findViewById(R.id.setting_bmail);
         cancel = findViewById(R.id.setting_cancel);
         on = findViewById(R.id.setting_numberon);
-        test_text.setText("متن تست 1" + "text test 1");
+
+
 
     }
 
@@ -193,7 +153,6 @@ public class SettingActivity extends Activity {
         password_chek = SharedPreferencesHelper.get_Data("Password_App", "null", SettingActivity.this);
 
         Size_Text = Integer.parseInt(SharedPreferencesHelper.get_Data("Size_Text_App", "14", SettingActivity.this));
-        Font = SharedPreferencesHelper.get_Data("Font_App", "font1", SettingActivity.this);
         String Code_save = SharedPreferencesHelper.get_Data("EC_Email", "null", SettingActivity.this);
         String status_email = SharedPreferencesHelper.get_Data("save_Email", "0", SettingActivity.this);
 
@@ -218,22 +177,6 @@ public class SettingActivity extends Activity {
             setEnabled(true);
         }
 
-        if (Font.equals("font1")) {
-            font1.setChecked(true);
-            font2.setChecked(false);
-            font3.setChecked(false);
-            test_text.setTypeface(font_1);
-        } else if (Font.equals("font2")) {
-            font1.setChecked(false);
-            font2.setChecked(true);
-            font3.setChecked(false);
-            test_text.setTypeface(font_2);
-        } else if (Font.equals("font3")) {
-            font1.setChecked(false);
-            font2.setChecked(false);
-            font3.setChecked(true);
-            test_text.setTypeface(font_3);
-        }
 
         if (!Code_save.equals("null")) {
             DialogHelper.VirifyCodeEmail(SettingActivity.this);
@@ -271,14 +214,8 @@ public class SettingActivity extends Activity {
         } else {
             SetCode("Password_App", "null");
         }
-        String font_set = "font1";
-        if (font2.isChecked()) {
-            font_set = "font2";
-        } else if (font3.isChecked()) {
-            font_set = "font3";
-        }
+
         SetCode("Size_Text_App", String.valueOf(Size_Text));
-        SetCode("Font_App", font_set);
         SetCode("status_number", Number);
         return res;
     }

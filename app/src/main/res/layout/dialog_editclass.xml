@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -33,11 +33,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal"
                 android:scrollIndicators="right">
 
-                <TextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/class_of_week_day_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -45,7 +44,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|center_horizontal"
                     android:padding="10dp"
-                    android:text=" روز هفته:"
+                    android:text="@string/weekDay_"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <Spinner
@@ -73,7 +72,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layoutDirection="rtl"
                     android:orientation="horizontal">
 
                     <TextView
@@ -82,7 +80,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="ساعت شروع کلاس:"
+                        android:text="@string/classStartTime"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
@@ -90,9 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_edit_black_24dp"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:text="09:00" />
+                        android:gravity="center_horizontal|center_vertical" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -109,26 +105,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layoutDirection="rtl"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <CustomObject.TextViewCustom
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text=" ساعت پایان کلاس:"
+                        android:text="@string/classEndTime"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                    <TextView
+                    <CustomObject.TextViewCustom
                         android:id="@+id/class_of_week_texttimeend"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_edit_black_24dp"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:text="12:00" />
+                        android:gravity="center_horizontal|center_vertical"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -138,21 +131,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:layoutDirection="rtl"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:scrollIndicators="right">
 
-                <TextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/class_of_week_class_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="شماره کلاس:"
+                    android:text="@string/classNumber"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <EditText
+                <CustomObject.EditTextCustom
                     android:id="@+id/class_of_week_class_edit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -166,29 +158,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layoutDirection="ltr"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
 
-                <TextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/class_of_week_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
                     android:padding="15dp"
-                    android:text="ذخیره"
+                    android:text="@string/save"
                     android:textColor="@color/green"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
-                <TextView
+                <CustomObject.TextViewCustom
                     android:id="@+id/class_of_week_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|center_horizontal"
                     android:padding="15dp"
-                    android:text="انصراف"
+                    android:text="@string/cancle"
                     android:textColor="@color/red"
                     android:textSize="15dp"
                     android:textStyle="bold" />
@@ -196,5 +187,5 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

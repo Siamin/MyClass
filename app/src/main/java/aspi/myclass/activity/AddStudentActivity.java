@@ -37,7 +37,7 @@ public class AddStudentActivity extends Activity {
 
     ImageView save, cancel, download;
     static ImageView Reload;
-    TextView nameclass, starttime, locationclass, numbers[];
+    TextView nameclass, starttime, locationclass;
     static EditText sno_student[], name_student[], family_student[];
     DatabasesHelper data;
     public static String id_class, Name_class, Start_time, location;
@@ -57,9 +57,9 @@ public class AddStudentActivity extends Activity {
             public void onClick(View view) {
                 if (ValidationHelper.isValidationBuyApp(AddStudentActivity.this, "‌Buy_App")) {
                     DialogHelper.Import(AddStudentActivity.this);
-                    MessageHelper.Mesage(AddStudentActivity.this, "برای وارد کردن فهرست دانشجویان ابتدا باید یک فایل متنی ایجاد کرد و اطلاعات را بصورت زیر وارد کنید." + "\nشماره دانشجویی-نام-نام خانوادگی" + "\nنام فایل راIO.txt گذاشته و در فولدر App_class ذخیره کنید" + "  ویا اسامی دانشجویان خود را در داخل فایل Excel بصورتی که شماره ی دانشجوی را در ستون A و نام دانشجو را در ستون B و نام خانوادگی دانشجو در ستون C به همین ترتیب وارد کنید و با نام IO.xls در پوشه ی App_class ذخیره کنید.\n" + "آموزش کامل تصویری این قسمت در منو کشویی قرار دارد");
+                    MessageHelper.Mesage(AddStudentActivity.this, getResources().getString(R.string.textLerningExcell));
                 } else {
-                    MessageHelper.Toast(AddStudentActivity.this, "برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.");
+                    MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.ErrorBuyApplication));
                 }
             }
         });
@@ -78,15 +78,15 @@ public class AddStudentActivity extends Activity {
                     if (save()) {
                         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
 
-                        MessageHelper.Toast(AddStudentActivity.this, "ذخیره شد...!");
+                        MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.Saved));
 
 
                     }
                     if (not_save > 0) {
-                        MessageHelper.Toast(AddStudentActivity.this, "اطلاعاتی که بعد از ذخیره پاک نشده اند قبلا شماره آنها وارد شده است...!");
+                        MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.ErrorSaveDataInAddStudentActivityInformation));
                     }
                 } else {
-                    MessageHelper.Toast(AddStudentActivity.this, "لطفا تمامی مشخصات را به ترتیب وارد نمایید...!");
+                    MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.ErrorSaveDataInAddStudentActivityEmptyData));
                 }
             }
         });
@@ -101,7 +101,6 @@ public class AddStudentActivity extends Activity {
     }
 
     void initView() {
-        numbers = new TextView[20];
         sno_student = new EditText[20];
         name_student = new EditText[20];
         family_student = new EditText[20];
@@ -115,26 +114,6 @@ public class AddStudentActivity extends Activity {
         nameclass = (TextView) findViewById(R.id.add_student_name_class);
         starttime = (TextView) findViewById(R.id.add_student_start_time);
         locationclass = (TextView) findViewById(R.id.add_student_location);
-        numbers[0] = (TextView) findViewById(R.id.add_student_number0);
-        numbers[1] = (TextView) findViewById(R.id.add_student_number1);
-        numbers[2] = (TextView) findViewById(R.id.add_student_number2);
-        numbers[3] = (TextView) findViewById(R.id.add_student_number3);
-        numbers[4] = (TextView) findViewById(R.id.add_student_number4);
-        numbers[5] = (TextView) findViewById(R.id.add_student_number5);
-        numbers[6] = (TextView) findViewById(R.id.add_student_number6);
-        numbers[7] = (TextView) findViewById(R.id.add_student_number7);
-        numbers[8] = (TextView) findViewById(R.id.add_student_number8);
-        numbers[9] = (TextView) findViewById(R.id.add_student_number9);
-        numbers[10] = (TextView) findViewById(R.id.add_student_number10);
-        numbers[11] = (TextView) findViewById(R.id.add_student_number11);
-        numbers[12] = (TextView) findViewById(R.id.add_student_number12);
-        numbers[13] = (TextView) findViewById(R.id.add_student_number13);
-        numbers[14] = (TextView) findViewById(R.id.add_student_number14);
-        numbers[15] = (TextView) findViewById(R.id.add_student_number15);
-        numbers[16] = (TextView) findViewById(R.id.add_student_number16);
-        numbers[17] = (TextView) findViewById(R.id.add_student_number17);
-        numbers[18] = (TextView) findViewById(R.id.add_student_number18);
-        numbers[19] = (TextView) findViewById(R.id.add_student_number19);
         //**********************************************************
         sno_student[0] = (EditText) findViewById(R.id.add_student_sno1);
         sno_student[1] = (EditText) findViewById(R.id.add_student_sno2);
@@ -204,9 +183,9 @@ public class AddStudentActivity extends Activity {
         locationclass.setText("" + location);
 
         for (int i = 0; i < 20; i++) {
-            sno_student[i].setHint("شماره " + (i + 1));
-            name_student[i].setHint("نام " + (i + 1));
-            family_student[i].setHint("نام خانوادگی " + (i + 1));
+            sno_student[i].setHint(getResources().getString(R.string.Code) + " " + (i + 1));
+            name_student[i].setHint(getResources().getString(R.string.studentName) + " " + (i + 1));
+            family_student[i].setHint(getResources().getString(R.string.studentFamily) + " " + (i + 1));
         }
     }
 
