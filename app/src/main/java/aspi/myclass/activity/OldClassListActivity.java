@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,9 +27,9 @@ import aspi.myclass.adapter.ListCreateClassAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
-public class OldClassListActivity extends Activity implements  DatePickerDialog.OnDateSetListener {
+public class OldClassListActivity extends Activity implements DatePickerDialog.OnDateSetListener, android.app.DatePickerDialog.OnDateSetListener {
 
-    public static String Name_class, id_class, refresh = "";
+    public static String Name_class, id_class, refresh = "",sessions;
     TextView name_class;
     DatabasesHelper data;
     RecyclerView recyclerView2;
@@ -92,7 +93,7 @@ public class OldClassListActivity extends Activity implements  DatePickerDialog.
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            IndicatorHelper.IndicatorCreate(OldClassListActivity.this,"درحال دریافت اطلاعات","لطفا صبر کنید ...!");
+                            IndicatorHelper.IndicatorCreate(OldClassListActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
                             new Thread(new Runnable() {
                                 public void run() {
                                     // get_database();
@@ -135,7 +136,7 @@ public class OldClassListActivity extends Activity implements  DatePickerDialog.
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        MessageHelper.Toast(OldClassListActivity.this, "هیچ جلسه ای برای کلاس تشکیل نشده...!");
+                        MessageHelper.Toast(OldClassListActivity.this, getResources().getString(R.string.notCreateMate));
                         finish();
                     }
                 });
@@ -151,9 +152,32 @@ public class OldClassListActivity extends Activity implements  DatePickerDialog.
         }
     }
 
+
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        Log.i(TAG, "onDateSet FA");
 
+        updateDate(year,monthOfYear,dayOfMonth);
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+        Log.i(TAG, "onDateSet EN");
+
+        updateDate(year,monthOfYear,dayOfMonth);
+    }
+
+    void updateDate(int year,int monthOfYear,int dayOfMonth){
+        try {
+            data.open();
+            data.update("day", String.valueOf(year), "month", String.valueOf(monthOfYear + 1), "year", String.valueOf(dayOfMonth), "jalase=" + sessions);
+            data.close();
+            MessageHelper.Toast(this, getResources().getString(R.string.editingDoneSuccessfully));
+            OldClassListActivity.refresh = "1";
+        } catch (Exception e) {
+            Log.i(TAG, "Error" + e.toString());
+        }
     }
 }
 

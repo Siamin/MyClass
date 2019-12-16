@@ -40,25 +40,15 @@ public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cv
     @Override
     public void onBindViewHolder(final cvh holder, int position) {
         final StatisticsModel content = Content_student.get(position);
-        //*************************************************************************
-        if (position<9)holder.row.setText("  " + (position + 1)+" ");
-        if (position>9)holder.row.setText(" " + (position + 1)+" ");
-        if (position>99)holder.row.setText("" + (position + 1)+" ");
-        holder.name.setText(""+content.name);
-        holder.family.setText(""+content.family);
-        holder.all.setText("تعداد کل جلسات "+content.max);
-        holder.abs.setText(content.set+" حضور");
-        holder.per.setText(content.per+" غیبت");
-        float status_=((float)content.set/content.max)*100;
-        holder.status.setText("%"+String.valueOf((int)status_));
-        //*************************************************************************
-        holder.row.setTypeface(MainActivity.FONTS);
-        holder.name.setTypeface(MainActivity.FONTS);
-        holder.family.setTypeface(MainActivity.FONTS);
-        holder.status.setTypeface(MainActivity.FONTS);
-        holder.all.setTypeface(MainActivity.FONTS);
-        holder.abs.setTypeface(MainActivity.FONTS);
-        holder.per.setTypeface(MainActivity.FONTS);
+
+        holder.name.setText(content.name);
+        holder.family.setText(content.family);
+        holder.all.setText(String.valueOf(content.max));
+        holder.abs.setText(String.valueOf(content.set));
+        holder.per.setText(String.valueOf(content.per));
+        float status_ = ((float) content.set / content.max) * 100;
+        holder.status.setText("%" + String.valueOf((int) status_));
+
         holder.progressDialog.setProgress(content.set);
         holder.progressDialog.setMax(content.max);
         //*************************************************************************
@@ -70,20 +60,20 @@ public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cv
 
     public class cvh extends RecyclerView.ViewHolder {
 
-        private TextView row, name, family, status,abs,per,all;
+        private TextView name, family, status, abs, per, all;
         private ProgressBar progressDialog;
 
         public cvh(View itemView) {
             super(itemView);
 
-            row = (TextView) itemView.findViewById(R.id.show_student_number);
-            name = (TextView) itemView.findViewById(R.id.show_student_name);
-            family = (TextView) itemView.findViewById(R.id.show_student_family);
-            status = (TextView) itemView.findViewById(R.id.show_student_status);
-            all= (TextView) itemView.findViewById(R.id.show_student_all);
-            abs= (TextView) itemView.findViewById(R.id.show_student_absent);
-            per= (TextView) itemView.findViewById(R.id.show_student_present);
-            progressDialog= (ProgressBar) itemView.findViewById(R.id.show_student_progressbar);
+
+            name = itemView.findViewById(R.id.show_student_name);
+            family = itemView.findViewById(R.id.show_student_family);
+            status = itemView.findViewById(R.id.show_student_status);
+            all = itemView.findViewById(R.id.show_student_all);
+            abs = itemView.findViewById(R.id.show_student_absent);
+            per = itemView.findViewById(R.id.show_student_present);
+            progressDialog = itemView.findViewById(R.id.show_student_progressbar);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -42,10 +42,10 @@ public class EditStudentAdapter extends RecyclerView.Adapter<EditStudentAdapter.
 
         final AbsentPersentModel studentModel = model.get(position);
 
-        holder.sno.setText("شماره دانشجویی : " + studentModel.sno);
-        holder.name.setText("نام : " + studentModel.name);
-        holder.family.setText("نام خانوادگی : " + studentModel.family);
-        holder.description.setText(studentModel.text.length() > 0 ? studentModel.text : "توضیحات ثبت نشده");
+        holder.sno.setText(context.getResources().getString(R.string.studentCode)+" : " + studentModel.sno);
+        holder.name.setText(context.getResources().getString(R.string.studentName)+" : "  + studentModel.name);
+        holder.family.setText(context.getResources().getString(R.string.studentFamily)+" : "  + studentModel.family);
+        holder.description.setText(studentModel.text.length() > 0 ? studentModel.text : "");
 
         holder.titleDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,20 +60,20 @@ public class EditStudentAdapter extends RecyclerView.Adapter<EditStudentAdapter.
 
         holder.sno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.SnoStudent(context, "ویرایش شماره دانشجویی " + studentModel.name + " " + studentModel.family, holder.sno, data, studentModel, NewClassActivity.did);
+                DialogHelper.SnoStudent(context, context.getResources().getString(R.string.EditStudentCode)+" "+ studentModel.name + " " + studentModel.family, holder.sno, data, studentModel, NewClassActivity.did);
 
             }
         });
         //*****************************************************************
         holder.family.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.FamilyStudent(context, "ویرایش نام خانوادگی " + studentModel.name + " " + studentModel.family, holder.family, data, studentModel);
+                DialogHelper.FamilyStudent(context, context.getResources().getString(R.string.EditStudentFamily)+" " + studentModel.name + " " + studentModel.family, holder.family, data, studentModel);
             }
         });
         //*****************************************************************
         holder.name.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.NameStudent(context, "ویرایش نام " + studentModel.name + " " + studentModel.family, holder.name, data, studentModel);
+                DialogHelper.NameStudent(context, context.getResources().getString(R.string.EditStudentName)+" "+ studentModel.name + " " + studentModel.family, holder.name, data, studentModel);
 
 
             }
@@ -81,7 +81,7 @@ public class EditStudentAdapter extends RecyclerView.Adapter<EditStudentAdapter.
         //*****************************************************************
         holder.description.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.DescriptionStudent(context, "توضیحات " + studentModel.name + " " + studentModel.family, holder.description, data, studentModel);
+                DialogHelper.DescriptionStudent(context, context.getResources().getString(R.string.SetStudentDescription)+" " + studentModel.name + " " + studentModel.family, holder.description, data, studentModel);
             }
         });
 

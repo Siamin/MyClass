@@ -35,9 +35,9 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="2dp"
                 android:drawableLeft="@drawable/ic_edit_black_24dp"
-                android:gravity="center_vertical|right"
+                android:gravity="center_vertical"
                 android:padding="@dimen/_5sdp"
-                android:text="شماره دانشجویی"
+                android:text="@string/studentCode"
                 android:textSize="15dp" />
 
             <CustomObject.TextViewCustom
@@ -45,19 +45,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/ic_edit_black_24dp"
-                android:gravity="center_vertical|right"
+                android:gravity="center_vertical"
                 android:padding="@dimen/_5sdp"
-                android:text="نام"
+                android:text="@string/studentName"
                 android:textSize="15dp" />
 
             <CustomObject.TextViewCustom
                 android:id="@+id/adapter_editestudent_family"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical|right"
+                android:gravity="center_vertical"
                 android:padding="@dimen/_5sdp"
                 android:drawableLeft="@drawable/ic_edit_black_24dp"
-                android:text="نام خانوادگی"
+                android:text="@string/studentFamily"
                 android:textSize="15dp" />
 
             <CustomObject.TextViewCustom
@@ -65,12 +65,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:background="@color/colorPrimary"
-                android:gravity="center_vertical|right"
+                android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_24dp"
                 android:drawableTint="@color/white"
-                android:text="توضیحات دانشجو"
+                android:text="@string/studentDescription"
                 android:textColor="@color/white" />
 
             <CustomObject.TextViewCustom

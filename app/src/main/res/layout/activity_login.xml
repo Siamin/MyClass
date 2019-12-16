@@ -20,13 +20,13 @@
             android:orientation="vertical">
 
 
-            <TextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/_30sdp"
-                android:text="رمز عبور را وارد کنید"
+                android:text="@string/EnterPassWord"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/_14sdp"
@@ -82,7 +82,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="ltr">
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="ltr">
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:layoutDirection="ltr">
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -226,10 +226,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/_5sdp"
-                android:gravity="center_vertical|center_horizontal"
-                android:layoutDirection="ltr">
+                android:gravity="center_vertical|center_horizontal">
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_c"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -237,12 +236,12 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
-                    android:text="تصحیح"
+                    android:text="@string/ClearPass"
                     android:textColor="@color/red_dark"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -255,7 +254,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
-                <Button
+                <CustomObject.ButtonCustom
                     android:id="@+id/key_enter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -263,14 +262,14 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/selector"
-                    android:text="ورود"
+                    android:text="@string/Enter"
                     android:textColor="@color/green_dark"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <TextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/forget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -278,7 +277,7 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:padding="@dimen/_5sdp"
-                android:text="رمز عبور را فراموش کرده ام"
+                android:text="@string/ForgotPass"
                 android:textColor="@color/colorPrimaryDark" />
         </LinearLayout>
 

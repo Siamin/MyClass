@@ -10,12 +10,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:elevation="8dp"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:elevation="@dimen/_8sdp"
         android:foregroundGravity="center_vertical|center_horizontal"
         app:cardBackgroundColor="@color/cardview_dark_background"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/_10sdp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
 
@@ -29,14 +29,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:gravity="center_horizontal"
                 android:padding="@dimen/_8sdp"
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white"
-                android:textSize="25dp" />
+                android:textSize="@dimen/_14sdp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,13 +47,13 @@
                     android:id="@+id/massge_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:padding="5dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
                     android:text="@string/okey"
                     android:layout_margin="@dimen/_8sdp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/yellow"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
 

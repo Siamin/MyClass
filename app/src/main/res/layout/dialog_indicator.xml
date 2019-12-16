@@ -33,7 +33,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:drawableTint="@color/white"
-                android:gravity="center_horizontal|right"
+                android:gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />

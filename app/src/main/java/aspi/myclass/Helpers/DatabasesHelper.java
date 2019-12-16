@@ -329,7 +329,7 @@ public class DatabasesHelper extends SQLiteOpenHelper {
     }
 
     //******************************************************************************* Qury Old Class
-    public List<AbsentPersentModel> OldClassByQuery(String selectQuery) {
+    public List<AbsentPersentModel> OldClassByQuery(String selectQuery,String score) {
 
         List<AbsentPersentModel> absentPersentModels = new ArrayList<>();
         Cursor cursor = mydb.rawQuery(selectQuery, null);
@@ -341,7 +341,7 @@ public class DatabasesHelper extends SQLiteOpenHelper {
                     _absentPersentModels.id_rull = cursor.getString(0);
                     _absentPersentModels.sno = cursor.getString(1);
                     _absentPersentModels.status = cursor.getString(2);
-                    _absentPersentModels.nomreh = cursor.getString(3);
+                    _absentPersentModels.nomreh = cursor.getString(3).isEmpty() ? score : cursor.getString(3);
                     //*****************************************
                     _absentPersentModels.id = cursor.getString(6);
                     _absentPersentModels.family = cursor.getString(8);

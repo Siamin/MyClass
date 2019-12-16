@@ -24,7 +24,6 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
     private List<AbsentPersentModel> Content_new_class;
     private Context contexts;
     private DatabasesHelper data;
-    Tools om = new Tools();
     String TAG = "TAG_StudentViewAdapter";
 
     public StudentViewAdapter(List<AbsentPersentModel> contents, Context context) {
@@ -43,11 +42,10 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
     public void onBindViewHolder(final cvh holder, int position) {
         final AbsentPersentModel content = Content_new_class.get(position);
         //*****************************************************************
-        holder.row.setText("  " + (position + 1) + " ");
         holder.sno.setText(content.sno);
         holder.name.setText(content.name);
         holder.family.setText(content.family);
-        holder.nomreh.setText(content.nomreh);
+        holder.score.setText(content.nomreh);
 
         if (content.status.equals("1")) {
             holder.status.setChecked(true);
@@ -56,12 +54,12 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         }
         if (!content.text.isEmpty()) {
             if (content.text.replace("\n", "  ").length() > 50) {
-                holder.text.setText(content.text.replace("\n", "  ").substring(0, 50) + "  توضایحات ادامه دارد...");
+                holder.text.setText(content.text.replace("\n", "  ").substring(0, 50) + "...");
             } else {
                 if (content.text.length() > 2) {
                     holder.text.setText(content.text);
                 } else {
-                    holder.text.setText("توضیحات...");
+                    holder.text.setText(contexts.getResources().getString(R.string.studentDescription)+"...");
                 }
             }
         }
@@ -93,20 +91,20 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         //*****************************************************************
         holder.sno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.SnoStudent(contexts, "ویرایش شماره دانشجویی " + content.name + " " + content.family, holder.sno, data, content,NewClassActivity.did);
+                DialogHelper.SnoStudent(contexts, contexts.getResources().getString(R.string.EditStudentCode)+" "+ content.name + " " + content.family, holder.sno, data, content,NewClassActivity.did);
 
             }
         });
         //*****************************************************************
         holder.family.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.FamilyStudent(contexts, "ویرایش نام خانوادگی " + content.name + " " + content.family, holder.family, data, content);
+                DialogHelper.FamilyStudent(contexts, contexts.getResources().getString(R.string.EditStudentFamily)+" " + content.name + " " + content.family, holder.family, data, content);
             }
         });
         //*****************************************************************
         holder.name.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.NameStudent(contexts, "ویرایش نام " + content.name + " " + content.family, holder.name, data, content);
+                DialogHelper.NameStudent(contexts, contexts.getResources().getString(R.string.EditStudentName)+" " + content.name + " " + content.family, holder.name, data, content);
 
 
             }
@@ -114,13 +112,13 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         //*****************************************************************
         holder.text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.DescriptionStudent(contexts, "توضیحات " + content.name + " " + content.family, holder.text, data, content);
+                DialogHelper.DescriptionStudent(contexts, contexts.getResources().getString(R.string.SetStudentDescription)+" " + content.family, holder.text, data, content);
             }
         });
         //*****************************************************************
-        holder.nomreh.setOnClickListener(new View.OnClickListener() {
+        holder.score.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.ScoreStudent(contexts, "نمره دانشجو " + content.name + " " + content.family, holder.nomreh, data, content);
+                DialogHelper.ScoreStudent(contexts, contexts.getResources().getString(R.string.studentScore)+" " + content.name + " " + content.family, holder.score, data, content);
             }
         });
         //******************************************************************************************end onBindViewHolder
@@ -133,19 +131,18 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
 
     public class cvh extends RecyclerView.ViewHolder {
 
-        private TextView row, sno, name, family, nomreh, text;
+        private TextView  sno, name, family, score, text;
         private CheckBox status;
 
         public cvh(View itemView) {
             super(itemView);
 
-            row = (TextView) itemView.findViewById(R.id.list_show_student_numbers);
-            sno = (TextView) itemView.findViewById(R.id.list_show_student_sno);
-            name = (TextView) itemView.findViewById(R.id.list_show_student_name);
-            family = (TextView) itemView.findViewById(R.id.list_show_student_family);
-            nomreh = (TextView) itemView.findViewById(R.id.list_show_student_nomerh);
-            status = (CheckBox) itemView.findViewById(R.id.list_show_student_status);
-            text = (TextView) itemView.findViewById(R.id.list_show_student_text);
+            sno =  itemView.findViewById(R.id.list_show_student_sno);
+            name =  itemView.findViewById(R.id.list_show_student_name);
+            family =  itemView.findViewById(R.id.list_show_student_family);
+            score =  itemView.findViewById(R.id.list_show_student_nomerh);
+            status =  itemView.findViewById(R.id.list_show_student_status);
+            text =  itemView.findViewById(R.id.list_show_student_text);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

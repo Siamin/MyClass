@@ -52,9 +52,7 @@ public class NewClassActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         LanguageHelper.loadLanguage(NewClassActivity.this);
-
         setContentView(R.layout.activity_newclass);
         //******************************************************************************************
         initView();
@@ -119,8 +117,8 @@ public class NewClassActivity extends Activity {
         linearLayoutManager = new LinearLayoutManager(NewClassActivity.this);
         Search = findViewById(R.id.newclass_search);
         //*************************************************************
-        name_class.setText("کلاس " + Name_class);
-        DATA.setText("" + DateHelper.date_iran());
+        name_class.setText(getResources().getString(R.string.Class) + " " + Name_class);
+        DATA.setText(DateHelper.GetData(NewClassActivity.this));
         HOUR = Integer.parseInt(DateHelper.Get_Time().split(":")[0]);
         MINUTE = Integer.parseInt(DateHelper.Get_Time().split(":")[1]);
         //*************************************************************
@@ -139,7 +137,7 @@ public class NewClassActivity extends Activity {
                     public void run() {
                         counters += 1;
                         if (counters == 1) {
-                            IndicatorHelper.IndicatorCreate(NewClassActivity.this, "در حال دریافت اطلاعات", "لطفا صبر کنید ...!");
+                            IndicatorHelper.IndicatorCreate(NewClassActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
                             new Thread(new Runnable() {
                                 public void run() {
                                     Data();
@@ -169,7 +167,7 @@ public class NewClassActivity extends Activity {
 
             if (absentPersentModels.size() > 0) {
 
-                DATA_IRAN = DateHelper.date_iran().split("/");
+                DATA_IRAN = DateHelper.GetData(NewClassActivity.this).split("/");
 
                 data.open();
                 int cunt_roll = data.count("rollcall");
@@ -181,6 +179,7 @@ public class NewClassActivity extends Activity {
                 for (int i = 0; i < absentPersentModels.size(); i++) {
                     data.insert_Rollcall(absentPersentModels.get(i).sno, true, "", DATA_IRAN[0], DATA_IRAN[1], DATA_IRAN[2], did, String.valueOf(jalase), String.valueOf(HOUR) + ":" + String.valueOf(MINUTE));
                     absentPersentModels.get(i).id_rull = data.Display("rollcall", cunt_roll, 0);
+                    absentPersentModels.get(i).nomreh = getResources().getString(R.string.Score);
                     cunt_roll += 1;
                 }
                 data.close();
@@ -189,7 +188,7 @@ public class NewClassActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        MessageHelper.Toast(NewClassActivity.this, "هیچ دانشجویی برای تشکیل جلسه ثبت نشده...!");
+                        MessageHelper.Toast(NewClassActivity.this, getResources().getString(R.string.NoAddStudentToClass));
                         go_main();
                     }
                 });
@@ -217,7 +216,7 @@ public class NewClassActivity extends Activity {
             super.onBackPressed();
             go_main();
         } else {
-            MessageHelper.Toast(NewClassActivity.this, "برای بازگشت دوباره کلیک کنید!");
+            MessageHelper.Toast(NewClassActivity.this, getResources().getString(R.string.BackPage));
             statusBackPage = true;
         }
     }

@@ -32,7 +32,6 @@ public class StatisticsActivity extends Activity {
     LinearLayoutManager linearLayoutManager_show_student;
     boolean view = false;
     java.util.List<StatisticsModel> List = new ArrayList<>();
-    Tools tools = new Tools();
     ImageView backPage;
     String TAG = "TAG_StatisticsActivity";
 
@@ -62,7 +61,7 @@ public class StatisticsActivity extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            IndicatorHelper.IndicatorCreate(StatisticsActivity.this,"در حال دریافت اطلاعات","لطفا صبر کنید ...!");
+                            IndicatorHelper.IndicatorCreate(StatisticsActivity.this,getResources().getString(R.string.gettingData),getResources().getString(R.string.pleaseWait));
                             new Thread(new Runnable() {
                                 public void run() {
                                     //Get_Data_Base();
@@ -103,7 +102,8 @@ public class StatisticsActivity extends Activity {
 
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        MessageHelper.Toast(StatisticsActivity.this," برای آمار حضور و غیاب شما باید جلسه برای کلاس خود تشکیل دهید...! ");
+                        MessageHelper.Toast(StatisticsActivity.this, getResources().getString(R.string.ToastNoData));
+                        onBackPressed();
                     }
                 });
             }

@@ -1,9 +1,27 @@
 package aspi.myclass.Helpers;
 
+import android.content.Context;
+
 import java.util.Calendar;
 
 public class DateHelper {
 
+    public static String GetData(Context context){
+        String lang = LanguageHelper.loadLanguage(context);
+
+        if (lang.equals("fa")){
+            return date_iran();
+        }else{
+            return dateMiladi();
+        }
+
+    }
+
+    public static String dateMiladi() {
+        Calendar c = Calendar.getInstance();
+        String data = String.valueOf(c.get(Calendar.YEAR)) + "/" + String.valueOf(c.get(Calendar.MONTH)+1) + "/" + String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+        return data;
+    }
 
     public static String date_iran() {
         Calendar c = Calendar.getInstance();

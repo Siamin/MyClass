@@ -15,9 +15,15 @@
     <string name="cancle">انصراف</string>
     <string name="delete">حذف</string>
     <string name="show">نمایش</string>
+    <string name="time">ساعت</string>
     <string name="EnterDescription">توضیحات خود را بنویسید</string>
     <string name="textClassDelete">با حذف در تمامی جلسه های برگزار شده کلاس حذف می شود!</string>
     <string name="checkYourInternetConnection">اتصال اینترنت خود را بررسی کنید!</string>
+    <string name="EnterText">را وارد کنید</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="Score">نمره</string>
+
 
 
 
@@ -42,6 +48,50 @@
     <string name="Errorposting">خطا در ارسال ...!</string>
     <string name="editingDoneSuccessfully">ویرایش با موفقیت انجام شد...!</string>
     <string name="noEditsHaveBeenMade">هیچ تغییری برای ویرایش اعمال نشده ...!</string>
+    <string name="EditStudentCode">ویرایش شماره دانشجویی</string>
+    <string name="EditStudentName">ویرایش نام</string>
+    <string name="EditStudentFamily">ویرایش نام خانوادگی</string>
+    <string name="SetStudentDescription">توضیحات</string>
+    <string name="ErrorStudentCode">این شماره برای دانشجویی دیگه ثبت شده!</string>
+    <string name="QuestionConnenctionNet">آیا دستگاه شما به اینترنت متصل است؟</string>
+    <string name="SendEmail">ایمیل ارسال شد...!</string>
+    <string name="HelloIsPassword">سلام رمز عبور شما</string>
+    <string name="SubjectForgotPassword">رمز عبور نرم افزار دفتر نمره حضور و غیاب</string>
+    <string name="BackPage">برای بازگشت دوباره کلیک کنید!</string>
+    <string name="NoAddStudentToClass">هیچ دانشجویی برای تشکیل جلسه ثبت نشده...!</string>
+    <string name="doYouWantMateing">آیا میخواهید جلسه</string>
+    <string name="inTime"> در ساعت </string>
+    <string name="deleteMateing"> را حذف کنید؟</string>
+    <string name="TitleDialogdeleteMateing">حذف جلسه</string>
+    <string name="SuccessfullyDeleteMateing">جلسه با موفقیت حذف شد..!</string>
+
+
+    <!--AdapterStatustics-->
+    <string name="AllMateing">کل جلسات</string>
+    <string name="CountPresence">تعداد حضور ها</string>
+    <string name="CountAbsence">تعداد غیبت ها</string>
+
+
+    <!--StatisticsActivity-->
+    <string name="TitleStatisticsActivity">آمار حضور دانشجویان</string>
+    <string name="ToastNoData">برای آمار حضور و غیاب شما باید جلسه برای کلاس خود تشکیل دهید...!</string>
+
+    <!--OldClassActivity-->
+    <string name="TitleOldClassActivity">لیست گذشته کلاس</string>
+
+    <!--LoginActivity-->
+    <string name="Enter">ورود</string>
+    <string name="ForgotPass">رمز عبور را فراموش کرده ام؟</string>
+    <string name="EnterPassWord">رمز عبور را وارد کنید</string>
+    <string name="ClearPass">تصحیح</string>
+
+    <string name="SendPassword">ارسال رمز عبور</string>
+
+    <!--NewClassActivity-->
+    <string name="TitleNewClassActivitu">لیست حضور و غیاب کلاس</string>
+    <string name="Date">تاریخ</string>
+    <string name="studentScore">نمره دانشجو</string>
+
 
     <!--BuyAppActivity-->
     <string name="price_">قیمت</string>
@@ -102,6 +152,14 @@
 
     <!--AddClassActivity-->
     <string name="classCharacteristic">مشخصه درس:</string>
+
+    <!--EditStudentActivity-->
+    <string name="studentCode">شماره دانشجویی</string>
+    <string name="studentDescription">توضیحات دانشجو</string>
+
+    <!--OldClassListActivity-->
+    <string name="TitleOldClassListActivity">جلسات برگزار شده</string>
+    <string name="notCreateMate">هیچ جلسه ای برای کلاس تشکیل نشده...!</string>
 
     <!--AddStudentActivity-->
     <string name="Code">کد</string>

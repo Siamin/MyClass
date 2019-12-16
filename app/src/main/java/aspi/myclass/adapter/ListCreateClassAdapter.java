@@ -20,6 +20,7 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.List;
 
+import aspi.myclass.Helpers.DatePickerHelper;
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
@@ -39,7 +40,6 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
     static DatabasesHelper data;
     Activity activity;
     static String TAG = "TAG_ListCreateClassAdapter";
-    String TIMEPICKER = "TimePickerDialog", DATEPICKER = "DatePickerDialog", MULTIDATEPICKER = "MultiDatePickerDialog";
 
     public ListCreateClassAdapter(List<OldClassModel> contents, Context context, Activity Act) {
         this.Content_list_old = contents;
@@ -57,30 +57,27 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
     @Override
     public void onBindViewHolder(final cvh holder, final int position) {
         final OldClassModel content = Content_list_old.get(position);
-        //*************************************************************************
-        holder.row.setText("" + (position + 1));
-        holder.Data.setText("" + content.DATA);
-        holder.time.setText("" + content.Hour);
-        //*************************************************************************
-        holder.row.setTypeface(MainActivity.FONTS);
-        holder.Data.setTypeface(MainActivity.FONTS);
-        holder.loggin.setTypeface(MainActivity.FONTS);
-        holder.delete.setTypeface(MainActivity.FONTS);
-        holder.time.setTypeface(MainActivity.FONTS);
-        //*************************************************************************
+
+
+        holder.Data.setText(content.DATA);
+        holder.time.setText(content.Hour);
+
+
         holder.time.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TOAST("time="+content.Hour);
             }
         });
-        //*************************************************************************
+
+
         holder.Data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Edit_Data(content.jalase);
 
             }
         });
-        //*************************************************************************
+
+
         holder.loggin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || position < 3) {
@@ -96,16 +93,20 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                 }
             }
         });
-        //*************************************************************************
+
+
         holder.delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || position < 3) {
-                    DialogHelper.DeleteOldSession(contexts, "آیا میخواهید جلسه" + content.DATA + " در ساعت " + content.Hour + " را حذف کنید؟", content.jalase);
+                    DialogHelper.DeleteOldSession(contexts, contexts.getResources().getString(R.string.doYouWantMateing) + " " + content.DATA
+                            + " " + contexts.getResources().getString(R.string.inTime) + " " + content.Hour + " "
+                            + contexts.getResources().getString(R.string.deleteMateing), content.jalase);
                 } else {
                     MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
             }
         });
+
     }
 
     public int getItemCount() {
@@ -114,17 +115,17 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
     public class cvh extends RecyclerView.ViewHolder {
 
-        private TextView row, Data, time;
+        private TextView Data, time;
         private Button loggin, delete;
 
         public cvh(View itemView) {
             super(itemView);
 
-            row = (TextView) itemView.findViewById(R.id.list_lists_old_class_row);
-            Data = (TextView) itemView.findViewById(R.id.list_lists_old_class_data);
-            time = (TextView) itemView.findViewById(R.id.list_lists_old_class_time);
-            loggin = (Button) itemView.findViewById(R.id.list_lists_old_class_loggin);
-            delete = (Button) itemView.findViewById(R.id.list_lists_old_class_delete);
+
+            Data = itemView.findViewById(R.id.list_lists_old_class_data);
+            time = itemView.findViewById(R.id.list_lists_old_class_time);
+            loggin = itemView.findViewById(R.id.list_lists_old_class_loggin);
+            delete = itemView.findViewById(R.id.list_lists_old_class_delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -138,8 +139,6 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
     public static void Delete_rollcall(final Context context, final String id_jalase, final Dialog dialog) {
         try {
 
-            IndicatorHelper.IndicatorCreate(context, "حذف جلسه", "لطفا صبر کنید ...!");
-
             new Thread(new Runnable() {
                 public void run() {
                     try {
@@ -148,9 +147,8 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                         data.close();
                         ((Activity) context).runOnUiThread(new Runnable() {
                             public void run() {
-                                MessageHelper.Toast(context, "جلسه با موفقیت حذف شد..!");
+                                MessageHelper.Toast(context, context.getResources().getString(R.string.SuccessfullyDeleteMateing));
                                 OldClassListActivity.refresh = "1";
-                                IndicatorHelper.IndicatorDismiss();
                                 dialog.dismiss();
                             }
                         });
@@ -169,29 +167,10 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
     void Edit_Data(final String jalase) {
 
-        final PersianCalendar now = new PersianCalendar();
-        final DatePickerDialog dpd = DatePickerDialog.newInstance(
-                (DatePickerDialog.OnDateSetListener) contexts,
-                now.getPersianYear(),
-                now.getPersianMonth(),
-                now.getPersianDay()
-        );
+        DatePickerHelper datePickerHelper = new DatePickerHelper();
+        OldClassListActivity.sessions = jalase;
+        datePickerHelper.getDate(contexts);
 
-        dpd.show(((Activity) contexts).getFragmentManager(), TIMEPICKER);
-        dpd.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                try {
-                    data.open();
-                    data.update("day", String.valueOf(year), "month", String.valueOf(monthOfYear+1), "year", String.valueOf(dayOfMonth), "jalase=" + jalase);
-                    data.close();
-                    MessageHelper.Toast(contexts, "ویرایش انجام شد.");
-                    OldClassListActivity.refresh = "1";
-                } catch (Exception e) {
-                    Log.i(TAG, "Error" + e.toString());
-                }
-            }
-        });
 
     }
 

@@ -19,7 +19,7 @@
         </shape>
     </item>
     <item android:state_checked="false"
-        android:drawable="@drawable/absent"
+        android:drawable="@drawable/cancle"
         android:state_focused="false">
         <shape android:shape="rectangle">
             <stroke android:width="2dp" android:color="#000000" />
@@ -27,7 +27,7 @@
         </shape>
     </item>
     <item android:state_checked="false"
-        android:drawable="@drawable/absent"
+        android:drawable="@drawable/cancle"
         android:state_focused="true">
         <shape android:shape="rectangle">
             <stroke android:width="2dp" android:color="#ffffff" />

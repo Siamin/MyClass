@@ -7,10 +7,8 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/_50sdp"
         android:background="@color/colorPrimary"
-        android:gravity="right"
-        android:layoutDirection="rtl"
         android:orientation="horizontal">
 
 
@@ -23,11 +21,12 @@
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
-            android:paddingRight="10dp"
-            android:text="آمار حضور دانشجویان"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:text="@string/TitleStatisticsActivity"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
 
         <CustomObject.TextViewCustom
@@ -40,13 +39,13 @@
             android:gravity="center_vertical|center_horizontal"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/white"
-            android:textSize="15dp" />
+            android:textSize="@dimen/_12sdp" />
 
-        <ImageView
+        <CustomObject.ImageViewCustom
             android:id="@+id/statistics_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="8dp"
+            android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
             android:tint="@color/white" />
 
@@ -58,7 +57,6 @@
         android:id="@+id/show_student_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout"
-        android:layoutDirection="rtl"/>
+        android:layout_below="@+id/linearLayout"/>
 
 </RelativeLayout>

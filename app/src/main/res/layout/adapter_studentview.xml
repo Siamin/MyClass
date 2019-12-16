@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layoutDirection="rtl"
     android:gravity="center_vertical|center_horizontal">
 
     <androidx.cardview.widget.CardView
@@ -30,93 +29,83 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layoutDirection="rtl"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
                 android:gravity="center_vertical">
 
                 <CustomObject.TextViewCustom
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text=" 1 "
-                    android:textColor="@color/white"
-                    android:id="@+id/list_show_student_numbers"
-                    android:background="@drawable/backgrond_text_day_class"
-                    android:paddingRight="2dp" />
-
-                <TextView
-                    android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:text="شماره دانشجویی"
                     android:id="@+id/list_show_student_sno"
                     android:gravity="center_vertical|center_horizontal"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="2dp"
-                    android:textSize="15dp" />
-
-
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="130dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="2dp"
-                    android:layout_weight="1">
+                    android:layout_marginRight="@dimen/_2sdp">
 
                     <CustomObject.TextViewCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="نام"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:id="@+id/list_show_student_name"
-                        android:layout_weight="1"
                         android:gravity="center_vertical|center_horizontal"
-                        android:textSize="15dp" />
+                        android:textSize="@dimen/_15sdp" />
 
                     <CustomObject.TextViewCustom
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:text="نام خانوادگی"
-                        android:id="@+id/list_show_student_family"
                         android:layout_weight="1"
+                        android:id="@+id/list_show_student_family"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:textSize="15dp" />
+                        android:textSize="@dimen/_15sdp" />
                 </LinearLayout>
 
-
-
                 <CustomObject.TextViewCustom
-                    android:layout_width="40dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="نمره"
+                    android:text="@string/Score"
+                    android:padding="@dimen/_3sdp"
                     android:id="@+id/list_show_student_nomerh"
                     android:gravity="center_vertical|center_horizontal"
                     android:background="@drawable/bacgrond_timepicker"
-                    android:layout_marginRight="8dp"
-                    android:textSize="15dp" />
-
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:id="@+id/list_show_student_status"
+                    android:gravity="center_vertical|center_horizontal"
                     android:nestedScrollingEnabled="true"
-                    android:button="@drawable/chechbox_new_class"
-                    android:layout_gravity="left"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="10dp" />
+                    android:checked="false"
+                    android:button="@drawable/chechbox_new_class" />
 
             </LinearLayout>
 
             <CustomObject.TextViewCustom
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:text="توضیحات دانشجو"
+                android:text="@string/studentDescription"
                 android:id="@+id/list_show_student_text"
-                android:gravity="center_vertical|right"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp" />
+                android:gravity="center_vertical"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_10sdp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

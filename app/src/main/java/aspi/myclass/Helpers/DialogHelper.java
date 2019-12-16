@@ -103,27 +103,26 @@ public class DialogHelper {
             public void run() {
                 try {
 
-                    if (Class.length > 0 && Tools.checkFileInFolder(Backup_File_App,"/class")) {
+                    if (Class.length > 0 && Tools.checkFileInFolder(Backup_File_App, "/class")) {
                         data.open();
                         for (int i = 0; i < Class.length; i++) {
                             String[] item = Class[i].split("~");
                             data.insert_class2(item[0], item[1], item[2], item[3], item[4], item[5], item[6], NC + item[7], item[8]);
                         }
 
-                        if (Student.length > 0 && Tools.checkFileInFolder(Backup_File_App,"/student")) {
+                        if (Student.length > 0 && Tools.checkFileInFolder(Backup_File_App, "/student")) {
                             for (int i = 0; i < Student.length; i++) {
                                 String[] item = Student[i].split("~");
                                 data.insert_student2(item[0], item[1], item[2], item[3], NC + item[4]);
                             }
 
-                            if (Rollcall.length > 0 && Tools.checkFileInFolder(Backup_File_App,"/rollcall")) {
+                            if (Rollcall.length > 0 && Tools.checkFileInFolder(Backup_File_App, "/rollcall")) {
                                 for (int i = 0; i < Rollcall.length; i++) {
                                     String[] item = Rollcall[i].split("~");
                                     boolean status = true;
                                     if (item[1].equals("0")) status = false;
                                     data.insert_Rollcall(item[0], status, item[2], item[3], item[4], item[5], NC + item[6], item[7] + NC, item[8]);
                                 }
-
 
 
                             }
@@ -428,7 +427,7 @@ public class DialogHelper {
 
                 String Subject = "کد تایید نرم افزار دفتر نمره حضور و غیاب ";
                 String Body = Email + "\n" + model + "\nکد تایید\n" + codes + "\n ایمیل شما \n" + Email;
-                EmailHelper.SendEmail(context, Email, Subject, Body, "کد برای ایمیل شما ارسال شد...!", 1,dialog, codes, Email);
+                EmailHelper.SendEmail(context, Email, Subject, Body, "کد برای ایمیل شما ارسال شد...!", 1, dialog, codes, Email);
 
             }
         });
@@ -491,18 +490,18 @@ public class DialogHelper {
         TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
         //*************************************************
-        title.setText("ارسال رمز عبور");
-        body.setText("آیا دستگاه شما به اینترنت متصل است؟");
-        cancle.setText("خیر");
-        okey.setText("بله");
+        title.setText(context.getResources().getString(R.string.SendPassword));
+        body.setText(context.getResources().getString(R.string.QuestionConnenctionNet));
+        cancle.setText(context.getResources().getString(R.string.no));
+        okey.setText(context.getResources().getString(R.string.yes));
         //*************************************************
         okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Body = " با سلام رمز عبور شما \n" + SharedPreferencesHelper.get_Data("Password_App", "null", context);
-                String Subject = "رمز عبور نرم افزار دفتر نمره حضور و غیاب " + SharedPreferencesHelper.get_Data("Email", "", context);
+                String Body = context.getResources().getString(R.string.HelloIsPassword)+" \n" + SharedPreferencesHelper.get_Data("Password_App", "null", context);
+                String Subject = context.getResources().getString(R.string.SubjectForgotPassword);
                 String MailTo = SharedPreferencesHelper.get_Data("Email", "", context);
-                EmailHelper.SendEmail(context, MailTo, Subject, Body, "ایمیل ارسال شد...!", 0,dialog);
+                EmailHelper.SendEmail(context, MailTo, Subject, Body,context.getResources().getString(R.string.SendEmail) , 0, dialog);
 
             }
         });
@@ -558,10 +557,10 @@ public class DialogHelper {
         TextView Delete = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView cancle = dialog.findViewById(R.id.dialog_custom_okey);
         //*************************************************
-        title.setText("حذف جلسه");
+        title.setText(context.getResources().getString(R.string.TitleDialogdeleteMateing));
         body.setText(Body);
-        Delete.setText("حذف");
-        cancle.setText("انصراف");
+        Delete.setText(context.getResources().getString(R.string.delete));
+        cancle.setText(context.getResources().getString(R.string.cancle));
         //************************************************
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -595,6 +594,12 @@ public class DialogHelper {
         //*************************************************
         title.setText(Title);
         sno.setText(content.sno);
+        String lang = LanguageHelper.loadLanguage(context);
+        if (lang.equals("fa")) {
+            sno.setHint(context.getResources().getString(R.string.studentCode) + " " + context.getResources().getString(R.string.EnterText));
+        } else {
+            sno.setHint(context.getResources().getString(R.string.EnterText) + " " + context.getResources().getString(R.string.studentCode));
+        }
         //************************************************
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -606,7 +611,7 @@ public class DialogHelper {
                         Sno.setText(sno.getText().toString());
                         content.sno = sno.getText().toString();
                     } else {
-                        MessageHelper.Toast(context, "این شماره برای دانشجویی دیگه ثبت شده!");
+                        MessageHelper.Toast(context, context.getResources().getString(R.string.ErrorStudentCode));
                     }
 
                     data.close();
@@ -639,7 +644,12 @@ public class DialogHelper {
         TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
         //*************************************************
         title.setText(Title);
-        name.setHint("نام را وارد کنید");
+        String lang = LanguageHelper.loadLanguage(context);
+        if (lang.equals("fa")) {
+            name.setHint(context.getResources().getString(R.string.studentName) + " " + context.getResources().getString(R.string.EnterText));
+        } else {
+            name.setHint(context.getResources().getString(R.string.EnterText) + " " + context.getResources().getString(R.string.studentName));
+        }
         name.setText(content.name);
         //************************************************
         submit.setOnClickListener(new View.OnClickListener() {
@@ -679,7 +689,12 @@ public class DialogHelper {
         TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
         //*************************************************
         title.setText(Title);
-        family.setHint("نام خانوادگی را وارد کنید");
+        String lang = LanguageHelper.loadLanguage(context);
+        if (lang.equals("fa")) {
+            family.setHint(context.getResources().getString(R.string.studentFamily) + " " + context.getResources().getString(R.string.EnterText));
+        } else {
+            family.setHint(context.getResources().getString(R.string.EnterText) + " " + context.getResources().getString(R.string.studentFamily));
+        }
         family.setText(content.family);
         //************************************************
         submit.setOnClickListener(new View.OnClickListener() {
@@ -757,9 +772,14 @@ public class DialogHelper {
         TextView cancle = dialog.findViewById(R.id.dialog_score_cancle);
         //*************************************************
         title.setText(Title);
-        if (content.text.isEmpty())
-            description.setText("توضیحات...");
-        else
+        if (content.text.isEmpty()) {
+            String lang = LanguageHelper.loadLanguage(context);
+            if (lang.equals("fa")) {
+                description.setHint(context.getResources().getString(R.string.studentDescription) + " " + context.getResources().getString(R.string.EnterText));
+            } else {
+                description.setHint(context.getResources().getString(R.string.EnterText) + " " + context.getResources().getString(R.string.studentDescription));
+            }
+        } else
             description.setText(content.text);
         //************************************************
         submit.setOnClickListener(new View.OnClickListener() {
@@ -770,7 +790,7 @@ public class DialogHelper {
                     data.update_one("klas", "tx", description.getText().toString(), Integer.parseInt(content.id));
                     data.close();
                     if (description.getText().toString().replace("\n", "  ").length() > 50) {
-                        Description.setText(description.getText().toString().replace("\n", "  ").substring(0, 50) + "  توضایحات ادامه دارد...");
+                        Description.setText(description.getText().toString().replace("\n", "  ").substring(0, 50) + " ...");
                     } else {
                         Description.setText(description.getText().toString().replace("\n", "  "));
                     }
@@ -835,20 +855,20 @@ public class DialogHelper {
 
     }
 
-    public static void ChangeLanguage(final Context context){
-        final String[] listLang ={"English","فارسی"};
+    public static void ChangeLanguage(final Context context) {
+        final String[] listLang = {"English", "فارسی"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(context.getResources().getString(R.string.chooseLanguage));
         builder.setSingleChoiceItems(listLang, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i){
+                switch (i) {
                     case 0:
-                        LanguageHelper.setLocal(context,"en");
+                        LanguageHelper.setLocal(context, "en");
                         break;
                     case 1:
-                        LanguageHelper.setLocal(context,"fa");
+                        LanguageHelper.setLocal(context, "fa");
                         break;
                 }
                 dialogInterface.dismiss();

@@ -76,18 +76,18 @@ public class OldClassActivity extends Activity {
 
     void initView() {
         backPage = findViewById(R.id.activity_newclass_back);
-        name_class = (TextView) findViewById(R.id.new_class_name_class);
-        DATA = (TextView) findViewById(R.id.new_class_data);
-        Time = (TextView) findViewById(R.id.old_classsss_time);
-        Titel = (TextView) findViewById(R.id.New_class_titel);
-        recyclerView_Old = (RecyclerView) findViewById(R.id.recyclerview_new_classsss);
+        name_class = findViewById(R.id.new_class_name_class);
+        DATA = findViewById(R.id.new_class_data);
+        Time = findViewById(R.id.old_classsss_time);
+        Titel = findViewById(R.id.New_class_titel);
+        recyclerView_Old = findViewById(R.id.recyclerview_new_classsss);
         linearLayoutManagers = new LinearLayoutManager(this);
         Search = findViewById(R.id.newclass_search);
         //*************************************************************
-        Titel.setText("لیست گذشته کلاس");
-        Time.setText("ساعت: " + HOUR);
-        name_class.setText("کلاس " + Name_class);
-        DATA.setText("" + Data_class);
+        Titel.setText(getResources().getString(R.string.TitleOldClassActivity));
+        Time.setText(getResources().getString(R.string.time) + ": " + HOUR);
+        name_class.setText(getResources().getString(R.string.Class) + " " + Name_class);
+        DATA.setText(Data_class);
         //*************************************************************
         Data();
     }
@@ -111,8 +111,9 @@ public class OldClassActivity extends Activity {
 
             data.open();
             List = data.OldClassByQuery("SELECT  r.id,r.sno,r.abs,r.am,r.iddars,r.jalase,k.id,k.name,k.family,k.sno,k.tx,k.did" +
-                    " FROM klas AS k,rollcall AS r WHERE r.iddars= " + Integer.parseInt(did_class) +
-                    " AND r.jalase= '" + Jalase + "' AND r.sno = k.sno AND r.iddars = k.did  ORDER BY k.family ASC ,k.name ASC ");
+                            " FROM klas AS k,rollcall AS r WHERE r.iddars= " + Integer.parseInt(did_class) +
+                            " AND r.jalase= '" + Jalase + "' AND r.sno = k.sno AND r.iddars = k.did  ORDER BY k.family ASC ,k.name ASC "
+                    , getResources().getString(R.string.Score));
             data.close();
 
             ShowAdapter(List);

@@ -10,12 +10,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:elevation="8dp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:elevation="@dimen/_8sdp"
         android:foregroundGravity="center_vertical|center_horizontal"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/_10sdp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
 
@@ -23,22 +23,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layoutDirection="rtl">
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="1"
-            android:id="@+id/list_lists_old_class_row"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:gravity="center_vertical|center_horizontal"
-            android:background="@drawable/backgrond_text_day_class"
-            android:layoutDirection="rtl"
-            android:textColor="#000000" />
-
+        android:gravity="center_vertical">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -46,51 +31,51 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <TextView
+            <CustomObject.TextViewCustom
                 android:id="@+id/list_lists_old_class_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="زمان"
+                android:text="@string/time"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
 
-            <TextView
+            <CustomObject.TextViewCustom
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="تاریخ"
+                android:text="@string/Date"
                 android:id="@+id/list_lists_old_class_data"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
 
         <CustomObject.ButtonCustom
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:text="نمایش"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="@string/show"
             android:id="@+id/list_lists_old_class_loggin"
             android:textColor="@color/green_dark"
             android:background="@drawable/button_style_save"
-            android:layout_margin="5dp"
-            android:textSize="10dp" />
+            android:layout_margin="@dimen/_5sdp"
+            android:textSize="@dimen/_8sdp" />
 
         <CustomObject.ButtonCustom
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:text="حذف"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="@string/delete"
             android:id="@+id/list_lists_old_class_delete"
             android:textColor="@color/red_dark"
             android:background="@drawable/button_style_cancel"
-            android:layout_margin="5dp"
-            android:textSize="10dp" />
+            android:layout_margin="@dimen/_5sdp"
+            android:textSize="@dimen/_8sdp" />
     </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -10,6 +10,7 @@
     <string name="Class">Class</string>
     <string name="save">Save</string>
     <string name="okey">okey</string>
+    <string name="time">Time</string>
     <string name="pleaseWait">Please Wait...!</string>
     <string name="gettingData">Getting Data</string>
     <string name="cancle">Cancle</string>
@@ -18,6 +19,10 @@
     <string name="EnterDescription">Write your own description</string>
     <string name="textClassDelete">Deletes all sessions held in class!</string>
     <string name="checkYourInternetConnection">Check your internet connection!</string>
+    <string name="EnterText">Enter</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="Score">Score</string>
 
 
     <!--Toast Message Application-->
@@ -41,6 +46,53 @@
     <string name="Errorposting">Error posting ...!</string>
     <string name="editingDoneSuccessfully">Editing done successfully ...!</string>
     <string name="noEditsHaveBeenMade">No edits have been made ...!</string>
+    <string name="EditStudentCode">Edit studen Code</string>
+    <string name="EditStudentName">Edit student name</string>
+    <string name="EditStudentFamily">Edit student Family</string>
+    <string name="SetStudentDescription">Description</string>
+    <string name="ErrorStudentCode">This studentCode is registered for another student</string>
+    <string name="QuestionConnenctionNet">Is your device connected to the internet?</string>
+    <string name="SendEmail">Send Email</string>
+    <string name="HelloIsPassword">Hello Is Your Password</string>
+    <string name="SubjectForgotPassword">Office software password attendance score</string>
+    <string name="BackPage">Click again to return!</string>
+    <string name="NoAddStudentToClass">No student registered to meet ...!</string>
+    <string name="doYouWantMateing">Do you want a meeting</string>
+    <string name="inTime"> Per hour </string>
+    <string name="deleteMateing"> Delete?</string>
+    <string name="TitleDialogdeleteMateing">Delete Session</string>
+    <string name="SuccessfullyDeleteMateing">Session deleted successfully ..!</string>
+
+
+
+    <!--AdapterStatustics-->
+    <string name="AllMateing">Whole sessions</string>
+    <string name="CountPresence">Presence count</string>
+    <string name="CountAbsence">Absence count</string>
+
+
+    <!--StatisticsActivity-->
+    <string name="TitleStatisticsActivity">Student attendance statistics</string>
+    <string name="ToastNoData">For attendance statistics you need to have a meeting for your class ...!</string>
+
+
+
+    <!--OldClassActivity-->
+    <string name="TitleOldClassActivity">Past class list</string>
+
+
+    <!--LoginActivity-->
+    <string name="Enter">Enter</string>
+    <string name="ForgotPass">Forgot password?</string>
+    <string name="EnterPassWord">Enter password</string>
+    <string name="ClearPass">Clear</string>
+    <string name="SendPassword">Send Password</string>
+
+
+    <!--NewClassActivity-->
+    <string name="TitleNewClassActivitu">Class attendance list</string>
+    <string name="Date">Date</string>
+    <string name="studentScore">Studen score</string>
 
     <!--BuyAppActivity-->
     <string name="price_">Price</string>
@@ -100,6 +152,15 @@
 
     <!--AddClassActivity-->
     <string name="classCharacteristic">Class characteristic</string>
+
+
+    <!--EditStudentActivity-->
+    <string name="studentCode">Student code</string>
+    <string name="studentDescription">Student Description</string>
+
+    <!--OldClassListActivity-->
+    <string name="TitleOldClassListActivity">Meetings held</string>
+    <string name="notCreateMate">No meeting for class ...!</string>
 
     <!--AddStudentActivity-->
     <string name="Code">Code</string>
