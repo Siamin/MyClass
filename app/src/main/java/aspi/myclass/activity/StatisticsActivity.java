@@ -61,7 +61,7 @@ public class StatisticsActivity extends Activity {
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            IndicatorHelper.IndicatorCreate(StatisticsActivity.this,getResources().getString(R.string.gettingData),getResources().getString(R.string.pleaseWait));
+                            IndicatorHelper.IndicatorCreate(StatisticsActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
                             new Thread(new Runnable() {
                                 public void run() {
                                     //Get_Data_Base();
@@ -73,7 +73,7 @@ public class StatisticsActivity extends Activity {
                             recyclerView_show_student = (RecyclerView) findViewById(R.id.show_student_recyclerview);
                             linearLayoutManager_show_student = new LinearLayoutManager(StatisticsActivity.this);
                             recyclerView_show_student.setLayoutManager(linearLayoutManager_show_student);
-                            recyclerView_show_student.setAdapter(new StatusticsAdapter(List, StatisticsActivity.this));
+                            recyclerView_show_student.setAdapter(new StatusticsAdapter(List));
                             time.cancel();
                             IndicatorHelper.IndicatorDismiss();
                         }
@@ -93,12 +93,11 @@ public class StatisticsActivity extends Activity {
             data.close();
 
 
-
-            if(!List.isEmpty()){
+            if (!List.isEmpty()) {
 
                 view = true;
 
-            }else{
+            } else {
 
                 runOnUiThread(new Runnable() {
                     public void run() {
@@ -109,9 +108,8 @@ public class StatisticsActivity extends Activity {
             }
 
 
-
         } catch (final Exception e) {
-            Log.i(TAG,e.toString());
+            Log.i(TAG, e.toString());
         }
     }
 

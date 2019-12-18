@@ -66,13 +66,13 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         final ClassModel content = Model.get(position);
 
         if (!content.name_class.equals("")) {
-            holder.class_.setText(contexts.getResources().getString(R.string.classNumber)+" :" +content.Class_);
+            holder.class_.setText(contexts.getResources().getString(R.string.classNumber) + " :" + content.Class_);
         }
 
-        holder.name_class.setText(contexts.getResources().getString(R.string.className)+ " :" + content.name_class);
+        holder.name_class.setText(contexts.getResources().getString(R.string.className) + " :" + content.name_class);
         holder.time_start.setText(content.time_start);
         holder.time_end.setText(content.time_end);
-        holder.location.setText(contexts.getResources().getString(R.string.classLocation)+" :" + content.location);
+        holder.location.setText(contexts.getResources().getString(R.string.classLocation) + " :" + content.location);
         if (content.text_class.length() > 2) holder.txt.setText("" + content.text_class);
 
         //***********************************************
@@ -91,12 +91,12 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             super(itemView);
 
 
-            name_class = (TextView) itemView.findViewById(R.id.list_class_in_main_name_class);
-            time_start = (TextView) itemView.findViewById(R.id.list_class_in_main_start_time);
-            time_end = (TextView) itemView.findViewById(R.id.list_class_in_main_end_time);
-            location = (TextView) itemView.findViewById(R.id.list_class_in_main_location);
-            class_ = (TextView) itemView.findViewById(R.id.list_class_in_main_class);
-            txt = (TextView) itemView.findViewById(R.id.list_class_in_main_txt);
+            name_class = itemView.findViewById(R.id.list_class_in_main_name_class);
+            time_start = itemView.findViewById(R.id.list_class_in_main_start_time);
+            time_end = itemView.findViewById(R.id.list_class_in_main_end_time);
+            location = itemView.findViewById(R.id.list_class_in_main_location);
+            class_ = itemView.findViewById(R.id.list_class_in_main_class);
+            txt = itemView.findViewById(R.id.list_class_in_main_txt);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,15 +122,15 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         kelas.setCancelable(true);
         kelas.setCanceledOnTouchOutside(true);
         kelas.show();
-        final Button new_class = (Button) kelas.findViewById(R.id.list_class_chang_new_class);
-        final Button add_student_class = (Button) kelas.findViewById(R.id.list_class_chang_add_student_class);
-        final Button old_class = (Button) kelas.findViewById(R.id.list_class_chang_old_class);
-        final Button edit_class = (Button) kelas.findViewById(R.id.list_class_chang_edit_class);
-        final Button delete_class = (Button) kelas.findViewById(R.id.list_class_chang_delete_class);
-        final Button output_class = (Button) kelas.findViewById(R.id.list_class_chang_output_class);
-        final Button text_class = (Button) kelas.findViewById(R.id.list_class_chang_text_class);
-        final Button week_class = (Button) kelas.findViewById(R.id.list_class_chang_add_class_of_week_class);
-        final Button editStudent = (Button) kelas.findViewById(R.id.option_editstudent);
+        final Button new_class = kelas.findViewById(R.id.list_class_chang_new_class);
+        final Button add_student_class = kelas.findViewById(R.id.list_class_chang_add_student_class);
+        final Button old_class = kelas.findViewById(R.id.list_class_chang_old_class);
+        final Button edit_class = kelas.findViewById(R.id.list_class_chang_edit_class);
+        final Button delete_class = kelas.findViewById(R.id.list_class_chang_delete_class);
+        final Button output_class = kelas.findViewById(R.id.list_class_chang_output_class);
+        final Button text_class = kelas.findViewById(R.id.list_class_chang_text_class);
+        final Button week_class = kelas.findViewById(R.id.list_class_chang_add_class_of_week_class);
+        final Button editStudent = kelas.findViewById(R.id.option_editstudent);
         //******************************************************************************************
 
 
@@ -228,14 +228,14 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         Week.setCanceledOnTouchOutside(false);
         Week.show();
         //**********************************************************************************
-        final TextView save_ = (TextView) Week.findViewById(R.id.class_of_week_save);
-        final TextView cancel_ = (TextView) Week.findViewById(R.id.class_of_week_cancel);
-        final TextView timeStart = (TextView) Week.findViewById(R.id.class_of_week_texttimestart);
-        final TextView timeEnd = (TextView) Week.findViewById(R.id.class_of_week_texttimeend);
-        final Spinner Spiner_ = (Spinner) Week.findViewById(R.id.class_of_week_spinner);
-        final EditText room = (EditText) Week.findViewById(R.id.class_of_week_class_edit);
-        final LinearLayout clickTimeStart = (LinearLayout) Week.findViewById(R.id.class_of_week_timestart);
-        final LinearLayout clickTimeEnd = (LinearLayout) Week.findViewById(R.id.class_of_week_timeend);
+        final TextView save_ = Week.findViewById(R.id.class_of_week_save);
+        final TextView cancel_ = Week.findViewById(R.id.class_of_week_cancel);
+        final TextView timeStart = Week.findViewById(R.id.class_of_week_texttimestart);
+        final TextView timeEnd = Week.findViewById(R.id.class_of_week_texttimeend);
+        final Spinner Spiner_ = Week.findViewById(R.id.class_of_week_spinner);
+        final EditText room = Week.findViewById(R.id.class_of_week_class_edit);
+        final LinearLayout clickTimeStart = Week.findViewById(R.id.class_of_week_timestart);
+        final LinearLayout clickTimeEnd = Week.findViewById(R.id.class_of_week_timeend);
 
         //**********************************************************************************
         String[] Day_of_week = contexts.getResources().getStringArray(R.array.weekName);
@@ -289,9 +289,9 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         statistics_.setCancelable(true);
         statistics_.setCanceledOnTouchOutside(true);
         statistics_.show();
-        final Button absent_student = (Button) statistics_.findViewById(R.id.list_statistics_class_absent_student);
-        final Button absent_students = (Button) statistics_.findViewById(R.id.list_statistics_class_absent_students);
-        final Button nomreh_students = (Button) statistics_.findViewById(R.id.list_statistics_class_nomreh_students);
+        final Button absent_student = statistics_.findViewById(R.id.list_statistics_class_absent_student);
+        final Button absent_students = statistics_.findViewById(R.id.list_statistics_class_absent_students);
+        final Button nomreh_students = statistics_.findViewById(R.id.list_statistics_class_nomreh_students);
         //*************************************************************************************************
 
         //******************************************************************************************
@@ -314,11 +314,14 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             public void onClick(View v) {
                 if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
                     statistics_.cancel();
-                    ReportClassActivity.Name_class = Class;
-                    ReportClassActivity.Id_class = id;
-                    ReportClassActivity.Did_class = did;
-                    ReportClassActivity.STATUS = true;
-                    contexts.startActivity(new Intent(contexts, ReportClassActivity.class));
+
+                    Intent i = new Intent(contexts, ReportClassActivity.class);
+                    i.putExtra("className", Class)
+                            .putExtra("classId", id)
+                            .putExtra("classDid", did)
+                            .putExtra("status", true);
+
+                    contexts.startActivity(i);
                 } else {
                     MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
@@ -330,11 +333,14 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
             public void onClick(View v) {
                 if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
                     statistics_.cancel();
-                    ReportClassActivity.Name_class = Class;
-                    ReportClassActivity.Id_class = id;
-                    ReportClassActivity.Did_class = did;
-                    ReportClassActivity.STATUS = false;
-                    contexts.startActivity(new Intent(contexts, ReportClassActivity.class));
+
+                    Intent i = new Intent(contexts, ReportClassActivity.class);
+                    i.putExtra("className", Class)
+                            .putExtra("classId", id)
+                            .putExtra("classDid", did)
+                            .putExtra("status", false);
+
+                    contexts.startActivity(i);
                 } else {
                     MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
                 }
@@ -385,9 +391,9 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
         //**********************************************************************************
-        final TextView save = (TextView) dialog.findViewById(R.id.dialogdes_save);
-        final TextView cancle = (TextView) dialog.findViewById(R.id.dialogdes_cancle);
-        final EditText description = (EditText) dialog.findViewById(R.id.dialogdes_description);
+        final TextView save = dialog.findViewById(R.id.dialogdes_save);
+        final TextView cancle = dialog.findViewById(R.id.dialogdes_cancle);
+        final EditText description = dialog.findViewById(R.id.dialogdes_description);
         //**********************************************************************************
         try {
             data.open();
@@ -436,8 +442,8 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
         //**********************************************************************************
-        final TextView save = (TextView) dialog.findViewById(R.id.dialogdelete_save);
-        final TextView cancle = (TextView) dialog.findViewById(R.id.dialogdelete_cancle);
+        final TextView save = dialog.findViewById(R.id.dialogdelete_save);
+        final TextView cancle = dialog.findViewById(R.id.dialogdelete_cancle);
         //**********************************************************************************
         save.setOnClickListener(new View.OnClickListener() {
             @Override

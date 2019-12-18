@@ -21,14 +21,9 @@ import aspi.myclass.Helpers.DatabasesHelper;
 public class StatusticsAdapter extends RecyclerView.Adapter<StatusticsAdapter.cvh> {
 
     private List<StatisticsModel> Content_student;
-    private Context contexts;
-    private DatabasesHelper data;
-    Activity activity;
 
-    public StatusticsAdapter(List<StatisticsModel> contents, Context context) {
+    public StatusticsAdapter(List<StatisticsModel> contents) {
         this.Content_student = contents;
-        this.contexts = context;
-        data = new DatabasesHelper(context);
     }
 
     @Override

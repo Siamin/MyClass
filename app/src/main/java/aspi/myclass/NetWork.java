@@ -23,7 +23,6 @@ public class NetWork {
                     .url(URL)
                     .post(formBody)
                     .header("Content-Type", "application/json")
-//                    .header("Authorization", Header)
                     .build();
 
             Response response = client.newCall(request).execute();

@@ -10,6 +10,7 @@
     <string name="Class">کلاس</string>
     <string name="save">ذخیره</string>
     <string name="okey">خب</string>
+    <string name="submit">ثبت</string>
     <string name="pleaseWait">لطفا صبر کنید ...!</string>
     <string name="gettingData">در حال دریافت اطلاعات</string>
     <string name="cancle">انصراف</string>
@@ -23,13 +24,24 @@
     <string name="yes">بله</string>
     <string name="no">خیر</string>
     <string name="Score">نمره</string>
-
-
+    <string name="TitleDialogSendValidationEmail">ارسال کد تایید</string>
+    <string name="BodyDialogSendValidationEmail">آیا میخواهید کد تایید برای ایمیل شما ارسال شود؟</string>
+    <string name="SubjectDialogSendValidationEmail">آیا میخواهید کد تایید برای ایمیل شما ارسال شود؟</string>
+    <string name="YourEmailDialog">ایمیل شما</string>
+    <string name="CodeDialog">کد تایید</string>
+    <string name="EnterCodeSend">کد ارسال شده ایمیل را وارد کنید.</string>
+    <string name="RateApp">امتیاز دادن</string>
+    <string name="Clear">پاک کردن</string>
+    <string name="Backup">پشتیبانی</string>
+    <string name="Upload">بازخوانی</string>
+    <string name="NameAndFamily">نام و نام خانوادگی</string>
+    <string name="Absent">غ</string>
 
 
     <!--Toast Message Application-->
     <string name="ErrorBuyApplication">برای استفاده از این امکانات باید نسخه ای کامل برنامه را خریداری کنید.</string>
     <string name="Saved">ذخیره شد...!</string>
+    <string name="Error">خطا...!</string>
     <string name="ClassDeleted">کلاس حذف شد...!</string>
     <string name="SuccessRegistered">با موفقیت ثبت شد.</string>
     <string name="PleaseEnterClassNumber">لطفا شماره کلاس را وارد نمایید...!</string>
@@ -64,6 +76,39 @@
     <string name="deleteMateing"> را حذف کنید؟</string>
     <string name="TitleDialogdeleteMateing">حذف جلسه</string>
     <string name="SuccessfullyDeleteMateing">جلسه با موفقیت حذف شد..!</string>
+    <string name="errorSubmitEmail"> برای استفاده از این قسمت باید ایمیل خود را در سیستم ثبت کنید.</string>
+    <string name="errorConfirmPassword">رمز جدید را مجددا وارد کنید...!</string>
+    <string name="errorValidOldPassword">رمز قدیمی را مجددا وارد کنید...!</string>
+    <string name="errorValidCode">کد وارد شده اشتباه است...!</string>
+    <string name="errorSendCodeDialogSuccess">کد برای ایمیل شما ارسال شد...!</string>
+    <string name="errorBuyApp">شما قبلا برنامه را خریداری کرده اید.</string>
+    <string name="titleBackupDialog">ایا شما میخواهید از اطلاعات خود فایل پشتیبان در حافظه ای زیر ایجاد کنید؟</string>
+    <string name="titleUploadDataDialog">ایا شما میخواهید از حافظه ای زیر اطلاعات خود را بازخوانی کنید؟</string>
+    <string name="titleClearSoftwareDialog">پاک کردن حافظه نرم افزار</string>
+    <string name="bodyClearSoftwareDialog">با پاک کردن حافظه نرم افزار تمام اسامی ، درس ها و جلسات برگزار شده در نرم افزار ،حذف می شوند!</string>
+    <string name="bodyAboutus">نرم افزار حضور وغیاب برای راحتی کار اساتید و معلمین گرامی طراحی و ساخته شده است برای حمایت از ما در نرم افزار بازار به ما رای بدهید</string>
+    <string name="bodyExcllDialog1">آیا می خواهید اطلاعات کلاس </string>
+    <string name="bodyExcllDialog2"> را در یک فایل اکسل ذخیره کنید؟</string>
+    <string name="ErrorSaveFile">مشکل در ذخیره فایل</string>
+    <string name="ErrorCreadetFolder">مشکل در ایجاد پوشه ی در حافظه ی گوشی دسترسی برنامه را بررسی کنید.</string>
+    <string name="ComingSoon">بزودی این قسمت فعال می شود.</string>
+    <string name="errorAddEmail">برای استفاده از این بخش باید ایمیل خود را در قسمت تنظیمات ثبت کنید.</string>
+
+
+
+
+
+    <!--SettingActivity-->
+    <string name="setingPassword">تنظیمات پسورد</string>
+    <string name="setingStatusPassword">لغو پسورد</string>
+    <string name="setingOldPassword">رمز فعلی</string>
+    <string name="setingNewPassword">رمز جدید</string>
+    <string name="setingConfirmPassword">تایید رمز جدید</string>
+    <string name="setingApp">تنظیمات برنامه ای</string>
+    <string name="setingScore">نمرات عددی</string>
+    <string name="setingEmail">تنظیمات ایمیل</string>
+    <string name="setingEnterEmail"> ایمیل را وارد کنید</string>
+    <string name="setingEmailText">اگر برای نرم افزار رمز قرار می دهید ایمیل خودتان را ثبت کنید که در صورت فراموشی رمز ، نرم افزار رمز را برای ایمیل ثبت شده ارسال کند.</string>
 
 
     <!--AdapterStatustics-->
@@ -93,7 +138,7 @@
     <string name="studentScore">نمره دانشجو</string>
 
 
-    <!--BuyAppActivity-->
+    <!--BazarActivity-->
     <string name="price_">قیمت</string>
     <string name="buy">خرید</string>
 
@@ -204,6 +249,6 @@
     <!-- Key Application-->
     <string name="FirebaseApiKey">AIzaSyAK4vnzSWr01YFg0h2TmIse6I2R-K-scE8</string>
     <string name="CrispWebId">dd4fefd7-c5c9-46aa-af7e-0197acb6068b</string>
-    <string name="KeyBazar">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==å</string>
+    <string name="KeyBazar">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==</string>
 
 </resources>

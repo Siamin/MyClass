@@ -49,9 +49,4 @@
         android:icon="@drawable/language"
         android:title="@string/languageChange"  />
 
-    <item
-        android:id="@+id/nav_exit"
-        android:icon="@drawable/logout"
-        android:title="@string/exitApplication"  />
-
 </menu>

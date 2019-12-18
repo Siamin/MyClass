@@ -39,7 +39,6 @@ public class DialogHelper {
 
     static String TAG = "TAG_DialogHelper";
     static File Backup_File_App = new File(Environment.getExternalStorageDirectory(), "BackupClass");
-    File Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
 
 
     public static void uploadBackupFile(final Context context, String _body, final DatabasesHelper data) {
@@ -49,18 +48,21 @@ public class DialogHelper {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
-        //************************************************
+
+
         TextView title = dialog.findViewById(R.id.dialog_custom_title);
         TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
         title.setCompoundDrawables(null, null, context.getResources().getDrawable(R.drawable.clouddownload), null);
         final TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
-        //*************************************************
-        title.setText("بازخوانی اطلاعات");
+
+
+        title.setText(context.getResources().getString(R.string.uploadBackupApplication));
         body.setText(_body);
-        cancle.setText("انصراف");
-        okey.setText("بازخوانی");
-        //*************************************************
+        cancle.setText(context.getResources().getString(R.string.cancle));
+        okey.setText(context.getResources().getString(R.string.Upload));
+
+
         okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -225,18 +227,20 @@ public class DialogHelper {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
-        //************************************************
+
+
         TextView title = dialog.findViewById(R.id.dialog_custom_title);
         TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
         TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
-        //*************************************************
-        title.setText("پشتیبانی اطلاعات");
-        title.setCompoundDrawables(null, null, context.getResources().getDrawable(R.drawable.ic_check_black_24dp), null);
+
+
+        title.setText(context.getResources().getString(R.string.backupApplication));
         body.setText(_body);
-        cancle.setText("انصراف");
-        okey.setText("پشتیبانی");
-        //*************************************************
+        cancle.setText(context.getResources().getString(R.string.cancle));
+        okey.setText(context.getResources().getString(R.string.Backup));
+
+
         okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -266,10 +270,10 @@ public class DialogHelper {
         TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
         //*************************************************
-        title.setText("پاک کردن حافظه نرم افزار");
-        body.setText("با پاک کردن حافظه نرم افزار تمام اسامی ، درس ها و جلسات برگزار شده در نرم افزار ،حذف می شوند!");
-        cancle.setText("پاک کردن");
-        okey.setText("انصراف");
+        title.setText(context.getResources().getString(R.string.titleClearSoftwareDialog));
+        body.setText(context.getResources().getString(R.string.bodyClearSoftwareDialog));
+        cancle.setText(context.getResources().getString(R.string.Clear));
+        okey.setText(context.getResources().getString(R.string.cancle));
         //*************************************************
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,35 +327,42 @@ public class DialogHelper {
 
     public static void Abute(final Context context) {
         PackageInfo pInfo = null;
+
         try {
             pInfo = context.getPackageManager().getPackageInfo("aspi.myclass", 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
+
         String version = pInfo.versionName;
+
+
         final Dialog dialog = new Dialog(context, R.style.NewDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_custom);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
-        //************************************************
+
+
         TextView title = dialog.findViewById(R.id.dialog_custom_title);
         TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
         TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
-        //*************************************************
-        title.setText("درباره ما");
-        body.setText("نرم افزار حضور وغیاب برای راحتی کار اساتید و معلمین گرامی طراحی و ساخته شده است برای حمایت از ما در نرم افزار بازار به ما رای بدهید" + "\n" + "\n" + "نرم افزار حضور و غیاب اساتید" + version);
-        cancle.setText("امتیاز دادن");
-        okey.setText("دیگر برنامه ها");
-        cancle.setTextColor(context.getResources().getColor(R.color.green));
-//        title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.abute, 0);
-        //*************************************************
+
+
+        title.setText(context.getResources().getString(R.string.aboutUs));
+        body.setText(context.getResources().getString(R.string.bodyAboutus) + "\n" + "\n"
+                + context.getResources().getString(R.string.app_name) + " " + version);
+        cancle.setText(context.getResources().getString(R.string.cancle));
+        okey.setText(context.getResources().getString(R.string.RateApp));
+
+
         okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application), context.getResources().getString(R.string.package_bazar));
+                Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application_class), context.getResources().getString(R.string.package_bazar));
 
             }
         });
@@ -359,7 +370,7 @@ public class DialogHelper {
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tools.openApplicationByUriAndPackage(context, context.getResources().getString(R.string.uri_bazar_my_application_class), context.getResources().getString(R.string.package_bazar));
+                dialog.dismiss();
             }
         });
 
@@ -408,26 +419,34 @@ public class DialogHelper {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
-        //************************************************
+
+
         TextView title = dialog.findViewById(R.id.dialog_custom_title);
         TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
         TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView okey = dialog.findViewById(R.id.dialog_custom_okey);
-        //*************************************************
-        title.setText("ارسال کد تایید");
-        body.setText("آیا میخواهید کد تایید برای ایمیل شما ارسال شود؟");
-        cancle.setText("خیر");
-        okey.setText("بله");
-        //*************************************************
+
+
+        title.setText(context.getResources().getString(R.string.TitleDialogSendValidationEmail));
+        body.setText(context.getResources().getString(R.string.BodyDialogSendValidationEmail));
+        cancle.setText(context.getResources().getString(R.string.cancle));
+        okey.setText(context.getResources().getString(R.string.okey));
+
+
         okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
                 final String codes = Tools.Pin_Cod(4);
 
-                String Subject = "کد تایید نرم افزار دفتر نمره حضور و غیاب ";
-                String Body = Email + "\n" + model + "\nکد تایید\n" + codes + "\n ایمیل شما \n" + Email;
-                EmailHelper.SendEmail(context, Email, Subject, Body, "کد برای ایمیل شما ارسال شد...!", 1, dialog, codes, Email);
+                String Subject = context.getResources().getString(R.string.SubjectDialogSendValidationEmail);
+                String Body = Email
+                        + "\n" + model
+                        + "\n" + context.getResources().getString(R.string.CodeDialog)
+                        + "\n" + codes
+                        + "\n" + context.getResources().getString(R.string.YourEmailDialog)
+                        + "\n" + Email;
+                EmailHelper.SendEmail(context, Email, Subject, Body, context.getResources().getString(R.string.errorSendCodeDialogSuccess), 1, dialog, codes, Email);
 
             }
         });
@@ -450,30 +469,34 @@ public class DialogHelper {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
-        final EditText ECode = (EditText) dialog.findViewById(R.id.setcode_code);
-        TextView OK = (TextView) dialog.findViewById(R.id.set_ok);
-        TextView Cancel = (TextView) dialog.findViewById(R.id.set_cancel);
-        //******************************************************************************************
+
+
+        final EditText ECode = dialog.findViewById(R.id.setcode_code);
+        TextView OK = dialog.findViewById(R.id.set_ok);
+        TextView Cancel = dialog.findViewById(R.id.set_cancel);
+
+
         OK.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (Code_save.equals(ECode.getText().toString())) {
                     SharedPreferencesHelper.SetCode("EC_Email", "null", context);
                     SharedPreferencesHelper.SetCode("save_Email", "1", context);
                     SettingActivity.SetEmail(SharedPreferencesHelper.get_Data("Email", "", context));
-                    MessageHelper.Toast(context, "ایمیل شما ثبت شد...!");
+                    MessageHelper.Toast(context, context.getResources().getString(R.string.SuccessRegistered));
                     dialog.dismiss();
                 } else {
-                    MessageHelper.Toast(context, "کد وارد شده اشتباه است...!");
+                    MessageHelper.Toast(context, context.getResources().getString(R.string.errorValidCode));
                 }
             }
         });
-        //******************************************************************************************
+
+
         Cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        //******************************************************************************************
+
 
     }
 
@@ -498,10 +521,10 @@ public class DialogHelper {
         okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Body = context.getResources().getString(R.string.HelloIsPassword)+" \n" + SharedPreferencesHelper.get_Data("Password_App", "null", context);
+                String Body = context.getResources().getString(R.string.HelloIsPassword) + " \n" + SharedPreferencesHelper.get_Data("Password_App", "null", context);
                 String Subject = context.getResources().getString(R.string.SubjectForgotPassword);
                 String MailTo = SharedPreferencesHelper.get_Data("Email", "", context);
-                EmailHelper.SendEmail(context, MailTo, Subject, Body,context.getResources().getString(R.string.SendEmail) , 0, dialog);
+                EmailHelper.SendEmail(context, MailTo, Subject, Body, context.getResources().getString(R.string.SendEmail), 0, dialog);
 
             }
         });
@@ -824,10 +847,10 @@ public class DialogHelper {
         TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
         TextView save = dialog.findViewById(R.id.dialog_custom_okey);
         //*************************************************
-        title.setText("ذخیره اطلاعات");
-        body.setText("آیا می خواهید اطلاعات کلاس " + NameClass + " را در یک فایل اکسل ذخیره کنید؟");
-        cancle.setText("انصراف");
-        save.setText("ذخیره");
+        title.setText(context.getResources().getString(R.string.save));
+        body.setText(context.getResources().getString(R.string.bodyExcllDialog1) + NameClass + context.getResources().getString(R.string.bodyExcllDialog2));
+        cancle.setText(context.getResources().getString(R.string.cancle));
+        save.setText(context.getResources().getString(R.string.save));
         //************************************************
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -836,9 +859,9 @@ public class DialogHelper {
                     MessageHelper.Toast(context, MainActivity.Address_file_app + "/" + NameClass + " " + Title + ".xls");
                 } else {
                     if (!MainActivity.Address_file_app.exists()) {
-                        MessageHelper.Toast(context, "مشکل در ایجاد پوشه ی  " + MainActivity.Address_file_app + " در حافظه ی گوشی ");
+                        MessageHelper.Toast(context, context.getResources().getString(R.string.ErrorSaveFile));
                     } else {
-                        MessageHelper.Toast(context, "مشکل در ذخیره فایل در حافظه گوشی");
+                        MessageHelper.Toast(context, context.getResources().getString(R.string.ErrorCreadetFolder));
                     }
                 }
                 dialog.dismiss();

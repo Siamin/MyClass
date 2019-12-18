@@ -71,7 +71,7 @@
             android:label="@string/app_name"/>
 
         <activity
-            android:name=".activity.BuyAppActivity"
+            android:name=".activity.BazarActivity"
             android:label="@string/app_name"/>
 
         <activity

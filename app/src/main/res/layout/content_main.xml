@@ -49,6 +49,7 @@
                         android:text="@string/Saturday"
                         android:id="@+id/main_Saturday"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_10sdp"
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp" />
 
@@ -58,6 +59,7 @@
                         android:text="@string/Sunday"
                         android:id="@+id/main_Sunday"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_10sdp"
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
@@ -67,6 +69,7 @@
                         android:text="@string/Monday"
                         android:id="@+id/main_Monday"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_10sdp"
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp" />
 
@@ -76,6 +79,7 @@
                         android:text="@string/Tuesday"
                         android:id="@+id/main_Tuesday"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_10sdp"
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
@@ -85,6 +89,7 @@
                         android:text="@string/Wednesday"
                         android:id="@+id/main_Wednesday"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_10sdp"
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
@@ -94,6 +99,7 @@
                         android:text="@string/Thursday"
                         android:id="@+id/main_Thursday"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_10sdp"
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 
@@ -103,6 +109,7 @@
                         android:text="@string/Friday"
                         android:id="@+id/main_Friday"
                         android:layout_weight="1"
+                        android:textSize="@dimen/_10sdp"
                         android:background="@drawable/button_style3"
                         android:layout_margin="10dp"/>
 

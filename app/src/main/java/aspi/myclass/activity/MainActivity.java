@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, CrispActivity.class));
             finish();
         } else {
-            MessageHelper.Mesage(MainActivity.this, "برای استفاده از این بخش باید ایمیل خود را در قسمت تنظیمات ثبت کنید.");
+            MessageHelper.Mesage(MainActivity.this, getResources().getString(R.string.errorAddEmail));
         }
     }
 
@@ -182,16 +182,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.changeLanguage) {
             DialogHelper.ChangeLanguage(MainActivity.this);
 
-        } else if (id == R.id.nav_exit) {
-            finish();
-
         } else if (id == R.id.nav_ClearDataBase) {
             DialogHelper.cleanDatabase(MainActivity.this, data);
 
         } else if (id == R.id.nav_backup) {
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
                 if (ValidationHelper.checkPerimission(MainActivity.this)) {
-                    DialogHelper.backupFile(MainActivity.this, "ایا شما میخواهید از اطلاعات خود فایل پشتیبان در حافظه ای زیر ایجاد کنید؟" + "\n" + Backup_File_App, data);
+                    DialogHelper.backupFile(MainActivity.this, getResources().getString(R.string.titleBackupDialog) + "\n" + Backup_File_App, data);
 
                 } else {
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, STORAGE_PERMISSION_CODE);
@@ -204,7 +201,7 @@ public class MainActivity extends AppCompatActivity
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
 
                 if (ValidationHelper.checkPerimission(MainActivity.this)) {
-                    DialogHelper.uploadBackupFile(MainActivity.this, "ایا شما میخواهید از حافظه ای  " + "زیر" + " اطلاعات خود را بازخوانی کنید؟" + "\n" + Backup_File_App, data);
+                    DialogHelper.uploadBackupFile(MainActivity.this, getResources().getString(R.string.titleUploadDataDialog) + "\n" + Backup_File_App, data);
 
                 } else {
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, STORAGE_PERMISSION_CODE);
@@ -215,14 +212,15 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_amozesh) {
-            startActivity(new Intent(MainActivity.this, LerningActivity.class));
+            //startActivity(new Intent(MainActivity.this, LerningActivity.class));
+            MessageHelper.Toast(MainActivity.this, getResources().getString(R.string.ComingSoon));
 
         } else if (id == R.id.buyapp) {
             if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("NO")) {
-                startActivity(new Intent(MainActivity.this, BuyAppActivity.class));
+                startActivity(new Intent(MainActivity.this, BazarActivity.class));
                 finish();
             } else {
-                MessageHelper.Toast(MainActivity.this, "شما قبلا برنامه را خریداری کرده اید.");
+                MessageHelper.Toast(MainActivity.this, getResources().getString(R.string.errorBuyApp));
             }
         }
 
@@ -248,35 +246,41 @@ public class MainActivity extends AppCompatActivity
     }
 
     void initView() {
+
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         data = new DatabasesHelper(this);
         data.database();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        Saturday = findViewById(R.id.main_Saturday);
+        Sunday = findViewById(R.id.main_Sunday);
+        Monday = findViewById(R.id.main_Monday);
+        Tuesday = findViewById(R.id.main_Tuesday);
+        Wednesday = findViewById(R.id.main_Wednesday);
+        Thursday = findViewById(R.id.main_Thursday);
+        Friday = findViewById(R.id.main_Friday);
+        text_day_class = findViewById(R.id.main_text_day_class);
+        recyclerView = findViewById(R.id.recyclerview);
+        linearLayoutManager = new LinearLayoutManager(this);
+
+
         setSupportActionBar(toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        Saturday = (Button) findViewById(R.id.main_Saturday);
-        Sunday = (Button) findViewById(R.id.main_Sunday);
-        Monday = (Button) findViewById(R.id.main_Monday);
-        Tuesday = (Button) findViewById(R.id.main_Tuesday);
-        Wednesday = (Button) findViewById(R.id.main_Wednesday);
-        Thursday = (Button) findViewById(R.id.main_Thursday);
-        Friday = (Button) findViewById(R.id.main_Friday);
-        text_day_class = (TextView) findViewById(R.id.main_text_day_class);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        linearLayoutManager = new LinearLayoutManager(this);
-        //****************************************************************
+
+
         Calendar calendar = Calendar.getInstance();
         DAY = calendar.get(Calendar.DAY_OF_WEEK);
         if (DAY == 7) DAY = 0;
         get_data_class(DAY);
         refresh();
-        //****************************************************************
+
+
         if (!Address_file_app.exists()) {
             Address_file_app.mkdir();
         }

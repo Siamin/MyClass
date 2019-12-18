@@ -52,7 +52,7 @@ public class TableHelper {
                     boolean Status_Date = true;
                     for (int fild = -1; fild < model.size(); fild++) {
                         if (row == -1 && fild == -1) {
-                            cell.addView(CreateTextView(context,"نام و نام خانوادگی", 300));
+                            cell.addView(CreateTextView(context,context.getResources().getString(R.string.NameAndFamily), 300));
 
                         } else if (row > -1 && fild == -1) {
                             modelCheck.add(model.get(row));
@@ -75,7 +75,7 @@ public class TableHelper {
                                 if (model.get(fild).status.equals("1")) {
                                     txt = "√";
                                 } else if (model.get(fild).status.equals("0")) {
-                                    txt = "غ";
+                                    txt = context.getResources().getString(R.string.Absent);
                                 } else {
                                     txt = "-";
                                 }

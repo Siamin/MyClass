@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgrund">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimary">
+
+        <CustomObject.TextViewCustom
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/buyApplication"
+            android:id="@+id/textView4"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16sdp" />
+
+        <CustomObject.ImageViewCustom
+            android:id="@+id/buyapp_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:tint="@color/white" />
+
+    </LinearLayout>
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/buyapp_recyc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+
+
+
+
+</LinearLayout>

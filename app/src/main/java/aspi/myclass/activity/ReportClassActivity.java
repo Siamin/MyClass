@@ -28,11 +28,11 @@ public class ReportClassActivity extends Activity {
 
     TableLayout table;
     DatabasesHelper data;
-    public static boolean STATUS;
+    boolean STATUS;
     ImageView save;
     TextView titel;
     List<ReportDataModel> reportModels = new ArrayList<>();
-    public static String Name_class, Id_class, Did_class;
+    String Name_class, Id_class, Did_class;
     String TAG = "TAG_ReportClassActivity";
     ImageView backPage;
     private static final int STORAGE_PERMISSION_CODE = 101;
@@ -43,7 +43,8 @@ public class ReportClassActivity extends Activity {
         setContentView(R.layout.activity_reportclass);
         data = new DatabasesHelper(this);
         initView();
-        //******************************************************************************************
+
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +59,8 @@ public class ReportClassActivity extends Activity {
                 }
             }
         });
-        //******************************************************************************************
+
+
         backPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,19 +74,29 @@ public class ReportClassActivity extends Activity {
         titel = findViewById(R.id.output_list_titel);
         table = findViewById(R.id.output_list_table);
         backPage = findViewById(R.id.outputlist_back);
-        //*****************************************************
+
+
+        Bundle bundle = getIntent().getExtras();
+
+        Name_class = bundle.getString("className");
+        Id_class = bundle.getString("classId");
+        Did_class = bundle.getString("classDid");
+        STATUS = bundle.getBoolean("status");
+
         if (STATUS) {
-            titel.setText("لیست حضور و غیاب");
+            titel.setText(getResources().getString(R.string.absenceList));
         } else {
-            titel.setText("لیست نمرات");
+            titel.setText(getResources().getString(R.string.scoreList));
         }
-        //*****************************************************
+
+
         Start();
     }
 
+
     void Start() {
 
-        IndicatorHelper.IndicatorCreate(ReportClassActivity.this, "در حال دریافت اطلاعات", "لطفا صبر کنید ...!");
+        IndicatorHelper.IndicatorCreate(ReportClassActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
         GetData();
         IndicatorHelper.IndicatorDismiss();
     }

@@ -27,17 +27,21 @@ public class MessageHelper {
     }
 
     public static void Mesage(final Context context, String text) {
+
         final Dialog massege = new Dialog(context, R.style.NewDialog);
         massege.requestWindowFeature(Window.FEATURE_NO_TITLE);
         massege.setContentView(R.layout.dialog_message);
         massege.setCancelable(false);
         massege.setCanceledOnTouchOutside(false);
         massege.show();
-        final TextView ok = (TextView) massege.findViewById(R.id.massge_btn);
-        final TextView txt = (TextView) massege.findViewById(R.id.massge_text);
-        //**********************************************************************
+
+        final TextView ok = massege.findViewById(R.id.massge_btn);
+        final TextView txt = massege.findViewById(R.id.massge_text);
+
+
         txt.setText("" + text);
-        //**********************************************************************
+
+
         ok.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 massege.dismiss();

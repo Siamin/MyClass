@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:elevation="@dimen/_8sdp"
+        android:foregroundGravity="center_vertical|center_horizontal"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:padding="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/adapter_bazar_image"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:src="@drawable/icon_app"/>
+
+
+                <CustomObject.TextViewCustom
+                    android:id="@+id/adapter_bazar_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:textSize="@dimen/_16sdp"/>
+
+
+
+            </LinearLayout>
+
+
+            <CustomObject.TextViewCustom
+                android:id="@+id/adapter_bazar_description"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/_8sdp"
+                android:paddingRight="@dimen/_8sdp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_14sdp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+                <CustomObject.TextViewCustom
+                    android:id="@+id/adapter_bazar_price"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+                <CustomObject.ButtonCustom
+                    android:id="@+id/adapter_bazar_buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:background="@drawable/button_style_save"
+                    android:text="@string/buy"
+                    android:textColor="@color/green_dark"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

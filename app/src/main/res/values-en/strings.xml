@@ -10,6 +10,7 @@
     <string name="Class">Class</string>
     <string name="save">Save</string>
     <string name="okey">okey</string>
+    <string name="submit">submit</string>
     <string name="time">Time</string>
     <string name="pleaseWait">Please Wait...!</string>
     <string name="gettingData">Getting Data</string>
@@ -23,11 +24,24 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="Score">Score</string>
+    <string name="TitleDialogSendValidationEmail">Send verification code</string>
+    <string name="BodyDialogSendValidationEmail">Do you want to send a verification code to your email?</string>
+    <string name="SubjectDialogSendValidationEmail">Attendance software attestation code verification code</string>
+    <string name="YourEmailDialog">your email</string>
+    <string name="CodeDialog">Verification code</string>
+    <string name="RateApp">Rate the app</string>
+    <string name="Clear">clear</string>
+    <string name="Backup">Backup</string>
+    <string name="Upload">Upload</string>
+    <string name="NameAndFamily">Full name</string>
+    <string name="Absent">A</string>
+
 
 
     <!--Toast Message Application-->
     <string name="ErrorBuyApplication">You can choose the full version to use.</string>
     <string name="Saved">Saved...!</string>
+    <string name="Error">Error</string>
     <string name="ClassDeleted">Class deleted ...!</string>
     <string name="SuccessRegistered">Successfully registered.</string>
     <string name="PleaseEnterClassNumber">Please enter class number ...!</string>
@@ -62,7 +76,37 @@
     <string name="deleteMateing"> Delete?</string>
     <string name="TitleDialogdeleteMateing">Delete Session</string>
     <string name="SuccessfullyDeleteMateing">Session deleted successfully ..!</string>
+    <string name="errorSubmitEmail">You must register your email in order to use this section.</string>
+    <string name="errorConfirmPassword">Re-enter new password ...!</string>
+    <string name="errorValidOldPassword">Re-enter your current password ...!</string>
+    <string name="errorValidCode">Wrong code entered ...!</string>
+    <string name="errorSendCodeDialogSuccess">The code was sent to your email ...!</string>
+    <string name="EnterCodeSend">Enter the email sent code.</string>
+    <string name="errorBuyApp">You have already purchased the app.</string>
+    <string name="titleBackupDialog">Do you want to back up your data to the following memory?</string>
+    <string name="titleUploadDataDialog">Do you want to refresh your data from memory below?</string>
+    <string name="titleClearSoftwareDialog">Clear the software memory</string>
+    <string name="bodyClearSoftwareDialog">By clearing the software memory all names, lessons and sessions held in the software are deleted!</string>
+    <string name="bodyAboutus">Attendance software is designed and built for the convenience of professors and teachers. Vote for us to support us in the marketplace software</string>
+    <string name="bodyExcllDialog1">Do you want to save Class </string>
+    <string name="bodyExcllDialog2"> information in an Excel file?</string>
+    <string name="ErrorSaveFile">Error saving file</string>
+    <string name="ErrorCreadetFolder">Check the problem of creating a folder in the phone\'s memory.</string>
+    <string name="ComingSoon">Coming Soon</string>
+    <string name="errorAddEmail">To use this section you need to register your email in the settings section.</string>
 
+
+    <!--SettingActivity-->
+    <string name="setingPassword">Password seting</string>
+    <string name="setingStatusPassword">Cancel password</string>
+    <string name="setingOldPassword">Password</string>
+    <string name="setingNewPassword">New password</string>
+    <string name="setingConfirmPassword">Confirm password</string>
+    <string name="setingApp">Program settings</string>
+    <string name="setingScore">Numeric scores</string>
+    <string name="setingEmail">Email settings</string>
+    <string name="setingEnterEmail">Enter Email</string>
+    <string name="setingEmailText">If you set up a password for the software, register your email to send the password to the registered email if you forget the password.</string>
 
 
     <!--AdapterStatustics-->
@@ -94,7 +138,7 @@
     <string name="Date">Date</string>
     <string name="studentScore">Studen score</string>
 
-    <!--BuyAppActivity-->
+    <!--BazarActivity-->
     <string name="price_">Price</string>
     <string name="buy">Buy</string>
 
@@ -204,6 +248,6 @@
     <!-- Key Application-->
     <string name="FirebaseApiKey">AIzaSyAK4vnzSWr01YFg0h2TmIse6I2R-K-scE8</string>
     <string name="CrispWebId">dd4fefd7-c5c9-46aa-af7e-0197acb6068b</string>
-    <string name="KeyBazar">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==å</string>
+    <string name="KeyBazar">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCym3I91/oYrhQAd5WdKBQrgG+N4oUOPP5QnDhoUsfwXbMZBbIiCABpKS1JYpG7fIbeXICuVnVedPwYdUeZbi954gxXZ25dDq0bR2TPIfYKSnycJKa+OMWjRIzUff2nPFDET6p/zebhyu36hOmvVr56OzA+H2WNpVl/a4+1RToYi85oBLGb9fe2KNlpQPWsZV22uJO7mFbOtZl1m1/glkAqW0zkBAin/Zy6Dy4HveECAwEAAQ==</string>
 
 </resources>

@@ -3,7 +3,6 @@ package aspi.myclass.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,13 +49,15 @@ public class SettingActivity extends Activity {
 
         on.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics,String.valueOf(on.getId()),on.getText().toString(),"CheckBox");
+                fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics, String.valueOf(on.getId()), on.getText().toString(), "CheckBox");
 
                 if (on.isChecked()) {
                     Number = "on";
+
                 } else {
                     Number = "off";
                 }
+                SharedPreferencesHelper.SetCode("status_number", Number, SettingActivity.this);
             }
         });
 
@@ -71,7 +72,7 @@ public class SettingActivity extends Activity {
                             && ValidationHelper.isValidEmailId(SharedPreferencesHelper.get_Data("Email", "", SettingActivity.this))) {
                         setEnabled(true);
                     } else {
-                        MessageHelper.Toast(SettingActivity.this, "  برای استفاده از این قسمت باید ایمیل خود را در سیستم ثبت کنید. ");
+                        MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.errorSubmitEmail));
                         setEnabled(false);
                         checkBox_password.setChecked(true);
                     }
@@ -83,33 +84,47 @@ public class SettingActivity extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (save()) {
-                    Go_main();
+                    onBackPressed();
                     MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.Saved));
                 }
 
             }
         });
+
+
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Go_main();
+                onBackPressed();
             }
         });
-        //******************************************************************************************
+
+
+
+
         Bmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (!email.getText().toString().isEmpty()) {
+
                     if (ValidationHelper.isValidEmailId(email.getText().toString())) {
+
                         try {
                             DialogHelper.sendCodeEmail(SettingActivity.this, email.getText().toString());
                         } catch (Exception e) {
                             Log.i(TAG, "Error " + e.toString());
                         }
+
                     } else {
-                        MessageHelper.Toast(SettingActivity.this, "ایمیل را به درستی وارد کنید.");
+
+                        MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.ErrorValidEmail));
+
                     }
+
                 } else {
-                    MessageHelper.Toast(SettingActivity.this, "ایمیل را وارد کنید.");
+
+                    MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.ErrorEnterEmail));
+
                 }
 
 
@@ -134,7 +149,6 @@ public class SettingActivity extends Activity {
         Bmail = findViewById(R.id.setting_bmail);
         cancel = findViewById(R.id.setting_cancel);
         on = findViewById(R.id.setting_numberon);
-
 
 
     }
@@ -184,45 +198,59 @@ public class SettingActivity extends Activity {
 
     }
 
-    void SetCode(String name, String code) {
-        SharedPreferencesHelper.SetCode(name, code, SettingActivity.this);
-    }
-
-    void Go_main() {
-        Intent setting = new Intent(this, MainActivity.class);
-        startActivity(setting);
-        finish();
-    }
 
     boolean save() {
-        boolean res = true;
+
         if (!checkBox_password.isChecked()) {
+
             if (password_chek.equals(old_password.getText().toString())) {
+
                 if (new_password1.getText().toString().equals(new_password2.getText().toString())) {
-                    SetCode("Password_App", new_password1.getText().toString());
-                } else if (!new_password1.getText().toString().equals("") && !new_password2.getText().toString().equals("")) {
+
+                    SharedPreferencesHelper.SetCode("Password_App", new_password1.getText().toString(), SettingActivity.this);
+                    return true;
+
+                } else if (new_password1.getText().toString().isEmpty() || new_password2.getText().toString().isEmpty() || !new_password1.getText().toString().equals(new_password2.getText().toString())) {
+
                     new_password1.setText("");
                     new_password2.setText("");
-                    MessageHelper.Toast(SettingActivity.this, "رمز جدید را مجددا وارد کنید...!");
-                    res = false;
+                    MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.errorConfirmPassword));
+                    return false;
+
+                } else {
+                    MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.Error));
+                    return false;
                 }
-            } else if (!old_password.getText().toString().equals("")) {
-                res = false;
+
+            } else if (old_password.getText().toString().isEmpty() || !password_chek.equals(old_password.getText().toString())) {
                 old_password.setText("");
-                MessageHelper.Toast(SettingActivity.this, "رمز قدیمی را مجددا وارد کنید...!");
+                MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.errorValidOldPassword));
+                return false;
+
+            } else {
+                MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.Error));
+                return false;
             }
+
         } else {
-            SetCode("Password_App", "null");
+
+            SharedPreferencesHelper.SetCode("Password_App", "null", SettingActivity.this);
+            return false;
+
         }
 
-        SetCode("Size_Text_App", String.valueOf(Size_Text));
-        SetCode("status_number", Number);
-        return res;
+
     }
 
     public static void SetEmail(String Email) {
         email.setText(Email);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent setting = new Intent(this, MainActivity.class);
+        startActivity(setting);
+        finish();
+    }
 }
