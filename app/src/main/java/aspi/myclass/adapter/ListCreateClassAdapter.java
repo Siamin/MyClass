@@ -80,7 +80,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
         holder.loggin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || position < 3) {
+                if (ValidationHelper.validBuyApp(contexts) || position < 3) {
                     OldClassActivity.did_class = OldClassListActivity.id_class;
                     OldClassActivity.Name_class = OldClassListActivity.Name_class;
                     OldClassActivity.Data_class = content.DATA;
@@ -97,7 +97,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || position < 3) {
+                if (ValidationHelper.validBuyApp(contexts) || position < 3) {
                     DialogHelper.DeleteOldSession(contexts, contexts.getResources().getString(R.string.doYouWantMateing) + " " + content.DATA
                             + " " + contexts.getResources().getString(R.string.inTime) + " " + content.Hour + " "
                             + contexts.getResources().getString(R.string.deleteMateing), content.jalase);

@@ -67,9 +67,7 @@ public class SettingActivity extends Activity {
                 if (checkBox_password.isChecked()) {
                     setEnabled(false);
                 } else {
-                    if (SharedPreferencesHelper.get_Data("EC_Email", "null", SettingActivity.this).equals("null")
-                            && SharedPreferencesHelper.get_Data("save_Email", "0", SettingActivity.this).equals("1")
-                            && ValidationHelper.isValidEmailId(SharedPreferencesHelper.get_Data("Email", "", SettingActivity.this))) {
+                    if (ValidationHelper.validSetEmail(SettingActivity.this)) {
                         setEnabled(true);
                     } else {
                         MessageHelper.Toast(SettingActivity.this, getResources().getString(R.string.errorSubmitEmail));
@@ -197,7 +195,6 @@ public class SettingActivity extends Activity {
         }
 
     }
-
 
     boolean save() {
 

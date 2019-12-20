@@ -223,7 +223,7 @@
     <string name="addNewClass">add new Class</string>
     <string name="backupApplication">backup data class</string>
     <string name="uploadBackupApplication">upload back data</string>
-    <string name="educationApplication">Learning to add a group of students to the class</string>
+    <string name="educationApplication">education</string>
     <string name="clearDatabase">clear data</string>
     <string name="aboutUs">aboutUs</string>
     <string name="setting">setting</string>

@@ -9,6 +9,9 @@ import androidx.core.content.ContextCompat;
 
 import java.util.List;
 import java.util.regex.Pattern;
+
+import aspi.myclass.activity.MainActivity;
+import aspi.myclass.activity.SettingActivity;
 import aspi.myclass.model.ReportDataModel;
 
 public class ValidationHelper {
@@ -31,14 +34,6 @@ public class ValidationHelper {
         } else {
             return false;
         }
-    }
-
-    public static boolean isValidationBuyApp(Context context, String name) {
-
-        if (SharedPreferencesHelper.get_Data(name, "null", context).equals("Buy_App")) {
-            return true;
-        }
-        return false;
     }
 
     public static boolean validationSnoInModel(List<ReportDataModel> model, String Sno) {
@@ -79,26 +74,42 @@ public class ValidationHelper {
     public static boolean isValidationInternet(Context context) {
         // get Connectivity Manager object to check connection
         ConnectivityManager connec
-                =(ConnectivityManager)context.getSystemService(context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
 
         // Check for network connections
-        if ( connec.getNetworkInfo(0).getState() ==
+        if (connec.getNetworkInfo(0).getState() ==
                 android.net.NetworkInfo.State.CONNECTED ||
                 connec.getNetworkInfo(0).getState() ==
                         android.net.NetworkInfo.State.CONNECTING ||
                 connec.getNetworkInfo(1).getState() ==
                         android.net.NetworkInfo.State.CONNECTING ||
-                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
             return true;
-        }else if (
+        } else if (
                 connec.getNetworkInfo(0).getState() ==
                         android.net.NetworkInfo.State.DISCONNECTED ||
                         connec.getNetworkInfo(1).getState() ==
-                                android.net.NetworkInfo.State.DISCONNECTED  ) {
+                                android.net.NetworkInfo.State.DISCONNECTED) {
             return false;
         }
         return false;
     }
 
+    public static boolean validSetEmail(Context context) {
+        if (SharedPreferencesHelper.get_Data("EC_Email", "null", context).equals("null")
+                && SharedPreferencesHelper.get_Data("save_Email", "0", context).equals("1")
+                && ValidationHelper.isValidEmailId(SharedPreferencesHelper.get_Data("Email", "", context))) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean validBuyApp(Context context) {
+
+        return SharedPreferencesHelper.get_Data("‌Buy_App", "NO", context).equals("Buy_App") ? true : false;
+
+    }
 
 }

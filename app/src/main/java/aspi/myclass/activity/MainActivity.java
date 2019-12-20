@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void helpMe(View v) {
-        if (!SharedPreferencesHelper.get_Data("Email", "", MainActivity.this).equals("")) {
+        if (ValidationHelper.validSetEmail(MainActivity.this)) {
             startActivity(new Intent(MainActivity.this, CrispActivity.class));
             finish();
         } else {
@@ -172,8 +172,14 @@ public class MainActivity extends AppCompatActivity
             DialogHelper.Abute(MainActivity.this);
 
         } else if (id == R.id.nav_coment) {
-            startActivity(new Intent(this, CommentActivity.class));
-            finish();
+
+            if (ValidationHelper.validSetEmail(MainActivity.this)) {
+                startActivity(new Intent(this, CommentActivity.class));
+                finish();
+            } else {
+                MessageHelper.Mesage(MainActivity.this, getResources().getString(R.string.errorAddEmail));
+            }
+
 
         } else if (id == R.id.nav_setting) {
             startActivity(new Intent(MainActivity.this, SettingActivity.class));
@@ -186,7 +192,7 @@ public class MainActivity extends AppCompatActivity
             DialogHelper.cleanDatabase(MainActivity.this, data);
 
         } else if (id == R.id.nav_backup) {
-            if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
+            if (ValidationHelper.validBuyApp(MainActivity.this)) {
                 if (ValidationHelper.checkPerimission(MainActivity.this)) {
                     DialogHelper.backupFile(MainActivity.this, getResources().getString(R.string.titleBackupDialog) + "\n" + Backup_File_App, data);
 
@@ -198,7 +204,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_upload) {
-            if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("Buy_App")) {
+            if (ValidationHelper.validBuyApp(MainActivity.this)) {
 
                 if (ValidationHelper.checkPerimission(MainActivity.this)) {
                     DialogHelper.uploadBackupFile(MainActivity.this, getResources().getString(R.string.titleUploadDataDialog) + "\n" + Backup_File_App, data);
@@ -216,7 +222,7 @@ public class MainActivity extends AppCompatActivity
             MessageHelper.Toast(MainActivity.this, getResources().getString(R.string.ComingSoon));
 
         } else if (id == R.id.buyapp) {
-            if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", MainActivity.this).equals("NO")) {
+            if (!ValidationHelper.validBuyApp(MainActivity.this)) {
                 startActivity(new Intent(MainActivity.this, BazarActivity.class));
                 finish();
             } else {
@@ -267,6 +273,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.recyclerview);
         linearLayoutManager = new LinearLayoutManager(this);
 
+        toolbar.setTitle(getResources().getString(R.string.app_name));
 
         setSupportActionBar(toolbar);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

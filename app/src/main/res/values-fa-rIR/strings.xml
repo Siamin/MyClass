@@ -223,7 +223,7 @@
     <string name="addNewClass">اضافه کردن کلاس جدید</string>
     <string name="backupApplication">پشتیبان گیری از نرم افزار</string>
     <string name="uploadBackupApplication">بارگیری فایل پشتیبانی</string>
-    <string name="educationApplication">آموزش اضافه کردن گروهی دانشجویان به کلاس</string>
+    <string name="educationApplication">آموزش</string>
     <string name="clearDatabase">پاک کردن حافظه نرم افزار</string>
     <string name="aboutUs">درباره ما</string>
     <string name="setting">تنظیمات</string>

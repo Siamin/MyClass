@@ -55,7 +55,7 @@ public class AddStudentActivity extends Activity {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ValidationHelper.isValidationBuyApp(AddStudentActivity.this, "‌Buy_App")) {
+                if (ValidationHelper.validBuyApp(AddStudentActivity.this)) {
                     DialogHelper.Import(AddStudentActivity.this);
                     MessageHelper.Mesage(AddStudentActivity.this, getResources().getString(R.string.textLerningExcell));
                 } else {

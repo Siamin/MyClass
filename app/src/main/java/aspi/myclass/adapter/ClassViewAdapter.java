@@ -137,7 +137,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         week_class.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App") || Integer.parseInt(did) <= 10) {
+                if (ValidationHelper.validBuyApp(contexts) || Integer.parseInt(did) <= 10) {
                     kelas.cancel();
                     Set_Of_Week(Class, location, Characteristic, did, TXT);
                 } else {
@@ -297,7 +297,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         absent_student.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (ValidationHelper.isValidationBuyApp(contexts, "‌Buy_App")) {
+                if (ValidationHelper.validBuyApp(contexts)) {
                     statistics_.cancel();
                     StatisticsActivity.Name_class = Class;
                     StatisticsActivity.Id_class = id;
@@ -312,7 +312,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         absent_students.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
+                if (ValidationHelper.validBuyApp(contexts)) {
                     statistics_.cancel();
 
                     Intent i = new Intent(contexts, ReportClassActivity.class);
@@ -331,7 +331,7 @@ public class ClassViewAdapter extends RecyclerView.Adapter<ClassViewAdapter.cvh>
         //******************************************************************************************
         nomreh_students.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (SharedPreferencesHelper.get_Data("‌Buy_App", "NO", contexts).equals("Buy_App")) {
+                if (ValidationHelper.validBuyApp(contexts)) {
                     statistics_.cancel();
 
                     Intent i = new Intent(contexts, ReportClassActivity.class);

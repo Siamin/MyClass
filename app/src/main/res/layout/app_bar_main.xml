@@ -27,13 +27,14 @@
         android:id="@+id/main_help_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
+        android:layout_gravity="bottom"
         android:layout_margin="@dimen/fab_margin"
         app:rippleColor="@color/green"
         app:borderWidth="@dimen/_4sdp"
-        app:backgroundTint="@color/table2"
+        app:backgroundTint="@color/colorAccent"
         android:onClick="helpMe"
-        android:src="@android:drawable/ic_menu_help"
+        android:src="@drawable/online_support"
+        android:tint="@color/white"
         tools:ignore="OnClick" />
 
 
