@@ -16,6 +16,8 @@
     <string name="gettingData">Getting Data</string>
     <string name="cancle">Cancle</string>
     <string name="delete">Delete</string>
+    <string name="report">report</string>
+    <string name="bodyReport">A system error has occurred Do you want to submit an error report?</string>
     <string name="show">Show</string>
     <string name="EnterDescription">Write your own description</string>
     <string name="textClassDelete">Deletes all sessions held in class!</string>
@@ -94,6 +96,14 @@
     <string name="ErrorCreadetFolder">Check the problem of creating a folder in the phone\'s memory.</string>
     <string name="ComingSoon">Coming Soon</string>
     <string name="errorAddEmail">To use this section you need to register your email in the settings section.</string>
+    <string name="successUpload">Upload complete ...!</string>
+    <string name="notDataUpload">No recovery info ...!</string>
+    <string name="worngUpload">The backup file is corrupted</string>
+    <string name="successBackup">The backup file was successful</string>
+    <string name="notDataBackup">No backup data recorded!</string>
+    <string name="successclearDatabase">Software cache successfully cleared ...!</string>
+
+
 
 
     <!--SettingActivity-->

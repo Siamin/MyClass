@@ -5,10 +5,10 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "aspi.myclass"
-        minSdkVersion 17
+        minSdkVersion 22
         targetSdkVersion 29
-        versionCode 36
-        versionName '4.1.6'
+        versionCode 37
+        versionName '4.1.7'
         multiDexEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -74,6 +74,8 @@ dependencies {
 
     implementation 'com.github.devlight:infinitecycleviewpager:1.0.2'
 
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
 }
 

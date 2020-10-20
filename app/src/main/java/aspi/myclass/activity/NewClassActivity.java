@@ -166,15 +166,15 @@ public class NewClassActivity extends Activity {
             data.close();
 
             if (absentPersentModels.size() > 0) {
-
                 DATA_IRAN = DateHelper.GetData(NewClassActivity.this).split("/");
 
                 data.open();
+
                 int cunt_roll = data.count("rollcall");
                 int jalase = 1;
-                if (cunt_roll > 0) {
+
+                if (cunt_roll > 0)
                     jalase = Integer.parseInt(data.Display("rollcall", (cunt_roll - 1), 8)) + 1;
-                }
 
                 for (int i = 0; i < absentPersentModels.size(); i++) {
                     data.insert_Rollcall(absentPersentModels.get(i).sno, true, "", DATA_IRAN[0], DATA_IRAN[1], DATA_IRAN[2], did, String.valueOf(jalase), String.valueOf(HOUR) + ":" + String.valueOf(MINUTE));
@@ -197,7 +197,8 @@ public class NewClassActivity extends Activity {
         } catch (final Exception e) {
             runOnUiThread(new Runnable() {
                 public void run() {
-                    Log.i(TAG, "" + e.toString());
+                    Log.i(TAG, "Data Error :" + e.toString());
+                    IndicatorHelper.IndicatorDismiss();
                 }
             });
         }

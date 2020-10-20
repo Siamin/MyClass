@@ -15,6 +15,8 @@
     <string name="gettingData">در حال دریافت اطلاعات</string>
     <string name="cancle">انصراف</string>
     <string name="delete">حذف</string>
+    <string name="report">ارسال گزارش</string>
+    <string name="bodyReport">خطایی سیستمی رخ داده است ایا مایل به ارسال گزارش خطا هستید؟</string>
     <string name="show">نمایش</string>
     <string name="time">ساعت</string>
     <string name="EnterDescription">توضیحات خود را بنویسید</string>
@@ -93,6 +95,13 @@
     <string name="ErrorCreadetFolder">مشکل در ایجاد پوشه ی در حافظه ی گوشی دسترسی برنامه را بررسی کنید.</string>
     <string name="ComingSoon">بزودی این قسمت فعال می شود.</string>
     <string name="errorAddEmail">برای استفاده از این بخش باید ایمیل خود را در قسمت تنظیمات ثبت کنید.</string>
+    <string name="successUpload">بارگذاری انجام شد...!</string>
+    <string name="notDataUpload">اطلاعاتی برای بازیابی وجود ندارد...!</string>
+    <string name="worngUpload">فایل پشتیبانی خراب است</string>
+    <string name="successBackup">فایل پشتیبانی گرفته شد...!</string>
+    <string name="notDataBackup">اطلاعاتی برای پشتیبانی گرفت ثبت نشده!</string>
+    <string name="successclearDatabase">حافظه نرم افزار با موفقیت پاک شد...!</string>
+
 
 
 

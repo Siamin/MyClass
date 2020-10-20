@@ -61,12 +61,21 @@ public class Tools {
         return file.exists();
     }
 
-    public static void restartApplication(Context context){
+    public static void restartApplication(Context context) {
         Intent mStartActivity = new Intent(context, SplashScreanActivity.class);
         int mPendingIntentId = 123456;
         PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity,
                 PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-        System.exit(0);    }
+        System.exit(0);
+    }
+
+    public String getDeviceModel() {
+        return android.os.Build.MODEL + " "
+                + android.os.Build.BRAND + " ("
+                + android.os.Build.VERSION.RELEASE + ")"
+                + " API-" + android.os.Build.VERSION.SDK_INT;
+
+    }
 }

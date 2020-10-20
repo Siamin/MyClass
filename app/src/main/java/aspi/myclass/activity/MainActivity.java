@@ -332,6 +332,7 @@ public class MainActivity extends AppCompatActivity
             Set_day();
         } catch (Exception e) {
             Log.i(TAG, e.toString());
+
         }
 
     }

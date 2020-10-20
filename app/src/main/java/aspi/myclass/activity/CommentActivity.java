@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,13 +16,14 @@ import aspi.myclass.Helpers.EmailHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.Interface.RequestInterface;
 import aspi.myclass.R;
 
-public class CommentActivity extends Activity {
+public class CommentActivity extends Activity implements RequestInterface {
 
     EditText subject, body, name, email;
     ImageView ok, cancel;
-    String model = "";
+    String model = "",TAG = "TAG_CommentActivity";
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class CommentActivity extends Activity {
                     if (ValidationHelper.isValidationNull(body.getText().toString())) {
                         if (ValidationHelper.isValidEmailId(email.getText().toString())) {
                             String Body = body.getText().toString() + "\n ارسال شده از  طرف \n" + name.getText().toString() + "\n ایمیل \n" + email.getText().toString() + "\n مدل دستگاه = " + model;
-                            EmailHelper.SendEmail(CommentActivity.this, "amin.syahi.69@gmail.com", subject.getText().toString(), Body, " نظر ارسال شد ", 2,null);
+                            EmailHelper.SendEmail_(CommentActivity.this, "amin.syahi.69@gmail.com", subject.getText().toString(), Body,this);
                         } else {
                             MessageHelper.Toast(CommentActivity.this, getResources().getString(R.string.ErrorValidEmail));
                         }
@@ -88,5 +90,13 @@ public class CommentActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         Back();
+    }
+
+    @Override
+    public void onPostExecute(String result) {
+        Log.i(TAG,"onPostExecute");
+        MessageHelper.Toast(CommentActivity.this," نظر ارسال شد ");
+        Back();
+
     }
 }

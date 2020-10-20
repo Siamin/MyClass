@@ -25,6 +25,7 @@ import java.io.FileWriter;
 import java.util.Calendar;
 import java.util.List;
 
+import aspi.myclass.Interface.RequestInterface;
 import aspi.myclass.R;
 import aspi.myclass.Tools.Tools;
 
@@ -39,7 +40,7 @@ public class DialogHelper {
 
     static String TAG = "TAG_DialogHelper";
     static File Backup_File_App = new File(Environment.getExternalStorageDirectory(), "BackupClass");
-
+    static Tools tools = new Tools();
 
     public static void uploadBackupFile(final Context context, String _body, final DatabasesHelper data) {
         final Dialog dialog = new Dialog(context, R.style.NewDialog);
@@ -134,14 +135,14 @@ public class DialogHelper {
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                MessageHelper.Toast(context, "بارگزاری انجام شد...!");
+                                MessageHelper.Toast(context, context.getResources().getString(R.string.successUpload));
                             }
                         });
                     } else {
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                MessageHelper.Toast(context, "اطلاعاتی برای بازیابی وجود ندارد...!");
+                                MessageHelper.Toast(context, context.getResources().getString(R.string.notDataUpload));
                             }
                         });
                     }
@@ -152,7 +153,7 @@ public class DialogHelper {
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            MessageHelper.Toast(context, "فایل پشتیبانی خراب است");
+                            MessageHelper.Toast(context, context.getResources().getString(R.string.worngUpload));
                         }
                     });
 
@@ -208,9 +209,9 @@ public class DialogHelper {
                 }
                 write("class", BACKUP_class);
 
-                MessageHelper.Toast(context, "فایل پشتیبانی گرفته شد...!");
+                MessageHelper.Toast(context, context.getResources().getString(R.string.successBackup));
             } else {
-                MessageHelper.Toast(context, "اطلاعاتی برای پشتیبانی گرفت ثبت نشده!");
+                MessageHelper.Toast(context, context.getResources().getString(R.string.notDataBackup));
             }
             dialog.dismiss();
             data.close();
@@ -297,9 +298,8 @@ public class DialogHelper {
         progressDialog.setProgress(0);
         progressDialog.setProgressDrawable(context.getResources().getDrawable(R.drawable.dialog));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("پاک کردن حافظه");
         progressDialog.setCancelable(false);
-        progressDialog.setMessage("لطفا صبر کنید ...!");
+        progressDialog.setMessage(context.getResources().getString(R.string.pleaseWait));
         progressDialog.show();
         new Thread(new Runnable() {
             public void run() {
@@ -312,7 +312,7 @@ public class DialogHelper {
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            MessageHelper.Toast(context, "حافظه نرم افزار با موفقیت پاک شد...!");
+                            MessageHelper.Toast(context, context.getResources().getString(R.string.successclearDatabase));
                             dialog.dismiss();
                         }
                     });
@@ -447,6 +447,7 @@ public class DialogHelper {
                         + "\n" + context.getResources().getString(R.string.YourEmailDialog)
                         + "\n" + Email;
                 EmailHelper.SendEmail(context, Email, Subject, Body, context.getResources().getString(R.string.errorSendCodeDialogSuccess), 1, dialog, codes, Email);
+
 
             }
         });
@@ -900,6 +901,49 @@ public class DialogHelper {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+
+    public static void errorReport(final Context context, String ActivityName, String methodName, String error) {
+
+        final String Error = tools.getDeviceModel()
+                + "\nin => " + ActivityName
+                + "\nmethodName =>" + methodName
+                + "\nError is:\n" + error;
+
+        final Dialog dialog = new Dialog(context, R.style.NewDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        //************************************************
+        TextView title = dialog.findViewById(R.id.dialog_custom_title);
+        TextView body = dialog.findViewById(R.id.dialog_custom_bodetxt);
+        TextView cancle = dialog.findViewById(R.id.dialog_custom_cancle);
+        TextView report = dialog.findViewById(R.id.dialog_custom_okey);
+        //*************************************************
+        title.setText("");
+        body.setText(context.getResources().getString(R.string.bodyReport));
+        report.setText(context.getResources().getString(R.string.report));
+        cancle.setText(context.getResources().getString(R.string.cancle));
+
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                EmailHelper.SendEmail_(context, context.getResources().getString(R.string.Email), "Error Application", Error, null);
+            }
+        });
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
 }

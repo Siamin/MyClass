@@ -27,9 +27,10 @@ import aspi.myclass.adapter.ListCreateClassAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
-public class OldClassListActivity extends Activity implements DatePickerDialog.OnDateSetListener, android.app.DatePickerDialog.OnDateSetListener {
+public class OldClassListActivity extends Activity
+        implements DatePickerDialog.OnDateSetListener,android.app.DatePickerDialog.OnDateSetListener {
 
-    public static String Name_class, id_class, refresh = "",sessions;
+    public static String Name_class, id_class, refresh = "", sessions;
     TextView name_class;
     DatabasesHelper data;
     RecyclerView recyclerView2;
@@ -106,7 +107,7 @@ public class OldClassListActivity extends Activity implements DatePickerDialog.O
                             view = false;
                             recyclerView2.setLayoutManager(linearLayoutManager);
                             recyclerView2.setHasFixedSize(true);
-                            recyclerView2.setAdapter(new ListCreateClassAdapter(List, OldClassListActivity.this, OldClassListActivity.this));
+                            recyclerView2.setAdapter(new ListCreateClassAdapter(List, OldClassListActivity.this));
 
                         }
                     }
@@ -155,20 +156,13 @@ public class OldClassListActivity extends Activity implements DatePickerDialog.O
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        Log.i(TAG, "onDateSet FA");
+        Log.i(TAG, "onDateSet FA" + year);
 
-        updateDate(year,monthOfYear,dayOfMonth);
+        updateDate(year, monthOfYear, dayOfMonth);
     }
 
 
-    @Override
-    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-        Log.i(TAG, "onDateSet EN");
-
-        updateDate(year,monthOfYear,dayOfMonth);
-    }
-
-    void updateDate(int year,int monthOfYear,int dayOfMonth){
+    void updateDate(int year, int monthOfYear, int dayOfMonth) {
         try {
             data.open();
             data.update("day", String.valueOf(year), "month", String.valueOf(monthOfYear + 1), "year", String.valueOf(dayOfMonth), "jalase=" + sessions);
@@ -178,6 +172,13 @@ public class OldClassListActivity extends Activity implements DatePickerDialog.O
         } catch (Exception e) {
             Log.i(TAG, "Error" + e.toString());
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+        Log.i(TAG, "onDateSet En" + year);
+
+        updateDate(year, monthOfYear, dayOfMonth);
     }
 }
 

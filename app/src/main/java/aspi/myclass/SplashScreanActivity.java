@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 
@@ -23,7 +24,6 @@ import tyrantgit.explosionfield.ExplosionField;
 
 public class SplashScreanActivity extends Activity {
 
-    int time = 0;
     ImageView mImageView;
     WaveDrawable mWaveDrawable;
     ExplosionField mExplosionField;
@@ -41,7 +41,7 @@ public class SplashScreanActivity extends Activity {
 
         mExplosionField = ExplosionField.attach2Window(this);
 
-        mImageView = (ImageView) findViewById(R.id.flash_img);
+        mImageView = findViewById(R.id.flash_img);
         mWaveDrawable = new WaveDrawable(this, R.drawable.aspiy);
         mImageView.setImageDrawable(mWaveDrawable);
         int color = getResources().getColor(R.color.colorAccent);
@@ -54,24 +54,16 @@ public class SplashScreanActivity extends Activity {
     }
 
     void Timer() {
-        final Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        time++;
-                        Log.i("TAG_Flash", "Timer :" + time);
-                        if (time == 5) {
-                            mWaveDrawable.setIndeterminate(false);
-                            timer.cancel();
-                            startActivity(new Intent(SplashScreanActivity.this, LoginActivity.class));
-                            finish();
-                        }
 
+        new Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        mWaveDrawable.setIndeterminate(false);
+                        startActivity(new Intent(SplashScreanActivity.this, LoginActivity.class));
+                        finish();
                     }
-                });
-            }
-        }, 1, 1000);
+                }, 5000);
+
     }
 
 

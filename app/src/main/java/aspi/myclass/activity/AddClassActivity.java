@@ -13,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import aspi.myclass.Helpers.DateHelper;
+import aspi.myclass.Helpers.DateTimePickerHelper;
+import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.R;
@@ -26,16 +29,18 @@ import aspi.myclass.Tools.Tools;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
-public class AddClassActivity extends Activity implements TimePickerDialog.OnTimeSetListener {
+public class AddClassActivity extends Activity implements TimePickerDialog.OnTimeSetListener,android.app.TimePickerDialog.OnTimeSetListener {
 
-    EditText name_edit, code_edit, location_edit, class_edit;
-    Spinner day_spinner;
-    LinearLayout time_start, time_end;
-    TextView textTimeStart, textTimeEnd;
-    DatabasesHelper data;
-    public static String[] Day_of_week;
-    ImageView backPage, save_data;
-    String TIMEPICKER = "TimePickerDialog";
+    private EditText name_edit, code_edit, location_edit, class_edit;
+    private Spinner day_spinner;
+    private LinearLayout time_start, time_end;
+    private TextView textTimeStart, textTimeEnd;
+    private DatabasesHelper data;
+    private String[] Day_of_week;
+    private ImageView backPage, save_data;
+    private DateTimePickerHelper dateTimePickerHelper = new DateTimePickerHelper();
+    private TextView textView;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,56 +95,27 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
         time_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SetTimeByDialog(textTimeStart);
+                textView = textTimeStart;
+                dateTimePickerHelper.getTime(AddClassActivity.this);
             }
         });
 
         time_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SetTimeByDialog(textTimeEnd);
+                textView = textTimeEnd;
+                dateTimePickerHelper.getTime(AddClassActivity.this);
             }
         });
 
 
     }
 
-    void SetTimeByDialog(final TextView text) {
-        PersianCalendar now = new PersianCalendar();
-        TimePickerDialog tpd = TimePickerDialog.newInstance(
-                AddClassActivity.this,
-                now.get(PersianCalendar.HOUR_OF_DAY),
-                now.get(PersianCalendar.MINUTE), true);
-        tpd.setThemeDark(true);
-        tpd.show(getFragmentManager(), TIMEPICKER);
-        tpd.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-                String Hour = "00", Min = "00";
-
-
-                if (hourOfDay < 10) {
-                    Hour = "0" + String.valueOf(hourOfDay);
-                } else {
-                    Hour = String.valueOf(hourOfDay);
-                }
-
-                if (minute < 10) {
-                    Min = "0" + String.valueOf(minute);
-                } else {
-                    Min = String.valueOf(minute);
-                }
-
-                text.setText(Hour + ":" + Min);
-            }
-        });
-    }
-
-    void Go_main() {
+    private void Go_main() {
         finish();
     }
 
-    void initView() {
+    private void initView() {
         save_data = findViewById(R.id.activity_addclass_save);
         backPage = findViewById(R.id.activity_addclass_back);
         name_edit = (EditText) findViewById(R.id.add_class_name_edit);
@@ -163,18 +139,19 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
 
     }
 
-    boolean save() {
+    private boolean save() {
         int day_of = day_spinner.getSelectedItemPosition();
-        boolean resualt;
         try {
             data.open();
             data.insert_class(name_edit.getText().toString().replace("~", ""), String.valueOf(day_of), textTimeStart.getText().toString(), location_edit.getText().toString().replace("~", ""), textTimeEnd.getText().toString(), code_edit.getText().toString(), class_edit.getText().toString().replace("~", ""), "");
             data.close();
-            resualt = true;
+            return true;
         } catch (Exception e) {
-            resualt = false;
+
+            DialogHelper.errorReport(AddClassActivity.this,"AddClassActivity","save",e.toString());
+            return false;
         }
-        return resualt;
+
     }
 
     protected void onResume() {
@@ -184,7 +161,31 @@ public class AddClassActivity extends Activity implements TimePickerDialog.OnTim
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+        setTime(hourOfDay, minute);
+    }
 
+    private void setTime(int hourOfDay, int minute) {
+        String Hour = "00", Min = "00";
+
+
+        if (hourOfDay < 10) {
+            Hour = "0" + String.valueOf(hourOfDay);
+        } else {
+            Hour = String.valueOf(hourOfDay);
+        }
+
+        if (minute < 10) {
+            Min = "0" + String.valueOf(minute);
+        } else {
+            Min = String.valueOf(minute);
+        }
+
+        textView.setText(Hour + ":" + Min);
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+        setTime(hourOfDay, minute);
     }
 
 }

@@ -41,7 +41,7 @@ public class StatisticsActivity extends Activity {
         setContentView(R.layout.activity_statistics);
         data = new DatabasesHelper(this);
         backPage = findViewById(R.id.statistics_back);
-        Start();
+        GetData();
 
         backPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,35 +53,6 @@ public class StatisticsActivity extends Activity {
 
     }
 
-    void Start() {
-        final Timer time = new Timer();
-        time.schedule(new TimerTask() {
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        cunters += 1;
-                        if (cunters == 1) {
-                            IndicatorHelper.IndicatorCreate(StatisticsActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
-                            new Thread(new Runnable() {
-                                public void run() {
-                                    //Get_Data_Base();
-                                    GetData();
-                                }
-                            }).start();
-                        }
-                        if (view) {
-                            recyclerView_show_student = (RecyclerView) findViewById(R.id.show_student_recyclerview);
-                            linearLayoutManager_show_student = new LinearLayoutManager(StatisticsActivity.this);
-                            recyclerView_show_student.setLayoutManager(linearLayoutManager_show_student);
-                            recyclerView_show_student.setAdapter(new StatusticsAdapter(List));
-                            time.cancel();
-                            IndicatorHelper.IndicatorDismiss();
-                        }
-                    }
-                });
-            }
-        }, 1, 1000);
-    }
 
     void GetData() {
         try {
@@ -95,7 +66,12 @@ public class StatisticsActivity extends Activity {
 
             if (!List.isEmpty()) {
 
-                view = true;
+                recyclerView_show_student = findViewById(R.id.show_student_recyclerview);
+                linearLayoutManager_show_student = new LinearLayoutManager(StatisticsActivity.this);
+                recyclerView_show_student.setLayoutManager(linearLayoutManager_show_student);
+                recyclerView_show_student.setAdapter(new StatusticsAdapter(List));
+
+                IndicatorHelper.IndicatorDismiss();
 
             } else {
 

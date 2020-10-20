@@ -18,6 +18,7 @@ import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
 import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.Interface.RequestInterface;
 import aspi.myclass.R;
 import aspi.myclass.Services.FireBaseAnalyticsService;
 
@@ -95,8 +96,6 @@ public class SettingActivity extends Activity {
                 onBackPressed();
             }
         });
-
-
 
 
         Bmail.setOnClickListener(new View.OnClickListener() {
@@ -250,4 +249,5 @@ public class SettingActivity extends Activity {
         startActivity(setting);
         finish();
     }
+
 }

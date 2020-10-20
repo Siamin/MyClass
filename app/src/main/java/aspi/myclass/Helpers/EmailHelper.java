@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
+import aspi.myclass.Interface.RequestInterface;
 import aspi.myclass.NetWork;
 import aspi.myclass.R;
 import aspi.myclass.activity.MainActivity;
@@ -22,14 +23,14 @@ public class EmailHelper {
 
     public static void SendEmail(final Context context, final String MailTo, final String Subject, final String Body, final String Message_sucsess, final int Action, final Dialog dialog, final String... param) {
 
-        if (!ValidationHelper.isValidationInternet(context)){
+        if (!ValidationHelper.isValidationInternet(context)) {
             MessageHelper.Toast(context, context.getResources().getString(R.string.checkYourInternetConnection));
             dialog.dismiss();
             return;
         }
 
 
-        IndicatorHelper.IndicatorCreate(context, "",context.getResources().getString(R.string.pleaseWait));
+        IndicatorHelper.IndicatorCreate(context, "", context.getResources().getString(R.string.pleaseWait));
         new AsyncTask<String, Void, String>() {
 
             @Override
@@ -44,9 +45,10 @@ public class EmailHelper {
             @Override
             protected void onPostExecute(String result) {
                 Log.i(TAG, result);
-                try{
+
+                try {
                     dialog.dismiss();
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -79,5 +81,46 @@ public class EmailHelper {
 
 
     }
+
+
+    public static void SendEmail_(final Context context, final String MailTo, final String Subject, final String Body, final RequestInterface requestInterface) {
+
+        if (!ValidationHelper.isValidationInternet(context)) {
+            MessageHelper.Toast(context, context.getResources().getString(R.string.checkYourInternetConnection));
+            return;
+        }
+
+
+        IndicatorHelper.IndicatorCreate(context, "", context.getResources().getString(R.string.pleaseWait));
+        new AsyncTask<String, Void, String>() {
+
+            @Override
+            protected String doInBackground(String... p) {
+                FormBody.Builder formBuilder = new FormBody.Builder();
+                formBuilder.add("Email", MailTo);
+                formBuilder.add("subject", Subject);
+                formBuilder.add("body", Body);
+                return netWork.Post(formBuilder, "", p[0]);
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                Log.i(TAG, result);
+                IndicatorHelper.IndicatorDismiss();
+
+                if (result.equals("1")) {
+                    if (requestInterface != null)
+                        requestInterface.onPostExecute(result);
+                } else {
+                    MessageHelper.Toast(context, context.getResources().getString(R.string.Errorposting));
+
+                }
+
+            }
+
+        }.execute(context.getResources().getString(R.string.ApiSendMail));
+
+    }
+
 
 }

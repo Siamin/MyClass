@@ -15,19 +15,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
-import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
-
 import java.util.List;
 
-import aspi.myclass.Helpers.DatePickerHelper;
+import aspi.myclass.Helpers.DateTimePickerHelper;
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.model.OldClassModel;
 import aspi.myclass.R;
-import aspi.myclass.activity.MainActivity;
 import aspi.myclass.activity.OldClassActivity;
 import aspi.myclass.activity.OldClassListActivity;
 import aspi.myclass.Helpers.DatabasesHelper;
@@ -38,14 +34,13 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
     private List<OldClassModel> Content_list_old;
     private Context contexts;
     static DatabasesHelper data;
-    Activity activity;
     static String TAG = "TAG_ListCreateClassAdapter";
 
-    public ListCreateClassAdapter(List<OldClassModel> contents, Context context, Activity Act) {
+    public ListCreateClassAdapter(List<OldClassModel> contents, Context context) {
         this.Content_list_old = contents;
         this.contexts = context;
-        data = new DatabasesHelper(context);
-        activity = Act;
+        this.data = new DatabasesHelper(context);
+
     }
 
     @Override
@@ -72,7 +67,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
 
         holder.Data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Edit_Data(content.jalase);
+                EditData(content.jalase);
 
             }
         });
@@ -165,9 +160,9 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
         }
     }
 
-    void Edit_Data(final String jalase) {
+    void EditData(final String jalase) {
 
-        DatePickerHelper datePickerHelper = new DatePickerHelper();
+        DateTimePickerHelper datePickerHelper = new DateTimePickerHelper();
         OldClassListActivity.sessions = jalase;
         datePickerHelper.getDate(contexts);
 

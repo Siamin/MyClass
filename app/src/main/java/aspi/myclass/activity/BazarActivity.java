@@ -16,12 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aspi.myclass.Helpers.DateHelper;
+import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.EmailHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.SharedPreferencesHelper;
+import aspi.myclass.Interface.BazarInterface;
+import aspi.myclass.Interface.RequestInterface;
 import aspi.myclass.R;
 
+import aspi.myclass.Tools.Tools;
 import aspi.myclass.adapter.BazarAdapter;
 import aspi.myclass.model.BazarModel;
 import util.IabHelper;
@@ -30,7 +34,7 @@ import util.Inventory;
 import util.Purchase;
 import util.SkuDetails;
 
-public class BazarActivity extends Activity {
+public class BazarActivity extends Activity implements RequestInterface, BazarInterface {
 
     static String TAG = "TAG_BuyAppActivity";
     String SKU_PREMIUM[] = {"buyApp"};
@@ -38,6 +42,7 @@ public class BazarActivity extends Activity {
     ImageView cancel;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
+    Tools tools = new Tools();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,8 @@ public class BazarActivity extends Activity {
             }).start();
         } catch (Exception e) {
             Log.i(TAG, e.toString());
+            DialogHelper.errorReport(BazarActivity.this,"BazarActivity","onCreate",e.toString());
+
         }
 
 
@@ -65,36 +72,6 @@ public class BazarActivity extends Activity {
         });
 
 
-    }
-
-    public static void Buy_App(String SKU_PREMIUM, final Context context) {
-        try {
-            buyhelper.launchPurchaseFlow(((Activity) context), SKU_PREMIUM, 1001,
-                    new IabHelper.OnIabPurchaseFinishedListener() {
-                        @Override
-                        public void onIabPurchaseFinished(IabResult result, Purchase info) {
-                            if (result.isSuccess()) {
-                                Log.i(TAG, "getMessage : " + result.getMessage());
-
-                                String model = android.os.Build.MODEL + " " + android.os.Build.BRAND + " (" + android.os.Build.VERSION.RELEASE + ")" + " API-" + android.os.Build.VERSION.SDK_INT;
-                                SharedPreferencesHelper.SetCode("‌Buy_App", "Buy_App", context);
-                                String Body = "\n خریداری شده توسط = " + SharedPreferencesHelper.get_Data("Email", "", context) + "\n  در تاریخ = " + DateHelper.date_iran() + "\n مدل دستگاه = " + model;
-
-                                EmailHelper.SendEmail(context, "amin.syahi.69@gmail.com", "خرید برنامه", Body, context.getResources().getString(R.string.thanksForYourPurchase), 0, null);
-
-                                ((Activity) context).startActivity(new Intent(context, MainActivity.class));
-                                ((Activity) context).finish();
-                            } else {
-                                MessageHelper.Toast(context, context.getResources().getString(R.string.failedPurchaseOperation));
-                                ((Activity) context).startActivity(new Intent(context, MainActivity.class));
-                                ((Activity) context).finish();
-                            }
-
-                        }
-                    });
-        } catch (Exception e) {
-            MessageHelper.Toast(context, context.getResources().getString(R.string.errorConnectAccountBazar));
-        }
     }
 
     void get_price() {
@@ -129,7 +106,7 @@ public class BazarActivity extends Activity {
 
                                     recyclerView.setLayoutManager(linearLayoutManager);
                                     recyclerView.setHasFixedSize(true);
-                                    recyclerView.setAdapter(new BazarAdapter(models, BazarActivity.this));
+                                    recyclerView.setAdapter(new BazarAdapter(models, BazarActivity.this, BazarActivity.this));
 
                                     IndicatorHelper.IndicatorDismiss();
                                 } else {
@@ -169,7 +146,50 @@ public class BazarActivity extends Activity {
         try {
             buyhelper.handleActivityResult(requestCode, resultCode, data);
         } catch (Exception e) {
+            DialogHelper.errorReport(BazarActivity.this,"BazarActivity","onActivityResult",e.toString());
+
         }
     }
+
+    @Override
+    public void onPostExecute(String result) {
+        Log.i(TAG, "onPostExecute");
+
+        MessageHelper.Toast(BazarActivity.this, getResources().getString(R.string.thanksForYourPurchase));
+
+        startActivity(new Intent(BazarActivity.this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void BuyApp(String SKU_PREMIUM) {
+        try {
+            buyhelper.launchPurchaseFlow(this, SKU_PREMIUM, 1001,
+                    new IabHelper.OnIabPurchaseFinishedListener() {
+                        @Override
+                        public void onIabPurchaseFinished(IabResult result, Purchase info) {
+                            if (result.isSuccess()) {
+                                Log.i(TAG, "getMessage : " + result.getMessage());
+
+                                String model = tools.getDeviceModel();
+                                SharedPreferencesHelper.SetCode("‌Buy_App", "Buy_App", BazarActivity.this);
+                                String Body = "\n خریداری شده توسط = " + SharedPreferencesHelper.get_Data("Email", "", BazarActivity.this) + "\n  در تاریخ = " + DateHelper.date_iran() + "\n مدل دستگاه = " + model;
+
+                                EmailHelper.SendEmail_(BazarActivity.this, "amin.syahi.69@gmail.com", "خرید برنامه", Body, BazarActivity.this);
+
+                            } else {
+                                MessageHelper.Toast(BazarActivity.this, getResources().getString(R.string.failedPurchaseOperation));
+                                startActivity(new Intent(BazarActivity.this, MainActivity.class));
+                                finish();
+                            }
+
+                        }
+                    });
+        } catch (Exception e) {
+            MessageHelper.Toast(BazarActivity.this, getResources().getString(R.string.errorConnectAccountBazar));
+
+        }
+    }
+
 
 }
