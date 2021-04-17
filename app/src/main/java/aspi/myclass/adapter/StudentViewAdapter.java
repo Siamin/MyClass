@@ -12,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import aspi.myclass.Helpers.DialogHelper;
-import aspi.myclass.Tools.Tools;
 import aspi.myclass.model.AbsentPersentModel;
 import aspi.myclass.R;
-import aspi.myclass.activity.MainActivity;
-import aspi.myclass.activity.NewClassActivity;
+import aspi.myclass.activity.MettingNewActivity;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
@@ -91,7 +89,7 @@ public class StudentViewAdapter extends RecyclerView.Adapter<StudentViewAdapter.
         //*****************************************************************
         holder.sno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.SnoStudent(contexts, contexts.getResources().getString(R.string.EditStudentCode)+" "+ content.name + " " + content.family, holder.sno, data, content,NewClassActivity.did);
+                DialogHelper.SnoStudent(contexts, contexts.getResources().getString(R.string.EditStudentCode)+" "+ content.name + " " + content.family, holder.sno, data, content, MettingNewActivity.did);
 
             }
         });

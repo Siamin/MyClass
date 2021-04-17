@@ -18,9 +18,8 @@ import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.R;
 import aspi.myclass.adapter.EditStudentAdapter;
 import aspi.myclass.model.AbsentPersentModel;
-import aspi.myclass.model.StudentModel;
 
-public class EditStudentActivity extends Activity {
+public class StudentEditActivity extends Activity {
 
     ImageView back;
     RecyclerView adapter;
@@ -63,7 +62,7 @@ public class EditStudentActivity extends Activity {
         if (studentModel.size() > 0) {
             adapter.setLayoutManager(linearLayoutManager);
             adapter.setHasFixedSize(true);
-            adapter.setAdapter(new EditStudentAdapter(studentModel, EditStudentActivity.this));
+            adapter.setAdapter(new EditStudentAdapter(studentModel, StudentEditActivity.this));
         } else {
             onBackPressed();
         }
@@ -72,7 +71,7 @@ public class EditStudentActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(EditStudentActivity.this,MainActivity.class));
+        startActivity(new Intent(StudentEditActivity.this,MainActivity.class));
         finish();
     }
 }

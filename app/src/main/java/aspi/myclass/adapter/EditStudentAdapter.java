@@ -14,9 +14,8 @@ import java.util.List;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.R;
-import aspi.myclass.activity.NewClassActivity;
+import aspi.myclass.activity.MettingNewActivity;
 import aspi.myclass.model.AbsentPersentModel;
-import aspi.myclass.model.StudentModel;
 
 public class EditStudentAdapter extends RecyclerView.Adapter<EditStudentAdapter.cvh> {
 
@@ -60,7 +59,7 @@ public class EditStudentAdapter extends RecyclerView.Adapter<EditStudentAdapter.
 
         holder.sno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DialogHelper.SnoStudent(context, context.getResources().getString(R.string.EditStudentCode)+" "+ studentModel.name + " " + studentModel.family, holder.sno, data, studentModel, NewClassActivity.did);
+                DialogHelper.SnoStudent(context, context.getResources().getString(R.string.EditStudentCode)+" "+ studentModel.name + " " + studentModel.family, holder.sno, data, studentModel, MettingNewActivity.did);
 
             }
         });

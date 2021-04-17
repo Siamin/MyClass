@@ -20,14 +20,14 @@ import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.TableHelper;
 import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.MyActivity;
 import aspi.myclass.R;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.model.ReportDataModel;
 
-public class ReportClassActivity extends Activity {
+public class ReportClassActivity extends MyActivity {
 
     TableLayout table;
-    DatabasesHelper data;
     boolean STATUS;
     ImageView save;
     TextView titel;
@@ -35,13 +35,14 @@ public class ReportClassActivity extends Activity {
     String Name_class, Id_class, Did_class;
     String TAG = "TAG_ReportClassActivity";
     ImageView backPage;
-    private static final int STORAGE_PERMISSION_CODE = 101;
-
+    private int STORAGE_PERMISSION_CODE = 101;
+    private TableHelper tableHelper;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reportclass);
-        data = new DatabasesHelper(this);
+
+        tableHelper = new TableHelper(this);
         initView();
 
 
@@ -118,7 +119,7 @@ public class ReportClassActivity extends Activity {
                     + " ORDER BY r.day ASC ,r.month ASC ,r.year ASC ,r.HOUR ASC ,k.family ASC , k.name ASC , r.jalase ASC");
             data.close();
             if (reportModels.size() > 0) {
-                TableHelper.creatTabel(ReportClassActivity.this, reportModels, STATUS, table);
+                tableHelper.creatTabel(reportModels, STATUS, table);
             } else {
                 finish();
             }

@@ -27,7 +27,7 @@ import aspi.myclass.adapter.ListCreateClassAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
-public class OldClassListActivity extends Activity
+public class MettingListActivity extends Activity
         implements DatePickerDialog.OnDateSetListener,android.app.DatePickerDialog.OnDateSetListener {
 
     public static String Name_class, id_class, refresh = "", sessions;
@@ -58,11 +58,10 @@ public class OldClassListActivity extends Activity
 
     void initView() {
         backPage = findViewById(R.id.activity_listoldclass_back);
-        name_class = (TextView) findViewById(R.id.show_list_old_class_name_class);
+        name_class = (TextView) findViewById(R.id.LessonName);
         recyclerView2 = (RecyclerView) findViewById(R.id.show_list_old_class_recyclerview);
-        linearLayoutManager = new LinearLayoutManager(OldClassListActivity.this);
+        linearLayoutManager = new LinearLayoutManager(MettingListActivity.this);
         //***********************************************************************
-        name_class.setTypeface(MainActivity.FONTS);
         //***********************************************************************
         name_class.setText("" + Name_class);
         //***********************************************************************
@@ -94,7 +93,7 @@ public class OldClassListActivity extends Activity
                     public void run() {
                         cunters += 1;
                         if (cunters == 1) {
-                            IndicatorHelper.IndicatorCreate(OldClassListActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
+                            IndicatorHelper.IndicatorCreate(MettingListActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
                             new Thread(new Runnable() {
                                 public void run() {
                                     // get_database();
@@ -107,7 +106,7 @@ public class OldClassListActivity extends Activity
                             view = false;
                             recyclerView2.setLayoutManager(linearLayoutManager);
                             recyclerView2.setHasFixedSize(true);
-                            recyclerView2.setAdapter(new ListCreateClassAdapter(List, OldClassListActivity.this));
+                            recyclerView2.setAdapter(new ListCreateClassAdapter(List, MettingListActivity.this));
 
                         }
                     }
@@ -137,7 +136,7 @@ public class OldClassListActivity extends Activity
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        MessageHelper.Toast(OldClassListActivity.this, getResources().getString(R.string.notCreateMate));
+                        MessageHelper.Toast(MettingListActivity.this, getResources().getString(R.string.notCreateMate));
                         finish();
                     }
                 });
@@ -168,7 +167,7 @@ public class OldClassListActivity extends Activity
             data.update("day", String.valueOf(year), "month", String.valueOf(monthOfYear + 1), "year", String.valueOf(dayOfMonth), "jalase=" + sessions);
             data.close();
             MessageHelper.Toast(this, getResources().getString(R.string.editingDoneSuccessfully));
-            OldClassListActivity.refresh = "1";
+            MettingListActivity.refresh = "1";
         } catch (Exception e) {
             Log.i(TAG, "Error" + e.toString());
         }

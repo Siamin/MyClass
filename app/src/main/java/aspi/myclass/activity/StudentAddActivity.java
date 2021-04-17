@@ -1,39 +1,26 @@
 package aspi.myclass.activity;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
 import aspi.myclass.Helpers.DialogHelper;
-import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.MyActivity;
 import aspi.myclass.R;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.model.ImportExcellModel;
 
 
-public class AddStudentActivity extends Activity {
+public class StudentAddActivity extends MyActivity {
 
     ImageView save, cancel, download;
     static ImageView Reload;
@@ -55,11 +42,11 @@ public class AddStudentActivity extends Activity {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ValidationHelper.validBuyApp(AddStudentActivity.this)) {
-                    DialogHelper.Import(AddStudentActivity.this);
-                    MessageHelper.Mesage(AddStudentActivity.this, getResources().getString(R.string.textLerningExcell));
+                if (ValidationHelper.validBuyApp(StudentAddActivity.this)) {
+                    DialogHelper.Import(StudentAddActivity.this);
+                    messageHelper.Mesage( getResources().getString(R.string.textLerningExcell));
                 } else {
-                    MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.ErrorBuyApplication));
+                    messageHelper.Toast( getResources().getString(R.string.ErrorBuyApplication));
                 }
             }
         });
@@ -78,15 +65,14 @@ public class AddStudentActivity extends Activity {
                     if (save()) {
                         SharedPreferences sp = getApplicationContext().getSharedPreferences("myclass", 0);
 
-                        MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.Saved));
-
+                        messageHelper.Toast( getResources().getString(R.string.Saved));
 
                     }
                     if (not_save > 0) {
-                        MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.ErrorSaveDataInAddStudentActivityInformation));
+                        messageHelper.Toast(getResources().getString(R.string.ErrorSaveDataInAddStudentActivityInformation));
                     }
                 } else {
-                    MessageHelper.Toast(AddStudentActivity.this, getResources().getString(R.string.ErrorSaveDataInAddStudentActivityEmptyData));
+                    messageHelper.Toast(getResources().getString(R.string.ErrorSaveDataInAddStudentActivityEmptyData));
                 }
             }
         });

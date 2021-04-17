@@ -24,8 +24,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import aspi.myclass.activity.AddStudentActivity;
-import aspi.myclass.activity.MainActivity;
+import aspi.myclass.activity.StudentAddActivity;
 import aspi.myclass.model.ImportExcellModel;
 import aspi.myclass.model.ReportDataModel;
 
@@ -33,6 +32,7 @@ import aspi.myclass.model.ReportDataModel;
 public class ExcellHelper {
 
     static String TAG = "TAG_ExcellHelper";
+    private static File Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
 
     public static boolean ExcelSaveDataClassByTypePage(Context context, List<ReportDataModel> model, String SheetName, String FileName, boolean StatusPage) {
         boolean success = false;
@@ -116,7 +116,7 @@ public class ExcellHelper {
 
             }
 
-            File file = new java.io.File(MainActivity.Address_file_app, FileName + ".xls");
+            File file = new java.io.File(Address_file_app, FileName + ".xls");
             FileOutputStream os = null;
 
             os = new FileOutputStream(file);
@@ -187,7 +187,7 @@ public class ExcellHelper {
                 }
 
             }
-            AddStudentActivity.get_upload(importExcellModels);
+            StudentAddActivity.get_upload(importExcellModels);
             dialog.dismiss();
         } catch (Exception e) {
             MessageHelper.Toast(context, "لظفا فایل Excel را با فرمت 97-2003 ذخیره و سپس import کنید.");

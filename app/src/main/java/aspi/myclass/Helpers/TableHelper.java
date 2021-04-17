@@ -13,14 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aspi.myclass.R;
-import aspi.myclass.activity.MainActivity;
 import aspi.myclass.model.ReportDataModel;
 
 public class TableHelper {
 
-    static String TAG = "TAG_TableHelper";
+    private String TAG = "TAG_TableHelper";
+    private Context context;
 
-    public static void creatTabel(Context context, List<ReportDataModel> model,boolean TypePage,TableLayout table) {
+    public TableHelper(Context context) {
+        this.context = context;
+    }
+
+    public void creatTabel(List<ReportDataModel> model, boolean TypePage, TableLayout table) {
 
         try {
 
@@ -52,11 +56,11 @@ public class TableHelper {
                     boolean Status_Date = true;
                     for (int fild = -1; fild < model.size(); fild++) {
                         if (row == -1 && fild == -1) {
-                            cell.addView(CreateTextView(context,context.getResources().getString(R.string.NameAndFamily), 300));
+                            cell.addView(CreateTextView(context.getResources().getString(R.string.NameAndFamily), 300));
 
                         } else if (row > -1 && fild == -1) {
                             modelCheck.add(model.get(row));
-                            cell.addView(CreateTextView(context,model.get(row).name + " " + model.get(row).family, 300));
+                            cell.addView(CreateTextView(model.get(row).name + " " + model.get(row).family, 300));
 
                         } else if (row > -1 && fild > -1 && model.get(row).sno.equals(model.get(fild).sno)) {
                             String txt = "";
@@ -65,9 +69,9 @@ public class TableHelper {
                             if (CountDate > 0) {
                                 for (int i = 0; i < CountDate; i++) {
                                     if (TypePage)
-                                        cell.addView(CreateTextView(context,"-", 70));
+                                        cell.addView(CreateTextView("-", 70));
                                     else
-                                        cell.addView(CreateTextView(context,"", 70));
+                                        cell.addView(CreateTextView("", 70));
                                 }
                             }
 
@@ -83,10 +87,10 @@ public class TableHelper {
                                 txt = model.get(fild).score;
                             }
 
-                            cell.addView(CreateTextView(context,txt, 70));
+                            cell.addView(CreateTextView(txt, 70));
 
                         } else if (row == -1 && fild > -1 && model.get(row + 1).sno.equals(model.get(fild).sno)) {
-                            cell.addView(CreateTextView(context,model.get(fild).date.replace("/", "\n-\n"), 70));
+                            cell.addView(CreateTextView(model.get(fild).date.replace("/", "\n-\n"), 70));
                             Datemodel.add(model.get(fild));
                         }
                     }
@@ -101,13 +105,12 @@ public class TableHelper {
 
     }
 
-    static TextView CreateTextView(Context context,String txt, int wight) {
+    public TextView CreateTextView(String txt, int wight) {
 
         TextView textView = new TextView(context);
         textView.setText(txt);
         textView.setPadding(5, 5, 5, 5);
         textView.setTextSize(15);
-        textView.setTypeface(MainActivity.FONTS);
         textView.setLayoutParams(new TableRow.LayoutParams(wight, TableRow.LayoutParams.FILL_PARENT));
         textView.setGravity(Gravity.CENTER);
         textView.setTextColor(context.getResources().getColor(R.color.white));

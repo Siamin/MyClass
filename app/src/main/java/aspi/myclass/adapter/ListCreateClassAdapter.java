@@ -24,8 +24,8 @@ import aspi.myclass.Helpers.MessageHelper;
 import aspi.myclass.Helpers.ValidationHelper;
 import aspi.myclass.model.OldClassModel;
 import aspi.myclass.R;
-import aspi.myclass.activity.OldClassActivity;
-import aspi.myclass.activity.OldClassListActivity;
+import aspi.myclass.activity.MettingLastActivity;
+import aspi.myclass.activity.MettingListActivity;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
@@ -76,12 +76,12 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
         holder.loggin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (ValidationHelper.validBuyApp(contexts) || position < 3) {
-                    OldClassActivity.did_class = OldClassListActivity.id_class;
-                    OldClassActivity.Name_class = OldClassListActivity.Name_class;
-                    OldClassActivity.Data_class = content.DATA;
-                    OldClassActivity.Jalase = content.jalase;
-                    OldClassActivity.HOUR = content.Hour;
-                    Intent old_class = new Intent(contexts, OldClassActivity.class);
+                    MettingLastActivity.did_class = MettingListActivity.id_class;
+                    MettingLastActivity.Name_class = MettingListActivity.Name_class;
+                    MettingLastActivity.Data_class = content.DATA;
+                    MettingLastActivity.Jalase = content.jalase;
+                    MettingLastActivity.HOUR = content.Hour;
+                    Intent old_class = new Intent(contexts, MettingLastActivity.class);
                     contexts.startActivity(old_class);
                 } else {
                     MessageHelper.Toast(contexts, contexts.getResources().getString(R.string.ErrorBuyApplication));
@@ -143,7 +143,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
                         ((Activity) context).runOnUiThread(new Runnable() {
                             public void run() {
                                 MessageHelper.Toast(context, context.getResources().getString(R.string.SuccessfullyDeleteMateing));
-                                OldClassListActivity.refresh = "1";
+                                MettingListActivity.refresh = "1";
                                 dialog.dismiss();
                             }
                         });
@@ -163,7 +163,7 @@ public class ListCreateClassAdapter extends RecyclerView.Adapter<ListCreateClass
     void EditData(final String jalase) {
 
         DateTimePickerHelper datePickerHelper = new DateTimePickerHelper();
-        OldClassListActivity.sessions = jalase;
+        MettingListActivity.sessions = jalase;
         datePickerHelper.getDate(contexts);
 
 

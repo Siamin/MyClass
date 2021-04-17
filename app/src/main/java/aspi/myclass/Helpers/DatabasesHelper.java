@@ -16,12 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aspi.myclass.model.AbsentPersentModel;
-import aspi.myclass.model.ClassModel;
+import aspi.myclass.model.LessonModel;
 import aspi.myclass.model.OldClassModel;
 import aspi.myclass.model.ReportDataModel;
-import aspi.myclass.model.ReportModel;
 import aspi.myclass.model.StatisticsModel;
-import aspi.myclass.model.StudentModel;
 
 import static java.lang.Integer.parseInt;
 
@@ -65,12 +63,14 @@ public class DatabasesHelper extends SQLiteOpenHelper {
 
     //**********************************************************************************************
     public void open() {
-        mydb = SQLiteDatabase.openDatabase(path + "study", null, SQLiteDatabase.OPEN_READWRITE);
+//        if (!mydb.isOpen())
+            mydb = SQLiteDatabase.openDatabase(path + "study", null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     //**********************************************************************************************
     public void close() {
-        mydb.close();
+//        if (mydb.isOpen())
+            mydb.close();
     }
 
     public boolean databaseIsOpen() {
@@ -101,25 +101,34 @@ public class DatabasesHelper extends SQLiteOpenHelper {
         myoutput.close();
     }
 
-    //**********************************************************************************************insert_class
-    public void insert_class(String name_dars, String day, String time, String location, String Minute, String Characteristic, String Class, String did) {
-
-        ContentValues cv = new ContentValues();
-        cv.put("ndars", name_dars);
-        cv.put("dey", day);
-        cv.put("time", time);
-        cv.put("location", location);
-        cv.put("Minute", Minute);
-        cv.put("Characteristic", Characteristic);
-        cv.put("txt", "");
-        cv.put("did", did);
-        cv.put("class", Class);
-        mydb.insert("dars", "ndars", cv);
-        if (did.equals("")) {
-            set_id_class();
-        }
+    //************************************* find ***************************************************
+    public Cursor findById(String table,String id) {
+        Cursor cursor= mydb.rawQuery("SELECT  * FROM "+table+" WHERE id=" + id, null);
+        return cursor;
     }
 
+    public Cursor findByWhere(String table, String where) {
+        Cursor cursor = mydb.rawQuery("SELECT  * FROM  "+table+"  WHERE  "+where, null);
+        return cursor;
+    }
+    //************************************* Insert *************************************************
+    public void insertDB(String table,ContentValues cv,String nullColumnHack) {
+        mydb.insert(table, nullColumnHack, cv);
+    }
+    //************************************** update ************************************************
+    public void updateById(String table,ContentValues cv,int id){
+        mydb.update(table, cv, "id="+id, null);
+    }
+    public void updateDB(String table,ContentValues cv,String where){
+        mydb.update(table, cv, where, null);
+    }
+    //************************************** Delete ************************************************
+    public void deleteById(String table, int id) {
+        mydb.delete(table, "id=" + id, null);
+    }
+    public void deleteAll(String table) {
+        mydb.delete(table, null, null);
+    }
     //**********************************************************************************************update_class
     public void update(String filde_database, String set_database, String filde_database2, String set_database2, String filde_database3, String set_database3, String where1) {
         ContentValues cv = new ContentValues();
@@ -263,11 +272,6 @@ public class DatabasesHelper extends SQLiteOpenHelper {
     }
 
     //*********************************************************************************************_delete_all
-    public void delete(String table, int id) {
-        mydb.delete(table, "id=" + id, null);
-    }
-
-    //*********************************************************************************************_delete_all
     public void delete_(String table, String Where) {
         mydb.delete(table, Where, null);
     }
@@ -287,25 +291,25 @@ public class DatabasesHelper extends SQLiteOpenHelper {
     }
 
     //*********************************************************************************************Get Class By Id
-    public List<ClassModel> getClassById(String dayOfWeek) {
-        List<ClassModel> returnModel = new ArrayList<>();
+    public List<LessonModel> getLessonByDay(String dayOfWeek) {
+        List<LessonModel> returnModel = new ArrayList<>();
         Cursor cursor = mydb.rawQuery("SELECT  * FROM dars WHERE dey='" + dayOfWeek + "'", null);
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-
-                    ClassModel model = new ClassModel();
+                    LessonModel model = new LessonModel();
                     model.id = cursor.getString(0);
-                    model.name_class = cursor.getString(1);
-                    model.time_start = cursor.getString(3);
-                    model.location = cursor.getString(4);
-                    model.time_end = cursor.getString(5);
-                    model.characteristic = cursor.getString(6);
-                    model.text_class = cursor.getString(7);
-                    model.id_class = cursor.getString(8);
-                    model.Class_ = cursor.getString(9);
-                    model.APP = true;
+                    model.lessonName = cursor.getString(1);
+                    model.dayOfWeek = cursor.getString(2);
+                    model.startTime = cursor.getString(3);
+                    model.education = cursor.getString(4);
+                    model.endTime = cursor.getString(5);
+                    model.lessonCode = cursor.getString(6);
+                    model.description = cursor.getString(7);
+                    model.parentId = cursor.getString(8);
+                    model.classNumber = cursor.getString(9);
+
 
                     returnModel.add(model);
                 } while (cursor.moveToNext());
@@ -329,7 +333,7 @@ public class DatabasesHelper extends SQLiteOpenHelper {
     }
 
     //******************************************************************************* Qury Old Class
-    public List<AbsentPersentModel> OldClassByQuery(String selectQuery,String score) {
+    public List<AbsentPersentModel> OldClassByQuery(String selectQuery, String score) {
 
         List<AbsentPersentModel> absentPersentModels = new ArrayList<>();
         Cursor cursor = mydb.rawQuery(selectQuery, null);

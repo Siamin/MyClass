@@ -31,7 +31,7 @@ import aspi.myclass.adapter.StudentViewAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
-public class NewClassActivity extends Activity {
+public class MettingNewActivity extends Activity {
 
     TextView name_class, DATA;
     public static String Name_class, did;
@@ -52,7 +52,7 @@ public class NewClassActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        LanguageHelper.loadLanguage(NewClassActivity.this);
+        LanguageHelper.loadLanguage(MettingNewActivity.this);
         setContentView(R.layout.activity_newclass);
         //******************************************************************************************
         initView();
@@ -114,11 +114,11 @@ public class NewClassActivity extends Activity {
         name_class = (TextView) findViewById(R.id.new_class_name_class);
         DATA = (TextView) findViewById(R.id.new_class_data);
         recyclerView1 = (RecyclerView) findViewById(R.id.recyclerview_new_classsss);
-        linearLayoutManager = new LinearLayoutManager(NewClassActivity.this);
+        linearLayoutManager = new LinearLayoutManager(MettingNewActivity.this);
         Search = findViewById(R.id.newclass_search);
         //*************************************************************
         name_class.setText(getResources().getString(R.string.Class) + " " + Name_class);
-        DATA.setText(DateHelper.GetData(NewClassActivity.this));
+        DATA.setText(DateHelper.GetData(MettingNewActivity.this));
         HOUR = Integer.parseInt(DateHelper.Get_Time().split(":")[0]);
         MINUTE = Integer.parseInt(DateHelper.Get_Time().split(":")[1]);
         //*************************************************************
@@ -137,7 +137,7 @@ public class NewClassActivity extends Activity {
                     public void run() {
                         counters += 1;
                         if (counters == 1) {
-                            IndicatorHelper.IndicatorCreate(NewClassActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
+                            IndicatorHelper.IndicatorCreate(MettingNewActivity.this, getResources().getString(R.string.gettingData), getResources().getString(R.string.pleaseWait));
                             new Thread(new Runnable() {
                                 public void run() {
                                     Data();
@@ -166,7 +166,7 @@ public class NewClassActivity extends Activity {
             data.close();
 
             if (absentPersentModels.size() > 0) {
-                DATA_IRAN = DateHelper.GetData(NewClassActivity.this).split("/");
+                DATA_IRAN = DateHelper.GetData(MettingNewActivity.this).split("/");
 
                 data.open();
 
@@ -188,7 +188,7 @@ public class NewClassActivity extends Activity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        MessageHelper.Toast(NewClassActivity.this, getResources().getString(R.string.NoAddStudentToClass));
+                        MessageHelper.Toast(MettingNewActivity.this, getResources().getString(R.string.NoAddStudentToClass));
                         go_main();
                     }
                 });
@@ -207,7 +207,7 @@ public class NewClassActivity extends Activity {
     void ShowAdapter(List<AbsentPersentModel> ListClass) {
         recyclerView1.setLayoutManager(linearLayoutManager);
         recyclerView1.setHasFixedSize(true);
-        recyclerView1.setAdapter(new StudentViewAdapter(ListClass, NewClassActivity.this));
+        recyclerView1.setAdapter(new StudentViewAdapter(ListClass, MettingNewActivity.this));
     }
 
     @Override
@@ -217,7 +217,7 @@ public class NewClassActivity extends Activity {
             super.onBackPressed();
             go_main();
         } else {
-            MessageHelper.Toast(NewClassActivity.this, getResources().getString(R.string.BackPage));
+            MessageHelper.Toast(MettingNewActivity.this, getResources().getString(R.string.BackPage));
             statusBackPage = true;
         }
     }

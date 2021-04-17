@@ -10,19 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import aspi.myclass.Helpers.IndicatorHelper;
 import aspi.myclass.Helpers.MessageHelper;
-import aspi.myclass.Tools.Tools;
 import aspi.myclass.model.StatisticsModel;
 import aspi.myclass.R;
 import aspi.myclass.adapter.StatusticsAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
 
 
-public class StatisticsActivity extends Activity {
+public class ChartActivity extends Activity {
 
 
     public static String Name_class, Id_class, Did_class;
@@ -67,7 +64,7 @@ public class StatisticsActivity extends Activity {
             if (!List.isEmpty()) {
 
                 recyclerView_show_student = findViewById(R.id.show_student_recyclerview);
-                linearLayoutManager_show_student = new LinearLayoutManager(StatisticsActivity.this);
+                linearLayoutManager_show_student = new LinearLayoutManager(ChartActivity.this);
                 recyclerView_show_student.setLayoutManager(linearLayoutManager_show_student);
                 recyclerView_show_student.setAdapter(new StatusticsAdapter(List));
 
@@ -77,7 +74,7 @@ public class StatisticsActivity extends Activity {
 
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        MessageHelper.Toast(StatisticsActivity.this, getResources().getString(R.string.ToastNoData));
+                        MessageHelper.Toast(ChartActivity.this, getResources().getString(R.string.ToastNoData));
                         onBackPressed();
                     }
                 });

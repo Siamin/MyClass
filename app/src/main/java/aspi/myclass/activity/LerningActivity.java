@@ -92,7 +92,6 @@ public class LerningActivity extends Activity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         input.setLayoutParams(lp);
         input.setText("آموزش مورد نظرتان را انتخاب کنید.");
-        input.setTypeface(MainActivity.FONTS);
         input.setTextSize(15);
         input.setPadding(10, 10, 5, 0);
         builder1.setView(input);

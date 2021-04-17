@@ -51,7 +51,7 @@
         android:layout_below="@+id/linearLayout">
 
         <CustomObject.TextViewCustom
-            android:id="@+id/show_list_old_class_name_class"
+            android:id="@+id/LessonName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"

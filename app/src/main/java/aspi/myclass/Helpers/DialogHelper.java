@@ -41,6 +41,7 @@ public class DialogHelper {
     static String TAG = "TAG_DialogHelper";
     static File Backup_File_App = new File(Environment.getExternalStorageDirectory(), "BackupClass");
     static Tools tools = new Tools();
+    private static File Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
 
     public static void uploadBackupFile(final Context context, String _body, final DatabasesHelper data) {
         final Dialog dialog = new Dialog(context, R.style.NewDialog);
@@ -546,7 +547,7 @@ public class DialogHelper {
         //*************************************************
         title.setText(context.getResources().getString(R.string.addStudent));
         body.setText(context.getResources().getString(R.string.textGetExcellFile1)
-                + MainActivity.Address_file_app
+                + "/App_class"
                 + context.getResources().getString(R.string.textGetExcellFile2));
         cancle.setText(context.getResources().getString(R.string.cancle));
         excllFile.setText(context.getResources().getString(R.string.save));
@@ -857,9 +858,9 @@ public class DialogHelper {
             @Override
             public void onClick(View view) {
                 if (ExcellHelper.ExcelSaveDataClassByTypePage(context, model, NameClass, NameClass + " " + Title, TypePage)) {
-                    MessageHelper.Toast(context, MainActivity.Address_file_app + "/" + NameClass + " " + Title + ".xls");
+                    MessageHelper.Toast(context,   "App_class/" + NameClass + " " + Title + ".xls");
                 } else {
-                    if (!MainActivity.Address_file_app.exists()) {
+                    if (!Address_file_app.exists()) {
                         MessageHelper.Toast(context, context.getResources().getString(R.string.ErrorSaveFile));
                     } else {
                         MessageHelper.Toast(context, context.getResources().getString(R.string.ErrorCreadetFolder));

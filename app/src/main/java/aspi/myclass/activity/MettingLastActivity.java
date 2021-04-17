@@ -23,7 +23,7 @@ import aspi.myclass.R;
 import aspi.myclass.adapter.StudentViewAdapter;
 import aspi.myclass.Helpers.DatabasesHelper;
 
-public class OldClassActivity extends Activity {
+public class MettingLastActivity extends Activity {
 
     private TextView name_class, DATA, Time, Titel;
     public static String Name_class, did_class, Data_class, Jalase, HOUR;
@@ -101,7 +101,7 @@ public class OldClassActivity extends Activity {
     void ShowAdapter(List<AbsentPersentModel> ListClass) {
         recyclerView_Old.setLayoutManager(linearLayoutManagers);
         recyclerView_Old.setHasFixedSize(true);
-        recyclerView_Old.setAdapter(new StudentViewAdapter(ListClass, OldClassActivity.this));
+        recyclerView_Old.setAdapter(new StudentViewAdapter(ListClass, MettingLastActivity.this));
     }
 
 

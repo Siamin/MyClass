@@ -22,7 +22,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -42,47 +41,45 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import aspi.myclass.Helpers.DialogHelper;
 import aspi.myclass.Helpers.LanguageHelper;
 import aspi.myclass.Helpers.MessageHelper;
-import aspi.myclass.Helpers.SharedPreferencesHelper;
 
 import aspi.myclass.Helpers.ValidationHelper;
+import aspi.myclass.Interface.RecyclerViewInteface;
+import aspi.myclass.MyActivity;
 import aspi.myclass.Services.FireBaseAnalyticsService;
-import aspi.myclass.model.ClassModel;
+import aspi.myclass.model.LessonModel;
 import aspi.myclass.R;
 import aspi.myclass.Helpers.DatabasesHelper;
 import aspi.myclass.adapter.ClassViewAdapter;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends MyActivity
         implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener
-        , DatePickerDialog.OnDateSetListener {
+        , DatePickerDialog.OnDateSetListener, RecyclerViewInteface {
 
 
-    DrawerLayout drawer;
-    ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
-    Toolbar toolbar;
-    public static Typeface FONTS;
-    public static int DAY, refresh = 0;
-    Button Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday;
-    TextView text_day_class;
-    RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager;
-    List<ClassModel> List = new ArrayList<>();
-    DatabasesHelper data;
-    public static Timer time;
-    public static File Backup_File_App = new File(Environment.getExternalStorageDirectory()
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+    private int DAY;
+    private Button Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday;
+    private TextView text_day_class;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private List<LessonModel> List = new ArrayList<>();
+
+    private File Backup_File_App = new File(Environment.getExternalStorageDirectory()
             , "BackupClass"), Address_file_app = new File(Environment.getExternalStorageDirectory(), "App_class");
-    IUpdateCheckService service;
-    UpdateServiceConnection connection;
-    static final String TAG = "TAG_Main";
-    FirebaseAnalytics mFirebaseAnalytics;
-    FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
-    static final int STORAGE_PERMISSION_CODE = 101;
+    private IUpdateCheckService service;
+    private UpdateServiceConnection connection;
+    private String TAG = "TAG_Main";
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private FireBaseAnalyticsService fireBaseAnalyticsService = new FireBaseAnalyticsService();
+    private int STORAGE_PERMISSION_CODE = 101;
     String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 
@@ -99,43 +96,43 @@ public class MainActivity extends AppCompatActivity
         //******************************************************************************************
         Saturday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                get_data_class(0);
+                getLessonData(0);
             }
         });
         //******************************************************************************************
         Sunday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                get_data_class(1);
+                getLessonData(1);
             }
         });
         //******************************************************************************************
         Monday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                get_data_class(2);
+                getLessonData(2);
             }
         });
         //******************************************************************************************
         Tuesday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                get_data_class(3);
+                getLessonData(3);
             }
         });
         //******************************************************************************************
         Wednesday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                get_data_class(4);
+                getLessonData(4);
             }
         });
         //******************************************************************************************
         Thursday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                get_data_class(5);
+                getLessonData(5);
             }
         });
         //******************************************************************************************
         Friday.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                get_data_class(6);
+                getLessonData(6);
             }
         });
         //******************************************************************************************
@@ -148,7 +145,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, CrispActivity.class));
             finish();
         } else {
-            MessageHelper.Mesage(MainActivity.this, getResources().getString(R.string.errorAddEmail));
+            messageHelper.Mesage(getResources().getString(R.string.errorAddEmail));
         }
     }
 
@@ -166,24 +163,20 @@ public class MainActivity extends AppCompatActivity
 
         fireBaseAnalyticsService.CustomEventFireBaseAnalytics(mFirebaseAnalytics, String.valueOf(id), item.getTitle().toString(), "menu");
         if (id == R.id.nav_add_class) {
-            startActivity(new Intent(this, AddClassActivity.class));
-
+            GoPage(new Intent(this, LessonAddActivity.class));
         } else if (id == R.id.nav_abute) {
             DialogHelper.Abute(MainActivity.this);
 
         } else if (id == R.id.nav_coment) {
 
             if (ValidationHelper.validSetEmail(MainActivity.this)) {
-                startActivity(new Intent(this, CommentActivity.class));
-                finish();
+                GoPage(new Intent(this, CommentActivity.class));
             } else {
-                MessageHelper.Mesage(MainActivity.this, getResources().getString(R.string.errorAddEmail));
+                messageHelper.Mesage(getResources().getString(R.string.errorAddEmail));
             }
 
-
         } else if (id == R.id.nav_setting) {
-            startActivity(new Intent(MainActivity.this, SettingActivity.class));
-            finish();
+            GoPage(new Intent(this, SettingActivity.class));
 
         } else if (id == R.id.changeLanguage) {
             DialogHelper.ChangeLanguage(MainActivity.this);
@@ -235,10 +228,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    // This function is called when the user accepts or decline the permission.
-    // Request Code is used to check which permission called this function.
-    // This request code is provided when the user is prompt for permission.
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -254,9 +243,6 @@ public class MainActivity extends AppCompatActivity
     void initView() {
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        data = new DatabasesHelper(this);
-        data.database();
-
 
         toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
@@ -284,8 +270,8 @@ public class MainActivity extends AppCompatActivity
         Calendar calendar = Calendar.getInstance();
         DAY = calendar.get(Calendar.DAY_OF_WEEK);
         if (DAY == 7) DAY = 0;
-        get_data_class(DAY);
-        refresh();
+        getLessonData(DAY);
+        refreshList();
 
 
         if (!Address_file_app.exists()) {
@@ -297,7 +283,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    void Set_day() {
+    void setDayText() {
         String[] weekName = getResources().getStringArray(R.array.weekName);
         String lang = LanguageHelper.loadLanguage(MainActivity.this);
         if (lang.equals("fa")) {
@@ -309,53 +295,29 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    void get_data_class(int day) {
+    void getLessonData(int day) {
 
         try {
             DAY = day;
-            data.open();
-            List = data.getClassById(String.valueOf(day));
-            data.close();
-            if (List.size() > 0) {
+//            data.open();
+//            List = data.getLessonByDay(String.valueOf(day));
+//            data.close();
 
+            List = lessonController.findByDayOfWeek(String.valueOf(day));
 
-                recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this));
-
-            } else {
+            if (List.size()==0)
                 List.clear();
-                recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this));
-            }
-            Set_day();
+
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(new ClassViewAdapter(List, MainActivity.this));
+
+            setDayText();
         } catch (Exception e) {
             Log.i(TAG, e.toString());
 
         }
 
-    }
-
-    public void refresh() {
-
-        time = new Timer();
-        time.schedule(new TimerTask() {
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        if (refresh == 1) {
-                            get_data_class(DAY);
-                            refresh = 0;
-
-                        } else if (refresh == 2) {
-                            refresh = 0;
-                            finish();
-                        }
-                    }
-                });
-            }
-        }, 1, 1000);
     }
 
     @Override
@@ -366,6 +328,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
+    }
+
+    @Override
+    public void refreshList() {
+        getLessonData(DAY);
     }
 
 
